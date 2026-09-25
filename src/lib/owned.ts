@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { signOut } from "@/lib/auth/client";
-import { getMyInventory, type InventoryMe } from "@/lib/inventory.server";
+import { getMyInventory, type InventoryMe } from "@/lib/inventory";
 
 /**
  * Loads the signed-in player's collection for the /owned page.
@@ -9,8 +9,8 @@ import { getMyInventory, type InventoryMe } from "@/lib/inventory.server";
  * Login itself is real, direct Discord OAuth on this app (see
  * `signInWithDiscord` in `@/lib/auth/client`) — no bot redirect, no ngrok.
  * Once a session exists, this calls the `getMyInventory` server function,
- * which does the actual bot lookup server-to-server (see
- * `@/lib/inventory.server` for that side of it).
+ * which does the actual bot lookup server-to-server (see `@/lib/inventory`
+ * for that side of it).
  */
 
 export type OwnedMe = InventoryMe;
