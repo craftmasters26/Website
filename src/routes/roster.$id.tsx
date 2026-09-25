@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SoulCard } from "@/components/soul-card";
 import { CatchButton } from "@/components/catch-button";
+import { CatalogImage } from "@/components/catalog-image";
 import {
   ALL_SOULS,
   FACTION_LABEL,
@@ -180,7 +181,11 @@ function SoulArt({
       )}
       data-soul-art={soulId}
     >
-      <img src={imagePath} alt={name} className="aspect-[3/4] w-full object-cover object-top" />
+      <CatalogImage
+        src={imagePath}
+        name={name}
+        className="aspect-[3/4] w-full object-cover object-top"
+      />
     </div>
   );
 }

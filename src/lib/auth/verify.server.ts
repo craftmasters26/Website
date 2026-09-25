@@ -71,6 +71,27 @@ export async function getSessionUser(
 }
 
 /**
+ * The signed-in visitor's Discord snowflake id (the account they actually
+ * logged in with), or `null` if they aren't signed in with Discord. This is
+ * NOT the same as `session.user.id` — that's this app's own internal user id.
+ * `listUserAccounts` returns the accounts linked to the session, each with
+ * `providerId` (e.g. `"discord"`) and `accountId` (the provider's own id for
+ * that person) — see the `discord` entry in `server.ts`'s `socialProviders`.
+ */
+export async function getDiscordAccountId(bearerToken?: string): Promise<string | null> {
+  const request = getRequest();
+  if (!request) return null;
+  let headers = request.headers;
+  if (bearerToken) {
+    headers = new Headers(request.headers);
+    headers.set("Authorization", `Bearer ${bearerToken}`);
+  }
+  const accounts = await auth.api.listUserAccounts({ headers }).catch(() => []);
+  const discordAccount = accounts.find((a) => a.providerId === "discord");
+  return discordAccount?.accountId ?? null;
+}
+
+/**
  * Resolve the current user id for a server function, or throw when unauthorized.
  * Prefer `authMiddleware` (`./middleware`), which calls this for you.
  * - Auth enabled -> the verified session user id; throws

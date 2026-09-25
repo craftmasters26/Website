@@ -85,6 +85,16 @@ const grokClientSecret = env("GROK_AUTH_CLIENT_SECRET") ?? PREVIEW_CLIENT_SECRET
 export const authConfigured =
   !authDisabled && Boolean(grokClientId && grokClientSecret);
 
+// Real Discord OAuth for THIS app, direct with Discord — no broker, no bot
+// server, no ngrok. Create an app at https://discord.com/developers/applications,
+// add redirect URI `${BETTER_AUTH_URL}/api/auth/callback/discord` (and the
+// preview host's equivalent), then set DISCORD_CLIENT_ID / DISCORD_CLIENT_SECRET
+// on this app (Vercel project env vars). Until both are set, the Discord
+// button will fail to sign in but the rest of the site is unaffected.
+const discordClientId = env("DISCORD_CLIENT_ID");
+const discordClientSecret = env("DISCORD_CLIENT_SECRET");
+export const discordConfigured = Boolean(discordClientId && discordClientSecret);
+
 // This app's own Better Auth origin. When deployed the deployer injects the
 // public URL. In the sandbox live preview there's no fixed URL (each preview gets
 // a dynamic `*.grok-sandbox.com` host), so we hand Better Auth a dynamic baseURL:
@@ -178,6 +188,18 @@ export const auth = betterAuth({
   // globalThis so HMR doesn't invalidate PGLite-backed sessions (see above).
   secret: env("BETTER_AUTH_SECRET") ?? previewAuthSecret(),
   database,
+
+  // Direct Discord sign-in (native Better Auth provider — not the Grok broker,
+  // not the Discord bot's own server). Discord redirects straight back to this
+  // app's own `/api/auth/callback/discord`, same-origin, no ngrok involved.
+  socialProviders: discordConfigured
+    ? {
+        discord: {
+          clientId: discordClientId as string,
+          clientSecret: discordClientSecret as string,
+        },
+      }
+    : undefined,
 
   // CSRF / origin check for credentialed auth POSTs (email sign-up/sign-in, …).
   // See `trustedOrigins` construction above — must cover live preview hosts AND

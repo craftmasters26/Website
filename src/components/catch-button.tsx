@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCollection } from "@/lib/collection";
-import { botLoginUrl } from "@/lib/bot";
+import { signInWithDiscord } from "@/lib/auth/client";
+import { useCurrentUser } from "@/lib/auth/use-current-user";
 
 export function CatchButton({
   kind,
@@ -10,11 +11,14 @@ export function CatchButton({
   id: number;
 }) {
   const [ready, setReady] = useState(false);
+  const [pending, setPending] = useState(false);
   const hasSoul = useCollection((s) => s.hasSoul);
   const hasWeapon = useCollection((s) => s.hasWeapon);
   const catchSoul = useCollection((s) => s.catchSoul);
   const catchWeapon = useCollection((s) => s.catchWeapon);
   const releaseSoul = useCollection((s) => s.releaseSoul);
+  const user = useCurrentUser();
+  const signedIn = Boolean(user) && !user?.isDevFallback;
 
   useEffect(() => {
     setReady(true);
@@ -46,9 +50,24 @@ export function CatchButton({
           {kind === "soul" ? "Catch soul" : "Claim blade"}
         </button>
       )}
-      <a href={botLoginUrl("/owned")} className="btn btn-outline">
-        Login with Discord
-      </a>
+      {signedIn ? null : (
+        <button
+          type="button"
+          className="btn btn-outline"
+          disabled={pending}
+          onClick={async () => {
+            setPending(true);
+            try {
+              await signInWithDiscord("/owned");
+            } catch (err) {
+              console.error(err);
+              setPending(false);
+            }
+          }}
+        >
+          {pending ? "Redirecting…" : "Login with Discord"}
+        </button>
+      )}
     </div>
   );
 }

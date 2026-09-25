@@ -43,5 +43,9 @@ export const authMiddleware = createMiddleware({ type: "function" })
     // Reject scripted cross-site/sibling requests before touching per-user data.
     assertSameSiteRequest();
     const userId = await requireUserId(context.bearerToken);
-    return next({ context: { userId } });
+    // Forward the bearer token too (not just userId) — handlers that need to
+    // call other `auth.api.*` methods for the caller (e.g. listing their
+    // linked accounts) need it to build the right headers, same as
+    // `getSessionUser` does below.
+    return next({ context: { userId, bearerToken: context.bearerToken } });
   });

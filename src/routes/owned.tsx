@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, Sparkles } from "lucide-react";
 import { FACTION_LABEL, TIER_LABEL, TIERS, getSoul, getWeapon, type Tier } from "@/lib/catalog";
 import { useCatalogVersion } from "@/lib/catalog-version";
-import { botLoginUrl } from "@/lib/bot";
+import { signInWithDiscord } from "@/lib/auth/client";
 import { useOwnedMe, signOutOwned } from "@/lib/owned";
 import { cn } from "@/lib/utils";
 
@@ -130,15 +130,43 @@ function Row({ entry }: { entry: Entry }) {
 }
 
 function SignedOutView() {
+  const [pending, setPending] = useState(false);
   return (
     <div className="flex flex-col items-center gap-5 rounded-md border border-line bg-void-raised px-6 py-20 text-center">
       <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">
         Log in with Discord to see the souls and zanpakutō your account actually owns.
       </p>
-      <a href={botLoginUrl("/owned")} className="btn btn-azure px-6 py-3 text-sm">
+      <button
+        type="button"
+        className="btn btn-azure px-6 py-3 text-sm"
+        disabled={pending}
+        onClick={async () => {
+          setPending(true);
+          try {
+            await signInWithDiscord("/owned");
+          } catch (err) {
+            console.error(err);
+            setPending(false);
+          }
+        }}
+      >
         <img src="/brand/discord-mark.png" alt="" className="size-4" />
-        Login with Discord
-      </a>
+        {pending ? "Redirecting…" : "Login with Discord"}
+      </button>
+    </div>
+  );
+}
+
+function NoRecordView() {
+  return (
+    <div className="flex flex-col items-center gap-4 rounded-md border border-line bg-void-raised px-6 py-20 text-center">
+      <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">
+        You're logged in, but the bot hasn't seen this Discord account yet. Catch a soul or claim
+        a blade in Discord, then come back.
+      </p>
+      <Link to="/list" className="btn btn-outline px-6 py-3 text-sm">
+        Browse the full list
+      </Link>
     </div>
   );
 }
@@ -248,7 +276,7 @@ function OwnedPage() {
   return (
     <main className="page-enter py-16 md:py-20">
       <div className="wrap">
-        <div className="kicker">Owned</div>
+        <div className="kicker">Inventory</div>
         <div className="mb-10 flex flex-wrap items-end justify-between gap-8">
           <h1 className="max-w-xl font-serif text-[38px] leading-tight">
             Your actual collection.
@@ -283,6 +311,8 @@ function OwnedPage() {
           </p>
         ) : state.status === "signed-out" ? (
           <SignedOutView />
+        ) : state.status === "no-record" ? (
+          <NoRecordView />
         ) : state.status === "error" ? (
           <ErrorView onRetry={reload} />
         ) : entries.length === 0 ? (

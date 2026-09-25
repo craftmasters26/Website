@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { CatchButton } from "@/components/catch-button";
+import { CatalogImage } from "@/components/catalog-image";
 import { FACTION_LABEL, TIER_LABEL, getWeapon } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
 
@@ -31,9 +32,9 @@ function WeaponDetail() {
             weapon.tier === "mythic" && "soul-card-mythic",
           )}
         >
-          <img
+          <CatalogImage
             src={weapon.imagePath}
-            alt={weapon.name}
+            name={weapon.name}
             className="aspect-[3/4] w-full object-cover"
           />
         </div>

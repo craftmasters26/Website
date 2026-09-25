@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { CatalogImage } from "@/components/catalog-image";
 import { CRAFT_SOULS, DISCORD_INVITE, SOULS, TIER_LABEL, WEAPONS, getSoul } from "@/lib/catalog";
 import { useCatalogVersion } from "@/lib/catalog-version";
 
@@ -95,9 +96,9 @@ function Home() {
 
           <figure className="mx-auto w-full max-w-[340px] md:ml-auto">
             <div className="rotate-[2deg] overflow-hidden rounded-[10px_28px_10px_28px] border border-line-bright bg-void-raised">
-              <img
+              <CatalogImage
                 src={featured.imagePath}
-                alt={featured.name}
+                name={featured.name}
                 className="aspect-[3/4] w-full object-cover object-top"
               />
             </div>
@@ -124,9 +125,9 @@ function Home() {
             <div className="pack-cards flex">
               {packArt.map((soul) => (
                 <div key={soul.id} className="pack-card">
-                  <img
+                  <CatalogImage
                     src={soul.imagePath}
-                    alt={`${soul.name} card`}
+                    name={soul.name}
                     className="size-full object-cover object-top"
                   />
                 </div>

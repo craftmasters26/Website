@@ -2,15 +2,26 @@ import { useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { botLoginUrl } from "@/lib/bot";
+import { signInWithDiscord, signOut } from "@/lib/auth/client";
+import { useCurrentUser } from "@/lib/auth/use-current-user";
 
-const LINKS = [
+const BASE_LINKS = [
   { to: "/", label: "Home" },
   { to: "/list", label: "List" },
-  { to: "/owned", label: "Owned" },
   { to: "/commands", label: "Commands" },
   { to: "/premium", label: "Premium" },
 ] as const;
+
+const INVENTORY_LINK = { to: "/owned", label: "Inventory" } as const;
+
+function useNavLinks() {
+  const user = useCurrentUser();
+  const signedIn = Boolean(user) && !user?.isDevFallback;
+  // Inventory slots in after "List" — 4 links signed out, 5 once logged in.
+  return signedIn
+    ? [BASE_LINKS[0], BASE_LINKS[1], INVENTORY_LINK, BASE_LINKS[2], BASE_LINKS[3]]
+    : BASE_LINKS;
+}
 
 function BrandMark() {
   return (
@@ -20,18 +31,71 @@ function BrandMark() {
   );
 }
 
+/**
+ * Real, direct Discord sign-in — Better Auth's native `discord` provider
+ * (see `src/lib/auth/server.ts`), not the bot's own server. Clicking this
+ * never leaves bleachdex.vercel.app for anything other than Discord's own
+ * consent screen, and Discord redirects straight back here.
+ */
 function DiscordLoginButton({ className }: { className: string }) {
+  const [pending, setPending] = useState(false);
   return (
-    <a href={botLoginUrl("/owned")} className={className}>
+    <button
+      type="button"
+      className={className}
+      disabled={pending}
+      onClick={async () => {
+        setPending(true);
+        try {
+          await signInWithDiscord("/owned");
+        } catch (err) {
+          console.error(err);
+          setPending(false);
+        }
+      }}
+    >
       <img src="/brand/discord-mark.png" alt="" className="size-4" />
-      Login with Discord
-    </a>
+      {pending ? "Redirecting…" : "Login with Discord"}
+    </button>
   );
+}
+
+/** Signed-in state: avatar, name, and a log-out control — replaces the login button. */
+function AccountMenu({ className }: { className?: string }) {
+  const user = useCurrentUser();
+  return (
+    <div className={cn("flex items-center gap-3", className)}>
+      {user?.profileImageUrl ? (
+        <img
+          src={user.profileImageUrl}
+          alt=""
+          className="size-8 shrink-0 rounded-full border border-line-bright object-cover"
+        />
+      ) : null}
+      <span className="max-w-[9rem] truncate font-mono text-[12.5px] text-bone-dim">
+        {user?.displayName ?? "Signed in"}
+      </span>
+      <button
+        type="button"
+        className="font-mono text-[11px] text-bone-faint underline-offset-4 hover:text-bone hover:underline"
+        onClick={() => signOut("/")}
+      >
+        Log out
+      </button>
+    </div>
+  );
+}
+
+function AuthArea({ className }: { className: string }) {
+  const user = useCurrentUser();
+  const signedIn = Boolean(user) && !user?.isDevFallback;
+  return signedIn ? <AccountMenu className={className} /> : <DiscordLoginButton className={className} />;
 }
 
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
+  const links = useNavLinks();
 
   return (
     <header className="site-header">
@@ -47,7 +111,7 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
-          {LINKS.map((link) => {
+          {links.map((link) => {
             const active =
               link.to === "/"
                 ? pathname === "/"
@@ -65,7 +129,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <DiscordLoginButton className="btn btn-azure px-5 py-3 text-sm" />
+          <AuthArea className="btn btn-azure px-5 py-3 text-sm" />
           <button
             type="button"
             className="inline-flex size-11 items-center justify-center rounded-[var(--radius-blade)] border border-line-bright text-bone lg:hidden"
@@ -80,7 +144,7 @@ export function SiteHeader() {
       {open ? (
         <nav className="border-t border-line px-5 py-4 lg:hidden" aria-label="Mobile">
           <div className="flex flex-col gap-2">
-            {LINKS.map((link) => (
+            {links.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
@@ -90,7 +154,7 @@ export function SiteHeader() {
                 {link.label}
               </Link>
             ))}
-            <DiscordLoginButton className="btn btn-azure mt-2 justify-center px-5 py-3 text-sm" />
+            <AuthArea className="btn btn-azure mt-2 justify-center px-5 py-3 text-sm" />
           </div>
         </nav>
       ) : null}
@@ -110,7 +174,7 @@ export function SiteFooter() {
             List
           </Link>
           <Link to="/owned" className="hover:text-azure-bright">
-            Owned
+            Inventory
           </Link>
           <Link to="/commands" className="hover:text-azure-bright">
             Commands
@@ -118,9 +182,6 @@ export function SiteFooter() {
           <Link to="/premium" className="hover:text-azure-bright">
             Premium
           </Link>
-          <a href={botLoginUrl("/owned")} className="hover:text-azure-bright">
-            Login with Discord
-          </a>
           <a
             href="https://discord.gg/RNp5d5TGPD"
             className="hover:text-azure-bright"

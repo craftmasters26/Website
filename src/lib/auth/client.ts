@@ -153,6 +153,26 @@ export async function signIn(
 }
 
 /**
+ * Sign in with Discord directly — native Better Auth `discord` social
+ * provider, federated straight to Discord's own OAuth screen. No broker, no
+ * separate bot server, no ngrok: Discord redirects back to this app's own
+ * `/api/auth/callback/discord` (same origin as `callbackURL`).
+ *
+ * Full-page redirect, same as the non-preview branch of `signIn()` above —
+ * live preview isn't relevant here since Discord login only matters once
+ * this app is actually deployed at a real URL.
+ */
+export async function signInWithDiscord(callbackURL = "/owned"): Promise<void> {
+  const { data, error } = await authClient.signIn.social({
+    provider: "discord",
+    callbackURL,
+    errorCallbackURL: callbackURL,
+  });
+  if (error) throw new Error(error.message ?? "Discord sign-in failed");
+  if (data?.url) window.location.href = data.url;
+}
+
+/**
  * Open `/auth/popup` in a new window. Must run synchronously inside the click
  * handler (no await before this). The path is served by the template Vite
  * plugin (`authPopupPlugin` in vite.config.ts) — NOT by a React route.
