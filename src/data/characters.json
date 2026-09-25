@@ -1,0 +1,5731 @@
+[
+  {
+    "id": 1,
+    "name": "Ichigo Kurosaki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ichigo%20Kurosaki.png",
+    "hp": 2800,
+    "attack": 2600,
+    "tier": "mythic",
+    "ability_name": "Getsuga Tensho",
+    "ability_description": "Fires a concentrated reiatsu slash.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 2,
+    "name": "Kisuke Urahara",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kisuke%20Urahara.png",
+    "hp": 2700,
+    "attack": 2550,
+    "tier": "mythic",
+    "ability_name": "Benihime",
+    "ability_description": "Creates shields, nets, and destructive screams.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 3,
+    "name": "Yoruichi Shihoin",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yoruichi%20Shihoin.png",
+    "hp": 2600,
+    "attack": 2650,
+    "tier": "mythic",
+    "ability_name": "Shunko",
+    "ability_description": "Coats body in lightning for speed and hakuda.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 4,
+    "name": "Genryusai Shigekuni Yamamoto",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Genryusai%20Shigekuni%20Yamamoto.png",
+    "hp": 3000,
+    "attack": 2800,
+    "tier": "mythic",
+    "ability_name": "Zanka no Tachi",
+    "ability_description": "Sun-hot flame bankai erases what it cuts.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 5,
+    "name": "Sosuke Aizen",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sosuke%20Aizen.png",
+    "hp": 2900,
+    "attack": 2900,
+    "tier": "mythic",
+    "ability_name": "Kyoka Suigetsu",
+    "ability_description": "Complete hypnosis controls all five senses.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 6,
+    "name": "Byakuya Kuchiki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Byakuya%20Kuchiki.png",
+    "hp": 2700,
+    "attack": 2600,
+    "tier": "mythic",
+    "ability_name": "Senbonzakura Kageyoshi",
+    "ability_description": "Thousand petal blades attack in swarms.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 7,
+    "name": "Shunsui Kyoraku",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shunsui%20Kyoraku.png",
+    "hp": 2750,
+    "attack": 2650,
+    "tier": "mythic",
+    "ability_name": "Katen Kyokotsu",
+    "ability_description": "Turns battle into deadly children's games.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 8,
+    "name": "Toshiro Hitsugaya",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Toshiro%20Hitsugaya.png",
+    "hp": 2700,
+    "attack": 2600,
+    "tier": "mythic",
+    "ability_name": "Daiguren Hyorinmaru",
+    "ability_description": "Ice bankai freezes and controls weather.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 9,
+    "name": "Kenpachi Zaraki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kenpachi%20Zaraki.png",
+    "hp": 2900,
+    "attack": 2850,
+    "tier": "mythic",
+    "ability_name": "Nozarashi",
+    "ability_description": "Massive cleaver cuts through almost anything.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 10,
+    "name": "Ichibei Hyosube",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ichibei%20Hyosube.png",
+    "hp": 2800,
+    "attack": 2750,
+    "tier": "mythic",
+    "ability_name": "Ichimonji",
+    "ability_description": "Ink erases or renames a target's power.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 11,
+    "name": "Ulquiorra Cifer",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ulquiorra%20Cifer.png",
+    "hp": 2750,
+    "attack": 2750,
+    "tier": "mythic",
+    "ability_name": "Murcielago",
+    "ability_description": "Bat release with high-speed regen and Cero Oscuras.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 12,
+    "name": "Yhwach",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yhwach.png",
+    "hp": 3000,
+    "attack": 2950,
+    "tier": "mythic",
+    "ability_name": "The Almighty",
+    "ability_description": "Sees and alters future outcomes.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 13,
+    "name": "Jugram Haschwalth",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Jugram%20Haschwalth.png",
+    "hp": 2800,
+    "attack": 2750,
+    "tier": "mythic",
+    "ability_name": "The Balance",
+    "ability_description": "Redirects misfortune from allies to enemies.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 14,
+    "name": "Rukia Kuchiki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Rukia%20Kuchiki.png",
+    "hp": 2500,
+    "attack": 2400,
+    "tier": "legendary",
+    "ability_name": "Sode no Shirayuki",
+    "ability_description": "Ice dances freeze targets to absolute zero.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 15,
+    "name": "Isshin Kurosaki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Isshin%20Kurosaki.png",
+    "hp": 2600,
+    "attack": 2300,
+    "tier": "legendary",
+    "ability_name": "Engetsu",
+    "ability_description": "Fire-type Getsuga Tensho.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 16,
+    "name": "Gin Ichimaru",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Gin%20Ichimaru.png",
+    "hp": 2500,
+    "attack": 2550,
+    "tier": "legendary",
+    "ability_name": "Kamishini no Yari",
+    "ability_description": "Extends and leaves lethal poison.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 17,
+    "name": "Retsu Unohana",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Retsu%20Unohana.png",
+    "hp": 2600,
+    "attack": 2500,
+    "tier": "legendary",
+    "ability_name": "Minazuki",
+    "ability_description": "Heals allies or melts enemies with acid.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 18,
+    "name": "Jushiro Ukitake",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ukitake.png",
+    "hp": 2600,
+    "attack": 2400,
+    "tier": "legendary",
+    "ability_name": "Sogyo no Kotowari",
+    "ability_description": "Absorbs and redirects attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 19,
+    "name": "Mayuri Kurotsuchi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Mayuri%20Kurotsuchi.png",
+    "hp": 2500,
+    "attack": 2550,
+    "tier": "legendary",
+    "ability_name": "Konjiki Ashisogi Jizo",
+    "ability_description": "Poison cloud and paralyzing baby.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 20,
+    "name": "Renji Abarai",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Renji.png",
+    "hp": 2550,
+    "attack": 2400,
+    "tier": "legendary",
+    "ability_name": "Soo Zabimaru",
+    "ability_description": "Bone cannon fires massive reiatsu blast.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 21,
+    "name": "Orihime Inoue",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Orihime%20Inoue.png",
+    "hp": 2350,
+    "attack": 1900,
+    "tier": "legendary",
+    "ability_name": "Shun Shun Rikka",
+    "ability_description": "Rejects events, healing or shielding.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 22,
+    "name": "Yasutora Sado",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yasutora%20Sado.png",
+    "hp": 2550,
+    "attack": 2200,
+    "tier": "legendary",
+    "ability_name": "Brazo Derecha de Gigante",
+    "ability_description": "Arm fires powerful reiatsu blasts.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 23,
+    "name": "Uryu Ishida",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Uryu%20Ishida.png",
+    "hp": 2400,
+    "attack": 2300,
+    "tier": "legendary",
+    "ability_name": "Licht Regen",
+    "ability_description": "Rains Quincy arrows.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 24,
+    "name": "Kaien Shiba",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kaien%20Shiba.png",
+    "hp": 2500,
+    "attack": 2400,
+    "tier": "legendary",
+    "ability_name": "Nejibana",
+    "ability_description": "Water trident controls liquid.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 25,
+    "name": "Oetsu Nimaiya",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Oetsu%20Nimaiya.png",
+    "hp": 2600,
+    "attack": 2700,
+    "tier": "legendary",
+    "ability_name": "Sayafushi",
+    "ability_description": "Blade so sharp it cannot be sheathed.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 26,
+    "name": "Senjumaru Shutara",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Senjumaru%20Shutara.png",
+    "hp": 2550,
+    "attack": 2500,
+    "tier": "legendary",
+    "ability_name": "Shutara Scale",
+    "ability_description": "Woven fabric creates illusions and traps.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 27,
+    "name": "Tenjiro Kirinji",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Tenjiro%20Kirinji.png",
+    "hp": 2600,
+    "attack": 2500,
+    "tier": "legendary",
+    "ability_name": "Kinpika",
+    "ability_description": "Light and hot-spring water attack/heal.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 28,
+    "name": "Kirio Hikifune",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Hikifune.png",
+    "hp": 2500,
+    "attack": 2400,
+    "tier": "legendary",
+    "ability_name": "Hikifune Tree",
+    "ability_description": "Grows reiatsu-infused food and plants.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 29,
+    "name": "Shinji Hirako",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shinji.png",
+    "hp": 2600,
+    "attack": 2500,
+    "tier": "legendary",
+    "ability_name": "Sakanade",
+    "ability_description": "Inverts enemy senses.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 30,
+    "name": "Coyote Starrk",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Coyote%20Starrk.png",
+    "hp": 2700,
+    "attack": 2600,
+    "tier": "legendary",
+    "ability_name": "Los Lobos",
+    "ability_description": "Fires cero wolves and pistols.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 31,
+    "name": "Barragan Louisenbairn",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Barragan%20Louisenbairn.png",
+    "hp": 2700,
+    "attack": 2550,
+    "tier": "legendary",
+    "ability_name": "Respira",
+    "ability_description": "Ages and rots anything it touches.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 32,
+    "name": "Grimmjow Jaegerjaquez",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/grimmjow.png",
+    "hp": 2650,
+    "attack": 2600,
+    "tier": "legendary",
+    "ability_name": "Pantera",
+    "ability_description": "Claw release with Desgarron.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 33,
+    "name": "Nelliel Tu Odelschwanck",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nelliel%20Tu%20Odelschwanck.png",
+    "hp": 2600,
+    "attack": 2500,
+    "tier": "legendary",
+    "ability_name": "Gamuza",
+    "ability_description": "Cero Doble and healing saliva.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 34,
+    "name": "Askin Nakk Le Vaar",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Askin%20Nakk%20Le%20Vaar.png",
+    "hp": 2650,
+    "attack": 2600,
+    "tier": "legendary",
+    "ability_name": "Deathdealing",
+    "ability_description": "Controls lethal dose and immunity.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 35,
+    "name": "Gremmy Thoumeaux",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Gremmy%20Thoumeaux.png",
+    "hp": 2600,
+    "attack": 2700,
+    "tier": "legendary",
+    "ability_name": "The Visionary",
+    "ability_description": "Turns imagination into reality.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 36,
+    "name": "Gerard Valkyrie",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Gerard%20Valkyrie.png",
+    "hp": 2800,
+    "attack": 2700,
+    "tier": "legendary",
+    "ability_name": "The Miracle",
+    "ability_description": "Converts damage into size and power.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 37,
+    "name": "Lille Barro",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Lille%20Barro.png",
+    "hp": 2700,
+    "attack": 2750,
+    "tier": "legendary",
+    "ability_name": "The X-Axis",
+    "ability_description": "Shots pierce anything between muzzle and target.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 38,
+    "name": "Pernida Parnkgjas",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Pernida%20Parnkgjas.png",
+    "hp": 2600,
+    "attack": 2600,
+    "tier": "legendary",
+    "ability_name": "The Compulsory",
+    "ability_description": "Nerves invade and evolve.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 39,
+    "name": "Masaki Kurosaki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Masaki%20Kurosaki.png",
+    "hp": 2000,
+    "attack": 1900,
+    "tier": "epic",
+    "ability_name": "Quincy Bow",
+    "ability_description": "Fires reishi arrows with Blut.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 40,
+    "name": "Soi Fon",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Soi%20Fon.png",
+    "hp": 2300,
+    "attack": 2400,
+    "tier": "epic",
+    "ability_name": "Suzumebachi",
+    "ability_description": "Two-hit kill in same spot.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 41,
+    "name": "Sajin Komamura",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sajin%20Komamura.png",
+    "hp": 2600,
+    "attack": 2300,
+    "tier": "epic",
+    "ability_name": "Kokujo Tengen Myo'o",
+    "ability_description": "Giant armored samurai mirrors moves.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 42,
+    "name": "Rangiku Matsumoto",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Rangiku%20Matsumoto.png",
+    "hp": 1188,
+    "attack": 1155,
+    "tier": "epic",
+    "ability_name": "Haineko",
+    "ability_description": "Ash cloud cuts like blades.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 43,
+    "name": "Yachiru Kusajishi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yachiru.png",
+    "hp": 2100,
+    "attack": 2000,
+    "tier": "epic",
+    "ability_name": "Sanpo Kenju",
+    "ability_description": "Three-blade combo attack.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 44,
+    "name": "Ikkaku Madarame",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ikkaku%20Madarame.png",
+    "hp": 2400,
+    "attack": 2350,
+    "tier": "epic",
+    "ability_name": "Ryumon Hozukimaru",
+    "ability_description": "Dragon cannon explosive thrust.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 45,
+    "name": "Ginrei Kuchiki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ginrei%20Kuchiki.png",
+    "hp": 2400,
+    "attack": 2200,
+    "tier": "epic",
+    "ability_name": "Senbonzakura",
+    "ability_description": "Petal blade swarm.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 46,
+    "name": "Kensei Muguruma",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kensei%20Muguruma.png",
+    "hp": 2500,
+    "attack": 2450,
+    "tier": "epic",
+    "ability_name": "Tekken Tachikaze",
+    "ability_description": "Explosive wind punches.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 47,
+    "name": "Tier Harribel",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Tier%20Harribel.png",
+    "hp": 2600,
+    "attack": 2450,
+    "tier": "epic",
+    "ability_name": "La Gota",
+    "ability_description": "Water drops that cut like blades",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 48,
+    "name": "Nnoitra Gilga",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nnoitra%20Gilga.png",
+    "hp": 2600,
+    "attack": 2550,
+    "tier": "epic",
+    "ability_name": "Santa Teresa",
+    "ability_description": "Four scythe arms and high regen.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 49,
+    "name": "Szayelaporro Granz",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Szayelaporro%20Granz.png",
+    "hp": 2400,
+    "attack": 2350,
+    "tier": "epic",
+    "ability_name": "Fornicaras",
+    "ability_description": "Clones and organ puppetry.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 50,
+    "name": "Bambietta Basterbine",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Bambietta%20Basterbine.png",
+    "hp": 2500,
+    "attack": 2450,
+    "tier": "epic",
+    "ability_name": "The Explode",
+    "ability_description": "Turns anything into bombs.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 51,
+    "name": "Bazz-B",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Bazz-B.png",
+    "hp": 2550,
+    "attack": 2500,
+    "tier": "epic",
+    "ability_name": "Burner Finger",
+    "ability_description": "Powerful flame fingers.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 52,
+    "name": "Quilge Opie",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Quilge%20Opie.png",
+    "hp": 2500,
+    "attack": 2450,
+    "tier": "epic",
+    "ability_name": "The Jail",
+    "ability_description": "Traps enemies in reishi prison.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 53,
+    "name": "Royd Lloyd",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Royd%20Lloyd.png",
+    "hp": 2500,
+    "attack": 2400,
+    "tier": "epic",
+    "ability_name": "The Yourself",
+    "ability_description": "Copies appearance and powers.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 54,
+    "name": "Kugo Ginjo",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kugo%20Ginjo.png",
+    "hp": 2500,
+    "attack": 2450,
+    "tier": "epic",
+    "ability_name": "Cross of Scaffold",
+    "ability_description": "Fullbring sword and reiatsu steal.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "fullbringer"
+  },
+  {
+    "id": 55,
+    "name": "Shukuro Tsukishima",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shukuro%20Tsukishima.png",
+    "hp": 2400,
+    "attack": 2400,
+    "tier": "epic",
+    "ability_name": "Book of the End",
+    "ability_description": "Inserts false past into targets.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "fullbringer"
+  },
+  {
+    "id": 56,
+    "name": "Tatsuki Arisawa",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Tatsuki%20Arisawa.png",
+    "hp": 1800,
+    "attack": 1600,
+    "tier": "rare",
+    "ability_name": "Martial Arts",
+    "ability_description": "Strong human fighter.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 57,
+    "name": "Tessai Tsukabishi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Tessai%20Tsukabishi.png",
+    "hp": 2300,
+    "attack": 2000,
+    "tier": "rare",
+    "ability_name": "Kido",
+    "ability_description": "High-level barrier and attack spells.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 58,
+    "name": "Izuru Kira",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Izuru%20Kira.png",
+    "hp": 2000,
+    "attack": 1900,
+    "tier": "rare",
+    "ability_name": "Wabisuke",
+    "ability_description": "Doubles weight with each hit.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 59,
+    "name": "Momo Hinamori",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Momo%20Hinamori.png",
+    "hp": 1026,
+    "attack": 990,
+    "tier": "rare",
+    "ability_name": "Tobiume",
+    "ability_description": "Fireball explosions.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 60,
+    "name": "Tetsuzaemon Iba",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Tetsuzaemon%20Iba.png",
+    "hp": 2000,
+    "attack": 1900,
+    "tier": "rare",
+    "ability_name": "Zanpakuto",
+    "ability_description": "Sword and physical combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 61,
+    "name": "Nanao Ise",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nanao%20Ise.png",
+    "hp": 2000,
+    "attack": 1850,
+    "tier": "rare",
+    "ability_name": "Kido",
+    "ability_description": "Barriers and binding spells.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 62,
+    "name": "Nemu Kurotsuchi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nemu%20Kurotsuchi.png",
+    "hp": 2100,
+    "attack": 2000,
+    "tier": "rare",
+    "ability_name": "Poison Body",
+    "ability_description": "Modified body with poison.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 63,
+    "name": "Yumichika Ayasegawa",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yumichika%20Ayasegawa.png",
+    "hp": 2200,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Ruri'iro Kujaku",
+    "ability_description": "Vines drain reiatsu.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 64,
+    "name": "Kukaku Shiba",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kukaku%20Shiba.png",
+    "hp": 2300,
+    "attack": 2200,
+    "tier": "rare",
+    "ability_name": "Fireworks",
+    "ability_description": "Kido cannon and fireworks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 65,
+    "name": "Hiyori Sarugaki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Hiyori%20Sarugaki.png",
+    "hp": 2200,
+    "attack": 2300,
+    "tier": "rare",
+    "ability_name": "Kubikiri Orochi",
+    "ability_description": "Heavy slash and Vizard mask.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 66,
+    "name": "Love Aikawa",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Love%20Aikawa.png",
+    "hp": 2400,
+    "attack": 2300,
+    "tier": "rare",
+    "ability_name": "Tengumaru",
+    "ability_description": "Fire club smashes.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 67,
+    "name": "Rose Otoribashi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Rose%20Otoribashi.png",
+    "hp": 2300,
+    "attack": 2200,
+    "tier": "rare",
+    "ability_name": "Kinshara",
+    "ability_description": "Sound illusions.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 68,
+    "name": "Mashiro Kuna",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Mashiro%20Kuna.png",
+    "hp": 2200,
+    "attack": 2200,
+    "tier": "rare",
+    "ability_name": "Vizard Mask",
+    "ability_description": "Hollow mask boosts speed.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 69,
+    "name": "Lisa Yadomaru",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Lisa%20Yadomaru.png",
+    "hp": 2100,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Hollow Mask",
+    "ability_description": "Mask boosts power.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 70,
+    "name": "Hachigen Ushoda",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Hachigen%20Ushoda.png",
+    "hp": 2300,
+    "attack": 2000,
+    "tier": "rare",
+    "ability_name": "Kido Barriers",
+    "ability_description": "High-level barriers and seals.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 71,
+    "name": "Zommari Rureaux",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Zommari%20Rureaux.png",
+    "hp": 2300,
+    "attack": 2200,
+    "tier": "rare",
+    "ability_name": "Amor",
+    "ability_description": "Controls targets with eyes.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 72,
+    "name": "Aaroniero Arruruerie",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Aaroniero%20Arruruerie.png",
+    "hp": 2300,
+    "attack": 2200,
+    "tier": "rare",
+    "ability_name": "Glotoneria",
+    "ability_description": "Absorbs powers by eating.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 73,
+    "name": "Yammy Llargo",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yammy%20Llargo.png",
+    "hp": 2500,
+    "attack": 2400,
+    "tier": "rare",
+    "ability_name": "Ira",
+    "ability_description": "Rage increases size and power.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 74,
+    "name": "Wonderweiss Margela",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Wonderweiss%20Margela.png",
+    "hp": 2200,
+    "attack": 2300,
+    "tier": "rare",
+    "ability_name": "Extinguir",
+    "ability_description": "Nullifies fire abilities.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 75,
+    "name": "Candice Catnipp",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Candice%20Catnipp.png",
+    "hp": 2400,
+    "attack": 2400,
+    "tier": "rare",
+    "ability_name": "Galvano Blast",
+    "ability_description": "Lightning arrows.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 76,
+    "name": "Cang Du",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Cang%20Du.png",
+    "hp": 2300,
+    "attack": 2250,
+    "tier": "rare",
+    "ability_name": "The Iron",
+    "ability_description": "Skin turns to iron.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 77,
+    "name": "Driscoll Berci",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Driscoll%20Berci.png",
+    "hp": 2200,
+    "attack": 2150,
+    "tier": "rare",
+    "ability_name": "The Overkill",
+    "ability_description": "Absorbs killed souls for power.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 78,
+    "name": "Giselle Gewelle",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Giselle%20Gewelle.png",
+    "hp": 2300,
+    "attack": 2200,
+    "tier": "rare",
+    "ability_name": "The Zombie",
+    "ability_description": "Controls zombies with blood.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 79,
+    "name": "Liltotto Lamperd",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Liltotto%20Lamperd.png",
+    "hp": 2300,
+    "attack": 2250,
+    "tier": "rare",
+    "ability_name": "The Glutton",
+    "ability_description": "Eats enemies and attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 80,
+    "name": "Meninas McAllon",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Meninas%20McAllon.png",
+    "hp": 2300,
+    "attack": 2250,
+    "tier": "rare",
+    "ability_name": "The Power",
+    "ability_description": "Super strength.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 81,
+    "name": "NaNaNa Najahkoop",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nanana%20Najahkoop.png",
+    "hp": 2200,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "The Underbelly",
+    "ability_description": "Analyzes and attacks weak points.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 82,
+    "name": "Robert Accutrone",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Robert%20Accutrone.png",
+    "hp": 2300,
+    "attack": 2250,
+    "tier": "rare",
+    "ability_name": "Quincy Guns",
+    "ability_description": "Fires reishi bullets.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 83,
+    "name": "BG9",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/BG9.png",
+    "hp": 2300,
+    "attack": 2250,
+    "tier": "rare",
+    "ability_name": "Daten",
+    "ability_description": "Data analysis and weapons.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 84,
+    "name": "Loyd Lloyd",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Loyd%20Lloyd.png",
+    "hp": 2200,
+    "attack": 2200,
+    "tier": "rare",
+    "ability_name": "The Yourself",
+    "ability_description": "Copies appearance and power.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 85,
+    "name": "Riruka Dokugamine",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Riruka%20Dokugamine.png",
+    "hp": 2100,
+    "attack": 2000,
+    "tier": "rare",
+    "ability_name": "Dollhouse",
+    "ability_description": "Shrinks and traps in boxes.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "fullbringer"
+  },
+  {
+    "id": 86,
+    "name": "Yukio Hans Vorarlberna",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yukio%20Hans%20Vorarlberna.png",
+    "hp": 2100,
+    "attack": 2050,
+    "tier": "rare",
+    "ability_name": "Invaders Must Die",
+    "ability_description": "Game constructs attack.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "fullbringer"
+  },
+  {
+    "id": 87,
+    "name": "Jackie Tristan",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Jackie%20Tristan.png",
+    "hp": 2100,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Dirty Boots",
+    "ability_description": "Boots gain power from dirt.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "fullbringer"
+  },
+  {
+    "id": 88,
+    "name": "Kazui Kurosaki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kazui%20Kurosaki.png",
+    "hp": 1700,
+    "attack": 1500,
+    "tier": "uncommon",
+    "ability_name": "Potential",
+    "ability_description": "Inherited high reiatsu.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 89,
+    "name": "Chojiro Sasakibe",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Chojiro%20Sasakibe.png",
+    "hp": 1134,
+    "attack": 1045,
+    "tier": "uncommon",
+    "ability_name": "Gonryomaru",
+    "ability_description": "Lightning spear.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 90,
+    "name": "Isane Kotetsu",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Isane%20Kotetsu.png",
+    "hp": 1026,
+    "attack": 935,
+    "tier": "uncommon",
+    "ability_name": "Healing Kido",
+    "ability_description": "Heals wounds.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 91,
+    "name": "Luppi Antenor",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Luppi%20Antenor.png",
+    "hp": 2100,
+    "attack": 2150,
+    "tier": "uncommon",
+    "ability_name": "Trepadora",
+    "ability_description": "Tentacle release.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 92,
+    "name": "Tesra Lindocruz",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Tesra%20Lindocruz.png",
+    "hp": 1026,
+    "attack": 990,
+    "tier": "uncommon",
+    "ability_name": "Strength",
+    "ability_description": "Physical combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 93,
+    "name": "Moe Shishigawara",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Moe%20Shishigawara.png",
+    "hp": 1026,
+    "attack": 1045,
+    "tier": "uncommon",
+    "ability_name": "Jackpot Knuckle",
+    "ability_description": "Lucky punch power.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "fullbringer"
+  },
+  {
+    "id": 94,
+    "name": "Yuzu Kurosaki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yuzu.png",
+    "hp": 1200,
+    "attack": 600,
+    "tier": "common",
+    "ability_name": "Human",
+    "ability_description": "Ordinary human.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 95,
+    "name": "Karin Kurosaki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Karin%20Kurosaki.png",
+    "hp": 1300,
+    "attack": 800,
+    "tier": "common",
+    "ability_name": "Human",
+    "ability_description": "Can see spirits.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 96,
+    "name": "Kon",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/kon.png",
+    "hp": 1000,
+    "attack": 500,
+    "tier": "common",
+    "ability_name": "Modified Soul",
+    "ability_description": "Can possess and fight.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 97,
+    "name": "Keigo Asano",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Keigo%20Asano.png",
+    "hp": 900,
+    "attack": 400,
+    "tier": "common",
+    "ability_name": "Human",
+    "ability_description": "Ordinary human.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 98,
+    "name": "Mizuiro Kojima",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Mizuiro%20Kojima.png",
+    "hp": 850,
+    "attack": 450,
+    "tier": "common",
+    "ability_name": "Human",
+    "ability_description": "Ordinary human.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 99,
+    "name": "Chizuru Honsho",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Chizuru%20Honsho.png",
+    "hp": 800,
+    "attack": 500,
+    "tier": "common",
+    "ability_name": "Human",
+    "ability_description": "Ordinary human.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 100,
+    "name": "Don Kanonji",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Don%20Kanonji.png",
+    "hp": 1100,
+    "attack": 700,
+    "tier": "common",
+    "ability_name": "Spiritual Power",
+    "ability_description": "Fires weak spirit ball.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 101,
+    "name": "Jinta Hanakari",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Jinta%20Hanakari.png",
+    "hp": 1400,
+    "attack": 1200,
+    "tier": "common",
+    "ability_name": "Strength",
+    "ability_description": "Strong human.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 102,
+    "name": "Ururu Tsumugiya",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ururu%20Tsumugiya.png",
+    "hp": 1300,
+    "attack": 1100,
+    "tier": "common",
+    "ability_name": "Strength",
+    "ability_description": "Modified strength.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 103,
+    "name": "Marechiyo Omaeda",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Marechiyo%20Omaeda.png",
+    "hp": 1800,
+    "attack": 1400,
+    "tier": "common",
+    "ability_name": "Gegetsuburi",
+    "ability_description": "Flail smash.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 104,
+    "name": "Hanataro Yamada",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Hanataro%20Yamada.png",
+    "hp": 1500,
+    "attack": 1100,
+    "tier": "common",
+    "ability_name": "Hisagomaru",
+    "ability_description": "Heals by releasing stored damage.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 105,
+    "name": "Kiyone Kotetsu",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kiyone%20Kotetsu.png",
+    "hp": 1600,
+    "attack": 1300,
+    "tier": "common",
+    "ability_name": "Kido",
+    "ability_description": "Basic kido.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 106,
+    "name": "Sentaro Kotsubaki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sentaro%20Kotsubaki.png",
+    "hp": 1700,
+    "attack": 1400,
+    "tier": "common",
+    "ability_name": "Kido",
+    "ability_description": "Basic kido.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 107,
+    "name": "Makizo Aramaki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Makizo%20Aramaki.png",
+    "hp": 1600,
+    "attack": 1300,
+    "tier": "common",
+    "ability_name": "Strength",
+    "ability_description": "Physical combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 108,
+    "name": "Ganju Shiba",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ganju%20Shiba.png",
+    "hp": 1900,
+    "attack": 1700,
+    "tier": "common",
+    "ability_name": "Fireworks",
+    "ability_description": "Kido fireworks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 109,
+    "name": "Lilynette Gingerbuck",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Lilynette%20Gingerbuck.png",
+    "hp": 1600,
+    "attack": 1500,
+    "tier": "common",
+    "ability_name": "Cero",
+    "ability_description": "Fires cero.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 110,
+    "name": "Pesche Guatiche",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Pesche%20Guatiche.png",
+    "hp": 1700,
+    "attack": 1500,
+    "tier": "common",
+    "ability_name": "Infinite Slick",
+    "ability_description": "Slippery spit.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 111,
+    "name": "Dondochakka Birstanne",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Dondochakka%20Birtanne.png",
+    "hp": 1800,
+    "attack": 1600,
+    "tier": "common",
+    "ability_name": "Spit",
+    "ability_description": "Sticky spit.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 112,
+    "name": "PePe Waccabrada",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/PePe%20Waccabrada.png",
+    "hp": 2000,
+    "attack": 1900,
+    "tier": "common",
+    "ability_name": "The Love",
+    "ability_description": "Controls targets with love.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 113,
+    "name": "Shaz Domino",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shaz%20Domino.png",
+    "hp": 1900,
+    "attack": 1800,
+    "tier": "common",
+    "ability_name": "Quincy",
+    "ability_description": "Reishi attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 114,
+    "name": "Giriko Kutsuzawa",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Giriko%20Kutsuzawa.png",
+    "hp": 1800,
+    "attack": 1700,
+    "tier": "common",
+    "ability_name": "Time Tells No Lies",
+    "ability_description": "Fullbring time-based.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "fullbringer"
+  },
+  {
+    "id": 115,
+    "name": "Adnyeus",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Soul%20King.png",
+    "hp": 1620,
+    "attack": 1623,
+    "tier": "mythic",
+    "ability_name": "",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 116,
+    "name": "Hikone Ubuginu",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Hikone%20Ubuginu.png",
+    "hp": 2900,
+    "attack": 2800,
+    "tier": "mythic",
+    "ability_name": "Ikomikidomoe",
+    "ability_description": "Hybrid Shinigami/Arrancar power boosts all stats.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 117,
+    "name": "Tokinada Tsunayashiro",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Tokinada%20Tsunayashiro.png",
+    "hp": 2750,
+    "attack": 2700,
+    "tier": "legendary",
+    "ability_name": "Enrakyoten",
+    "ability_description": "Copies other zanpakuto abilities.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 118,
+    "name": "Kageroza Inaba",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kageroza%20Inaba.png",
+    "hp": 2700,
+    "attack": 2650,
+    "tier": "legendary",
+    "ability_name": "Reigai",
+    "ability_description": "Creates clones with copied powers.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 119,
+    "name": "Mask De Masculine",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Mask%20De%20Masculine.png",
+    "hp": 2650,
+    "attack": 2600,
+    "tier": "legendary",
+    "ability_name": "The Superstar",
+    "ability_description": "Cheers increase power and healing.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 120,
+    "name": "Muramasa",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Muramasa.png",
+    "hp": 2600,
+    "attack": 2650,
+    "tier": "legendary",
+    "ability_name": "Mind Control",
+    "ability_description": "Turns zanpakuto spirits against owners.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 121,
+    "name": "Kaname Tosen",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kaname%20Tosen.png",
+    "hp": 2600,
+    "attack": 2550,
+    "tier": "legendary",
+    "ability_name": "Suzumushi",
+    "ability_description": "Sound-based illusions and black dome.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 122,
+    "name": "Ryuken Ishida",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ryuken%20Ishida.png",
+    "hp": 2600,
+    "attack": 2500,
+    "tier": "legendary",
+    "ability_name": "Quincy Archery",
+    "ability_description": "Master arrow shots and Blut.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 123,
+    "name": "\u00c4s N\u00f6dt",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/%C3%84s%20N%C3%B6dt.png",
+    "hp": 2550,
+    "attack": 2500,
+    "tier": "legendary",
+    "ability_name": "The Fear",
+    "ability_description": "Thorns induce absolute fear.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 124,
+    "name": "Ohana Katen",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ohana.png",
+    "hp": 2550,
+    "attack": 2450,
+    "tier": "legendary",
+    "ability_name": "Katen Kyokotsu",
+    "ability_description": "Reality game abilities.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 125,
+    "name": "Okyo Kyokotsu",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Okyo.png",
+    "hp": 2500,
+    "attack": 2550,
+    "tier": "legendary",
+    "ability_name": "Kyokotsu",
+    "ability_description": "Game-based support and attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 126,
+    "name": "Sogyo no Kotowari",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sogyo%20no%20Kotowari.png",
+    "hp": 2500,
+    "attack": 2400,
+    "tier": "legendary",
+    "ability_name": "Redirect",
+    "ability_description": "Absorbs and returns attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 127,
+    "name": "Hozukimaru",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Hozukimaru.png",
+    "hp": 2400,
+    "attack": 2300,
+    "tier": "legendary",
+    "ability_name": "Spear Thrust",
+    "ability_description": "Extends and explodes on impact.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 128,
+    "name": "Suzumebachi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Suzumebachi.png",
+    "hp": 1334,
+    "attack": 1170,
+    "tier": "legendary",
+    "ability_name": "Nigeki Kessatsu",
+    "ability_description": "Second hit in same spot kills.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 129,
+    "name": "Hisagomaru",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Hisagomaru.png",
+    "hp": 1318,
+    "attack": 1139,
+    "tier": "legendary",
+    "ability_name": "Healing Gauge",
+    "ability_description": "Stores damage then releases as healing.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 130,
+    "name": "Narunosuke",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Narunosuke.png",
+    "hp": 1301,
+    "attack": 1107,
+    "tier": "legendary",
+    "ability_name": "Spirit Support",
+    "ability_description": "Filler zanpakuto spirit supports with kido.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 131,
+    "name": "Shintaro",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shintaro.png",
+    "hp": 1285,
+    "attack": 1076,
+    "tier": "legendary",
+    "ability_name": "Spirit Blade",
+    "ability_description": "Filler zanpakuto spirit slashes with reiatsu.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 132,
+    "name": "Sakanade",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sakanade.png",
+    "hp": 1269,
+    "attack": 1045,
+    "tier": "legendary",
+    "ability_name": "Sense Invert",
+    "ability_description": "Inverts enemy senses.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 133,
+    "name": "Tenken",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Tenken.png",
+    "hp": 1404,
+    "attack": 1403,
+    "tier": "epic",
+    "ability_name": "Giant Limb",
+    "ability_description": "Summons giant arm/leg.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 134,
+    "name": "Zabimaru",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Zabimaru.png",
+    "hp": 1388,
+    "attack": 1386,
+    "tier": "epic",
+    "ability_name": "Snake Blade",
+    "ability_description": "Extends and bites.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 135,
+    "name": "Ashisogi Jizo",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ashisogi%20Jizo.png",
+    "hp": 1373,
+    "attack": 1369,
+    "tier": "epic",
+    "ability_name": "Poison Sting",
+    "ability_description": "Paralyzes and poisons.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 136,
+    "name": "Kazeshini",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kazeshini.png",
+    "hp": 3017,
+    "attack": 2703,
+    "tier": "epic",
+    "ability_name": "",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 137,
+    "name": "Kokuto",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kokuto.png",
+    "hp": 2500,
+    "attack": 2500,
+    "tier": "epic",
+    "ability_name": "Dark Zanpakuto",
+    "ability_description": "Dark energy slashes.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 138,
+    "name": "Shusuke Amagai",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shusuke%20Amagai.png",
+    "hp": 2500,
+    "attack": 2450,
+    "tier": "epic",
+    "ability_name": "Raika",
+    "ability_description": "Fire and lightning blade.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 139,
+    "name": "Jin Kariya",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Jin%20Kariya.png",
+    "hp": 2500,
+    "attack": 2400,
+    "tier": "epic",
+    "ability_name": "Doll Wind",
+    "ability_description": "Wind doll attacks and defense.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 140,
+    "name": "Sojiro Kusaka",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sojiro%20Kusaka.png",
+    "hp": 2450,
+    "attack": 2400,
+    "tier": "epic",
+    "ability_name": "Ice Zanpakuto",
+    "ability_description": "Ice attacks and freezing.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 141,
+    "name": "Oko Yushima",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Oko%20Yushima.png",
+    "hp": 2450,
+    "attack": 2350,
+    "tier": "epic",
+    "ability_name": "Reigai Fusion",
+    "ability_description": "Absorbs powers and kido.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 142,
+    "name": "Gantenbainne Mosqueda",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Gantenbainne%20Mosqueda.png",
+    "hp": 2450,
+    "attack": 2300,
+    "tier": "epic",
+    "ability_name": "Dragra",
+    "ability_description": "Armored arm blasts.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 143,
+    "name": "Ruri'iro Kujaku",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ruri%27iro%20Kujaku.png",
+    "hp": 2777,
+    "attack": 2464,
+    "tier": "epic",
+    "ability_name": "",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 144,
+    "name": "Haineko",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Haineko.png",
+    "hp": 1234,
+    "attack": 1215,
+    "tier": "epic",
+    "ability_name": "Ash Cloud",
+    "ability_description": "Ash cuts like blades.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 145,
+    "name": "Aura Michibane",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Aura%20Michibane.png",
+    "hp": 2400,
+    "attack": 2350,
+    "tier": "epic",
+    "ability_name": "Fullbring Matter",
+    "ability_description": "Controls matter and reishi.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "fullbringer"
+  },
+  {
+    "id": 146,
+    "name": "Dordoni Alessandro Del Socaccio",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Dordoni%20Alessandro%20Del%20Socaccio.png",
+    "hp": 2400,
+    "attack": 2350,
+    "tier": "epic",
+    "ability_name": "Giralda",
+    "ability_description": "Wind-based kicks and tornado.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 147,
+    "name": "Senna",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Senna.png",
+    "hp": 2400,
+    "attack": 2350,
+    "tier": "epic",
+    "ability_name": "Shinken",
+    "ability_description": "Memory blade cuts memories.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 148,
+    "name": "Ouko Yushima",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ouko%20Yushima.png",
+    "hp": 2400,
+    "attack": 2300,
+    "tier": "epic",
+    "ability_name": "Reigai Tech",
+    "ability_description": "Copies and enhances powers.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 149,
+    "name": "Cirucci Sanderwicci",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Cirucci%20Sanderwicci.png",
+    "hp": 2350,
+    "attack": 2400,
+    "tier": "epic",
+    "ability_name": "Golondrina",
+    "ability_description": "Blade wings and feather attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 150,
+    "name": "Shuhei Hisagi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shuhei%20Hisagi.png",
+    "hp": 2350,
+    "attack": 2250,
+    "tier": "epic",
+    "ability_name": "Kazeshini",
+    "ability_description": "Twin scythes on chains.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 151,
+    "name": "Rudbornn Chelute",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Rudbornn%20Chelute.png",
+    "hp": 2300,
+    "attack": 2250,
+    "tier": "epic",
+    "ability_name": "Calaveras",
+    "ability_description": "Summons Exequias minions.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 152,
+    "name": "Gonryomaru",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Gonryomaru.png",
+    "hp": 1111,
+    "attack": 1079,
+    "tier": "epic",
+    "ability_name": "Lightning Spear",
+    "ability_description": "Lightning spear strikes.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 153,
+    "name": "Wabisuke",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Wabisuke.png",
+    "hp": 1095,
+    "attack": 1062,
+    "tier": "epic",
+    "ability_name": "Weight Double",
+    "ability_description": "Doubles target's weight.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 154,
+    "name": "Nozomi Kujo",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nozomi%20Kujo.png",
+    "hp": 1080,
+    "attack": 1045,
+    "tier": "epic",
+    "ability_name": "Modified Soul",
+    "ability_description": "Kido and reiatsu bursts.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 155,
+    "name": "Tobiume",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Tobiume.png",
+    "hp": 1350,
+    "attack": 1320,
+    "tier": "rare",
+    "ability_name": "Fireball",
+    "ability_description": "Throws explosive fireballs.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 156,
+    "name": "Gegetsuburi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Gegetsuburi.png",
+    "hp": 1331,
+    "attack": 1298,
+    "tier": "rare",
+    "ability_name": "Flail",
+    "ability_description": "Heavy flail smashes.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 157,
+    "name": "Shuren",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shuren.png",
+    "hp": 2300,
+    "attack": 2250,
+    "tier": "rare",
+    "ability_name": "Fire Doll",
+    "ability_description": "Fire-based Bount doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 158,
+    "name": "Choe Neng Poww",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Choe%20Neng%20Poww.png",
+    "hp": 2300,
+    "attack": 2200,
+    "tier": "rare",
+    "ability_name": "Hippo",
+    "ability_description": "Massive strength and cero.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 159,
+    "name": "Kuruyashiki Kenpachi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kuruyashiki%20Kenpachi.png",
+    "hp": 2300,
+    "attack": 2200,
+    "tier": "rare",
+    "ability_name": "Sword",
+    "ability_description": "Kenpachi swordsmanship.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 160,
+    "name": "Edrad Liones",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Edrad%20Liones.png",
+    "hp": 2250,
+    "attack": 2150,
+    "tier": "rare",
+    "ability_name": "Volcano",
+    "ability_description": "Fire punches and explosions.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 161,
+    "name": "Makoto Kibune",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Makoto%20Kibune.png",
+    "hp": 2250,
+    "attack": 2150,
+    "tier": "rare",
+    "ability_name": "Kido",
+    "ability_description": "Binding and attack spells.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 162,
+    "name": "Ggio Vega",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ggio%20Vega.png",
+    "hp": 2200,
+    "attack": 2150,
+    "tier": "rare",
+    "ability_name": "Tigre",
+    "ability_description": "Claw and speed release.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 163,
+    "name": "Kenpachi Kiganjo",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kenpachi%20Kiganjo.png",
+    "hp": 2200,
+    "attack": 2150,
+    "tier": "rare",
+    "ability_name": "Sword",
+    "ability_description": "Kenpachi swordsmanship.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 164,
+    "name": "Charlotte Chuhlhourne",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Charlotte%20Chuhlhourne.png",
+    "hp": 2200,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Reina de Rosas",
+    "ability_description": "Rose attacks and beauty.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 165,
+    "name": "Ganryu",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ganryu.png",
+    "hp": 2200,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Bount Doll",
+    "ability_description": "Doll with energy attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 166,
+    "name": "Go Koga",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Go%20Koga.png",
+    "hp": 2200,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Dark Zanpakuto",
+    "ability_description": "Dark energy attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 167,
+    "name": "Shawlong Koufang",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shawlong%20Koufang.png",
+    "hp": 2200,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Tijereta",
+    "ability_description": "Claw release and ice.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 168,
+    "name": "Yylfordt Granz",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yylfordt%20Granz.png",
+    "hp": 2200,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Del Toro",
+    "ability_description": "Horns and charging.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 169,
+    "name": "Cyan Sun-Sun",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Cyan%20Sun-Sun.png",
+    "hp": 2150,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Anaconda",
+    "ability_description": "Snake tail and poison.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 170,
+    "name": "Emilou Apacci",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/emilou%20apacci.png",
+    "hp": 2150,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Cierva",
+    "ability_description": "Antler and cero.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 171,
+    "name": "Franceska Mila Rose",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Franceska%20Mila%20Rose.png",
+    "hp": 2150,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Leona",
+    "ability_description": "Lion strength and roar.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 172,
+    "name": "Nirgge Parduoc",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nirgge%20Parduoc.png",
+    "hp": 2150,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Mammoth",
+    "ability_description": "Heavy strength and charge.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 173,
+    "name": "Findorr Calius",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Findorr%20Calius.png",
+    "hp": 2150,
+    "attack": 2050,
+    "tier": "rare",
+    "ability_name": "Pinza",
+    "ability_description": "Crab claw and water.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 174,
+    "name": "Abirama Redder",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Abirama%20Redder.png",
+    "hp": 2100,
+    "attack": 2150,
+    "tier": "rare",
+    "ability_name": "Aguila",
+    "ability_description": "Winged claw attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 175,
+    "name": "Maki Ichinose",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Maki%20Ichinose.png",
+    "hp": 2100,
+    "attack": 2050,
+    "tier": "rare",
+    "ability_name": "Light Zanpakuto",
+    "ability_description": "Light-based slashes.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 176,
+    "name": "Roka Paramia",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Roka%20Paramia.png",
+    "hp": 2100,
+    "attack": 2050,
+    "tier": "rare",
+    "ability_name": "Arrancar",
+    "ability_description": "Healing and research.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 177,
+    "name": "Grand Fisher",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Grand%20Fisher.png",
+    "hp": 2000,
+    "attack": 2100,
+    "tier": "rare",
+    "ability_name": "Lure",
+    "ability_description": "Uses lure to eat souls.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow"
+  },
+  {
+    "id": 178,
+    "name": "Kirikaze",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kirikaze.png",
+    "hp": 2000,
+    "attack": 1950,
+    "tier": "rare",
+    "ability_name": "Wind",
+    "ability_description": "Wind blade.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 179,
+    "name": "Lurichiyo Kasumi\u014dji",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Rurichiyo%20Kasumioji.png",
+    "hp": 2000,
+    "attack": 1900,
+    "tier": "rare",
+    "ability_name": "Noble Blade",
+    "ability_description": "Royal zanpakuto.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 180,
+    "name": "Hanza Nukui",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Hanza%20Nukui.png",
+    "hp": 1950,
+    "attack": 1900,
+    "tier": "rare",
+    "ability_name": "Assassin",
+    "ability_description": "Stealth and blade.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 181,
+    "name": "Taikun",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Taikun.png",
+    "hp": 1950,
+    "attack": 1900,
+    "tier": "rare",
+    "ability_name": "Lightning",
+    "ability_description": "Lightning attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 182,
+    "name": "Garogai",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Garogai.png",
+    "hp": 1900,
+    "attack": 1850,
+    "tier": "rare",
+    "ability_name": "Earth",
+    "ability_description": "Earth attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 183,
+    "name": "Gyakuaku Kumoi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Gyakuaku%20Kumoi.png",
+    "hp": 1900,
+    "attack": 1850,
+    "tier": "rare",
+    "ability_name": "Kido",
+    "ability_description": "Political and kido attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 184,
+    "name": "Homura",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Homura.png",
+    "hp": 1900,
+    "attack": 1800,
+    "tier": "rare",
+    "ability_name": "Fire",
+    "ability_description": "Fire attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 185,
+    "name": "Shizuku",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shizuku.png",
+    "hp": 1900,
+    "attack": 1800,
+    "tier": "rare",
+    "ability_name": "Water",
+    "ability_description": "Water attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 186,
+    "name": "Gunjo",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/gunjo.png",
+    "hp": 2309,
+    "attack": 2050,
+    "tier": "uncommon",
+    "ability_name": "",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 187,
+    "name": "Jinnai Douko",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Jinnai%20Douko.png",
+    "hp": 1850,
+    "attack": 1800,
+    "tier": "rare",
+    "ability_name": "Kido",
+    "ability_description": "Binding spells.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 188,
+    "name": "Genga",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/genga.png",
+    "hp": 1800,
+    "attack": 1750,
+    "tier": "rare",
+    "ability_name": "Bount",
+    "ability_description": "Bount physical combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 189,
+    "name": "Yang",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yang.png",
+    "hp": 1800,
+    "attack": 1750,
+    "tier": "rare",
+    "ability_name": "Twin",
+    "ability_description": "Twin combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 190,
+    "name": "Yin",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yin.png",
+    "hp": 1800,
+    "attack": 1750,
+    "tier": "rare",
+    "ability_name": "Twin",
+    "ability_description": "Twin combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 191,
+    "name": "Enryu",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Enryu.png",
+    "hp": 1800,
+    "attack": 1700,
+    "tier": "rare",
+    "ability_name": "Doll",
+    "ability_description": "Modified soul doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 192,
+    "name": "Jai",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Jai.png",
+    "hp": 1800,
+    "attack": 1700,
+    "tier": "rare",
+    "ability_name": "Bount",
+    "ability_description": "Bount combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 193,
+    "name": "Kenryu",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kenryu.png",
+    "hp": 1800,
+    "attack": 1700,
+    "tier": "rare",
+    "ability_name": "Doll",
+    "ability_description": "Modified soul doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 194,
+    "name": "Ryu Kuzu",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ryu%20Kuzu.png",
+    "hp": 1750,
+    "attack": 1700,
+    "tier": "rare",
+    "ability_name": "Bount",
+    "ability_description": "Bount combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 195,
+    "name": "Benin",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Benin.png",
+    "hp": 1750,
+    "attack": 1650,
+    "tier": "rare",
+    "ability_name": "Bount",
+    "ability_description": "Bount combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 196,
+    "name": "Bau",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Bau.png",
+    "hp": 1700,
+    "attack": 1600,
+    "tier": "rare",
+    "ability_name": "Bount",
+    "ability_description": "Bount combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 197,
+    "name": "Ririn",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ririn.png",
+    "hp": 1700,
+    "attack": 1600,
+    "tier": "rare",
+    "ability_name": "Doll",
+    "ability_description": "Modified soul doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 198,
+    "name": "Kurudo",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kurudo.png",
+    "hp": 1700,
+    "attack": 1550,
+    "tier": "rare",
+    "ability_name": "Doll",
+    "ability_description": "Modified soul doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 199,
+    "name": "Mue",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Mue.png",
+    "hp": 1650,
+    "attack": 1550,
+    "tier": "rare",
+    "ability_name": "Bount",
+    "ability_description": "Bount combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 200,
+    "name": "Noba",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Noba.png",
+    "hp": 1600,
+    "attack": 1500,
+    "tier": "rare",
+    "ability_name": "Doll",
+    "ability_description": "Modified soul doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 201,
+    "name": "Riyan",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Riyan.png",
+    "hp": 1600,
+    "attack": 1500,
+    "tier": "rare",
+    "ability_name": "Bount",
+    "ability_description": "Bount combat.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 202,
+    "name": "Ho",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ho.png",
+    "hp": 2280,
+    "attack": 1953,
+    "tier": "common",
+    "ability_name": "",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 203,
+    "name": "Yoshino Soma",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yoshino%20Soma.png",
+    "hp": 1900,
+    "attack": 1800,
+    "tier": "uncommon",
+    "ability_name": "Goethe",
+    "ability_description": "Fire doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 204,
+    "name": "Ban",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ban.png",
+    "hp": 1850,
+    "attack": 1750,
+    "tier": "uncommon",
+    "ability_name": "Doll",
+    "ability_description": "Bount doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 205,
+    "name": "Mabashi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Mabashi.png",
+    "hp": 1850,
+    "attack": 1750,
+    "tier": "uncommon",
+    "ability_name": "Doll",
+    "ability_description": "Bount doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 206,
+    "name": "Gesell",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Gesell.png",
+    "hp": 1800,
+    "attack": 1700,
+    "tier": "uncommon",
+    "ability_name": "Doll",
+    "ability_description": "Bount doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 207,
+    "name": "Sawatari",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sawatari.png",
+    "hp": 1800,
+    "attack": 1700,
+    "tier": "uncommon",
+    "ability_name": "Doll",
+    "ability_description": "Bount doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 208,
+    "name": "Ugaki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ugaki.png",
+    "hp": 1800,
+    "attack": 1700,
+    "tier": "uncommon",
+    "ability_name": "Gesell",
+    "ability_description": "Doll attacks.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 209,
+    "name": "Ikumi Unagiya",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ikumi%20Unagiya.png",
+    "hp": 1800,
+    "attack": 1600,
+    "tier": "uncommon",
+    "ability_name": "Human",
+    "ability_description": "Strong will.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 210,
+    "name": "Yoshi",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yoshi.png",
+    "hp": 1750,
+    "attack": 1650,
+    "tier": "uncommon",
+    "ability_name": "Flying Doll",
+    "ability_description": "Flying doll.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 211,
+    "name": "Kaoru Unagiya",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kaoru%20Unagiya.png",
+    "hp": 1500,
+    "attack": 1200,
+    "tier": "uncommon",
+    "ability_name": "Human",
+    "ability_description": "Ordinary human.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  },
+  {
+    "id": 212,
+    "name": "Nianzol Weizol",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nianzol%20Weizol.png",
+    "hp": 1900,
+    "attack": 1850,
+    "tier": "common",
+    "ability_name": "The Wind",
+    "ability_description": "Redirects attacks with wind.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy"
+  },
+  {
+    "id": 213,
+    "name": "Sojun Kuchiki",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sojun%20Kuchiki.png",
+    "hp": 1500,
+    "attack": 1400,
+    "tier": "common",
+    "ability_name": "Kuchiki Blade",
+    "ability_description": "Noble swordsmanship.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper"
+  },
+  {
+    "id": 214,
+    "name": "Aizen (First Fusion)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sosuke%20Aizen.png",
+    "hp": 3050,
+    "attack": 3150,
+    "tier": "mythic",
+    "ability_name": "Hogyoku Fusion",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Aizen",
+      "recipe": [
+        [
+          "character",
+          "Sosuke Aizen",
+          1
+        ],
+        [
+          "weapon",
+          "Kyoka Suigetsu",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 215,
+    "name": "Aizen (Chrysalis)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sosuke%20Aizen.png",
+    "hp": 3150,
+    "attack": 3250,
+    "tier": "mythic",
+    "ability_name": "Chrysalis",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Aizen",
+      "recipe": [
+        [
+          "character",
+          "Aizen (First Fusion)",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ],
+        [
+          "drop",
+          "Shin'eiyaku",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 216,
+    "name": "Aizen (Butterfly)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sosuke%20Aizen.png",
+    "hp": 3400,
+    "attack": 3500,
+    "tier": "mythic",
+    "ability_name": "Butterfly Form",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Aizen",
+      "recipe": [
+        [
+          "character",
+          "Aizen (Chrysalis)",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 217,
+    "name": "Aizen (Monster)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sosuke%20Aizen.png",
+    "hp": 3500,
+    "attack": 3600,
+    "tier": "mythic",
+    "ability_name": "Transcendent Reiatsu",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Aizen",
+      "recipe": [
+        [
+          "character",
+          "Aizen (Butterfly)",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          3
+        ],
+        [
+          "weapon",
+          "Kyoka Suigetsu",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 218,
+    "name": "Aizen (Final Fusion)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sosuke%20Aizen.png",
+    "hp": 3800,
+    "attack": 4250,
+    "tier": "mythic",
+    "ability_name": "Kyoka Suigetsu (Evolved)",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Aizen",
+      "recipe": [
+        [
+          "character",
+          "Aizen (Monster)",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          2
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          3
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 219,
+    "name": "Ichigo (Substitute Shinigami)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ichigo%20Kurosaki.png",
+    "hp": 2850,
+    "attack": 2700,
+    "tier": "epic",
+    "ability_name": "Zangetsu (Sealed)",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Ichigo",
+      "recipe": [
+        [
+          "character",
+          "Ichigo Kurosaki",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ],
+        [
+          "weapon",
+          "Zangetsu",
+          1
+        ],
+        [
+          "drop",
+          "Shinigami Badge",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 220,
+    "name": "Ichigo (Shikai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ichigo%20Kurosaki.png",
+    "hp": 2850,
+    "attack": 2700,
+    "tier": "epic",
+    "ability_name": "Zangetsu",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Ichigo",
+      "recipe": [
+        [
+          "character",
+          "Ichigo (Substitute Shinigami)",
+          1
+        ],
+        [
+          "weapon",
+          "Zangetsu",
+          1
+        ],
+        [
+          "drop",
+          "Shinigami Badge",
+          1
+        ],
+        [
+          "drop",
+          "Reiatsu Fragment",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 221,
+    "name": "Ichigo (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ichigo%20Kurosaki.png",
+    "hp": 2900,
+    "attack": 2800,
+    "tier": "legendary",
+    "ability_name": "Tensa Zangetsu",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Ichigo",
+      "recipe": [
+        [
+          "character",
+          "Ichigo (Shikai)",
+          1
+        ],
+        [
+          "weapon",
+          "Tensa Zangetsu",
+          1
+        ],
+        [
+          "drop",
+          "Bankai Training Essence",
+          1
+        ],
+        [
+          "drop",
+          "Konpaku Fragment",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 222,
+    "name": "Ichigo (Hollow Mask / Visored)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ichigo%20Kurosaki.png",
+    "hp": 3000,
+    "attack": 2900,
+    "tier": "legendary",
+    "ability_name": "Hollow Mask",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Ichigo",
+      "recipe": [
+        [
+          "character",
+          "Ichigo (Substitute Shinigami)",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          3
+        ]
+      ]
+    }
+  },
+  {
+    "id": 223,
+    "name": "Ichigo (Vasto Lorde / Full Hollow)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ichigo%20Kurosaki.png",
+    "hp": 3200,
+    "attack": 3100,
+    "tier": "mythic",
+    "ability_name": "Full Hollow",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Ichigo",
+      "recipe": [
+        [
+          "character",
+          "Ichigo (Hollow Mask / Visored)",
+          1
+        ],
+        [
+          "drop",
+          "Vasto Lorde",
+          2
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 224,
+    "name": "Ichigo (Dangai / Mugetsu)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ichigo%20Kurosaki.png",
+    "hp": 3700,
+    "attack": 4000,
+    "tier": "mythic",
+    "ability_name": "Mugetsu",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Ichigo",
+      "recipe": [
+        [
+          "character",
+          "Ichigo (Vasto Lorde / Full Hollow)",
+          1
+        ],
+        [
+          "weapon",
+          "Tensa Zangetsu",
+          1
+        ],
+        [
+          "weapon",
+          "Zangetsu",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 225,
+    "name": "Ichigo (Fullbring)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ichigo%20Kurosaki.png",
+    "hp": 2950,
+    "attack": 2850,
+    "tier": "epic",
+    "ability_name": "Fullbring",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Ichigo",
+      "recipe": [
+        [
+          "character",
+          "Ichigo (Dangai / Mugetsu)",
+          1
+        ],
+        [
+          "drop",
+          "Xcution Badge",
+          2
+        ],
+        [
+          "drop",
+          "Fullbring Focus",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 226,
+    "name": "Ichigo (True Shikai / Dual Blades)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ichigo%20Kurosaki.png",
+    "hp": 3300,
+    "attack": 3200,
+    "tier": "mythic",
+    "ability_name": "Dual Zangetsu",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Ichigo",
+      "recipe": [
+        [
+          "character",
+          "Ichigo (Fullbring)",
+          1
+        ],
+        [
+          "weapon",
+          "Zangetsu",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          3
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          3
+        ]
+      ]
+    }
+  },
+  {
+    "id": 227,
+    "name": "Ichigo (Horn of Salvation / True Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ichigo%20Kurosaki.png",
+    "hp": 4000,
+    "attack": 4500,
+    "tier": "mythic",
+    "ability_name": "True Bankai",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Ichigo",
+      "recipe": [
+        [
+          "character",
+          "Ichigo (True Shikai / Dual Blades)",
+          1
+        ],
+        [
+          "drop",
+          "True Bankai Core",
+          1
+        ],
+        [
+          "drop",
+          "Horn of Salvation",
+          1
+        ],
+        [
+          "drop",
+          "Almighty Eye",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 228,
+    "name": "Yhwach (The Almighty Awakened)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yhwach.png",
+    "hp": 3200,
+    "attack": 3300,
+    "tier": "mythic",
+    "ability_name": "The Almighty",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Yhwach",
+      "recipe": [
+        [
+          "character",
+          "Yhwach",
+          1
+        ],
+        [
+          "drop",
+          "Almighty Eye",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 229,
+    "name": "Yhwach (Soul King Absorbed)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yhwach.png",
+    "hp": 3900,
+    "attack": 4400,
+    "tier": "mythic",
+    "ability_name": "The Almighty + Soul King",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Yhwach",
+      "recipe": [
+        [
+          "character",
+          "Yhwach (The Almighty Awakened)",
+          1
+        ],
+        [
+          "drop",
+          "Soul King",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 230,
+    "name": "Yhwach (True Soul King / God Form)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yhwach.png",
+    "hp": 4250,
+    "attack": 4750,
+    "tier": "mythic",
+    "ability_name": "The Almighty",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Yhwach",
+      "recipe": [
+        [
+          "character",
+          "Yhwach (Soul King Absorbed)",
+          1
+        ],
+        [
+          "drop",
+          "Soul King's Heart",
+          1
+        ],
+        [
+          "drop",
+          "Almighty Eye",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 231,
+    "name": "Ulquiorra (Resurreccion: Murcielago)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ulquiorra%20Cifer.png",
+    "hp": 3150,
+    "attack": 3200,
+    "tier": "mythic",
+    "ability_name": "Murcielago",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow",
+    "craft": {
+      "category": "Ulquiorra",
+      "recipe": [
+        [
+          "character",
+          "Ulquiorra Cifer",
+          1
+        ],
+        [
+          "weapon",
+          "Murcielago",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 232,
+    "name": "Ginjo (Fullbring: Cross of Scaffold)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kugo%20Ginjo.png",
+    "hp": 2700,
+    "attack": 2700,
+    "tier": "legendary",
+    "ability_name": "Cross of Scaffold",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "fullbringer",
+    "craft": {
+      "category": "Ginjo",
+      "recipe": [
+        [
+          "character",
+          "Kugo Ginjo",
+          1
+        ],
+        [
+          "drop",
+          "Cross of Scaffold",
+          1
+        ],
+        [
+          "drop",
+          "Xcution Badge",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 233,
+    "name": "Ginjo (Armor Form / Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kugo%20Ginjo.png",
+    "hp": 2800,
+    "attack": 2800,
+    "tier": "legendary",
+    "ability_name": "Cross of Scaffold",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "fullbringer",
+    "craft": {
+      "category": "Ginjo",
+      "recipe": [
+        [
+          "character",
+          "Ginjo (Fullbring: Cross of Scaffold)",
+          1
+        ],
+        [
+          "character",
+          "Ichigo (Fullbring)",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 234,
+    "name": "Coyote Starrk (Los Lobos)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Coyote%20Starrk.png",
+    "hp": 3000,
+    "attack": 3050,
+    "tier": "legendary",
+    "ability_name": "Los Lobos",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow",
+    "craft": {
+      "category": "Espada Resurrecci\u00f3n",
+      "recipe": [
+        [
+          "character",
+          "Coyote Starrk",
+          1
+        ],
+        [
+          "weapon",
+          "Los Lobos",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 235,
+    "name": "Baraggan (Arrogante)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Barragan%20Louisenbairn.png",
+    "hp": 1485,
+    "attack": 1450,
+    "tier": "legendary",
+    "ability_name": "Respira Aging",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow",
+    "craft": {
+      "category": "Espada Resurrecci\u00f3n",
+      "recipe": [
+        [
+          "character",
+          "Barragan Louisenbairn",
+          1
+        ],
+        [
+          "weapon",
+          "Arrogante",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 236,
+    "name": "Tier Harribel (Tiburon)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Tier%20Harribel.png",
+    "hp": 2700,
+    "attack": 2700,
+    "tier": "epic",
+    "ability_name": "Tiburon",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow",
+    "craft": {
+      "category": "Espada Resurrecci\u00f3n",
+      "recipe": [
+        [
+          "character",
+          "Tier Harribel",
+          1
+        ],
+        [
+          "weapon",
+          "Tiburon",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 237,
+    "name": "Nelliel (Gamuza)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nelliel%20Tu%20Odelschwanck.png",
+    "hp": 2900,
+    "attack": 2850,
+    "tier": "legendary",
+    "ability_name": "Gamuza",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow",
+    "craft": {
+      "category": "Espada Resurrecci\u00f3n",
+      "recipe": [
+        [
+          "character",
+          "Nelliel Tu Odelschwanck",
+          1
+        ],
+        [
+          "weapon",
+          "Gamuza",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 238,
+    "name": "Grimmjow (Pantera)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/grimmjow.png",
+    "hp": 1463,
+    "attack": 1475,
+    "tier": "legendary",
+    "ability_name": "Desgarron Claws",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow",
+    "craft": {
+      "category": "Espada Resurrecci\u00f3n",
+      "recipe": [
+        [
+          "character",
+          "Grimmjow Jaegerjaquez",
+          1
+        ],
+        [
+          "weapon",
+          "Pantera",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 239,
+    "name": "Nnoitra (Santa Teresa)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nnoitra%20Gilga.png",
+    "hp": 2950,
+    "attack": 3000,
+    "tier": "epic",
+    "ability_name": "Santa Teresa",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow",
+    "craft": {
+      "category": "Espada Resurrecci\u00f3n",
+      "recipe": [
+        [
+          "character",
+          "Nnoitra Gilga",
+          1
+        ],
+        [
+          "weapon",
+          "Santa Teresa",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 240,
+    "name": "Zommari (Brujeria)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Zommari%20Rureaux.png",
+    "hp": 2700,
+    "attack": 2700,
+    "tier": "rare",
+    "ability_name": "Amor",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow",
+    "craft": {
+      "category": "Espada Resurrecci\u00f3n",
+      "recipe": [
+        [
+          "character",
+          "Zommari Rureaux",
+          1
+        ],
+        [
+          "weapon",
+          "Brujeria",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 241,
+    "name": "Szayelaporro (Fornicaras)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Szayelaporro%20Granz.png",
+    "hp": 2700,
+    "attack": 2700,
+    "tier": "epic",
+    "ability_name": "Fornicaras",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow",
+    "craft": {
+      "category": "Espada Resurrecci\u00f3n",
+      "recipe": [
+        [
+          "character",
+          "Szayelaporro Granz",
+          1
+        ],
+        [
+          "weapon",
+          "Fornicaras",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 242,
+    "name": "Aaroniero (Glotoneria)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Aaroniero%20Arruruerie.png",
+    "hp": 2700,
+    "attack": 2700,
+    "tier": "rare",
+    "ability_name": "Glotoneria",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow",
+    "craft": {
+      "category": "Espada Resurrecci\u00f3n",
+      "recipe": [
+        [
+          "character",
+          "Aaroniero Arruruerie",
+          1
+        ],
+        [
+          "weapon",
+          "Glotoneria",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 243,
+    "name": "Yammy (Ira)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yammy%20Llargo.png",
+    "hp": 2850,
+    "attack": 2800,
+    "tier": "legendary",
+    "ability_name": "Ira",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "hollow",
+    "craft": {
+      "category": "Espada Resurrecci\u00f3n",
+      "recipe": [
+        [
+          "character",
+          "Yammy Llargo",
+          1
+        ],
+        [
+          "weapon",
+          "Ira",
+          1
+        ],
+        [
+          "drop",
+          "Hogyoku",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 244,
+    "name": "Quilge Opie (Biskiel)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Quilge%20Opie.png",
+    "hp": 2650,
+    "attack": 2650,
+    "tier": "epic",
+    "ability_name": "The Jail",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Quilge Opie",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 245,
+    "name": "Bambietta (Zofiel)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Bambietta%20Basterbine.png",
+    "hp": 2650,
+    "attack": 2650,
+    "tier": "epic",
+    "ability_name": "The Explode",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Bambietta Basterbine",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 246,
+    "name": "Candice (Barbarriel)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Candice%20Catnipp.png",
+    "hp": 2600,
+    "attack": 2600,
+    "tier": "rare",
+    "ability_name": "Galvano Blast",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Candice Catnipp",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 247,
+    "name": "\u00c4s N\u00f6dt (Tatarforas)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/%C3%84s%20N%C3%B6dt.png",
+    "hp": 2600,
+    "attack": 2600,
+    "tier": "legendary",
+    "ability_name": "The Fear",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "\u00c4s N\u00f6dt",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 248,
+    "name": "Lille Barro (Jilliel)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Lille%20Barro.png",
+    "hp": 3050,
+    "attack": 3150,
+    "tier": "legendary",
+    "ability_name": "The X-Axis",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Lille Barro",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 249,
+    "name": "Gerard (Aschetonig)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Gerard%20Valkyrie.png",
+    "hp": 2850,
+    "attack": 2800,
+    "tier": "legendary",
+    "ability_name": "The Miracle",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Gerard Valkyrie",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 250,
+    "name": "Pernida (Vollst\u00e4ndig)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Pernida%20Parnkgjas.png",
+    "hp": 2650,
+    "attack": 2650,
+    "tier": "legendary",
+    "ability_name": "The Compulsory",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Pernida Parnkgjas",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 251,
+    "name": "Askin (Hasshein)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Askin%20Nakk%20Le%20Vaar.png",
+    "hp": 2750,
+    "attack": 2750,
+    "tier": "legendary",
+    "ability_name": "Deathdealing",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Askin Nakk Le Vaar",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 252,
+    "name": "Bazz-B (Vollst\u00e4ndig)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Bazz-B.png",
+    "hp": 2600,
+    "attack": 2600,
+    "tier": "epic",
+    "ability_name": "Burner Finger",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Bazz-B",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 253,
+    "name": "Mask De Masculine (Vollst\u00e4ndig)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Mask%20De%20Masculine.png",
+    "hp": 2650,
+    "attack": 2650,
+    "tier": "legendary",
+    "ability_name": "The Superstar",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Mask De Masculine",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 254,
+    "name": "Robert Accutrone (Grimaniel)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Robert%20Accutrone.png",
+    "hp": 2650,
+    "attack": 2650,
+    "tier": "rare",
+    "ability_name": "Quincy Guns",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Robert Accutrone",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 255,
+    "name": "Giselle (Azhalbiora)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Giselle%20Gewelle.png",
+    "hp": 2650,
+    "attack": 2650,
+    "tier": "rare",
+    "ability_name": "The Zombie",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Giselle Gewelle",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 256,
+    "name": "Liltotto (Vollst\u00e4ndig)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Liltotto%20Lamperd.png",
+    "hp": 2650,
+    "attack": 2650,
+    "tier": "rare",
+    "ability_name": "The Glutton",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Liltotto Lamperd",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 257,
+    "name": "Meninas (Vollst\u00e4ndig)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Meninas%20McAllon.png",
+    "hp": 2650,
+    "attack": 2650,
+    "tier": "rare",
+    "ability_name": "The Power",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "quincy",
+    "craft": {
+      "category": "Quincy Vollst\u00e4ndig",
+      "recipe": [
+        [
+          "character",
+          "Meninas McAllon",
+          1
+        ],
+        [
+          "drop",
+          "Sanrei Glove",
+          1
+        ],
+        [
+          "drop",
+          "Quincy Cross",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 258,
+    "name": "Yamamoto (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Genryusai%20Shigekuni%20Yamamoto.png",
+    "hp": 3300,
+    "attack": 3400,
+    "tier": "mythic",
+    "ability_name": "Zanka no Tachi",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Genryusai Shigekuni Yamamoto",
+          1
+        ],
+        [
+          "weapon",
+          "Ryujin Jakka",
+          1
+        ],
+        [
+          "weapon",
+          "Zanka no Tachi",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "Chrysanthemum",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 259,
+    "name": "Soi Fon (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Soi%20Fon.png",
+    "hp": 2750,
+    "attack": 2750,
+    "tier": "legendary",
+    "ability_name": "Jakuho Raikoben",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Soi Fon",
+          1
+        ],
+        [
+          "weapon",
+          "Suzumebachi",
+          1
+        ],
+        [
+          "weapon",
+          "Jakuho Raikoben",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "Pasque Flower",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 260,
+    "name": "Gin (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Gin%20Ichimaru.png",
+    "hp": 2800,
+    "attack": 2800,
+    "tier": "legendary",
+    "ability_name": "Kamishini no Yari",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Gin Ichimaru",
+          1
+        ],
+        [
+          "weapon",
+          "Shinso",
+          1
+        ],
+        [
+          "weapon",
+          "Kamishini no Yari",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "Marigold",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 261,
+    "name": "Unohana (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Retsu%20Unohana.png",
+    "hp": 3100,
+    "attack": 3150,
+    "tier": "mythic",
+    "ability_name": "Minazuki (Bankai)",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Retsu Unohana",
+          1
+        ],
+        [
+          "weapon",
+          "Minazuki",
+          2
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "Bellflower",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 262,
+    "name": "Byakuya (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Byakuya%20Kuchiki.png",
+    "hp": 3000,
+    "attack": 3100,
+    "tier": "mythic",
+    "ability_name": "Senbonzakura Kageyoshi",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Byakuya Kuchiki",
+          1
+        ],
+        [
+          "weapon",
+          "Senbonzakura",
+          1
+        ],
+        [
+          "weapon",
+          "Senbonzakura Kageyoshi",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "Camellia",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 263,
+    "name": "Komamura (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Sajin%20Komamura.png",
+    "hp": 2900,
+    "attack": 2850,
+    "tier": "legendary",
+    "ability_name": "Kokujo Tengen Myo'o",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Sajin Komamura",
+          1
+        ],
+        [
+          "weapon",
+          "Tenken",
+          1
+        ],
+        [
+          "weapon",
+          "Kokujo Tengen Myo'o",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "Iris",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 264,
+    "name": "Shunsui (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shunsui%20Kyoraku.png",
+    "hp": 3100,
+    "attack": 3150,
+    "tier": "mythic",
+    "ability_name": "Katen Kyokotsu: Karamatsu Shinju",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Shunsui Kyoraku",
+          1
+        ],
+        [
+          "weapon",
+          "Katen Kyokotsu",
+          1
+        ],
+        [
+          "weapon",
+          "Katen Kyokotsu Karamatsu Shinju",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "Bird of Paradise",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 265,
+    "name": "Tosen (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kaname%20Tosen.png",
+    "hp": 2950,
+    "attack": 3000,
+    "tier": "legendary",
+    "ability_name": "Suzumushi Tsuishiki: Enma Korogi",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Kaname Tosen",
+          1
+        ],
+        [
+          "weapon",
+          "Suzumushi",
+          1
+        ],
+        [
+          "weapon",
+          "Enma Korogi",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "White Poppy",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 266,
+    "name": "Hitsugaya (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Toshiro%20Hitsugaya.png",
+    "hp": 3000,
+    "attack": 3100,
+    "tier": "mythic",
+    "ability_name": "Daiguren Hyorinmaru",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Toshiro Hitsugaya",
+          1
+        ],
+        [
+          "weapon",
+          "Hyorinmaru",
+          1
+        ],
+        [
+          "weapon",
+          "Daiguren Hyorinmaru",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "Daffodil",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 267,
+    "name": "Kenpachi (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kenpachi%20Zaraki.png",
+    "hp": 3250,
+    "attack": 3350,
+    "tier": "mythic",
+    "ability_name": "Bankai",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Kenpachi Zaraki",
+          1
+        ],
+        [
+          "weapon",
+          "Nozarashi",
+          2
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "Yarrow",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 268,
+    "name": "Mayuri (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Mayuri%20Kurotsuchi.png",
+    "hp": 2800,
+    "attack": 2800,
+    "tier": "legendary",
+    "ability_name": "Konjiki Ashisogi Jizo",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Mayuri Kurotsuchi",
+          1
+        ],
+        [
+          "weapon",
+          "Ashisogi Jizo",
+          1
+        ],
+        [
+          "weapon",
+          "Konjiki Ashisogi Jizo",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "Thistle",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 269,
+    "name": "Ukitake (Bankai)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Ukitake.png",
+    "hp": 2950,
+    "attack": 2950,
+    "tier": "mythic",
+    "ability_name": "Sogyo no Kotowari (Bankai)",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Captains",
+      "recipe": [
+        [
+          "character",
+          "Jushiro Ukitake",
+          1
+        ],
+        [
+          "weapon",
+          "Sogyo no Kotowari",
+          2
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ],
+        [
+          "drop",
+          "Snowdrop",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 270,
+    "name": "Renji (Soo Zabimaru)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Renji.png",
+    "hp": 2850,
+    "attack": 2800,
+    "tier": "legendary",
+    "ability_name": "Soo Zabimaru",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Lieutenants",
+      "recipe": [
+        [
+          "character",
+          "Renji Abarai",
+          1
+        ],
+        [
+          "weapon",
+          "Zabimaru",
+          1
+        ],
+        [
+          "drop",
+          "Camellia",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 271,
+    "name": "Rukia (Hakka no Togame)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Rukia%20Kuchiki.png",
+    "hp": 2800,
+    "attack": 2750,
+    "tier": "legendary",
+    "ability_name": "Hakka no Togame",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Lieutenants",
+      "recipe": [
+        [
+          "character",
+          "Rukia Kuchiki",
+          1
+        ],
+        [
+          "weapon",
+          "Sode no Shirayuki",
+          1
+        ],
+        [
+          "drop",
+          "Snowdrop",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 272,
+    "name": "Izuru (Wabisuke)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Izuru%20Kira.png",
+    "hp": 2600,
+    "attack": 2600,
+    "tier": "rare",
+    "ability_name": "Wabisuke",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Lieutenants",
+      "recipe": [
+        [
+          "character",
+          "Izuru Kira",
+          1
+        ],
+        [
+          "weapon",
+          "Wabisuke",
+          1
+        ],
+        [
+          "drop",
+          "Marigold",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 273,
+    "name": "Momo (Tobiume)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Momo%20Hinamori.png",
+    "hp": 2550,
+    "attack": 2550,
+    "tier": "rare",
+    "ability_name": "Tobiume",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Lieutenants",
+      "recipe": [
+        [
+          "character",
+          "Momo Hinamori",
+          1
+        ],
+        [
+          "weapon",
+          "Tobiume",
+          1
+        ],
+        [
+          "drop",
+          "Lily of the Valley",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 274,
+    "name": "Hisagi (Kazeshini)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shuhei%20Hisagi.png",
+    "hp": 2650,
+    "attack": 2650,
+    "tier": "epic",
+    "ability_name": "Kazeshini",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Lieutenants",
+      "recipe": [
+        [
+          "character",
+          "Shuhei Hisagi",
+          1
+        ],
+        [
+          "weapon",
+          "Kazeshini",
+          1
+        ],
+        [
+          "drop",
+          "White Poppy",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 275,
+    "name": "Rangiku (Haineko)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Rangiku%20Matsumoto.png",
+    "hp": 2300,
+    "attack": 2250,
+    "tier": "epic",
+    "ability_name": "Ash Cloud",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Lieutenants",
+      "recipe": [
+        [
+          "character",
+          "Rangiku Matsumoto",
+          1
+        ],
+        [
+          "weapon",
+          "Haineko",
+          1
+        ],
+        [
+          "drop",
+          "Daffodil",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 276,
+    "name": "Yachiru (Sanpo Kenju)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Yachiru.png",
+    "hp": 2600,
+    "attack": 2600,
+    "tier": "epic",
+    "ability_name": "Sanpo Kenju",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Lieutenants",
+      "recipe": [
+        [
+          "character",
+          "Yachiru Kusajishi",
+          1
+        ],
+        [
+          "weapon",
+          "Sanpo Kenju",
+          1
+        ],
+        [
+          "drop",
+          "Yarrow",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 277,
+    "name": "Isane (Itegumo)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Isane%20Kotetsu.png",
+    "hp": 2550,
+    "attack": 2550,
+    "tier": "uncommon",
+    "ability_name": "Itegumo",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Lieutenants",
+      "recipe": [
+        [
+          "character",
+          "Isane Kotetsu",
+          1
+        ],
+        [
+          "weapon",
+          "Itegumo",
+          1
+        ],
+        [
+          "drop",
+          "Bellflower",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 278,
+    "name": "Iba (Zanpakuto)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Tetsuzaemon%20Iba.png",
+    "hp": 2550,
+    "attack": 2550,
+    "tier": "uncommon",
+    "ability_name": "Zanpakuto",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Lieutenants",
+      "recipe": [
+        [
+          "character",
+          "Tetsuzaemon Iba",
+          1
+        ],
+        [
+          "drop",
+          "Iris",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 279,
+    "name": "Nanao (Kido)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nanao%20Ise.png",
+    "hp": 2550,
+    "attack": 2550,
+    "tier": "rare",
+    "ability_name": "Kido",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Lieutenants",
+      "recipe": [
+        [
+          "character",
+          "Nanao Ise",
+          1
+        ],
+        [
+          "drop",
+          "Bird of Paradise",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 280,
+    "name": "Nemu (Poison Body)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Nemu%20Kurotsuchi.png",
+    "hp": 2600,
+    "attack": 2600,
+    "tier": "rare",
+    "ability_name": "Poison Body",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Soul Reaper Lieutenants",
+      "recipe": [
+        [
+          "character",
+          "Nemu Kurotsuchi",
+          1
+        ],
+        [
+          "drop",
+          "Thistle",
+          1
+        ],
+        [
+          "drop",
+          "Jigokuch\u014d",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": 281,
+    "name": "Shinji (Hollow Mask)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Shinji.png",
+    "hp": 2900,
+    "attack": 2850,
+    "tier": "legendary",
+    "ability_name": "Sakanade",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Visored",
+      "recipe": [
+        [
+          "character",
+          "Shinji Hirako",
+          1
+        ],
+        [
+          "weapon",
+          "Sakanade",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 282,
+    "name": "Kensei (Hollow Mask)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Kensei%20Muguruma.png",
+    "hp": 2800,
+    "attack": 2750,
+    "tier": "legendary",
+    "ability_name": "Tekken Tachikaze",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Visored",
+      "recipe": [
+        [
+          "character",
+          "Kensei Muguruma",
+          1
+        ],
+        [
+          "weapon",
+          "Tachikaze",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 283,
+    "name": "Rose (Hollow Mask)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Rose%20Otoribashi.png",
+    "hp": 2700,
+    "attack": 2700,
+    "tier": "legendary",
+    "ability_name": "Kinshara",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Visored",
+      "recipe": [
+        [
+          "character",
+          "Rose Otoribashi",
+          1
+        ],
+        [
+          "weapon",
+          "Kinshara",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 284,
+    "name": "Love (Hollow Mask)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Love%20Aikawa.png",
+    "hp": 2650,
+    "attack": 2650,
+    "tier": "legendary",
+    "ability_name": "Tengumaru",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Visored",
+      "recipe": [
+        [
+          "character",
+          "Love Aikawa",
+          1
+        ],
+        [
+          "weapon",
+          "Tengumaru",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 285,
+    "name": "Hiyori (Hollow Mask)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Hiyori%20Sarugaki.png",
+    "hp": 2600,
+    "attack": 2600,
+    "tier": "epic",
+    "ability_name": "Kubikiri Orochi",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Visored",
+      "recipe": [
+        [
+          "character",
+          "Hiyori Sarugaki",
+          1
+        ],
+        [
+          "weapon",
+          "Kubikiri Orochi",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 286,
+    "name": "Lisa (Hollow Mask)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Lisa%20Yadomaru.png",
+    "hp": 2600,
+    "attack": 2600,
+    "tier": "epic",
+    "ability_name": "Haguro Tonbo",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Visored",
+      "recipe": [
+        [
+          "character",
+          "Lisa Yadomaru",
+          1
+        ],
+        [
+          "weapon",
+          "Haguro Tonbo",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 287,
+    "name": "Mashiro (Hollow Mask)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Mashiro%20Kuna.png",
+    "hp": 2600,
+    "attack": 2600,
+    "tier": "epic",
+    "ability_name": "Vizard Mask",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Visored",
+      "recipe": [
+        [
+          "character",
+          "Mashiro Kuna",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 288,
+    "name": "Hachi (Hollow Mask)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Hachigen%20Ushoda.png",
+    "hp": 2700,
+    "attack": 2650,
+    "tier": "epic",
+    "ability_name": "Kido Barriers",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "soul_reaper",
+    "craft": {
+      "category": "Visored",
+      "recipe": [
+        [
+          "character",
+          "Hachigen Ushoda",
+          1
+        ],
+        [
+          "drop",
+          "Hollow Mask",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": 289,
+    "name": "Soul King (True Form)",
+    "position": "",
+    "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/new%20soul%20images/New%20Character%20Images/Soul%20King.png",
+    "hp": 4500,
+    "attack": 5000,
+    "tier": "mythic",
+    "ability_name": "Soul King Reiatsu",
+    "ability_description": "",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": "",
+    "craft": {
+      "category": "Soul King",
+      "recipe": []
+    }
+  },
+  {
+    "id": 290,
+    "name": "Soul King",
+    "position": "",
+    "image_path": "/home/claude/work3/bleachdex/admin/static/uploads/soul_king.png",
+    "hp": 3100,
+    "attack": 3200,
+    "tier": "mythic",
+    "ability_name": "Soul King Reiatsu",
+    "ability_description": "Stabilizes realms and grants precognitive power.",
+    "card_image_path": "",
+    "enabled": 1,
+    "faction": ""
+  }
+]
