@@ -115,13 +115,3 @@ specifically — this archive doesn't contain either.
   one alone can trip from antivirus web-protection, ISP-level ad-domain
   filtering, or just a slow connection. Now requires 2 of the 3 to agree.
   Initial check delay bumped 2000ms → 3500ms for slower connections.
-
-## 7. Favicon → Halloween ghost
-- The tab icon (browser tab / "address bar" icon) came from public/favicon.svg
-  — a small orange sparkle on a dark square, set via `<link rel="icon"
-  type="image/svg+xml" href="/favicon.svg">` in src/routes/__root.tsx.
-- Replaced it with the uploaded Halloween ghost artwork: cropped to a square,
-  exported as public/favicon-32.png and public/favicon.png (128px), and the
-  head links now point to those instead of the SVG (which was removed).
-- Also updated public/__grok/icon-180.png (the "Add to Home Screen" icon on
-  iOS) to the same crop, so the PWA icon matches the browser tab.
