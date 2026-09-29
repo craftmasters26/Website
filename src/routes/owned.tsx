@@ -299,11 +299,7 @@ function OwnedPage() {
                 Log out
               </button>
             </div>
-          ) : (
-            <p className="max-w-xs text-[14.5px] leading-6 text-bone-dim">
-              Pulled straight from your Discord account — not a browser-only guess.
-            </p>
-          )}
+          ) : null}
         </div>
 
         {state.status === "loading" ? (

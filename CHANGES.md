@@ -166,3 +166,7 @@ specifically — this archive doesn't contain either.
   specifically (straight downscaling was blurring the eye holes/mouth away).
   128px and the 180px apple-touch-icon use the same crop without sharpening
   — they're big enough not to need it.
+
+## 11. Removed the "Pulled straight from your Discord..." subtitle
+- src/routes/owned.tsx — that line only showed in the signed-out/empty
+  state next to the page title. Removed as asked.
