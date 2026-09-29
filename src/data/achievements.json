@@ -1,0 +1,505 @@
+[
+  {
+    "key": "main_catcher",
+    "name": "Main Catcher",
+    "description": "Catch your first soul in the main server.",
+    "target": 1,
+    "reward": 3000,
+    "group": "Catching",
+    "track": null
+  },
+  {
+    "key": "speed_is_a_burden",
+    "name": "Speed is a Burden",
+    "description": "Catch a soul in less than 5 seconds.",
+    "target": 1,
+    "reward": 5000,
+    "group": "Catching",
+    "track": null
+  },
+  {
+    "key": "fast_catcher",
+    "name": "Fast Catcher",
+    "description": "Catch a soul in under 20 seconds.",
+    "target": 1,
+    "reward": 1500,
+    "group": "Catching",
+    "track": null
+  },
+  {
+    "key": "sniper",
+    "name": "Sniper",
+    "description": "Catch a soul in 10 seconds or under.",
+    "target": 1,
+    "reward": 3500,
+    "group": "Catching",
+    "track": null
+  },
+  {
+    "key": "catch_100",
+    "name": "Novice",
+    "description": "Catch 100 souls.",
+    "target": 100,
+    "reward": 1500,
+    "group": "Catching",
+    "track": null
+  },
+  {
+    "key": "catch_500",
+    "name": "Semi-pro",
+    "description": "Catch 500 souls.",
+    "target": 500,
+    "reward": 2500,
+    "group": "Catching",
+    "track": null
+  },
+  {
+    "key": "catch_1000",
+    "name": "Hoarder",
+    "description": "Catch 1,000 souls.",
+    "target": 1000,
+    "reward": 5000,
+    "group": "Catching",
+    "track": null
+  },
+  {
+    "key": "reiatsu_supply",
+    "name": "Reiatsu Supply",
+    "description": "Obtain 5 Reiatsu Infused souls.",
+    "target": 5,
+    "reward": 3500,
+    "group": "Rare souls",
+    "track": null
+  },
+  {
+    "key": "mythic_collector",
+    "name": "Mythic Collector",
+    "description": "Obtain 5 Mythical souls.",
+    "target": 5,
+    "reward": 3500,
+    "group": "Rare souls",
+    "track": {
+      "kind": "tier",
+      "tier": "mythic"
+    }
+  },
+  {
+    "key": "reiatsu_collector",
+    "name": "Reiatsu Collector",
+    "description": "Obtain 10 Reiatsu Infused souls.",
+    "target": 10,
+    "reward": 5000,
+    "group": "Rare souls",
+    "track": null
+  },
+  {
+    "key": "mighty_myths",
+    "name": "Mighty Myths",
+    "description": "Obtain 10 Mythical souls.",
+    "target": 10,
+    "reward": 5000,
+    "group": "Rare souls",
+    "track": {
+      "kind": "tier",
+      "tier": "mythic"
+    }
+  },
+  {
+    "key": "mythical_aura",
+    "name": "Mythical Aura",
+    "description": "Obtain your first mythical soul.",
+    "target": 1,
+    "reward": 3500,
+    "group": "Rare souls",
+    "track": {
+      "kind": "tier",
+      "tier": "mythic"
+    }
+  },
+  {
+    "key": "reiatsu_knot",
+    "name": "Reiatsu Knot",
+    "description": "Obtain your first Reiatsu Infused soul.",
+    "target": 1,
+    "reward": 3500,
+    "group": "Rare souls",
+    "track": null
+  },
+  {
+    "key": "gotei_13",
+    "name": "Gotei 13",
+    "description": "Obtain 1x each Captain.",
+    "target": 10,
+    "reward": 3500,
+    "group": "Sets",
+    "track": {
+      "kind": "souls",
+      "ids": [
+        4,
+        6,
+        7,
+        8,
+        9,
+        17,
+        18,
+        19,
+        40,
+        41
+      ]
+    }
+  },
+  {
+    "key": "zanpakuto_collector",
+    "name": "Zanpakuto Collector",
+    "description": "Obtain 1x each Zanpakuto.",
+    "target": 50,
+    "reward": 3500,
+    "group": "Sets",
+    "track": {
+      "kind": "weapons",
+      "ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        64
+      ]
+    }
+  },
+  {
+    "key": "espada_fleet",
+    "name": "Espada Fleet",
+    "description": "Obtain 1x each Arrancar, including the Espada.",
+    "target": 34,
+    "reward": 5000,
+    "group": "Sets",
+    "track": {
+      "kind": "souls",
+      "ids": [
+        11,
+        30,
+        31,
+        32,
+        33,
+        47,
+        48,
+        49,
+        71,
+        72,
+        73,
+        74,
+        91,
+        92,
+        109,
+        110,
+        111,
+        142,
+        146,
+        149,
+        151,
+        158,
+        160,
+        162,
+        164,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        176
+      ]
+    }
+  },
+  {
+    "key": "perfectionist",
+    "name": "Perfectionist",
+    "description": "Get 100% completion.",
+    "target": 100,
+    "reward": 5000,
+    "group": "Sets",
+    "track": null
+  },
+  {
+    "key": "junior_trade",
+    "name": "Junior Trade",
+    "description": "Complete one trade with 10 souls.",
+    "target": 10,
+    "reward": 3000,
+    "group": "Trading",
+    "track": null
+  },
+  {
+    "key": "semi_pro_trader",
+    "name": "Semi-pro Trader",
+    "description": "Complete one trade with 50 souls.",
+    "target": 50,
+    "reward": 5000,
+    "group": "Trading",
+    "track": null
+  },
+  {
+    "key": "the_marketplace",
+    "name": "Trading Novice",
+    "description": "Complete your first trade.",
+    "target": 1,
+    "reward": 1500,
+    "group": "Trading",
+    "track": null
+  },
+  {
+    "key": "kan_trader",
+    "name": "Kan Trader",
+    "description": "Complete a trade which includes Kan.",
+    "target": 1,
+    "reward": 1500,
+    "group": "Trading",
+    "track": null
+  },
+  {
+    "key": "trading_beginner",
+    "name": "Trading Beginner",
+    "description": "Complete 50 trades.",
+    "target": 50,
+    "reward": 1500,
+    "group": "Trading",
+    "track": null
+  },
+  {
+    "key": "fighter",
+    "name": "Fighter",
+    "description": "Win your first battle.",
+    "target": 1,
+    "reward": 1500,
+    "group": "Battle",
+    "track": null
+  },
+  {
+    "key": "boss_slayer",
+    "name": "Boss Slayer",
+    "description": "Win a boss battle.",
+    "target": 1,
+    "reward": 5000,
+    "group": "Battle",
+    "track": null
+  },
+  {
+    "key": "beating_the_boss",
+    "name": "Beating the Sternritter",
+    "description": "Win a battle against an admin.",
+    "target": 1,
+    "reward": 7500,
+    "group": "Battle",
+    "track": null
+  },
+  {
+    "key": "dethroning_the_king",
+    "name": "Dethroning the Almighty",
+    "description": "Win a battle against the owner.",
+    "target": 1,
+    "reward": 10000,
+    "group": "Battle",
+    "track": null
+  },
+  {
+    "key": "flawless_victory",
+    "name": "Flawless Victory",
+    "description": "Win a battle without losing a single character.",
+    "target": 1,
+    "reward": 4000,
+    "group": "Battle",
+    "track": null
+  },
+  {
+    "key": "crafter",
+    "name": "Crafter",
+    "description": "Craft your 1st collectable.",
+    "target": 1,
+    "reward": 3000,
+    "group": "Crafting",
+    "track": null
+  },
+  {
+    "key": "master_craftsman",
+    "name": "Master Craftsman",
+    "description": "Craft 10 collectables.",
+    "target": 10,
+    "reward": 6000,
+    "group": "Crafting",
+    "track": null
+  },
+  {
+    "key": "bankai_spammer",
+    "name": "Bankai Spammer",
+    "description": "Win 10 battles.",
+    "target": 10,
+    "reward": 3000,
+    "group": "Battle",
+    "track": null
+  },
+  {
+    "key": "trusted_deal",
+    "name": "Trusted Deal",
+    "description": "Trade with an admin.",
+    "target": 1,
+    "reward": 5000,
+    "group": "Trading",
+    "track": null
+  },
+  {
+    "key": "high_roller",
+    "name": "High Roller",
+    "description": "Trade with the owner.",
+    "target": 1,
+    "reward": 7500,
+    "group": "Trading",
+    "track": null
+  },
+  {
+    "key": "vizard_mask",
+    "name": "Vizard Mask",
+    "description": "Collect all Visored/Vizards.",
+    "target": 18,
+    "reward": 7500,
+    "group": "Sets",
+    "track": {
+      "kind": "souls",
+      "ids": [
+        29,
+        46,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        132,
+        222,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288
+      ]
+    }
+  },
+  {
+    "key": "zanpakuto_spirit",
+    "name": "Zanpakuto Spirit",
+    "description": "Collect all 14 Zanpakuto Spirits.",
+    "target": 14,
+    "reward": 5000,
+    "group": "Sets",
+    "track": {
+      "kind": "souls",
+      "ids": [
+        126,
+        127,
+        128,
+        132,
+        133,
+        134,
+        135,
+        136,
+        143,
+        144,
+        152,
+        153,
+        155,
+        156
+      ]
+    }
+  },
+  {
+    "key": "quincy_k",
+    "name": "Quincy K",
+    "description": "Collect all 29 Quincy.",
+    "target": 29,
+    "reward": 8000,
+    "group": "Sets",
+    "track": {
+      "kind": "souls",
+      "ids": [
+        12,
+        13,
+        23,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        50,
+        51,
+        52,
+        53,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        112,
+        113,
+        119,
+        122,
+        123,
+        212
+      ]
+    }
+  }
+]
