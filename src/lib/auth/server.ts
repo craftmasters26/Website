@@ -35,6 +35,8 @@ import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { getCookie } from "@tanstack/react-start/server";
 import { randomBytes } from "node:crypto";
 import { Pool } from "pg";
+import { MongoClient } from "mongodb";
+import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { ensureDbReady, getPglite } from "../db";
 import { emailAndPasswordEnabled } from "./email-password";
 import { GATE_PROVIDER_ID, gateIdentitySessions } from "./gate-session.server";
@@ -48,7 +50,9 @@ import {
 } from "./preview";
 
 // Kick (and share) PGLite bootstrap as soon as the auth server module loads.
-void ensureDbReady();
+// MongoDB (MONGODB_URI) takes priority; only boot PGLite when nothing else is set.
+const mongoUri = process.env.MONGODB_URI?.trim() || undefined;
+if (!mongoUri) void ensureDbReady();
 
 /**
  * Preview secret must outlive module reloads: PGLite (and its session rows) is
@@ -101,7 +105,12 @@ export const discordConfigured = Boolean(discordClientId && discordClientSecret)
 // it derives the origin per-request from the (proxied) host, validated against the
 // preview allowlist, which makes the OAuth `redirect_uri` the concrete preview URL
 // the broker's preview client accepts.
-const explicitBaseURL = env("BETTER_AUTH_URL");
+const SITE_URL_FALLBACK = "https://bleachdex.vercel.app";
+const vercelProdHost = env("VERCEL_PROJECT_PRODUCTION_URL");
+const explicitBaseURL =
+  env("BETTER_AUTH_URL") ??
+  (vercelProdHost ? `https://${vercelProdHost}` : undefined) ??
+  (process.env.VERCEL ? SITE_URL_FALLBACK : undefined);
 // Explicit `string[]` (not a readonly tuple) — Better Auth's DynamicBaseURLConfig
 // requires a mutable `allowedHosts: string[]`.
 const previewAllowedHosts: string[] = [...PREVIEW_ALLOWED_HOSTS];
@@ -151,9 +160,21 @@ const grokUserInfoUrl = `${issuerBase}/api/auth/oauth2/userinfo`;
 // SAME DB as app data, including email/password users. Both use the Better Auth
 // schema from `migrations/auth/0001_auth.sql`, copied into `migrations/` when
 // the app turns sign-in on.
-const database = databaseUrl
-  ? new Pool({ connectionString: databaseUrl })
-  : { dialect: pgliteDialect(() => getPglite()), type: "postgres" as const };
+const globalMongo = globalThis as typeof globalThis & {
+  __bleachdexAuthMongo__?: MongoClient;
+};
+function mongoDatabase(uri: string) {
+  // Reuse one client across serverless invocations; `db()` uses the database
+  // name in the URI (same one the /api/catalog route reads from).
+  globalMongo.__bleachdexAuthMongo__ ??= new MongoClient(uri);
+  return mongodbAdapter(globalMongo.__bleachdexAuthMongo__.db());
+}
+
+const database = mongoUri
+  ? mongoDatabase(mongoUri)
+  : databaseUrl
+    ? new Pool({ connectionString: databaseUrl })
+    : { dialect: pgliteDialect(() => getPglite()), type: "postgres" as const };
 
 /** Session token cookie name — also read by the live-preview popup completion page. */
 export const SESSION_TOKEN_COOKIE = "__Host-grok-auth.session_token";

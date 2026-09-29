@@ -100,3 +100,28 @@ than this archive. If images are still broken after you deploy this, or if
 you meant images not loading **inside Discord itself** (bot embeds), I'll
 need the bot's source or the currently-live frontend's source to fix that
 specifically — this archive doesn't contain either.
+
+## 5. Round 2 (login on bleachdex.vercel.app, logos, smaller button)
+- Login now stores users/sessions in MongoDB (the same MONGODB_URI the catalog uses) via Better Auth's MongoDB adapter; collections are created automatically. No Postgres needed.
+- src/lib/auth/server.ts: base URL now falls back to https://bleachdex.vercel.app on Vercel.
+- Logos are imported from src/assets (bundled with hashed URLs) instead of /public paths, with real alt text.
+- Login button is compact ("Login", smaller padding/icon).
+- src/lib/error-component.tsx added (router.tsx imported it but it was missing from the repo).
+
+## 6. Ad-block gate false positive
+- ad-block-gate.tsx showed "Your ad blocker is on" to real visitors with no
+  blocker at all — it treated any ONE of its three signals (hidden bait,
+  failed fetch, missing window.adsbygoogle) as proof of blocking, but each
+  one alone can trip from antivirus web-protection, ISP-level ad-domain
+  filtering, or just a slow connection. Now requires 2 of the 3 to agree.
+  Initial check delay bumped 2000ms → 3500ms for slower connections.
+
+## 7. Favicon → Halloween ghost
+- The tab icon (browser tab / "address bar" icon) came from public/favicon.svg
+  — a small orange sparkle on a dark square, set via `<link rel="icon"
+  type="image/svg+xml" href="/favicon.svg">` in src/routes/__root.tsx.
+- Replaced it with the uploaded Halloween ghost artwork: cropped to a square,
+  exported as public/favicon-32.png and public/favicon.png (128px), and the
+  head links now point to those instead of the SVG (which was removed).
+- Also updated public/__grok/icon-180.png (the "Add to Home Screen" icon on
+  iOS) to the same crop, so the PWA icon matches the browser tab.

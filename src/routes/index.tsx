@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CatalogImage } from "@/components/catalog-image";
+import { brandIcon } from "@/assets";
 import { CRAFT_SOULS, DISCORD_INVITE, SOULS, TIER_LABEL, WEAPONS, getSoul } from "@/lib/catalog";
 import { useCatalogVersion } from "@/lib/catalog-version";
 
@@ -60,7 +61,7 @@ function Home() {
       <section className="py-20 md:py-24">
         <div className="wrap grid items-center gap-14 md:grid-cols-[1.15fr_.85fr]">
           <div>
-            <img src="/brand/brand-icon.png" alt="" className="h-9 w-auto" />
+            <img src={brandIcon} alt="BleachDex" className="h-9 w-auto rounded-md" />
             <h1 className="mt-5 font-serif text-[52px] leading-[0.98] tracking-[-0.01em] md:text-[76px]">
               Bleach
               <br />

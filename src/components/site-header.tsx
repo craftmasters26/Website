@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { signInWithDiscord, signOut } from "@/lib/auth/client";
 import { useCurrentUser } from "@/lib/auth/use-current-user";
+import { botAvatar, discordMark } from "@/assets";
 
 const BASE_LINKS = [
   { to: "/", label: "Home" },
@@ -26,7 +27,7 @@ function useNavLinks() {
 function BrandMark() {
   return (
     <div className="brand-mark" aria-hidden="true">
-      <img src="/brand/bot-avatar.png" alt="" className="size-full rounded-[inherit] object-cover" />
+      <img src={botAvatar} alt="BleachDex logo" className="size-full rounded-[inherit] object-cover" />
     </div>
   );
 }
@@ -54,8 +55,8 @@ function DiscordLoginButton({ className }: { className: string }) {
         }
       }}
     >
-      <img src="/brand/discord-mark.png" alt="" className="size-4" />
-      {pending ? "Redirecting…" : "Login with Discord"}
+      <img src={discordMark} alt="" className="size-3.5" />
+      {pending ? "…" : "Login"}
     </button>
   );
 }
@@ -99,8 +100,8 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
-      <div className="wrap flex items-center justify-between py-4">
-        <Link to="/" className="brand flex items-center gap-3 no-underline">
+      <div className="wrap flex items-center justify-between gap-3 py-3">
+        <Link to="/" className="brand flex min-w-0 items-center gap-3 no-underline">
           <BrandMark />
           <span className="leading-tight">
             <span className="block font-serif text-[19px] font-bold text-bone">BleachDex</span>
@@ -129,7 +130,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <AuthArea className="btn btn-azure px-5 py-3 text-sm" />
+          <AuthArea className="btn btn-azure !gap-1.5 !px-3.5 !py-2 !text-[13px]" />
           <button
             type="button"
             className="inline-flex size-11 items-center justify-center rounded-[var(--radius-blade)] border border-line-bright text-bone lg:hidden"
@@ -154,7 +155,7 @@ export function SiteHeader() {
                 {link.label}
               </Link>
             ))}
-            <AuthArea className="btn btn-azure mt-2 justify-center px-5 py-3 text-sm" />
+            <AuthArea className="btn btn-azure mt-2 justify-center !gap-1.5 !px-3.5 !py-2 !text-[13px]" />
           </div>
         </nav>
       ) : null}

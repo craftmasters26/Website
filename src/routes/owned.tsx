@@ -6,6 +6,7 @@ import { useCatalogVersion } from "@/lib/catalog-version";
 import { signInWithDiscord } from "@/lib/auth/client";
 import { useOwnedMe, signOutOwned } from "@/lib/owned";
 import { cn } from "@/lib/utils";
+import { discordMark } from "@/assets";
 
 export const Route = createFileRoute("/owned")({
   head: () => ({
@@ -150,7 +151,7 @@ function SignedOutView() {
           }
         }}
       >
-        <img src="/brand/discord-mark.png" alt="" className="size-4" />
+        <img src={discordMark} alt="" className="size-4" />
         {pending ? "Redirecting…" : "Login with Discord"}
       </button>
     </div>

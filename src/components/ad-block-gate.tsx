@@ -39,6 +39,14 @@ type AdsWindow = Window & { adsbygoogle?: unknown };
  *  1. a bait element that filter lists hide by class name,
  *  2. a network request to the AdSense script that a blocker cancels,
  *  3. the AdSense script never defining window.adsbygoogle.
+ *
+ * Each one alone is unreliable for reasons that have nothing to do with an
+ * ad blocker: antivirus "web protection" can quietly drop the fetch,
+ * flaky mobile networks can make it time out, and a screen reader or
+ * forced-colors mode can make an off-screen bait element measure as
+ * hidden. Requiring at least two of the three agree keeps the wall for
+ * actual blockers (which normally trip all three at once) while no longer
+ * locking out a real visitor over one flaky signal.
  */
 async function adsAreBlocked(): Promise<boolean> {
   const bait = document.createElement("div");
@@ -61,7 +69,8 @@ async function adsAreBlocked(): Promise<boolean> {
   bait.remove();
 
   const scriptMissing = typeof (window as AdsWindow).adsbygoogle === "undefined";
-  return baitHidden || requestBlocked || scriptMissing;
+  const signals = [baitHidden, requestBlocked, scriptMissing].filter(Boolean).length;
+  return signals >= 2;
 }
 
 export function AdBlockGate() {
@@ -77,8 +86,9 @@ export function AdBlockGate() {
       if (!cancelled) setBlocked(result);
     };
 
-    // Give the AdSense script a moment to load before judging it.
-    const first = window.setTimeout(run, 2000);
+    // Give the AdSense script a moment to load before judging it — longer
+    // than before, since a slow connection alone shouldn't read as "blocked".
+    const first = window.setTimeout(run, 3500);
     const repeat = window.setInterval(run, 8000);
     return () => {
       cancelled = true;
