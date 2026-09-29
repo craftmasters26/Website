@@ -39,16 +39,32 @@ export function useOwnedMe(): [OwnedState, () => void] {
         return;
       }
       setState({ status: "loading" });
-      const result = await getMyInventory();
-      if (cancelled) return;
-      if (result.status === "ok") {
-        setState({ status: "signed-in", me: result.me });
-      } else if (result.status === "no-record") {
-        setState({ status: "no-record" });
-      } else {
-        // "not-linked" | "not-configured" | "network-error" all land here —
-        // the ErrorView copy already covers "couldn't reach the bot".
-        setState({ status: "error" });
+      try {
+        // getMyInventory() is a network round trip (this app -> the bot's
+        // API). If it hangs — bot offline, DB slow to answer the session
+        // check inside it, whatever — bound it instead of leaving the page
+        // stuck on "Loading your collection…" forever with no way out.
+        const result = await Promise.race([
+          getMyInventory(),
+          new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error("timed out")), 15_000),
+          ),
+        ]);
+        if (cancelled) return;
+        if (result.status === "ok") {
+          setState({ status: "signed-in", me: result.me });
+        } else if (result.status === "no-record") {
+          setState({ status: "no-record" });
+        } else {
+          // "not-linked" | "not-configured" | "network-error" all land here —
+          // the ErrorView copy already covers "couldn't reach the bot".
+          setState({ status: "error" });
+        }
+      } catch {
+        // Previously uncaught: a thrown/rejected getMyInventory() (server
+        // function error, network drop, the timeout above) left `state`
+        // stuck at "loading" forever with no retry button reachable.
+        if (!cancelled) setState({ status: "error" });
       }
     }
 

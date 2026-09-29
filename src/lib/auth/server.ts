@@ -166,7 +166,20 @@ const globalMongo = globalThis as typeof globalThis & {
 function mongoDatabase(uri: string) {
   // Reuse one client across serverless invocations; `db()` uses the database
   // name in the URI (same one the /api/catalog route reads from).
-  globalMongo.__bleachdexAuthMongo__ ??= new MongoClient(uri);
+  //
+  // `serverSelectionTimeoutMS` is lowered from the driver's 30s default: if
+  // Atlas is unreachable (network access list, wrong URI, cluster paused) we
+  // want that to surface as a normal "couldn't sign in, try again" within a
+  // few seconds — not a half-minute hang on every login/logout click. It
+  // does NOT change how long a *successful* connection takes; if login and
+  // logout are consistently slow (several seconds) even when they do
+  // succeed, that's the Atlas round trip itself — most often the cluster
+  // region being far from Vercel's function region, or a free-tier (M0)
+  // cluster, both of which add real network latency on every request rather
+  // than just the first one.
+  globalMongo.__bleachdexAuthMongo__ ??= new MongoClient(uri, {
+    serverSelectionTimeoutMS: 8_000,
+  });
   return mongodbAdapter(globalMongo.__bleachdexAuthMongo__.db());
 }
 
