@@ -140,3 +140,29 @@ specifically — this archive doesn't contain either.
   login/logout — that's most likely Atlas connection setup happening on
   every request because Vercel spun up a fresh serverless instance (see
   reply for the two things worth checking on the Atlas side).
+
+## 9. The real cause of the permanent "Loading your collection…" (and the Chrome crash)
+- src/lib/auth/use-current-user.ts rebuilt the `user` object inline on every
+  render. Better Auth's `useSession()` hands back a new `data` object on
+  every background refetch even when the session hasn't changed, so `user`
+  was a brand-new object reference constantly — and `useOwnedMe`'s effect
+  depends on `user`. Net effect: every refetch looked like "the user
+  changed" to that effect, which cancelled the in-flight inventory request
+  and started a new one, forever — never completing, continuously hammering
+  the network, which is almost certainly what was crashing the tab. My
+  earlier try/catch/timeout fix couldn't help because no single attempt
+  ever ran long enough to hit either the error path or the timeout.
+- Fixed by memoizing `user` on its primitive fields (id/name/email/image),
+  so the reference only changes when the session actually changes. This was
+  the real bug — not Mongo latency, though the earlier connection-timeout
+  hardening is still worth keeping.
+
+## 10. Favicon redone — was unrecognizable at tab size
+- The previous favicon (§7) was the full illustration squeezed into a
+  square: ghost silhouettes, candy pumpkin, hand and all. At 16–32px that
+  much detail just turns to mush.
+- Re-cropped tight on the hood/face only, which is the part that actually
+  reads at icon size, and added a light unsharp mask on the 32px export
+  specifically (straight downscaling was blurring the eye holes/mouth away).
+  128px and the 180px apple-touch-icon use the same crop without sharpening
+  — they're big enough not to need it.

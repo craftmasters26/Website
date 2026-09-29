@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { authClient, authEnabled } from "./client";
 
 /** Normalized user shape used across the app, auth on or off. */
@@ -58,19 +59,29 @@ export function useCurrentUserState(): CurrentUserState {
   if (!authEnabled) return { user: DEV_USER, isPending: false };
   // eslint-disable-next-line react-hooks/rules-of-hooks -- authEnabled is constant for the app's lifetime
   const { data, isPending } = authClient.useSession();
-  const user = data?.user;
-  return {
-    user: user
-      ? {
-          id: user.id,
-          displayName: user.name ?? null,
-          primaryEmail: user.email ?? null,
-          profileImageUrl: user.image ?? null,
-          isDevFallback: false,
-        }
-      : null,
-    isPending,
-  };
+  const sessionUser = data?.user;
+  // Better Auth's session store hands back a new `data` object on every
+  // background refetch even when nothing actually changed. Rebuilding
+  // `user` inline (as this used to do) made a fresh object every render,
+  // so anything that used it as an effect dependency — `useOwnedMe`, which
+  // drives the Inventory page — saw a "changed" value on every refetch and
+  // restarted its fetch before the previous one ever finished. That's what
+  // pinned the page on "Loading your collection…" indefinitely: not one
+  // slow request, but a loop of requests each abandoned by the next.
+  // Memoizing on the primitive fields keeps the object reference stable
+  // when the underlying session hasn't actually changed.
+  const user = useMemo<AppUser | null>(() => {
+    if (!sessionUser) return null;
+    return {
+      id: sessionUser.id,
+      displayName: sessionUser.name ?? null,
+      primaryEmail: sessionUser.email ?? null,
+      profileImageUrl: sessionUser.image ?? null,
+      isDevFallback: false,
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- compared by primitive fields on purpose
+  }, [sessionUser?.id, sessionUser?.name, sessionUser?.email, sessionUser?.image]);
+  return { user, isPending };
 }
 
 /**
