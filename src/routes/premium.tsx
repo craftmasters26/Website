@@ -9,8 +9,13 @@ export const Route = createFileRoute("/premium")({
 });
 
 const WHOP_PLAN = {
-  support: "plan_iIWvPeAUQnKzx",
-  vip: "plan_IG5LgcXFTYNsW",
+  support: "plan_J7OuXMyBZFZeN",
+  vip: "plan_UneUQNGIMsazS",
+} as const;
+
+const WHOP_URL = {
+  support: "https://whop.com/bleachdex/bleach-enjoyer/",
+  vip: "https://whop.com/bleachdex/urahara-foundation-shareholder/",
 } as const;
 
 const WHOP_LABEL = {
@@ -170,7 +175,7 @@ function TierCard({
               />
               <div className="border-t border-line px-4 py-2.5 text-center">
                 <a
-                  href={`https://whop.com/checkout/${WHOP_PLAN[kind]}/`}
+                  href={WHOP_URL[kind]}
                   target="_blank"
                   rel="noreferrer"
                   className="font-mono text-[11.5px] text-bone-faint underline underline-offset-4 hover:text-azure-bright"
