@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/premium")({
@@ -229,7 +230,7 @@ function CheckoutModal({
   const meta = TIER_META[kind];
   return (
     <div
-      className="bd-backdrop fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/70 px-4 py-8 backdrop-blur-md md:items-center"
+      className="bd-backdrop fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 p-3 backdrop-blur-md sm:p-5"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -238,7 +239,7 @@ function CheckoutModal({
       aria-label={`Checkout: ${WHOP_LABEL[kind]}`}
     >
       <div
-        className="bd-modal relative w-full max-w-[470px] overflow-hidden rounded-[10px_28px_10px_28px] border border-line-bright bg-void-raised"
+        className="bd-modal relative flex max-h-[calc(100dvh-1.5rem)] w-full max-w-[470px] flex-col overflow-hidden rounded-[10px_28px_10px_28px] border border-line-bright bg-void-raised sm:max-h-[calc(100dvh-2.5rem)]"
         style={{
           boxShadow: `0 30px 90px -20px ${meta.accent}55, 0 0 0 1px ${meta.accent}22`,
         }}
@@ -254,7 +255,7 @@ function CheckoutModal({
           style={{ background: meta.accent }}
         />
 
-        <div className="relative flex items-start justify-between gap-4 px-6 pb-4 pt-5">
+        <div className="relative flex shrink-0 items-start justify-between gap-4 px-6 pb-4 pt-5">
           <div>
             <div className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-bone-faint">
               BleachDex Premium
@@ -288,10 +289,10 @@ function CheckoutModal({
           </button>
         </div>
 
-        <div className="h-px w-full bg-line" />
+        <div className="h-px w-full shrink-0 bg-line" />
 
         {done ? (
-          <div className="relative px-6 py-14 text-center">
+          <div className="relative min-h-0 flex-1 overflow-y-auto px-6 py-12 text-center">
             <div
               className="bd-pop mx-auto mb-5 grid size-[72px] place-items-center rounded-full border"
               style={{
@@ -329,7 +330,7 @@ function CheckoutModal({
           </div>
         ) : (
           <>
-            <div className="relative min-h-[460px] bg-void-raised">
+            <div className="bd-scroll relative min-h-0 flex-1 overflow-y-auto overscroll-contain bg-void-raised">
               <div className="bd-skeleton pointer-events-none absolute inset-0" />
               <div className="pointer-events-none absolute inset-0 grid place-items-center font-mono text-[11.5px] text-bone-faint">
                 Loading secure checkout…
@@ -341,10 +342,10 @@ function CheckoutModal({
                 data-whop-checkout-theme-accent-color={meta.whopAccent}
                 data-whop-checkout-skip-redirect="true"
                 data-whop-checkout-hide-price="true"
-                className="relative min-h-[460px]"
+                className="relative min-h-[420px]"
               />
             </div>
-            <div className="flex items-center justify-between gap-3 border-t border-line px-6 py-3.5">
+            <div className="flex shrink-0 items-center justify-between gap-3 border-t border-line px-6 py-3">
               <span className="flex items-center gap-2 font-mono text-[11px] text-bone-faint">
                 <svg
                   viewBox="0 0 20 20"
