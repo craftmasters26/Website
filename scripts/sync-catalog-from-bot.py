@@ -131,6 +131,8 @@ def main() -> None:
             "position": r["position"],
             "image_path": r["image_path"],
             "attack_bonus": r["attack_bonus"],
+            "boost_type": r["boost_type"],
+            "boost_percent": r["boost_percent"],
             "tier": r["tier"],
             "ability_name": r["ability_name"],
             "ability_description": r["ability_description"],

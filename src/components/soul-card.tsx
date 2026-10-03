@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import type { Soul, Zanpakuto, Tier } from "@/lib/catalog";
-import { FACTION_LABEL, TIER_LABEL } from "@/lib/catalog";
+import { FACTION_LABEL, TIER_LABEL, weaponBoostLabel } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
 
 function onTilt(card: HTMLElement, event: React.MouseEvent) {
@@ -104,7 +104,7 @@ export function WeaponCard({ weapon }: { weapon: Zanpakuto }) {
         <div className="mt-1 text-sm font-bold leading-snug text-bone">{weapon.name}</div>
         <div className="mt-2.5 flex justify-between font-mono text-[11px]">
           <span className="font-bold text-gold">{TIER_LABEL[weapon.tier as Tier]}</span>
-          <span className="text-bone-faint">+{weapon.attackBonus} ATK</span>
+          <span className="text-bone-faint">{weaponBoostLabel(weapon)}</span>
         </div>
       </div>
     </Link>

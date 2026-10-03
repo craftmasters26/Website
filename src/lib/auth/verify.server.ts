@@ -94,6 +94,28 @@ export async function getDiscordAccountId(bearerToken?: string): Promise<string 
 }
 
 /**
+ * The signed-in visitor's Discord display name and avatar URL, as stored on
+ * their session when they logged in with Discord. Used to show the real
+ * name/avatar on the Inventory page without needing the bot to supply them.
+ */
+export async function getSessionProfile(
+  bearerToken?: string,
+): Promise<{ name: string | null; image: string | null }> {
+  const request = getRequest();
+  if (!request) return { name: null, image: null };
+  let headers = request.headers;
+  if (bearerToken) {
+    headers = new Headers(request.headers);
+    headers.set("Authorization", `Bearer ${bearerToken}`);
+  }
+  const session = await auth.api.getSession({ headers }).catch(() => null);
+  return {
+    name: session?.user?.name?.trim() || null,
+    image: session?.user?.image?.trim() || null,
+  };
+}
+
+/**
  * Resolve the current user id for a server function, or throw when unauthorized.
  * Prefer `authMiddleware` (`./middleware`), which calls this for you.
  * - Auth enabled -> the verified session user id; throws

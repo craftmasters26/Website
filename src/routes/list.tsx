@@ -9,6 +9,7 @@ import {
   TIER_LABEL,
   TIERS,
   WEAPONS,
+  weaponBoostLabel,
   type Tier,
 } from "@/lib/catalog";
 import { useCatalogVersion } from "@/lib/catalog-version";
@@ -74,8 +75,8 @@ function buildEntries(): Entry[] {
       imagePath: weapon.imagePath,
       tier: weapon.tier,
       note: "",
-      stats: `+${weapon.attackBonus} ATK`,
-      power: weapon.attackBonus,
+      stats: weaponBoostLabel(weapon),
+      power: weapon.boostPercent,
     })),
   ];
 }
@@ -222,10 +223,6 @@ function ListPage() {
           <h1 className="max-w-xl font-serif text-[38px] leading-tight">
             One list for the whole roster.
           </h1>
-          <p className="max-w-xs text-[14.5px] leading-6 text-bone-dim">
-            {SOULS.length} souls from packs and spawns, {CRAFT_SOULS.length} that only /craft can
-            make, and {WEAPONS.length} zanpakutō.
-          </p>
         </div>
 
         <div className="mb-4 flex flex-wrap items-center gap-3">

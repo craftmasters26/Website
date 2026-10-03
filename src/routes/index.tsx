@@ -15,8 +15,8 @@ const PACK_ART_NAMES = ["Coyote Starrk", "Ichigo Kurosaki", "Yhwach"];
 const HOW_IT_PLAYS = [
   {
     tag: "Catch",
-    title: "Souls spawn in chat",
-    body: 'Every spawn has two buttons. "Catch Soul!" claims it and "What is this?" gives a hint to anyone stuck.',
+    title: "Claim all the baddies with a click of a button—no rizz required.",
+    body: "With BleachDex, rizzing up a character becomes unnecessary; it's just a click of a button.",
   },
   {
     tag: "Collect",
@@ -118,9 +118,6 @@ function Home() {
             <h2 className="max-w-xl font-serif text-[38px] leading-tight">
               3 daily pulls, 1 weekly pull.
             </h2>
-            <p className="max-w-xs text-[14.5px] leading-6 text-bone-dim">
-              The daily pack can land any tier. The weekly pack is Epic or better.
-            </p>
           </div>
           <div className="flex flex-wrap items-center gap-7">
             <div className="pack-cards flex">

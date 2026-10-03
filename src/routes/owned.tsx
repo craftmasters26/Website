@@ -1,7 +1,15 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, Sparkles } from "lucide-react";
-import { FACTION_LABEL, TIER_LABEL, TIERS, getSoul, getWeapon, type Tier } from "@/lib/catalog";
+import {
+  FACTION_LABEL,
+  TIER_LABEL,
+  TIERS,
+  getSoul,
+  getWeapon,
+  weaponBoostLabel,
+  type Tier,
+} from "@/lib/catalog";
 import { useCatalogVersion } from "@/lib/catalog-version";
 import { signInWithDiscord } from "@/lib/auth/client";
 import { useOwnedMe, signOutOwned } from "@/lib/owned";
@@ -172,12 +180,25 @@ function NoRecordView() {
   );
 }
 
-function ErrorView({ onRetry }: { onRetry: () => void }) {
+const ERROR_HINT: Record<string, string> = {
+  unreachable: "The site can't reach the bot's URL. Check BOT_API_URL on Vercel and that the tunnel is running.",
+  "secret-mismatch": "The bot rejected the site's secret. BOT_API_SECRET on Vercel and on the bot must be identical.",
+  "bot-secret-missing": "The bot has no BOT_API_SECRET set. Add it to the bot's environment and restart it.",
+  "bad-response": "The bot URL answered with a non-JSON page. Check BOT_API_URL points at the bot itself.",
+  "bot-error": "The bot answered with an error. Check the bot's console.",
+  "not-configured": "BOT_API_URL / BOT_API_SECRET aren't set on Vercel.",
+  "not-linked": "This login isn't linked to a Discord account. Log out and log in with Discord.",
+  timeout: "The request timed out. The bot or its tunnel is too slow or down.",
+};
+
+function ErrorView({ onRetry, reason }: { onRetry: () => void; reason?: string }) {
+  const hint = reason ? ERROR_HINT[reason] : undefined;
   return (
     <div className="flex flex-col items-center gap-5 rounded-md border border-line bg-void-raised px-6 py-20 text-center">
       <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">
         Couldn't reach the bot to load your collection. It may be offline right now.
       </p>
+      {hint ? <p className="max-w-md font-mono text-[11.5px] leading-5 text-bone-faint">{hint}</p> : null}
       <button type="button" className="btn btn-outline px-6 py-3 text-sm" onClick={onRetry}>
         Try again
       </button>
@@ -235,8 +256,8 @@ function OwnedPage() {
           imagePath: weapon.imagePath,
           tier: weapon.tier,
           note: "",
-          stats: `+${weapon.attackBonus} ATK`,
-          power: weapon.attackBonus,
+          stats: weaponBoostLabel(weapon),
+          power: weapon.boostPercent,
           isReiatsu: false,
         };
         return entry;
@@ -311,7 +332,7 @@ function OwnedPage() {
         ) : state.status === "no-record" ? (
           <NoRecordView />
         ) : state.status === "error" ? (
-          <ErrorView onRetry={reload} />
+          <ErrorView onRetry={reload} reason={state.reason} />
         ) : entries.length === 0 ? (
           <div className="flex flex-col items-center gap-4 rounded-md border border-line bg-void-raised px-6 py-20 text-center">
             <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">

@@ -13,23 +13,13 @@ export const COMMAND_GROUPS = [
     title: "Packs",
     commands: [
       ["/pack daily", "Claim a daily pack (3 per day)"],
-      ["/pack weekly", "Claim your weekly pack (guaranteed Epic or better)"],
-    ],
-  },
-  {
-    title: "Shop & Merchant",
-    commands: [
-      ["/shop", "Daily shop with 5 faction pages and boss drops, refreshes every 24 hours"],
-      ["/merchant", "See this window's rotating trades and make one"],
+      ["/pack weekly", "Claim your weekly pack (1 per week)"],
     ],
   },
   {
     title: "Team & Battle",
     commands: [
-      ["/team add", "Build a team by name and save it into one of your 2 slots"],
-      ["/team use", "Switch which of your 2 saved slots is active for battles"],
-      ["/team show", "Show one of your saved teams (defaults to your active slot)"],
-      ["/team list", "Quick overview of both of your saved team slots"],
+      ["/team add", "Build your 3-character squad and equip weapons per slot"],
       [
         "/battle start",
         "Challenge another player. Teams fight it out automatically, round by round",
@@ -43,7 +33,6 @@ export const COMMAND_GROUPS = [
   {
     title: "Trading",
     commands: [
-      ["/trade give", "Give one of your owned characters or weapons directly to someone"],
       ["/trade start", "Propose a trade with another player"],
       ["/trade add", "Add one of your owned items to your active trade"],
       ["/trade remove", "Remove an item from your active trade"],
@@ -60,18 +49,11 @@ export const COMMAND_GROUPS = [
     title: "Achievements & Ranks",
     commands: [
       ["/achievements", "See your earned achievements and progress"],
-      ["/leaderboard", "See who owns the most cards or KAN, or the most of one item"],
+      ["/leaderboard", "See who owns the most cards overall, or of one item"],
     ],
   },
   {
     title: "Reference",
-    commands: [
-      ["/help", "See what this bot can do"],
-      ["/about", "About BleachDex - what it is and how it's doing"],
-    ],
-  },
-  {
-    title: "Server Setup",
-    commands: [["/set spawn", "Server admins: set the channel where Souls spawn"]],
+    commands: [["/about", "See what this bot can do"]],
   },
 ] as const;

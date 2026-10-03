@@ -105,9 +105,6 @@ export function SiteHeader() {
           <BrandMark />
           <span className="leading-tight">
             <span className="block font-serif text-[19px] font-bold text-bone">BleachDex</span>
-            <span className="block font-mono text-[10px] tracking-[0.08em] text-bone-faint">
-              SOUL REGISTRY
-            </span>
           </span>
         </Link>
 
@@ -168,7 +165,7 @@ export function SiteFooter() {
     <footer className="border-t border-line py-11">
       <div className="wrap flex flex-wrap items-center justify-between gap-4">
         <span className="font-mono text-xs text-bone-faint">
-          BleachDex
+          BleachDex · unofficial fan project · not affiliated with Shueisha/Studio Pierrot
         </span>
         <div className="flex flex-wrap gap-5 text-[13px] text-bone-dim">
           <Link to="/list" className="hover:text-azure-bright">

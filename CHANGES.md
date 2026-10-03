@@ -170,3 +170,8 @@ specifically — this archive doesn't contain either.
 ## 11. Removed the "Pulled straight from your Discord..." subtitle
 - src/routes/owned.tsx — that line only showed in the signed-out/empty
   state next to the page title. Removed as asked.
+
+## 12. "Couldn't reach the bot" even though the bot is online
+- Root cause is configuration, not code: the bot's `/internal/player/<id>` endpoint returns 503 when the bot has no `BOT_API_SECRET` in its environment (its `env.txt` didn't list one), and the site treated every non-OK answer as "offline".
+- src/lib/inventory.ts: sends `ngrok-skip-browser-warning`, 10s timeout, and returns a `detail` (unreachable / secret-mismatch / bot-secret-missing / bad-response / bot-error). src/lib/owned.ts + src/routes/owned.tsx show a one-line hint under the error so the next failure says what to fix.
+- No bot code was changed.

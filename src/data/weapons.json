@@ -10,7 +10,9 @@
     "ability_description": "Supercharged Getsuga that cuts through dimensions",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 50
   },
   {
     "id": 2,
@@ -23,7 +25,9 @@
     "ability_description": "Everything touched ceases to exist",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 49
   },
   {
     "id": 3,
@@ -36,7 +40,9 @@
     "ability_description": "Complete control over all five senses",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 48
   },
   {
     "id": 4,
@@ -49,7 +55,9 @@
     "ability_description": "Thousand blades become a death dome crushing everything inside",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 45
   },
   {
     "id": 5,
@@ -62,7 +70,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 40
   },
   {
     "id": 6,
@@ -75,11 +85,13 @@
     "ability_description": "Freezes everything in a 10-mile radius",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 44
   },
   {
     "id": 7,
-    "name": "Nozarashi",
+    "name": "Nozarashi (Bankai)",
     "position": "",
     "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/New%20Weapons%20images/New%20Weapons%20images/Nozarashi%20%28Bankai%29.png",
     "attack_bonus": 3488,
@@ -88,7 +100,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 43
   },
   {
     "id": 8,
@@ -101,11 +115,13 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 42
   },
   {
     "id": 9,
-    "name": "Minazuki",
+    "name": "Minazuki (Bankai)",
     "position": "",
     "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/New%20Weapons%20images/New%20Weapons%20images/minazuki%20bankai.png",
     "attack_bonus": 2050,
@@ -114,7 +130,9 @@
     "ability_description": "Melts and heals enemies simultaneously",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 39
   },
   {
     "id": 10,
@@ -127,7 +145,9 @@
     "ability_description": "Crescent moon energy slash",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 30
   },
   {
     "id": 11,
@@ -140,7 +160,9 @@
     "ability_description": "Flame Prison of Hell",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 33
   },
   {
     "id": 12,
@@ -153,7 +175,9 @@
     "ability_description": "Creates an ice prison around the enemy",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 28
   },
   {
     "id": 13,
@@ -166,7 +190,9 @@
     "ability_description": "Flash freezes everything to absolute zero",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 35
   },
   {
     "id": 14,
@@ -179,7 +205,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 25
   },
   {
     "id": 15,
@@ -192,7 +220,9 @@
     "ability_description": "The child game becomes a death trap",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 28
   },
   {
     "id": 16,
@@ -205,11 +235,13 @@
     "ability_description": "Ice pillar that freezes everything in its radius",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 29
   },
   {
     "id": 17,
-    "name": "Nozarashi",
+    "name": "Nozarashi (Shikai)",
     "position": "",
     "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/New%20Weapons%20images/New%20Weapons%20images/Nozarashi%20Shikai.png",
     "attack_bonus": 2539,
@@ -218,7 +250,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 29
   },
   {
     "id": 18,
@@ -231,7 +265,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 25
   },
   {
     "id": 19,
@@ -244,7 +280,9 @@
     "ability_description": "Blood mist shield that absorbs attacks",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 29
   },
   {
     "id": 20,
@@ -257,7 +295,9 @@
     "ability_description": "healing or destroying",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 34
   },
   {
     "id": 21,
@@ -270,7 +310,9 @@
     "ability_description": "Fires colossal snake-shaped energy",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 31
   },
   {
     "id": 22,
@@ -283,7 +325,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 32
   },
   {
     "id": 23,
@@ -296,7 +340,9 @@
     "ability_description": "friend/foe, directions, perceptions",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 33
   },
   {
     "id": 24,
@@ -309,7 +355,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 31
   },
   {
     "id": 25,
@@ -322,7 +370,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 28
   },
   {
     "id": 26,
@@ -335,7 +385,9 @@
     "ability_description": "Extends like a giant snake of blade segments",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 19
   },
   {
     "id": 27,
@@ -348,7 +400,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 18
   },
   {
     "id": 28,
@@ -361,7 +415,9 @@
     "ability_description": "Massive energy from the staff's tip",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 21
   },
   {
     "id": 29,
@@ -374,7 +430,9 @@
     "ability_description": "Two stings = guaranteed death",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 23
   },
   {
     "id": 30,
@@ -387,7 +445,9 @@
     "ability_description": "Devastating homing missile",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 23
   },
   {
     "id": 31,
@@ -400,7 +460,9 @@
     "ability_description": "Creates exploding fireballs",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 17
   },
   {
     "id": 32,
@@ -413,7 +475,9 @@
     "ability_description": "Turns into dust that cuts anything",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 21
   },
   {
     "id": 33,
@@ -426,7 +490,9 @@
     "ability_description": "Reverses all directions and perceptions",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 24
   },
   {
     "id": 34,
@@ -439,7 +505,9 @@
     "ability_description": "Dual blades that slice with wind force",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 19
   },
   {
     "id": 35,
@@ -452,7 +520,9 @@
     "ability_description": "Summons a giant's arm to strike",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 18
   },
   {
     "id": 36,
@@ -465,7 +535,9 @@
     "ability_description": "Massive armored giant that fights for him",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 24
   },
   {
     "id": 37,
@@ -478,7 +550,9 @@
     "ability_description": "Creates wind that detonates after cutting",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 22
   },
   {
     "id": 38,
@@ -491,7 +565,9 @@
     "ability_description": "Whip that creates haunting melodies",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 17
   },
   {
     "id": 39,
@@ -504,7 +580,9 @@
     "ability_description": "Doubles the weight of anything it cuts",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 23
   },
   {
     "id": 40,
@@ -517,7 +595,9 @@
     "ability_description": "Electric-based attack",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 22
   },
   {
     "id": 41,
@@ -530,7 +610,9 @@
     "ability_description": "Simple but powerful direct attack",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 17
   },
   {
     "id": 42,
@@ -543,7 +625,9 @@
     "ability_description": "Giant crushing flail attack",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 21
   },
   {
     "id": 43,
@@ -556,7 +640,9 @@
     "ability_description": "Stops enemy movement",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 19
   },
   {
     "id": 44,
@@ -569,7 +655,9 @@
     "ability_description": "Drains enemy spiritual pressure",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 18
   },
   {
     "id": 45,
@@ -582,7 +670,9 @@
     "ability_description": "Deflects any attack back at the enemy",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 21
   },
   {
     "id": 46,
@@ -595,11 +685,13 @@
     "ability_description": "Twisting water that pierces everything",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 22
   },
   {
     "id": 47,
-    "name": "Minazuki",
+    "name": "Minazuki (Shikai)",
     "position": "",
     "image_path": "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/New%20Weapons%20images/New%20Weapons%20images/Minazuki%20%28Shikai%29.png",
     "attack_bonus": 2200,
@@ -608,7 +700,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 38
   },
   {
     "id": 48,
@@ -621,7 +715,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "damage",
+    "boost_percent": 30
   },
   {
     "id": 49,
@@ -634,7 +730,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "soul_reaper"
+    "faction": "soul_reaper",
+    "boost_type": "hp",
+    "boost_percent": 20
   },
   {
     "id": 50,
@@ -647,7 +745,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "hollow"
+    "faction": "hollow",
+    "boost_type": "damage",
+    "boost_percent": 41
   },
   {
     "id": 51,
@@ -660,7 +760,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "hollow"
+    "faction": "hollow",
+    "boost_type": "damage",
+    "boost_percent": 27
   },
   {
     "id": 52,
@@ -673,7 +775,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "hollow"
+    "faction": "hollow",
+    "boost_type": "hp",
+    "boost_percent": 27
   },
   {
     "id": 53,
@@ -686,7 +790,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "hollow"
+    "faction": "hollow",
+    "boost_type": "hp",
+    "boost_percent": 27
   },
   {
     "id": 54,
@@ -699,7 +805,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "hollow"
+    "faction": "hollow",
+    "boost_type": "hp",
+    "boost_percent": 20
   },
   {
     "id": 55,
@@ -712,7 +820,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "hollow"
+    "faction": "hollow",
+    "boost_type": "hp",
+    "boost_percent": 22
   },
   {
     "id": 56,
@@ -725,7 +835,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "hollow"
+    "faction": "hollow",
+    "boost_type": "damage",
+    "boost_percent": 20
   },
   {
     "id": 57,
@@ -738,7 +850,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "hollow"
+    "faction": "hollow",
+    "boost_type": "hp",
+    "boost_percent": 20
   },
   {
     "id": 58,
@@ -751,7 +865,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "hollow"
+    "faction": "hollow",
+    "boost_type": "hp",
+    "boost_percent": 19
   },
   {
     "id": 59,
@@ -764,7 +880,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "hollow"
+    "faction": "hollow",
+    "boost_type": "hp",
+    "boost_percent": 18
   },
   {
     "id": 60,
@@ -777,7 +895,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "quincy"
+    "faction": "quincy",
+    "boost_type": "damage",
+    "boost_percent": 47
   },
   {
     "id": 61,
@@ -790,7 +910,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "quincy"
+    "faction": "quincy",
+    "boost_type": "damage",
+    "boost_percent": 46
   },
   {
     "id": 62,
@@ -803,7 +925,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "quincy"
+    "faction": "quincy",
+    "boost_type": "damage",
+    "boost_percent": 30
   },
   {
     "id": 63,
@@ -816,7 +940,9 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "quincy"
+    "faction": "quincy",
+    "boost_type": "damage",
+    "boost_percent": 26
   },
   {
     "id": 64,
@@ -829,6 +955,8 @@
     "ability_description": "",
     "card_image_path": "",
     "enabled": 1,
-    "faction": "quincy"
+    "faction": "quincy",
+    "boost_type": "hp",
+    "boost_percent": 26
   }
 ]
