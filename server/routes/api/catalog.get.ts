@@ -43,6 +43,8 @@ type WeaponDoc = {
   faction?: string;
   tier: string;
   attackBonus: number;
+  boostType?: string;
+  boostPercent?: number;
   abilityName?: string;
   abilityDescription?: string;
   imagePath: string;
@@ -68,6 +70,8 @@ type CatalogPayload = {
     name: string;
     image_path: string;
     attack_bonus: number;
+    boost_type: string;
+    boost_percent: number;
     tier: string;
     ability_name: string;
     ability_description: string;
@@ -116,6 +120,8 @@ async function loadCatalog(): Promise<CatalogPayload> {
       name: w.name,
       image_path: w.imagePath,
       attack_bonus: w.attackBonus,
+      boost_type: w.boostType ?? "damage",
+      boost_percent: w.boostPercent ?? 0,
       tier: w.tier,
       ability_name: w.abilityName ?? "",
       ability_description: w.abilityDescription ?? "",

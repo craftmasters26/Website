@@ -1,6 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SoulCard } from "@/components/soul-card";
-import { CatchButton } from "@/components/catch-button";
 import { CatalogImage } from "@/components/catalog-image";
 import {
   ALL_SOULS,
@@ -28,7 +27,7 @@ export const Route = createFileRoute("/roster/$id")({
 
 const INGREDIENT_KIND: Record<Ingredient["kind"], string> = {
   drop: "Boss drop",
-  weapon: "Zanpakutō",
+  weapon: "Weapon",
   character: "Character",
 };
 
@@ -142,9 +141,7 @@ function SoulDetail() {
                 ))}
               </div>
             </div>
-          ) : (
-            <CatchButton kind="soul" id={soul.id} />
-          )}
+          ) : null}
         </div>
       </div>
 

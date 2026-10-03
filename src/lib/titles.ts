@@ -20,7 +20,7 @@ export function titleForPath(pathname: string, entityName?: string): string {
   if (path.startsWith("/weapons/") && entityName) {
     return `${entityName} · ${APP_NAME}`;
   }
-  if (path.startsWith("/weapons/")) return `Zanpakutō · ${APP_NAME}`;
+  if (path.startsWith("/weapons/")) return `Weapon · ${APP_NAME}`;
 
   return APP_NAME;
 }

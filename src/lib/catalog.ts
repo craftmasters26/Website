@@ -28,6 +28,9 @@ export type RawWeapon = {
   name: string;
   image_path: string;
   attack_bonus: number;
+  /** Which stat the weapon boosts. The real numbers; attack_bonus is deprecated in the bot. */
+  boost_type?: string;
+  boost_percent?: number;
   tier: string;
   ability_name: string;
   ability_description: string;
@@ -60,6 +63,10 @@ export type Zanpakuto = {
   name: string;
   imagePath: string;
   attackBonus: number;
+  /** "damage" or "hp" — which stat the percentage applies to. */
+  boostType: "damage" | "hp";
+  /** e.g. 40 means +40%. */
+  boostPercent: number;
   tier: Tier;
   abilityName: string;
   abilityDescription: string;
@@ -108,6 +115,8 @@ function buildWeapons(raw: RawWeapon[]): Zanpakuto[] {
       name: row.name,
       imagePath: row.image_path,
       attackBonus: row.attack_bonus,
+      boostType: row.boost_type === "hp" ? "hp" : "damage",
+      boostPercent: row.boost_percent ?? 0,
       tier: asTier(row.tier),
       abilityName: row.ability_name,
       abilityDescription: row.ability_description,
@@ -150,6 +159,11 @@ export function applyCatalog(nextCharacters: RawCharacter[], nextWeapons: RawWea
   CRAFT_SOULS.push(...nextCraftSouls);
   WEAPONS.length = 0;
   WEAPONS.push(...nextWeaponList);
+}
+
+/** "+19% HP" / "+50% DMG" — how the bot shows a weapon's boost. */
+export function weaponBoostLabel(weapon: Pick<Zanpakuto, "boostType" | "boostPercent">): string {
+  return `+${weapon.boostPercent}% ${weapon.boostType === "hp" ? "HP" : "DMG"}`;
 }
 
 export const TIER_LABEL: Record<Tier, string> = {

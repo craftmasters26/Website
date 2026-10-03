@@ -13,7 +13,7 @@ export const Route = createFileRoute("/weapons/$id")({
   head: ({ loaderData }) => ({
     meta: [
       {
-        title: loaderData ? `${loaderData.name} · BleachDex` : "Zanpakutō · BleachDex",
+        title: loaderData ? `${loaderData.name} · BleachDex` : "Weapon · BleachDex",
       },
     ],
   }),
@@ -52,10 +52,10 @@ function WeaponDetail() {
 
           <div className="panel mt-8 p-5">
             <div className="font-serif text-[28px] tabular-nums text-gold">
-              +{weapon.attackBonus}
+              +{weapon.boostPercent}%
             </div>
             <div className="mt-1 font-mono text-[11px] uppercase tracking-wider text-bone-faint">
-              Attack bonus
+              {weapon.boostType === "hp" ? "HP boost" : "Damage boost"}
             </div>
           </div>
 

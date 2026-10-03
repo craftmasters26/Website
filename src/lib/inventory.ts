@@ -77,8 +77,22 @@ export type InventoryResult =
   | { status: "no-record" }
   /** BOT_API_URL / BOT_API_SECRET aren't set on this deployment yet. */
   | { status: "not-configured" }
-  /** Couldn't reach the bot (offline, tunnel down, network blip). */
-  | { status: "network-error" };
+  /** Couldn't reach the bot (offline, tunnel down, network blip), or it answered
+   * with something other than the player JSON. `detail` says which, so the
+   * page can tell you what to fix instead of always blaming "offline". */
+  | { status: "network-error"; detail?: BotErrorDetail };
+
+export type BotErrorDetail =
+  /** fetch() itself failed: wrong BOT_API_URL, tunnel down, bot process stopped. */
+  | "unreachable"
+  /** Bot answered 401: BOT_API_SECRET on Vercel != BOT_API_SECRET on the bot. */
+  | "secret-mismatch"
+  /** Bot answered 503: the bot has no BOT_API_SECRET set in ITS environment. */
+  | "bot-secret-missing"
+  /** Answered, but not JSON (e.g. an ngrok interstitial / wrong URL / HTML error page). */
+  | "bad-response"
+  /** Any other non-OK status. */
+  | "bot-error";
 
 export const getMyInventory = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
@@ -94,21 +108,51 @@ export const getMyInventory = createServerFn({ method: "GET" })
     let res: Response;
     try {
       res = await fetch(`${botApiUrl.replace(/\/+$/, "")}/internal/player/${discordId}`, {
-        headers: { Authorization: `Bearer ${botApiSecret}`, accept: "application/json" },
+        headers: {
+          Authorization: `Bearer ${botApiSecret}`,
+          accept: "application/json",
+          // ngrok's free tier can serve an HTML warning page instead of the bot's
+          // response; this header makes it pass straight through.
+          "ngrok-skip-browser-warning": "true",
+        },
+        // Don't let a dead tunnel hang the serverless function.
+        signal: AbortSignal.timeout(10_000),
       });
-    } catch {
-      return { status: "network-error" };
+    } catch (err) {
+      console.error("[inventory] bot unreachable:", err);
+      return { status: "network-error", detail: "unreachable" };
     }
     if (res.status === 404) return { status: "no-record" };
-    if (!res.ok) return { status: "network-error" };
+    if (res.status === 401) {
+      console.error("[inventory] bot returned 401 — BOT_API_SECRET mismatch");
+      return { status: "network-error", detail: "secret-mismatch" };
+    }
+    if (res.status === 503) {
+      console.error("[inventory] bot returned 503 — BOT_API_SECRET not set on the bot");
+      return { status: "network-error", detail: "bot-secret-missing" };
+    }
+    if (!res.ok) {
+      console.error("[inventory] bot returned", res.status);
+      return { status: "network-error", detail: "bot-error" };
+    }
 
-    const data = (await res.json()) as BotPlayerResponse;
+    let data: BotPlayerResponse;
+    try {
+      data = (await res.json()) as BotPlayerResponse;
+    } catch {
+      console.error("[inventory] bot response was not JSON (wrong BOT_API_URL or tunnel page?)");
+      return { status: "network-error", detail: "bad-response" };
+    }
+    // Prefer the name/avatar from the visitor's Discord login session; the bot
+    // may only know a placeholder like "Player 6616" and no avatar.
+    const { getSessionProfile } = await import("./auth/verify.server");
+    const profile = await getSessionProfile(context.bearerToken);
     return {
       status: "ok",
       me: {
         discordId,
-        username: data.username,
-        avatarUrl: data.avatar_url,
+        username: profile.name || data.username,
+        avatarUrl: profile.image || data.avatar_url,
         kan: data.kan_coins,
         ownedCharacterIds: data.owned_character_ids ?? [],
         reiatsuCharacterIds: data.reiatsu_character_ids ?? [],

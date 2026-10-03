@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { signOut } from "@/lib/auth/client";
-import { getMyInventory, type InventoryMe } from "@/lib/inventory";
+import { getMyInventory, type InventoryMe, type BotErrorDetail } from "@/lib/inventory";
 
 /**
  * Loads the signed-in player's collection for the /owned page.
@@ -22,7 +22,7 @@ export type OwnedState =
   /** Signed in, but the bot has no record for this Discord id yet. */
   | { status: "no-record" }
   /** Couldn't reach the bot, or BOT_API_URL/BOT_API_SECRET aren't set. */
-  | { status: "error" };
+  | { status: "error"; reason?: BotErrorDetail | "not-configured" | "not-linked" | "timeout" };
 
 export function useOwnedMe(): [OwnedState, () => void] {
   const { user, isPending: userPending } = useCurrentUserState();
@@ -58,13 +58,21 @@ export function useOwnedMe(): [OwnedState, () => void] {
         } else {
           // "not-linked" | "not-configured" | "network-error" all land here —
           // the ErrorView copy already covers "couldn't reach the bot".
-          setState({ status: "error" });
+          setState({
+            status: "error",
+            reason:
+              result.status === "network-error"
+                ? result.detail
+                : result.status === "not-configured" || result.status === "not-linked"
+                  ? result.status
+                  : undefined,
+          });
         }
       } catch {
         // Previously uncaught: a thrown/rejected getMyInventory() (server
         // function error, network drop, the timeout above) left `state`
         // stuck at "loading" forever with no retry button reachable.
-        if (!cancelled) setState({ status: "error" });
+        if (!cancelled) setState({ status: "error", reason: "timeout" });
       }
     }
 
