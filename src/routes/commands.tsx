@@ -17,9 +17,6 @@ function CommandsPage() {
           <h1 className="max-w-xl font-serif text-[38px] leading-tight">
             Every slash command, in one place.
           </h1>
-          <p className="max-w-xs text-[14.5px] leading-6 text-bone-dim">
-            Copied from the bot's slash command list.
-          </p>
         </div>
         <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
           {COMMAND_GROUPS.map((group) => (

@@ -168,7 +168,7 @@ export function SiteFooter() {
     <footer className="border-t border-line py-11">
       <div className="wrap flex flex-wrap items-center justify-between gap-4">
         <span className="font-mono text-xs text-bone-faint">
-          BleachDex · unofficial fan project · not affiliated with Shueisha/Studio Pierrot
+          BleachDex
         </span>
         <div className="flex flex-wrap gap-5 text-[13px] text-bone-dim">
           <Link to="/list" className="hover:text-azure-bright">
