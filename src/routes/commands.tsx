@@ -12,15 +12,6 @@ function CommandsPage() {
   return (
     <main className="page-enter py-16 md:py-20">
       <div className="wrap">
-        <div className="kicker">Commands</div>
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-8">
-          <h1 className="max-w-xl font-serif text-[38px] leading-tight">
-            Every slash command, in one place.
-          </h1>
-          <p className="max-w-xs text-[14.5px] leading-6 text-bone-dim">
-            Copied from the bot's slash command list.
-          </p>
-        </div>
         <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
           {COMMAND_GROUPS.map((group) => (
             <div key={group.title}>

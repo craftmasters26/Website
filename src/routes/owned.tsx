@@ -22,7 +22,7 @@ export const Route = createFileRoute("/owned")({
       { title: "Owned · BleachDex" },
       {
         name: "description",
-        content: "Your real BleachDex collection — every soul and zanpakutō you actually own.",
+        content: "Your real BleachDex collection — every soul and weapon you actually own.",
       },
     ],
   }),
@@ -46,12 +46,12 @@ type Entry = {
   isReiatsu: boolean;
 };
 
-const KIND_LABEL: Record<Kind, string> = { soul: "Soul", weapon: "Zanpakutō" };
+const KIND_LABEL: Record<Kind, string> = { soul: "Soul", weapon: "Weapon" };
 
 const KIND_CHIPS: { value: KindFilter; label: string }[] = [
   { value: "all", label: "All" },
   { value: "soul", label: "Souls" },
-  { value: "weapon", label: "Zanpakutō" },
+  { value: "weapon", label: "Weapons" },
 ];
 
 const SORTS: { value: Sort; label: string }[] = [
@@ -143,7 +143,7 @@ function SignedOutView() {
   return (
     <div className="flex flex-col items-center gap-5 rounded-md border border-line bg-void-raised px-6 py-20 text-center">
       <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">
-        Log in with Discord to see the souls and zanpakutō your account actually owns.
+        Log in with Discord to see the souls and weapons your account actually owns.
       </p>
       <button
         type="button"

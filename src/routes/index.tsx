@@ -12,39 +12,6 @@ export const Route = createFileRoute("/")({
 
 const PACK_ART_NAMES = ["Coyote Starrk", "Ichigo Kurosaki", "Yhwach"];
 
-const HOW_IT_PLAYS = [
-  {
-    tag: "Catch",
-    title: "Claim all the baddies with a click of a button—no rizz required.",
-    body: "With BleachDex, rizzing up a character becomes unnecessary; it's just a click of a button.",
-  },
-  {
-    tag: "Collect",
-    title: "/collection completion, /collection inventory",
-    body: "Completion shows the percentage you own. Inventory lists what you have, split into souls, weapons and drops.",
-  },
-  {
-    tag: "Reiatsu",
-    title: "One copy in ten is awakened",
-    body: "A Reiatsu copy fights with +20% damage and +10% HP and has its own card. It can come from a pack, a catch or a craft.",
-  },
-  {
-    tag: "Battle",
-    title: "/team add, /battle start",
-    body: "Own three characters, set a team, equip weapons with /equip, then challenge another player. The rounds play out in one live message.",
-  },
-  {
-    tag: "Boss",
-    title: "A new boss every hour",
-    body: "It spawns in the same channel as regular souls. Challenge it for a private ten-round fight with your active team.",
-  },
-  {
-    tag: "Craft",
-    title: "/craft",
-    body: `Spend boss drops, weapons and lower forms on characters no pack can give you. There are ${CRAFT_SOULS.length} of them, all on the List page.`,
-  },
-];
-
 function Home() {
   const catalogVersion = useCatalogVersion();
   const featured = useMemo(() => getSoul(1) ?? SOULS[0], [catalogVersion]);
@@ -87,7 +54,7 @@ function Home() {
                 <b className="text-bone">{CRAFT_SOULS.length}</b> craft-only
               </span>
               <span>
-                <b className="text-bone">{WEAPONS.length}</b> zanpakutō
+                <b className="text-bone">{WEAPONS.length}</b> weapons
               </span>
               <span>
                 <b className="text-bone">300</b> KAN a day
@@ -139,32 +106,6 @@ function Home() {
                 Browse the list
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-line py-24">
-        <div className="wrap">
-          <div className="kicker">How it plays</div>
-          <div className="grid gap-x-14 md:grid-cols-2 mt-11">
-            {HOW_IT_PLAYS.map((item, i) => (
-              <div
-                key={item.tag}
-                className="border-t border-line py-7 first:border-t-0 md:[&:nth-child(2)]:border-t-0"
-              >
-                <div
-                  className={
-                    i % 2 === 0
-                      ? "mb-2 font-mono text-[11.5px] tracking-[0.06em] text-azure-bright"
-                      : "mb-2 font-mono text-[11.5px] tracking-[0.06em] text-ember-bright"
-                  }
-                >
-                  {item.tag}
-                </div>
-                <h3 className="mb-2 font-serif text-[21px]">{item.title}</h3>
-                <p className="max-w-md text-sm leading-6 text-bone-dim">{item.body}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

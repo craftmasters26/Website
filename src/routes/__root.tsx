@@ -19,7 +19,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "BleachDex is a Discord bot where souls spawn in chat. Browse every soul, zanpakutō and craft-only character, and log in with Discord to see your own collection.",
+          "BleachDex is a Discord bot where souls spawn in chat. Browse every soul, weapon and craft-only character, and log in with Discord to see your own collection.",
       },
     ],
     links: [

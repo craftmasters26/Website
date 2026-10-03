@@ -13,7 +13,7 @@ export const Route = createFileRoute("/weapons/$id")({
   head: ({ loaderData }) => ({
     meta: [
       {
-        title: loaderData ? `${loaderData.name} · BleachDex` : "Zanpakutō · BleachDex",
+        title: loaderData ? `${loaderData.name} · BleachDex` : "Weapon · BleachDex",
       },
     ],
   }),

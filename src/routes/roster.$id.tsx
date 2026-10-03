@@ -27,7 +27,7 @@ export const Route = createFileRoute("/roster/$id")({
 
 const INGREDIENT_KIND: Record<Ingredient["kind"], string> = {
   drop: "Boss drop",
-  weapon: "Zanpakutō",
+  weapon: "Weapon",
   character: "Character",
 };
 

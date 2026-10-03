@@ -30,7 +30,7 @@ export const Route = createFileRoute("/list")({
       {
         name: "description",
         content:
-          "Every BleachDex soul, craft-only character and zanpakutō in one list, with tier, HP, attack and crafting recipes.",
+          "Every BleachDex soul, craft-only character and weapon in one list, with tier, HP, attack and crafting recipes.",
       },
     ],
   }),
@@ -84,14 +84,14 @@ function buildEntries(): Entry[] {
 const KIND_LABEL: Record<Kind, string> = {
   soul: "Soul",
   craft: "Craft only",
-  weapon: "Zanpakutō",
+  weapon: "Weapon",
 };
 
 const KIND_CHIPS: { value: KindFilter; label: string }[] = [
   { value: "all", label: "All" },
   { value: "soul", label: "Souls" },
   { value: "craft", label: "Craft-only" },
-  { value: "weapon", label: "Zanpakutō" },
+  { value: "weapon", label: "Weapons" },
 ];
 
 const SORTS: { value: Sort; label: string }[] = [
