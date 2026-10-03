@@ -10,11 +10,14 @@ export const Route = createFileRoute("/premium")({
   component: PremiumPage,
 });
 
+// Checkout happens on this site (embedded Whop checkout). These plan IDs must
+// belong to the two products below.
 const WHOP_PLAN = {
   support: "plan_J7OuXMyBZFZeN",
   vip: "plan_UneUQNGIMsazS",
 } as const;
 
+// Product pages: used only as the "open in a new tab" fallback.
 const WHOP_URL = {
   support: "https://whop.com/bleachdex/bleach-enjoyer/",
   vip: "https://whop.com/bleachdex/urahara-foundation-shareholder/",
@@ -208,13 +211,15 @@ function TierCard({ kind, onOpen }: { kind: Tier; onOpen: () => void }) {
       <div className="font-serif text-[22px] leading-tight">{WHOP_LABEL[kind]}</div>
       <div className="mt-1 text-[13.5px] text-bone-dim">{tier.tagline}</div>
 
-      <div
-        className={
-          "my-5 font-serif text-[52px] leading-none " +
-          (isVip ? "text-ember-bright" : "text-azure-bright")
-        }
-      >
-        {tier.price}
+      <div className="my-5 flex items-baseline gap-2">
+        <span
+          className={
+            "font-serif text-[52px] leading-none " + (isVip ? "text-ember-bright" : "text-azure-bright")
+          }
+        >
+          {tier.price}
+        </span>
+        <span className="font-mono text-[12px] text-bone-faint">/ month</span>
       </div>
 
       <div className="mb-6 h-px bg-gradient-to-r from-line-bright via-line to-transparent" />
@@ -301,7 +306,6 @@ function CheckoutModal({
           (active ? "scale-100" : "scale-95")
         }
       >
-        {/* Compact header */}
         <div
           className="flex shrink-0 items-center justify-between gap-3 border-b border-line px-5 py-3.5"
           style={{
@@ -351,36 +355,34 @@ function CheckoutModal({
               </button>
             </div>
           ) : null}
-          {(
-            <div className="p-4">
-              {!loaded ? (
-                <div className="absolute inset-x-4 top-4 space-y-3" aria-hidden="true">
-                  <div className="prem-skeleton h-10 w-full" />
-                  <div className="prem-skeleton h-24 w-full" />
-                  <div className="prem-skeleton h-10 w-full" />
-                </div>
-              ) : null}
-              <div
-                ref={hostRef}
-                data-whop-checkout-plan-id={WHOP_PLAN[kind]}
-                data-whop-checkout-theme="dark"
-                data-whop-checkout-theme-accent-color={WHOP_ACCENT[kind]}
-                data-whop-checkout-skip-redirect="true"
-                data-whop-checkout-hide-price="true"
-                className="relative min-h-[300px]"
-              />
-              <div className="mt-2 pb-1 text-center">
-                <a
-                  href={WHOP_URL[kind]}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-mono text-[11px] text-bone-faint underline underline-offset-4 hover:text-azure-bright"
-                >
-                  Checkout not loading? Open it in a new tab instead
-                </a>
+          <div className="p-4">
+            {!loaded ? (
+              <div className="absolute inset-x-4 top-4 space-y-3" aria-hidden="true">
+                <div className="prem-skeleton h-10 w-full" />
+                <div className="prem-skeleton h-24 w-full" />
+                <div className="prem-skeleton h-10 w-full" />
               </div>
+            ) : null}
+            <div
+              ref={hostRef}
+              data-whop-checkout-plan-id={WHOP_PLAN[kind]}
+              data-whop-checkout-theme="dark"
+              data-whop-checkout-theme-accent-color={WHOP_ACCENT[kind]}
+              data-whop-checkout-skip-redirect="true"
+              data-whop-checkout-hide-price="true"
+              className="relative min-h-[300px]"
+            />
+            <div className="mt-2 pb-1 text-center">
+              <a
+                href={WHOP_URL[kind]}
+                target="_blank"
+                rel="noreferrer"
+                className="font-mono text-[11px] text-bone-faint underline underline-offset-4 hover:text-azure-bright"
+              >
+                Checkout not loading? Open it in a new tab instead
+              </a>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
