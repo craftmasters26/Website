@@ -1,13 +1,13 @@
 export const WHOP_PLAN = {
-  support: "plan_J7OuXMyBZFZeN",
-  vip: "plan_UneUQNGIMsazS",
+  "bleach-enjoyer": "plan_J7OuXMyBZFZeN",
+  "urahara-foundation-shareholder": "plan_UneUQNGIMsazS",
 } as const;
 
 export type Tier = keyof typeof WHOP_PLAN;
 
 export const WHOP_LABEL: Record<Tier, string> = {
-  support: "Bleach Enjoyer",
-  vip: "Urahara Foundation Shareholder",
+  "bleach-enjoyer": "Bleach Enjoyer",
+  "urahara-foundation-shareholder": "Urahara Foundation Shareholder",
 };
 
 export const TIER_META: Record<
@@ -21,7 +21,7 @@ export const TIER_META: Record<
     perks: string[];
   }
 > = {
-  support: {
+  "bleach-enjoyer": {
     price: "$3",
     accent: "#5c8dff",
     whopAccent: "sky",
@@ -33,7 +33,7 @@ export const TIER_META: Record<
       "1 BleachDex item of your choice (excluding certain items)",
     ],
   },
-  vip: {
+  "urahara-foundation-shareholder": {
     price: "$5",
     accent: "#ff8f4d",
     whopAccent: "orange",

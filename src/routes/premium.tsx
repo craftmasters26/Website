@@ -21,7 +21,7 @@ function PremiumPage() {
           perks attach automatically the moment your payment goes through.
         </p>
         <div className="grid gap-6 md:grid-cols-2">
-          {(["support", "vip"] as Tier[]).map((kind) => (
+          {(["bleach-enjoyer", "urahara-foundation-shareholder"] as Tier[]).map((kind) => (
             <TierCard key={kind} kind={kind} />
           ))}
         </div>
@@ -97,7 +97,7 @@ function TierCard({ kind }: { kind: Tier }) {
         to="/checkout"
         search={{ tier: kind }}
         className={
-          kind === "vip" ? "btn btn-fill relative" : "btn btn-outline relative"
+          kind === "urahara-foundation-shareholder" ? "btn btn-fill relative" : "btn btn-outline relative"
         }
       >
         {meta.cta}

@@ -9,7 +9,10 @@ import {
 
 export const Route = createFileRoute("/checkout")({
   validateSearch: (search: Record<string, unknown>): { tier: Tier } => ({
-    tier: search.tier === "vip" ? "vip" : "support",
+    tier:
+      search.tier === "urahara-foundation-shareholder"
+        ? "urahara-foundation-shareholder"
+        : "bleach-enjoyer",
   }),
   head: () => ({
     meta: [{ title: "Checkout · BleachDex" }],
@@ -72,7 +75,7 @@ function CheckoutPage() {
         </Link>
 
         <div className="mb-6 flex flex-wrap gap-2.5">
-          {(["support", "vip"] as Tier[]).map((t) => {
+          {(["bleach-enjoyer", "urahara-foundation-shareholder"] as Tier[]).map((t) => {
             const active = t === tier;
             const m = TIER_META[t];
             return (
