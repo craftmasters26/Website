@@ -180,6 +180,15 @@ export function SiteFooter() {
           <Link to="/premium" className="hover:text-azure-bright">
             Premium
           </Link>
+          <Link to="/privacy" className="hover:text-azure-bright">
+            Privacy
+          </Link>
+          <Link to="/terms" className="hover:text-azure-bright">
+            Terms
+          </Link>
+          <Link to="/contact" className="hover:text-azure-bright">
+            Contact
+          </Link>
           <a
             href="https://discord.gg/RNp5d5TGPD"
             className="hover:text-azure-bright"
