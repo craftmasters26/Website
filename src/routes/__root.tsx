@@ -2,7 +2,6 @@ import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-r
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteHeader, SiteFooter } from "@/components/site-header";
-import { AdBlockGate } from "@/components/ad-block-gate";
 import { DocumentTitle } from "@/components/document-title";
 import { NotFound } from "@/components/not-found";
 import { APP_NAME } from "@/lib/titles";
@@ -67,7 +66,6 @@ function RootDocument() {
               <SiteFooter />
             </div>
           </div>
-          <AdBlockGate />
         </AuthProvider>
         <Scripts />
       </body>
