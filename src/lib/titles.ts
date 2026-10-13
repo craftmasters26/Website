@@ -5,6 +5,9 @@ const PAGE_TITLES: Record<string, string> = {
   "/list": `List · ${APP_NAME}`,
   "/commands": `Commands · ${APP_NAME}`,
   "/premium": `Premium · ${APP_NAME}`,
+  "/privacy": `Privacy Policy · ${APP_NAME}`,
+  "/terms": `Terms of Service · ${APP_NAME}`,
+  "/contact": `Contact · ${APP_NAME}`,
 };
 
 export { APP_NAME };
