@@ -4,24 +4,43 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { signInWithDiscord, signOut } from "@/lib/auth/client";
 import { useCurrentUser } from "@/lib/auth/use-current-user";
+import { useAdminAccess } from "@/lib/admin-access";
 import { botAvatar, discordMark } from "@/assets";
 
-const BASE_LINKS = [
-  { to: "/", label: "Home" },
-  { to: "/list", label: "List" },
-  { to: "/commands", label: "Commands" },
-  { to: "/premium", label: "Premium" },
-] as const;
+type NavLink = {
+  to: "/" | "/list" | "/owned" | "/leaderboard" | "/commands" | "/premium" | "/admin";
+  label: string;
+  /** Shows a small pulsing "live" dot. */
+  live?: boolean;
+};
 
-const INVENTORY_LINK = { to: "/owned", label: "Inventory" } as const;
-
-function useNavLinks() {
+function useNavLinks(): NavLink[] {
   const user = useCurrentUser();
   const signedIn = Boolean(user) && !user?.isDevFallback;
-  // Inventory slots in after "List" — 4 links signed out, 5 once logged in.
-  return signedIn
-    ? [BASE_LINKS[0], BASE_LINKS[1], INVENTORY_LINK, BASE_LINKS[2], BASE_LINKS[3]]
-    : BASE_LINKS;
+  const admin = useAdminAccess();
+  const links: NavLink[] = [
+    { to: "/", label: "Home" },
+    { to: "/list", label: "List" },
+  ];
+  // Inventory slots in after "List" once logged in.
+  if (signedIn) links.push({ to: "/owned", label: "Inventory" });
+  links.push(
+    { to: "/leaderboard", label: "Leaderboard", live: true },
+    { to: "/commands", label: "Commands" },
+    { to: "/premium", label: "Premium" },
+  );
+  // Only people on the bot's admin list ever see this link.
+  if (admin.level) links.push({ to: "/admin", label: "Admin" });
+  return links;
+}
+
+function LiveDot() {
+  return (
+    <span
+      className="ml-1.5 inline-block size-1.5 animate-pulse rounded-full bg-emerald-400 align-middle"
+      aria-hidden="true"
+    />
+  );
 }
 
 function BrandMark() {
@@ -108,7 +127,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
           {links.map((link) => {
             const active =
               link.to === "/"
@@ -121,6 +140,7 @@ export function SiteHeader() {
                 className={cn("nav-link", active && "nav-link-active")}
               >
                 {link.label}
+                {link.live ? <LiveDot /> : null}
               </Link>
             );
           })}
@@ -150,6 +170,7 @@ export function SiteHeader() {
                 onClick={() => setOpen(false)}
               >
                 {link.label}
+                {link.live ? <LiveDot /> : null}
               </Link>
             ))}
             <AuthArea className="btn btn-azure mt-2 justify-center !gap-1.5 !px-3.5 !py-2 !text-[13px]" />
@@ -173,6 +194,9 @@ export function SiteFooter() {
           </Link>
           <Link to="/owned" className="hover:text-azure-bright">
             Inventory
+          </Link>
+          <Link to="/leaderboard" className="hover:text-azure-bright">
+            Leaderboard
           </Link>
           <Link to="/commands" className="hover:text-azure-bright">
             Commands

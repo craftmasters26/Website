@@ -175,3 +175,10 @@ specifically — this archive doesn't contain either.
 - Root cause is configuration, not code: the bot's `/internal/player/<id>` endpoint returns 503 when the bot has no `BOT_API_SECRET` in its environment (its `env.txt` didn't list one), and the site treated every non-OK answer as "offline".
 - src/lib/inventory.ts: sends `ngrok-skip-browser-warning`, 10s timeout, and returns a `detail` (unreachable / secret-mismatch / bot-secret-missing / bad-response / bot-error). src/lib/owned.ts + src/routes/owned.tsx show a one-line hint under the error so the next failure says what to fix.
 - No bot code was changed.
+
+## 13. Watch an ad → +2 daily packs, live daily leaderboard, admin panel
+- **Extra packs:** `src/components/watch-ad-card.tsx` (shown on /owned), `src/lib/rewards.ts` (start/claim server functions), `src/lib/rewarded-ad.ts` (Google Ad Manager rewarded ads; `VITE_REWARDED_AD_TEST=true` for a 10s test timer). Each completed ad = +1 `/pack daily` today, max 2/day, enforced by the bot (one-time nonce + daily cap).
+- **Leaderboard:** `/leaderboard` page + `server/routes/api/leaderboard.get.ts` (polls every 15s, 8s server cache). Nav link has a live dot; home page has a "Live leaderboard" button.
+- **Admin:** `/admin` (`src/routes/admin.tsx`, `src/lib/admin.ts`, `src/lib/admin-access.ts`). Visible only to Discord ids on the BOT's `ADMIN_USER_IDS` (full) / `LIMITED_ADMIN_USER_IDS` (spawn only); the site asks the bot on every call.
+- Shared bot caller + signed tokens: `src/lib/bot-api.server.ts`.
+- New env vars (Vercel): `VITE_GAM_REWARDED_AD_UNIT` (or `VITE_REWARDED_AD_TEST=true` while testing), optional `AD_MIN_WATCH_SECONDS` (default 8), optional `AD_REWARD_SECRET` (falls back to BETTER_AUTH_SECRET / BOT_API_SECRET).

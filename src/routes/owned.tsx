@@ -15,6 +15,7 @@ import { signInWithDiscord } from "@/lib/auth/client";
 import { useOwnedMe, signOutOwned } from "@/lib/owned";
 import { cn } from "@/lib/utils";
 import { discordMark } from "@/assets";
+import { WatchAdCard } from "@/components/watch-ad-card";
 
 export const Route = createFileRoute("/owned")({
   head: () => ({
@@ -322,6 +323,8 @@ function OwnedPage() {
             </div>
           ) : null}
         </div>
+
+        {state.status === "signed-in" || state.status === "no-record" ? <WatchAdCard /> : null}
 
         {state.status === "loading" ? (
           <p className="py-16 text-center font-mono text-[13px] text-bone-faint">

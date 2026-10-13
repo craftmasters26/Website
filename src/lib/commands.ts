@@ -12,7 +12,7 @@ export const COMMAND_GROUPS = [
   {
     title: "Packs",
     commands: [
-      ["/pack daily", "Claim a daily pack (3 per day)"],
+      ["/pack daily", "Claim a daily pack (3 per day, +2 extra by watching ads on the website)"],
       ["/pack weekly", "Claim your weekly pack (1 per week)"],
     ],
   },
@@ -50,6 +50,7 @@ export const COMMAND_GROUPS = [
     commands: [
       ["/achievements", "See your earned achievements and progress"],
       ["/leaderboard", "See who owns the most cards overall, or of one item"],
+      ["Live daily leaderboard", "Most catches today, updated live — on the website's Leaderboard page"],
     ],
   },
   {

@@ -45,6 +45,10 @@ function Home() {
               <Link to="/list" className="btn btn-outline">
                 Browse the list
               </Link>
+              <Link to="/leaderboard" className="btn btn-outline">
+                <span className="mr-2 inline-block size-2 animate-pulse rounded-full bg-emerald-400" aria-hidden="true" />
+                Live leaderboard
+              </Link>
             </div>
             <div className="mt-9 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[12.5px] text-bone-faint">
               <span>
@@ -83,7 +87,7 @@ function Home() {
           <div className="kicker">Packs</div>
           <div className="mb-12 flex flex-wrap items-end justify-between gap-10">
             <h2 className="max-w-xl font-serif text-[38px] leading-tight">
-              3 daily pulls, 1 weekly pull.
+              3 daily pulls, 1 weekly pull — plus 2 more for watching ads.
             </h2>
           </div>
           <div className="flex flex-wrap items-center gap-7">

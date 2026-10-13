@@ -15,6 +15,8 @@ import { Route as CommandsRouteImport } from './routes/commands'
 import { Route as ListRouteImport } from './routes/list'
 import { Route as OwnedRouteImport } from './routes/owned'
 import { Route as PremiumRouteImport } from './routes/premium'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as RanksRouteImport } from './routes/ranks'
 import { Route as RosterRouteImport } from './routes/roster'
 import { Route as WeaponsRouteImport } from './routes/weapons'
@@ -51,6 +53,16 @@ const OwnedRoute = OwnedRouteImport.update({
 const PremiumRoute = PremiumRouteImport.update({
   id: '/premium',
   path: '/premium',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeaderboardRoute = LeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RanksRoute = RanksRouteImport.update({
@@ -96,6 +108,8 @@ export interface FileRoutesByFullPath {
   '/list': typeof ListRoute
   '/owned': typeof OwnedRoute
   '/premium': typeof PremiumRoute
+  '/admin': typeof AdminRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/ranks': typeof RanksRoute
   '/roster': typeof RosterRouteWithChildren
   '/weapons': typeof WeaponsRouteWithChildren
@@ -111,6 +125,8 @@ export interface FileRoutesByTo {
   '/list': typeof ListRoute
   '/owned': typeof OwnedRoute
   '/premium': typeof PremiumRoute
+  '/admin': typeof AdminRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/ranks': typeof RanksRoute
   '/roster/$id': typeof RosterIdRoute
   '/weapons/$id': typeof WeaponsIdRoute
@@ -125,6 +141,8 @@ export interface FileRoutesById {
   '/list': typeof ListRoute
   '/owned': typeof OwnedRoute
   '/premium': typeof PremiumRoute
+  '/admin': typeof AdminRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/ranks': typeof RanksRoute
   '/roster': typeof RosterRouteWithChildren
   '/weapons': typeof WeaponsRouteWithChildren
@@ -142,6 +160,8 @@ export interface FileRouteTypes {
     | '/list'
     | '/owned'
     | '/premium'
+    | '/admin'
+    | '/leaderboard'
     | '/ranks'
     | '/roster'
     | '/weapons'
@@ -157,6 +177,8 @@ export interface FileRouteTypes {
     | '/list'
     | '/owned'
     | '/premium'
+    | '/admin'
+    | '/leaderboard'
     | '/ranks'
     | '/roster/$id'
     | '/weapons/$id'
@@ -170,6 +192,8 @@ export interface FileRouteTypes {
     | '/list'
     | '/owned'
     | '/premium'
+    | '/admin'
+    | '/leaderboard'
     | '/ranks'
     | '/roster'
     | '/weapons'
@@ -186,6 +210,8 @@ export interface RootRouteChildren {
   ListRoute: typeof ListRoute
   OwnedRoute: typeof OwnedRoute
   PremiumRoute: typeof PremiumRoute
+  AdminRoute: typeof AdminRoute
+  LeaderboardRoute: typeof LeaderboardRoute
   RanksRoute: typeof RanksRoute
   RosterRoute: typeof RosterRouteWithChildren
   WeaponsRoute: typeof WeaponsRouteWithChildren
@@ -233,6 +259,20 @@ declare module '@tanstack/react-router' {
       path: '/premium'
       fullPath: '/premium'
       preLoaderRoute: typeof PremiumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leaderboard': {
+      id: '/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof LeaderboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ranks': {
@@ -320,6 +360,8 @@ const rootRouteChildren: RootRouteChildren = {
   ListRoute: ListRoute,
   OwnedRoute: OwnedRoute,
   PremiumRoute: PremiumRoute,
+  AdminRoute: AdminRoute,
+  LeaderboardRoute: LeaderboardRoute,
   RanksRoute: RanksRoute,
   RosterRoute: RosterRouteWithChildren,
   WeaponsRoute: WeaponsRouteWithChildren,
