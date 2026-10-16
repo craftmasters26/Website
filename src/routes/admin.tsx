@@ -6,6 +6,7 @@ import { CatalogImage } from "@/components/catalog-image";
 import { useAdminAccess } from "@/lib/admin-access";
 import {
   adminEditCharacter,
+  adminGuildInvite,
   adminListChannels,
   adminListCharacters,
   adminListGuilds,
@@ -125,6 +126,59 @@ function AdminPage() {
 
 // ── Servers ─────────────────────────────────────────────────────────────────────
 
+function InviteButton({ guildId }: { guildId: string }) {
+  const [state, setState] = useState<"idle" | "loading" | "error">("idle");
+  const [url, setUrl] = useState<string | null>(null);
+  const [note, setNote] = useState("");
+
+  async function get() {
+    setState("loading");
+    setNote("");
+    try {
+      const r = await adminGuildInvite({ data: { guildId } });
+      if (r.status === "ok") {
+        setUrl(r.data.url);
+        setState("idle");
+      } else {
+        setNote(failureText(r));
+        setState("error");
+      }
+    } catch {
+      setNote("The request failed.");
+      setState("error");
+    }
+  }
+
+  if (url)
+    return (
+      <div className="flex items-center gap-2 font-mono text-[11.5px]">
+        <a href={url} target="_blank" rel="noreferrer" className="text-bone underline">
+          {url.replace("https://", "")}
+        </a>
+        <button
+          type="button"
+          className="btn btn-outline px-2 py-1 text-[11px]"
+          onClick={() => void navigator.clipboard?.writeText(url)}
+        >
+          Copy
+        </button>
+      </div>
+    );
+  return (
+    <div className="flex items-center gap-2">
+      <button
+        type="button"
+        className="btn btn-outline px-3 py-1.5 text-[11.5px]"
+        disabled={state === "loading"}
+        onClick={() => void get()}
+      >
+        {state === "loading" ? "…" : "Get invite"}
+      </button>
+      {note ? <span className="font-mono text-[11px] text-bone-faint">{note}</span> : null}
+    </div>
+  );
+}
+
 function ServersTab({
   guilds,
   totalMembers,
@@ -179,6 +233,7 @@ function ServersTab({
                 {g.joined_at ? ` · added ${new Date(g.joined_at * 1000).toLocaleDateString()}` : ""}
               </div>
             </div>
+            <InviteButton guildId={g.id} />
             <div className="text-right font-mono text-[12.5px] text-bone-dim">
               {g.member_count.toLocaleString()} members
             </div>

@@ -76,6 +76,17 @@ export const adminListGuilds = createServerFn({ method: "GET" })
     ),
   );
 
+export const adminGuildInvite = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .inputValidator((data: { guildId: string }) => data)
+  .handler(async ({ context, data }) =>
+    adminCall<{ url: string }>(
+      context.bearerToken,
+      "full",
+      `/internal/admin/guilds/${encodeURIComponent(String(data.guildId).replace(/\D/g, ""))}/invite`,
+    ),
+  );
+
 export const adminListChannels = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
   .inputValidator((data: { guildId: string }) => data)
