@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/leaderboard")({
   head: () => ({
     meta: [
-      { title: "Daily Leaderboard · BleachDex" },
+      { title: "Leaderboard · BleachDex" },
       {
         name: "description",
-        content: "Live BleachDex leaderboard: who has caught the most souls today.",
+        content: "Live BleachDex leaderboard: who has caught the most souls — daily, weekly and monthly.",
       },
     ],
   }),
@@ -25,7 +25,9 @@ type Entry = {
   characters: number;
   weapons: number;
 };
+type Period = "daily" | "weekly" | "monthly";
 type Board = {
+  period?: Period;
   date: string;
   generated_at: number;
   resets_in_seconds: number;
@@ -37,11 +39,48 @@ type Board = {
 
 const POLL_MS = 15_000;
 
+const PERIODS: {
+  id: Period;
+  label: string;
+  title: string;
+  blurb: string;
+  unit: string;
+  reset: string;
+}[] = [
+  {
+    id: "daily",
+    label: "Daily",
+    title: "Today's top catchers.",
+    blurb: "Every soul or blade caught today — pack pulls, wild spawns and shop grabs — counts. The board resets at 00:00 UTC.",
+    unit: "today",
+    reset: "00:00 UTC",
+  },
+  {
+    id: "weekly",
+    label: "Weekly",
+    title: "This week's top catchers.",
+    blurb: "Every catch since Monday 00:00 UTC counts. The board resets every Monday at 00:00 UTC.",
+    unit: "this week",
+    reset: "Monday 00:00 UTC",
+  },
+  {
+    id: "monthly",
+    label: "Monthly",
+    title: "This month's top catchers.",
+    blurb: "Every catch since the 1st of the month counts. The board resets on the 1st at 00:00 UTC.",
+    unit: "this month",
+    reset: "the 1st, 00:00 UTC",
+  },
+];
+
 function formatReset(seconds: number): string {
-  const h = Math.floor(seconds / 3600);
+  const d = Math.floor(seconds / 86400);
+  const h = Math.floor((seconds % 86400) / 3600);
   const m = Math.floor((seconds % 3600) / 60);
+  if (d > 0) return `${d}d ${h}h ${String(m).padStart(2, "0")}m`;
   return `${h}h ${String(m).padStart(2, "0")}m`;
 }
+
 
 function Avatar({ entry, size }: { entry: Entry; size: string }) {
   const [failed, setFailed] = useState(false);
@@ -69,6 +108,7 @@ function Avatar({ entry, size }: { entry: Entry; size: string }) {
 }
 
 function LeaderboardPage() {
+  const [period, setPeriod] = useState<Period>("daily");
   const [board, setBoard] = useState<Board | null>(null);
   const [error, setError] = useState(false);
   const [now, setNow] = useState(() => Date.now());
@@ -77,17 +117,27 @@ function LeaderboardPage() {
 
   const load = useCallback(async () => {
     try {
-      const res = await fetch("/api/leaderboard", { headers: { accept: "application/json" } });
+      const res = await fetch(`/api/leaderboard?period=${period}`, {
+        headers: { accept: "application/json" },
+      });
       if (!res.ok) throw new Error(String(res.status));
       const data = (await res.json()) as Board;
       if (!Array.isArray(data.entries)) throw new Error("bad payload");
+      if (data.period && data.period !== period) return; // stale response for another tab
       setBoard(data);
       setFetchedAt(Date.now());
       setError(false);
     } catch {
       setError(true);
     }
-  }, []);
+  }, [period]);
+
+  // Switching tabs clears the old board so numbers never show under the wrong label.
+  useEffect(() => {
+    setBoard(null);
+    setFetchedAt(null);
+    setError(false);
+  }, [period]);
 
   // Poll while the tab is visible; refresh immediately when it comes back.
   useEffect(() => {
@@ -124,17 +174,40 @@ function LeaderboardPage() {
       ? Math.max(0, board.resets_in_seconds - Math.round((now - fetchedAt) / 1000))
       : null;
   const live = !error && !board?.stale;
+  const meta = PERIODS.find((p) => p.id === period)!;
 
   return (
     <main className="page-enter py-16 md:py-20">
       <div className="wrap">
         <div className="kicker">Leaderboard</div>
+        <div
+          role="tablist"
+          aria-label="Leaderboard period"
+          className="mb-8 inline-flex gap-1 rounded-md border border-line bg-void-raised p-1"
+        >
+          {PERIODS.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              role="tab"
+              aria-selected={period === p.id}
+              onClick={() => setPeriod(p.id)}
+              className={cn(
+                "rounded px-4 py-1.5 font-mono text-[12.5px] uppercase tracking-[0.08em] transition-colors",
+                period === p.id
+                  ? "bg-gold text-void font-semibold"
+                  : "text-bone-dim hover:text-bone",
+              )}
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <h1 className="font-serif text-[38px] leading-tight">Today's top catchers.</h1>
+            <h1 className="font-serif text-[38px] leading-tight">{meta.title}</h1>
             <p className="mt-3 max-w-lg text-[14.5px] leading-[1.65] text-bone-dim">
-              Every soul or blade caught today — pack pulls, wild spawns and shop grabs — counts.
-              The board resets at 00:00 UTC.
+              {meta.blurb}
             </p>
           </div>
           <div className="flex flex-col items-start gap-1 font-mono text-[12px] text-bone-faint md:items-end">
@@ -157,25 +230,27 @@ function LeaderboardPage() {
 
         {!board ? (
           <p className="py-16 text-center font-mono text-[13px] text-bone-faint">
-            {error ? "The leaderboard couldn't be loaded. Retrying…" : "Loading the board…"}
+            {error
+              ? `The ${meta.label.toLowerCase()} leaderboard couldn't be loaded. Retrying…`
+              : "Loading the board…"}
           </p>
         ) : (
           <>
             <div className="mb-6 flex flex-wrap gap-6 font-mono text-[12.5px] text-bone-dim">
               <span>
-                <b className="text-bone">{board.total_catches.toLocaleString()}</b> catches today
+                <b className="text-bone">{board.total_catches.toLocaleString()}</b> catches {meta.unit}
               </span>
               <span>
                 <b className="text-bone">{board.total_players.toLocaleString()}</b> players
               </span>
-              <span>{board.date} UTC</span>
+              <span>{board.date}{period === "daily" ? " UTC" : ""}</span>
             </div>
 
             {board.entries.length === 0 ? (
               <div className="panel flex flex-col items-center gap-3 px-6 py-20 text-center">
                 <Trophy className="size-8 text-line-bright" aria-hidden="true" />
                 <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">
-                  Nobody has caught anything yet today. Be first — pull a pack or catch a spawn in
+                  Nobody has caught anything {meta.unit} yet. Be first — pull a pack or catch a spawn in
                   Discord.
                 </p>
               </div>
