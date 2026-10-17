@@ -106,10 +106,68 @@ function AccountMenu({ className }: { className?: string }) {
   );
 }
 
-function AuthArea({ className }: { className: string }) {
+/**
+ * The phone header only has room for the logo + a small round control, so signed-in
+ * visitors get just their avatar here (name + Log out live in the menu) and signed-out
+ * visitors get an icon-only Discord login. From `sm` up the full controls show.
+ */
+function HeaderAuth() {
   const user = useCurrentUser();
   const signedIn = Boolean(user) && !user?.isDevFallback;
-  return signedIn ? <AccountMenu className={className} /> : <DiscordLoginButton className={className} />;
+  const [pending, setPending] = useState(false);
+
+  async function login() {
+    setPending(true);
+    try {
+      await signInWithDiscord("/owned");
+    } catch (err) {
+      console.error(err);
+      setPending(false);
+    }
+  }
+
+  return (
+    <>
+      <div className="hidden sm:block">
+        <AuthArea className="btn btn-azure !gap-1.5 !px-3.5 !py-2 !text-[13px]" />
+      </div>
+      <div className="sm:hidden">
+        {signedIn ? (
+          user?.profileImageUrl ? (
+            <img
+              src={user.profileImageUrl}
+              alt={user.displayName ?? "Signed in"}
+              className="size-9 shrink-0 rounded-full border border-line-bright object-cover"
+            />
+          ) : (
+            <span className="flex size-9 items-center justify-center rounded-full border border-line-bright bg-void-raised font-serif text-sm text-bone">
+              {(user?.displayName ?? "?").slice(0, 1).toUpperCase()}
+            </span>
+          )
+        ) : (
+          <button
+            type="button"
+            aria-label="Log in with Discord"
+            disabled={pending}
+            onClick={() => void login()}
+            className="btn btn-azure !size-9 !justify-center !p-0"
+          >
+            <img src={discordMark} alt="" className="size-4" />
+          </button>
+        )}
+      </div>
+    </>
+  );
+}
+
+function AuthArea({ className, loginClassName }: { className: string; loginClassName?: string }) {
+  const user = useCurrentUser();
+  const signedIn = Boolean(user) && !user?.isDevFallback;
+  return signedIn ? (
+    <AccountMenu className={className} />
+  ) : (
+    <DiscordLoginButton className={loginClassName ?? className} />
+  );
 }
 
 export function SiteHeader() {
@@ -119,8 +177,8 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
-      <div className="wrap flex items-center justify-between gap-3 py-3">
-        <Link to="/" className="brand flex min-w-0 items-center gap-3 no-underline">
+      <div className="wrap flex items-center justify-between gap-2 py-3">
+        <Link to="/" className="brand flex shrink-0 items-center gap-3 no-underline">
           <BrandMark />
           <span className="leading-tight">
             <span className="block font-serif text-[19px] font-bold text-bone">BleachDex</span>
@@ -146,8 +204,8 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <AuthArea className="btn btn-azure !gap-1.5 !px-3.5 !py-2 !text-[13px]" />
+        <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
+          <HeaderAuth />
           <button
             type="button"
             className="inline-flex size-11 items-center justify-center rounded-[var(--radius-blade)] border border-line-bright text-bone lg:hidden"
@@ -173,7 +231,10 @@ export function SiteHeader() {
                 {link.live ? <LiveDot /> : null}
               </Link>
             ))}
-            <AuthArea className="btn btn-azure mt-2 justify-center !gap-1.5 !px-3.5 !py-2 !text-[13px]" />
+            <AuthArea
+              className="mt-2 justify-between rounded-[var(--radius-blade)] border border-line px-3 py-3 [&_button]:text-[12px] [&_span]:max-w-none [&_span]:flex-1 [&_span]:text-[13.5px]"
+              loginClassName="btn btn-azure mt-2 justify-center !gap-1.5 !px-3.5 !py-2 !text-[13px]"
+            />
           </div>
         </nav>
       ) : null}

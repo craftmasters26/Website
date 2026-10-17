@@ -25,6 +25,46 @@ export type AdminCharacter = {
   image_path: string;
   tier: string;
   enabled: boolean;
+  hp: number;
+  attack: number;
+  ability_name: string;
+  ability_description: string;
+  emoji: string;
+  card_image_path: string;
+  has_template: boolean;
+  craftable_only: boolean;
+};
+export type AdminWeapon = {
+  id: number;
+  name: string;
+  image_path: string;
+  tier: string;
+  enabled: boolean;
+  boost_type: "damage" | "hp";
+  boost_percent: number;
+  ability_name: string;
+  ability_description: string;
+  emoji: string;
+  card_image_path: string;
+  has_template: boolean;
+};
+export type AdminMeta = {
+  drops: string[];
+  bosses: { id: number; name: string; category: string; enabled: boolean }[];
+  achievements: { key: string; name: string }[];
+  boss_factions: { label: string; value: string }[];
+  card_factions: { label: string; value: string }[];
+  character_tiers: string[];
+  weapon_tiers: string[];
+};
+export type BlacklistEntry = {
+  kind: "user" | "guild";
+  target_id: string;
+  label: string;
+  expires_at: number | null;
+  reason: string;
+  created_at: number;
+  created_by: string;
 };
 
 type Fail = { status: "forbidden" | "bot-offline" | "error"; message?: string };
@@ -62,6 +102,7 @@ async function adminCall<T>(
     timeoutMs: 90_000, // a spawn downloads art + posts to Discord
   });
   if (r.ok) return { status: "ok", data: r.data };
+  if (r.status === 403) return { status: "forbidden" };
   if (r.detail === "unreachable" || r.detail === "not-configured") return { status: "bot-offline" };
   return { status: "error", message: r.error ?? r.detail };
 }
@@ -144,3 +185,31 @@ export const adminSpawn = createServerFn({ method: "POST" })
       },
     ),
   );
+
+/**
+ * One door for every other admin action. The path is allow-listed (it can only ever
+ * reach the bot's /internal/admin/* routes) and the bot re-checks the visitor's
+ * Discord id against ADMIN_USER_IDS on every call — see `adminCall` above.
+ */
+const ADMIN_PATH =
+  /^\/internal\/admin\/(?:meta|weapons|characters|spawn|give|bossbattle|blacklist(?:\/remove)?|emoji|craftable|achievement-icon|template|character|weapon|seed\/[a-z]+|(?:character|weapon)\/\d+(?:\/enabled)?)$/;
+
+export const adminApi = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .inputValidator((data: { path: string; body?: Record<string, unknown> }) => {
+    if (!ADMIN_PATH.test(data.path)) throw new Error("Bad admin path");
+    return data;
+  })
+  .handler(async ({ context, data }) =>
+    adminCall<unknown>(context.bearerToken, "limited", data.path, data.body),
+  );
+
+export type AdminResult<T> = { status: "ok"; data: T } | Fail;
+
+/** GET when `body` is omitted, POST otherwise. */
+export async function adminRequest<T>(
+  path: string,
+  body?: Record<string, unknown>,
+): Promise<AdminResult<T>> {
+  return (await adminApi({ data: { path, body } })) as AdminResult<T>;
+}
