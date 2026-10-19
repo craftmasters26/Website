@@ -349,7 +349,7 @@ export function grokOgHeadTags({
   } catch {}
   const publicHost = resolvePublicHost(host) || siteHost || "bleachdex.vercel.app";
   const tags = [
-    `<meta name="twitter:card" content="summary_large_image">`,
+    `<meta name="twitter:card" content="${escapeHtml(String(site.twitterCard ?? "summary_large_image"))}">`,
     `<meta property="og:title" content="${escapeHtml(title)}">`,
   ];
   const description = String(site.description ?? "").trim();
@@ -363,7 +363,7 @@ export function grokOgHeadTags({
     tags.push(`<meta property="og:type" content="x:game">`);
   }
   if (publicHost) {
-    const asset = resolveOgCardAsset(site, cwd);
+    const asset = String(site.shareImage ?? "").trim() || resolveOgCardAsset(site, cwd);
     const custom = Boolean(asset);
     let image = custom
       ? `https://${publicHost}${asset.startsWith("/") ? asset : `/${asset}`}`
@@ -371,8 +371,8 @@ export function grokOgHeadTags({
     const color = !custom ? placeholderCardColor(site) : "";
     if (color) image += `&color=${encodeURIComponent(color)}`;
     tags.push(`<meta property="og:image" content="${escapeHtml(image)}">`);
-    tags.push(`<meta property="og:image:width" content="1200">`);
-    tags.push(`<meta property="og:image:height" content="630">`);
+    tags.push(`<meta property="og:image:width" content="${Number(site.shareImageWidth) || 1200}">`);
+    tags.push(`<meta property="og:image:height" content="${Number(site.shareImageHeight) || 630}">`);
     const banner = String(site.banner ?? "").trim();
     if (banner) {
       const bannerUrl = `https://${publicHost}${banner.startsWith("/") ? banner : `/${banner}`}`;

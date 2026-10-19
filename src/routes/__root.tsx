@@ -10,7 +10,7 @@ import { useCatalogAutoSync } from "@/lib/catalog-live";
 import appCss from "../styles.css?url";
 
 const OG_DESCRIPTION =
-  "Souls spawn in your Discord server. Catch them, open packs, craft rare characters and climb the leaderboard. Log in with Discord to watch an ad for up to 2 extra daily pulls.";
+  "Souls spawn in your Discord server. Catch them, open packs, craft rare characters and climb the leaderboard. Watch an ad for up to 2 extra daily pulls.";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -24,13 +24,13 @@ export const Route = createRootRoute({
       { property: "og:title", content: "BleachDex" },
       { property: "og:description", content: OG_DESCRIPTION },
       { property: "og:url", content: "https://bleachdex.vercel.app" },
-      { property: "og:image", content: "https://bleachdex.vercel.app/og.jpg" },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: "https://bleachdex.vercel.app/brand/bot-avatar.png" },
+      { property: "og:image:width", content: "256" },
+      { property: "og:image:height", content: "256" },
+      { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "BleachDex" },
       { name: "twitter:description", content: OG_DESCRIPTION },
-      { name: "twitter:image", content: "https://bleachdex.vercel.app/og.jpg" },
+      { name: "twitter:image", content: "https://bleachdex.vercel.app/brand/bot-avatar.png" },
       {
         name: "description",
         content:
