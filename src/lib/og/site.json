@@ -1,5 +1,9 @@
 {
   "title": "BleachDex",
+  "description": "Souls spawn in your Discord server. Catch them, open packs, craft rare characters and climb the leaderboard. Log in with Discord to watch an ad for up to 2 extra daily pulls.",
+  "url": "https://bleachdex.vercel.app",
   "type": "website",
-  "card": "custom"
+  "card": "custom",
+  "image": "/og.jpg",
+  "color": "070a13"
 }
