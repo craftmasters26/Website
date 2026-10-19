@@ -10,7 +10,7 @@ import { useCatalogAutoSync } from "@/lib/catalog-live";
 import appCss from "../styles.css?url";
 
 const OG_DESCRIPTION =
-  "Souls spawn in your Discord server. Catch them, open packs, craft rare characters and climb the leaderboard. Watch an ad for up to 2 extra daily pulls.";
+  "Souls spawn in your Discord server. Catch them, open packs, craft rare characters and climb the leaderboard.";
 
 export const Route = createRootRoute({
   head: () => ({
