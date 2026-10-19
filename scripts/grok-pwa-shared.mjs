@@ -341,7 +341,13 @@ export function grokOgHeadTags({
   cwd = process.cwd(),
 } = {}) {
   const title = resolveOgTitle(site, appName, host, documentTitle);
-  const publicHost = resolvePublicHost(host);
+  // Fallback: an explicit `url` in site.json (e.g. https://bleachdex.vercel.app).
+  // publicAppHost() rejects *.vercel.app, which left og:image out entirely.
+  let siteHost = "";
+  try {
+    siteHost = new URL(String(site.url ?? "")).host.toLowerCase();
+  } catch {}
+  const publicHost = resolvePublicHost(host) || siteHost || "bleachdex.vercel.app";
   const tags = [
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta property="og:title" content="${escapeHtml(title)}">`,
@@ -349,7 +355,10 @@ export function grokOgHeadTags({
   const description = String(site.description ?? "").trim();
   if (description) {
     tags.push(`<meta property="og:description" content="${escapeHtml(description)}">`);
+    tags.push(`<meta name="twitter:description" content="${escapeHtml(description)}">`);
   }
+  tags.push(`<meta property="og:site_name" content="BleachDex">`);
+  tags.push(`<meta property="og:type" content="website">`);
   if (String(site.type ?? "").toLowerCase() === "x:game") {
     tags.push(`<meta property="og:type" content="x:game">`);
   }
