@@ -347,7 +347,7 @@ export function grokOgHeadTags({
   try {
     siteHost = new URL(String(site.url ?? "")).host.toLowerCase();
   } catch {}
-  const publicHost = resolvePublicHost(host) || siteHost || "bleachdex.vercel.app";
+  const publicHost = resolvePublicHost(host) || siteHost;
   const tags = [
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta property="og:title" content="${escapeHtml(title)}">`,
