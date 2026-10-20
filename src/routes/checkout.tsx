@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ComponentType, type ReactNode } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   TIER_META,
@@ -6,13 +6,19 @@ import {
   WHOP_PLAN,
   type Tier,
 } from "@/lib/premium-tiers";
+import { getMyDiscordId } from "@/lib/premium";
+import { signInWithDiscord } from "@/lib/auth/client";
+import { useCurrentUserState } from "@/lib/auth/use-current-user";
 
 export const Route = createFileRoute("/checkout")({
-  validateSearch: (search: Record<string, unknown>): { tier: Tier } => ({
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { tier: Tier; status?: string } => ({
     tier:
       search.tier === "urahara-foundation-shareholder"
         ? "urahara-foundation-shareholder"
         : "bleach-enjoyer",
+    status: typeof search.status === "string" ? search.status : undefined,
   }),
   head: () => ({
     meta: [{ title: "Checkout · BleachDex" }],
@@ -20,38 +26,137 @@ export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
 });
 
+/* eslint-disable @typescript-eslint/no-explicit-any -- Whop's Elements are loaded in the browser only */
+type WhopLib = {
+  elements: unknown;
+  WhopElements: ComponentType<any>;
+  Checkout: ComponentType<any>;
+  CheckoutElement: ComponentType<any>;
+};
+/* eslint-enable @typescript-eslint/no-explicit-any */
+
 function CheckoutPage() {
-  const { tier } = Route.useSearch();
+  const { tier, status } = Route.useSearch();
   const meta = TIER_META[tier];
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(status === "succeeded");
+  const { user, isPending } = useCurrentUserState();
+  const [discordId, setDiscordId] = useState<string | null | undefined>(
+    undefined,
+  );
+  const [lib, setLib] = useState<WhopLib | null>(null);
+  const [signInError, setSignInError] = useState<string | null>(null);
 
   useEffect(() => {
-    setDone(false);
-  }, [tier]);
+    setDone(status === "succeeded");
+  }, [tier, status]);
 
-  // (Re)load Whop's embed script whenever the checkout element is mounted.
+  // The verified Discord id of whoever is paying (needs a Discord login).
   useEffect(() => {
-    if (done) return;
-    document.getElementById("whop-checkout-loader")?.remove();
-    const script = document.createElement("script");
-    script.id = "whop-checkout-loader";
-    script.src = "https://js.whop.com/static/checkout/loader.js";
-    script.async = true;
-    document.head.appendChild(script);
+    if (isPending) return;
+    if (!user) {
+      setDiscordId(null);
+      return;
+    }
+    let alive = true;
+    getMyDiscordId()
+      .then((r) => alive && setDiscordId(r.discordId))
+      .catch(() => alive && setDiscordId(null));
     return () => {
-      script.remove();
+      alive = false;
     };
-  }, [tier, done]);
+  }, [isPending, user]);
 
+  // Whop's checkout runs in the browser only.
   useEffect(() => {
-    const onMessage = (event: MessageEvent) => {
-      const data = event.data as { event?: string; type?: string } | null;
-      if (!data || typeof data !== "object") return;
-      if (data.event === "complete" || data.type === "complete") setDone(true);
+    let alive = true;
+    void Promise.all([
+      import("@whop/elements"),
+      import("@whop/elements-react"),
+    ]).then(([core, react]) => {
+      if (!alive) return;
+      setLib({
+        elements: core.loadWhop(),
+        WhopElements: react.WhopElements,
+        Checkout: react.Checkout,
+        CheckoutElement: react.CheckoutElement,
+      });
+    });
+    return () => {
+      alive = false;
     };
-    window.addEventListener("message", onMessage);
-    return () => window.removeEventListener("message", onMessage);
   }, []);
+
+  async function signIn() {
+    setSignInError(null);
+    try {
+      await signInWithDiscord(`/checkout?tier=${tier}`);
+    } catch (e) {
+      setSignInError(e instanceof Error ? e.message : "Sign-in failed.");
+    }
+  }
+
+  let checkoutBody: ReactNode;
+  if (isPending || discordId === undefined) {
+    checkoutBody = (
+      <div className="grid min-h-[420px] place-items-center font-mono text-[12px] text-bone-faint">
+        Loading…
+      </div>
+    );
+  } else if (!discordId) {
+    checkoutBody = (
+      <div className="grid min-h-[420px] place-items-center px-6 py-16 text-center">
+        <div>
+          <div className="font-serif text-[24px]">
+            Sign in with Discord first
+          </div>
+          <p className="mx-auto mt-2 max-w-[380px] text-[14px] leading-[1.6] text-bone-dim">
+            Your perks are delivered to your Discord account, so we need to know
+            which one is yours before you pay.
+          </p>
+          <button
+            type="button"
+            onClick={() => void signIn()}
+            className="btn btn-outline mt-6"
+          >
+            Continue with Discord
+          </button>
+          {signInError ? (
+            <p className="mt-3 font-mono text-[12px] text-ember-bright">
+              {signInError}
+            </p>
+          ) : null}
+        </div>
+      </div>
+    );
+  } else if (!lib) {
+    checkoutBody = (
+      <div className="relative min-h-[560px]">
+        <div className="bd-skeleton pointer-events-none absolute inset-0" />
+        <div className="pointer-events-none absolute inset-x-0 top-24 text-center font-mono text-[11.5px] text-bone-faint">
+          Loading secure checkout…
+        </div>
+      </div>
+    );
+  } else {
+    const { WhopElements, Checkout, CheckoutElement } = lib;
+    checkoutBody = (
+      <div className="px-3 py-4">
+        <WhopElements elements={lib.elements}>
+          <Checkout
+            key={tier}
+            plan={WHOP_PLAN[tier]}
+            metadata={{ discord_id: discordId, tier }}
+            returnUrl={`${window.location.origin}/checkout?tier=${tier}`}
+            onComplete={(completion: { result?: string }) => {
+              if (completion.result === "payment") setDone(true);
+            }}
+          >
+            <CheckoutElement />
+          </Checkout>
+        </WhopElements>
+      </div>
+    );
+  }
 
   return (
     <main className="page-enter py-10 md:py-14">
@@ -154,7 +259,7 @@ function CheckoutPage() {
               </ul>
               <div className="space-y-2 border-t border-line pt-4 font-mono text-[11.5px] text-bone-faint">
                 <div>Cancel anytime</div>
-                <div>Discord role granted instantly after payment</div>
+                <div>Then run /redeem rewards in Discord</div>
               </div>
             </div>
           </aside>
@@ -209,8 +314,10 @@ function CheckoutPage() {
                     {WHOP_LABEL[tier]}: locked in.
                   </div>
                   <p className="mx-auto mt-2 max-w-[360px] text-[14px] leading-[1.6] text-bone-dim">
-                    Thank you for supporting BleachDex. Your Discord role
-                    attaches automatically from the payment, so just sit tight.
+                    Thank you for supporting BleachDex. Your member role arrives on
+                    Discord automatically. Run{" "}
+                    <span className="font-mono">/redeem rewards</span> in the
+                    server to pick your cards and create your custom role.
                   </p>
                   <Link to="/premium" className="btn btn-outline mt-7">
                     Back to Premium
@@ -218,33 +325,7 @@ function CheckoutPage() {
                 </div>
               </div>
             ) : (
-              <>
-                <div className="relative">
-                  <div className="bd-skeleton pointer-events-none absolute inset-0" />
-                  <div className="pointer-events-none absolute inset-x-0 top-24 text-center font-mono text-[11.5px] text-bone-faint">
-                    Loading secure checkout…
-                  </div>
-                  <div
-                    key={tier}
-                    data-whop-checkout-plan-id={WHOP_PLAN[tier]}
-                    data-whop-checkout-theme="dark"
-                    data-whop-checkout-theme-accent-color={meta.whopAccent}
-                    data-whop-checkout-skip-redirect="true"
-                    data-whop-checkout-hide-price="true"
-                    className="relative min-h-[560px] px-1 py-2"
-                  />
-                </div>
-                <div className="border-t border-line px-6 py-3.5 text-right">
-                  <a
-                    href={`https://whop.com/checkout/${WHOP_PLAN[tier]}/`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-mono text-[11px] text-bone-faint underline underline-offset-4 hover:text-azure-bright"
-                  >
-                    Not loading? Open in new tab
-                  </a>
-                </div>
-              </>
+              checkoutBody
             )}
           </section>
         </div>

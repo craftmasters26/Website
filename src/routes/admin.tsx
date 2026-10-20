@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Ban, Gift, Rocket, Server, Sword, Users, Wrench } from "lucide-react";
+import { Ban, Gift, Megaphone, Rocket, Server, Sword, Users, Wrench } from "lucide-react";
 import { NotFound } from "@/components/not-found";
 import { useAdminAccess } from "@/lib/admin-access";
 import type { AdminCharacter, AdminLevel, AdminWeapon } from "@/lib/admin";
 import { cn } from "@/lib/utils";
 import { BlacklistTab } from "@/components/admin/blacklist";
+import { BroadcastTab } from "@/components/admin/broadcast";
 import { CatalogTab } from "@/components/admin/catalog";
 import { useAdminData } from "@/components/admin/data";
 import { GiveTab } from "@/components/admin/give";
@@ -20,7 +21,7 @@ export const Route = createFileRoute("/admin")({
   component: AdminPage,
 });
 
-type Tab = "servers" | "characters" | "weapons" | "spawns" | "give" | "blacklist" | "tools";
+type Tab = "servers" | "characters" | "weapons" | "spawns" | "give" | "blacklist" | "message" | "tools";
 
 const TABS: { id: Tab; label: string; icon: typeof Server; full?: boolean }[] = [
   { id: "servers", label: "Servers", icon: Server },
@@ -29,6 +30,7 @@ const TABS: { id: Tab; label: string; icon: typeof Server; full?: boolean }[] = 
   { id: "spawns", label: "Spawns", icon: Rocket },
   { id: "give", label: "Give", icon: Gift, full: true },
   { id: "blacklist", label: "Blacklist", icon: Ban, full: true },
+  { id: "message", label: "Message", icon: Megaphone, full: true },
   { id: "tools", label: "Tools", icon: Wrench, full: true },
 ];
 
@@ -123,6 +125,7 @@ function AdminPage() {
           />
         ) : null}
         {tab === "blacklist" ? <BlacklistTab /> : null}
+        {tab === "message" ? <BroadcastTab /> : null}
         {tab === "tools" ? (
           <ToolsTab
             characters={(data.characters ?? []) as AdminCharacter[]}

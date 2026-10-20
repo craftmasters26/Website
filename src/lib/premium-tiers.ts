@@ -28,9 +28,9 @@ export const TIER_META: Record<
     tag: null,
     cta: "Become a Bleach Enjoyer",
     perks: [
-      "Extra entries to giveaways",
-      "A custom role with your choice of up to 2 colours + an icon",
-      "1 BleachDex item of your choice (excluding certain items)",
+      "Extra giveaway entries (average entries ÷ 10)",
+      "A custom role: your name, colour (solid, gradient or holographic) and icon",
+      "Cards of your choice: 1 Mythical, 2 Legendary, 3 Rare, 4 Uncommon, 5 Common",
     ],
   },
   "urahara-foundation-shareholder": {
@@ -40,10 +40,11 @@ export const TIER_META: Record<
     tag: "Best value",
     cta: "Become a Shareholder",
     perks: [
-      "Extra entries to giveaways",
-      "A custom role with your choice of up to 2 colours + an icon",
-      "3 BleachDex items of your choice (instead of one)",
-      "A custom private spawn party once a week",
+      "Extra giveaway entries (average entries ÷ 6.5)",
+      "A custom role: your name, colour (solid, gradient or holographic) and icon",
+      "Cards of your choice: 2 Mythical, 4 Legendary, 5 Rare, 6 Uncommon, 7 Common",
+      "Exclusive weekly boss day: a boss every 15 minutes, all day",
+      "Exclusive weekly spawn party channel",
     ],
   },
 };
