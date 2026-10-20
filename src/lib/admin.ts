@@ -192,7 +192,7 @@ export const adminSpawn = createServerFn({ method: "POST" })
  * Discord id against ADMIN_USER_IDS on every call — see `adminCall` above.
  */
 const ADMIN_PATH =
-  /^\/internal\/admin\/(?:meta|weapons|characters|spawn|give|bossbattle|broadcast(?:\/targets)?|blacklist(?:\/remove)?|emoji|craftable|achievement-icon|template|character|weapon|seed\/[a-z]+|(?:character|weapon)\/\d+(?:\/enabled)?)$/;
+  /^\/internal\/admin\/(?:meta|weapons|characters|spawn|give|bossbattle|broadcast(?:\/(?:targets|status))?|blacklist(?:\/remove)?|emoji|craftable|achievement-icon|template|character|weapon|seed\/[a-z]+|(?:character|weapon)\/\d+(?:\/enabled)?)$/;
 
 export const adminApi = createServerFn({ method: "POST" })
   .middleware([authMiddleware])

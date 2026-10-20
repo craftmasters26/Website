@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState, type ReactNode } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { adminRequest } from "@/lib/admin";
 import { Field, Panel, Status, failureText, inputCls, useAction } from "./ui";
 
@@ -13,6 +13,25 @@ const MESSAGE_MAX = 4000;
 const FOOTER_MAX = 200;
 const DEFAULT_COLOR = "#5C8DFF";
 const DEFAULT_FOOTER = "BleachDex announcement";
+const DM_FOOTER_NOTE = "Don't want these DMs? Use /announcements off";
+
+type Audience = "servers" | "users" | "both";
+type Counts = { servers: number; skipped: number; users: number; opted_out: number };
+type JobStatus = {
+  running?: boolean;
+  audience?: Audience;
+  started_at?: number | null;
+  error?: string | null;
+  servers_total?: number;
+  servers_sent?: number;
+  servers_failed?: number;
+  servers_skipped?: number;
+  users_total?: number;
+  users_sent?: number;
+  users_closed?: number;
+  users_failed?: number;
+  users_left_out?: number;
+};
 
 // ---------------------------------------------------------------- tiny Discord-markdown renderer
 
@@ -127,12 +146,14 @@ function DiscordPreview({
   color,
   image,
   footer,
+  dm,
 }: {
   title: string;
   message: string;
   color: string;
   image: string;
   footer: string;
+  dm: boolean;
 }) {
   const accent = normalizeColor(color) ?? DEFAULT_COLOR;
   const imageOk = image.trim().toLowerCase().startsWith("https://");
@@ -206,7 +227,7 @@ function DiscordPreview({
                 style={{ marginTop: 16, maxWidth: "100%", borderRadius: 4, display: "block" }}
               />
             ) : null}
-            <div style={{ marginTop: 8, fontSize: 12, color: "#b5bac1" }}>{footer.trim() || DEFAULT_FOOTER}</div>
+            <div style={{ marginTop: 8, fontSize: 12, color: "#b5bac1" }}>{(footer.trim() || DEFAULT_FOOTER) + (dm ? ` · ${DM_FOOTER_NOTE}` : "")}</div>
           </div>
         </div>
       </div>
@@ -222,15 +243,18 @@ export function BroadcastTab() {
   const [color, setColor] = useState(DEFAULT_COLOR);
   const [image, setImage] = useState("");
   const [footer, setFooter] = useState("");
+  const [audience, setAudience] = useState<Audience>("servers");
   const [confirming, setConfirming] = useState(false);
-  const [targets, setTargets] = useState<{ servers: number; skipped: number } | null>(null);
+  const [targets, setTargets] = useState<Counts | null>(null);
   const [targetError, setTargetError] = useState<string | null>(null);
+  const [job, setJob] = useState<JobStatus | null>(null);
   const send = useAction();
+  const poll = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const loadTargets = useCallback(async () => {
     setTargetError(null);
     try {
-      const r = await adminRequest<{ servers: number; skipped: number }>("/internal/admin/broadcast/targets");
+      const r = await adminRequest<Counts>("/internal/admin/broadcast/targets");
       if (r.status === "ok") setTargets(r.data);
       else setTargetError(failureText(r));
     } catch {
@@ -238,12 +262,52 @@ export function BroadcastTab() {
     }
   }, []);
 
+  const loadJob = useCallback(async () => {
+    try {
+      const r = await adminRequest<JobStatus>("/internal/admin/broadcast/status");
+      if (r.status === "ok") {
+        setJob(r.data);
+        if (!r.data.running && poll.current) {
+          clearInterval(poll.current);
+          poll.current = null;
+          void loadTargets();
+        }
+        return r.data;
+      }
+    } catch {
+      /* keep the last known progress */
+    }
+    return null;
+  }, [loadTargets]);
+
   useEffect(() => {
     void loadTargets();
-  }, [loadTargets]);
+    void loadJob().then((j) => {
+      if (j?.running && !poll.current) poll.current = setInterval(() => void loadJob(), 2500);
+    });
+    return () => {
+      if (poll.current) clearInterval(poll.current);
+    };
+  }, [loadTargets, loadJob]);
 
   const colorValue = normalizeColor(color);
   const imageBad = image.trim() !== "" && !image.trim().toLowerCase().startsWith("https://");
+  const reach =
+    !targets
+      ? null
+      : audience === "servers"
+        ? targets.servers
+        : audience === "users"
+          ? targets.users
+          : targets.servers + targets.users;
+  const audienceText =
+    !targets
+      ? "…"
+      : audience === "servers"
+        ? `${targets.servers} servers`
+        : audience === "users"
+          ? `${targets.users} players (DM)`
+          : `${targets.servers} servers + ${targets.users} players`;
   const problem =
     !title.trim() && !message.trim()
       ? "Write a title or a message."
@@ -252,39 +316,52 @@ export function BroadcastTab() {
         : imageBad
           ? "The image link must start with https://"
           : null;
+  const sending = Boolean(job?.running);
 
   function doSend() {
     setConfirming(false);
     void send.run(async () => {
-      const r = await adminRequest<{ sent: number; failed: number; skipped: number; failed_names: string[] }>(
-        "/internal/admin/broadcast",
-        {
-          title: title.trim(),
-          message: message.trim(),
-          color: colorValue ?? DEFAULT_COLOR,
-          image_url: image.trim(),
-          footer: footer.trim(),
-        },
-      );
+      const r = await adminRequest<{ started: boolean }>("/internal/admin/broadcast", {
+        title: title.trim(),
+        message: message.trim(),
+        color: colorValue ?? DEFAULT_COLOR,
+        image_url: image.trim(),
+        footer: footer.trim(),
+        audience,
+      });
       if (r.status !== "ok") return { ok: false, text: failureText(r) };
-      const d = r.data;
-      void loadTargets();
-      return {
-        ok: true,
-        text:
-          `Sent to ${d.sent} servers` +
-          (d.failed ? ` · ${d.failed} failed (${d.failed_names.join(", ")})` : "") +
-          (d.skipped ? ` · ${d.skipped} skipped` : "") +
-          ".",
-      };
+      await loadJob();
+      if (!poll.current) poll.current = setInterval(() => void loadJob(), 2500);
+      return { ok: true, text: "Started — progress is shown below." };
     });
+  }
+
+  function progressLines(j: JobStatus): string[] {
+    const lines: string[] = [];
+    if (j.audience === "servers" || j.audience === "both")
+      lines.push(
+        `Servers: ${j.servers_sent ?? 0}/${j.servers_total ?? 0} sent` +
+          (j.servers_failed ? ` · ${j.servers_failed} failed` : "") +
+          (j.servers_skipped ? ` · ${j.servers_skipped} skipped` : ""),
+      );
+    if (j.audience === "users" || j.audience === "both") {
+      const done = (j.users_sent ?? 0) + (j.users_closed ?? 0) + (j.users_failed ?? 0);
+      lines.push(
+        `Players (DMs): ${done}/${j.users_total ?? 0} processed · ${j.users_sent ?? 0} delivered` +
+          (j.users_closed ? ` · ${j.users_closed} have DMs closed` : "") +
+          (j.users_failed ? ` · ${j.users_failed} failed` : "") +
+          (j.users_left_out ? ` · ${j.users_left_out} left out (opted out / blacklisted)` : ""),
+      );
+    }
+    if (j.error) lines.push(j.error);
+    return lines;
   }
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <Panel
         title="Global message"
-        blurb="Posts an announcement in every server the bot is in (their spawn channel, or the server's system channel). Pings are always off. Same as /admin globalmessage."
+        blurb="Sends an announcement to every server the bot is in (their spawn channel, or the system channel) and/or as a DM to every player who has used the bot. Pings are always off. Same as /admin globalmessage."
       >
         <div className="grid gap-4">
           <Field label={`Title (optional) — ${title.length}/${TITLE_MAX}`}>
@@ -300,6 +377,16 @@ export function BroadcastTab() {
               maxLength={MESSAGE_MAX}
               onChange={(e) => setMessage(e.target.value)}
             />
+          </Field>
+          <Field
+            label="Send to"
+            hint="Players = everyone who has used the bot (DMs go out about 1 per second, so big lists take a while). People who ran /announcements off or are blacklisted are skipped."
+          >
+            <select className={inputCls} value={audience} onChange={(e) => setAudience(e.target.value as Audience)}>
+              <option value="servers">Servers{targets ? ` (${targets.servers})` : ""}</option>
+              <option value="users">Players — DM{targets ? ` (${targets.users})` : ""}</option>
+              <option value="both">Servers + players</option>
+            </select>
           </Field>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Colour">
@@ -325,9 +412,7 @@ export function BroadcastTab() {
           <div className="flex flex-wrap items-center gap-4 border-t border-line pt-4">
             {confirming ? (
               <>
-                <span className="font-mono text-[12px] text-bone-dim">
-                  Post this in {targets?.servers ?? "all"} servers right now?
-                </span>
+                <span className="font-mono text-[12px] text-bone-dim">Send this to {audienceText} right now?</span>
                 <button type="button" className="btn btn-fill px-6 py-2.5 text-sm" onClick={doSend}>
                   Yes, send it
                 </button>
@@ -339,16 +424,24 @@ export function BroadcastTab() {
               <button
                 type="button"
                 className="btn btn-fill px-6 py-2.5 text-sm"
-                disabled={send.busy || problem !== null || !targets || targets.servers === 0}
+                disabled={send.busy || sending || problem !== null || !reach}
                 onClick={() => setConfirming(true)}
               >
-                {send.busy ? "Sending…" : `Send to ${targets ? targets.servers : "…"} servers`}
+                {send.busy ? "Starting…" : sending ? "Sending…" : `Send to ${audienceText}`}
               </button>
             )}
             <Status msg={send.msg} />
           </div>
           {problem ? <span className="font-mono text-[12px] text-ember-bright">{problem}</span> : null}
           {targetError ? <span className="font-mono text-[12px] text-ember-bright">{targetError}</span> : null}
+          {job?.started_at ? (
+            <div className="rounded-md border border-line bg-void px-3.5 py-3 font-mono text-[12px] leading-relaxed text-bone-dim">
+              <div className="mb-1 text-bone">{job.running ? "Sending…" : "Last message finished"}</div>
+              {progressLines(job).map((l) => (
+                <div key={l}>{l}</div>
+              ))}
+            </div>
+          ) : null}
           {targets && targets.skipped > 0 ? (
             <span className="font-mono text-[11.5px] text-bone-faint">
               {targets.skipped} server(s) can't be reached (no channel the bot can post embeds in, or blacklisted).
@@ -359,7 +452,7 @@ export function BroadcastTab() {
 
       <div className="lg:sticky lg:top-24 lg:self-start">
         <Panel title="Preview" blurb="This is how it will look in Discord (desktop, dark theme).">
-          <DiscordPreview title={title} message={message} color={color} image={image} footer={footer} />
+          <DiscordPreview title={title} message={message} color={color} image={image} footer={footer} dm={audience !== "servers"} />
         </Panel>
       </div>
     </div>
