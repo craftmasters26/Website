@@ -1,5 +1,5 @@
 import { Fragment, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { adminRequest } from "@/lib/admin";
+import { adminRequest, type AdminGuild } from "@/lib/admin";
 import { Field, Panel, Status, failureText, inputCls, useAction } from "./ui";
 
 /**
@@ -15,7 +15,9 @@ const DEFAULT_COLOR = "#5C8DFF";
 const DEFAULT_FOOTER = "BleachDex announcement";
 const DM_FOOTER_NOTE = "Don't want these DMs? Use /announcements off";
 
-type Audience = "servers" | "users" | "both";
+type Audience = "servers" | "users" | "both" | "specific";
+type ResolvedUser = { id: string; found: boolean; name: string; is_bot: boolean; is_player: boolean; opted_out: boolean };
+const MAX_SPECIFIC_USERS = 500;
 type Counts = { servers: number; skipped: number; users: number; opted_out: number };
 type JobStatus = {
   running?: boolean;
@@ -31,6 +33,10 @@ type JobStatus = {
   users_closed?: number;
   users_failed?: number;
   users_left_out?: number;
+  servers_requested?: number;
+  users_requested?: number;
+  skipped_names?: string[];
+  user_problems?: string[];
 };
 
 // ---------------------------------------------------------------- tiny Discord-markdown renderer
@@ -237,7 +243,7 @@ function DiscordPreview({
 
 // ---------------------------------------------------------------- the tab
 
-export function BroadcastTab() {
+export function BroadcastTab({ guilds }: { guilds: AdminGuild[] | null }) {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [color, setColor] = useState(DEFAULT_COLOR);
@@ -245,6 +251,11 @@ export function BroadcastTab() {
   const [footer, setFooter] = useState("");
   const [audience, setAudience] = useState<Audience>("servers");
   const [confirming, setConfirming] = useState(false);
+  const [pickedGuilds, setPickedGuilds] = useState<string[]>([]);
+  const [guildFilter, setGuildFilter] = useState("");
+  const [userInput, setUserInput] = useState("");
+  const [resolved, setResolved] = useState<ResolvedUser[] | null>(null);
+  const lookup = useAction();
   const [targets, setTargets] = useState<Counts | null>(null);
   const [targetError, setTargetError] = useState<string | null>(null);
   const [job, setJob] = useState<JobStatus | null>(null);
@@ -290,18 +301,48 @@ export function BroadcastTab() {
     };
   }, [loadTargets, loadJob]);
 
+  const userIds = Array.from(new Set(userInput.match(/\d{15,21}/g) ?? []));
+  const specific = audience === "specific";
+
+  function toggleGuild(id: string) {
+    setPickedGuilds((cur) => (cur.includes(id) ? cur.filter((g) => g !== id) : [...cur, id]));
+  }
+
+  function lookUpPlayers() {
+    void lookup.run(async () => {
+      const r = await adminRequest<{ users: ResolvedUser[] }>("/internal/admin/broadcast/resolve", {
+        user_ids: userIds.slice(0, 50),
+      });
+      if (r.status !== "ok") return { ok: false, text: failureText(r) };
+      setResolved(r.data.users);
+      return {
+        ok: true,
+        text: userIds.length > 50 ? "Looked up the first 50 ids." : `Looked up ${r.data.users.length} id(s).`,
+      };
+    });
+  }
+
   const colorValue = normalizeColor(color);
   const imageBad = image.trim() !== "" && !image.trim().toLowerCase().startsWith("https://");
-  const reach =
-    !targets
+  const specificReach = pickedGuilds.length + userIds.length;
+  const reach = specific
+    ? specificReach
+    : !targets
       ? null
       : audience === "servers"
         ? targets.servers
         : audience === "users"
           ? targets.users
           : targets.servers + targets.users;
-  const audienceText =
-    !targets
+  const specificText = [
+    pickedGuilds.length ? `${pickedGuilds.length} server${pickedGuilds.length === 1 ? "" : "s"}` : "",
+    userIds.length ? `${userIds.length} player${userIds.length === 1 ? "" : "s"} (DM)` : "",
+  ]
+    .filter(Boolean)
+    .join(" + ");
+  const audienceText = specific
+    ? specificText || "nobody yet"
+    : !targets
       ? "…"
       : audience === "servers"
         ? `${targets.servers} servers`
@@ -311,6 +352,10 @@ export function BroadcastTab() {
   const problem =
     !title.trim() && !message.trim()
       ? "Write a title or a message."
+      : specific && specificReach === 0
+        ? "Pick at least one server or paste at least one player ID."
+        : specific && userIds.length > MAX_SPECIFIC_USERS
+          ? `At most ${MAX_SPECIFIC_USERS} players at a time.`
       : colorValue === null
         ? "Colour must be a 6-digit hex code like #5C8DFF."
         : imageBad
@@ -328,6 +373,7 @@ export function BroadcastTab() {
         image_url: image.trim(),
         footer: footer.trim(),
         audience,
+        ...(specific ? { guild_ids: pickedGuilds, user_ids: userIds } : {}),
       });
       if (r.status !== "ok") return { ok: false, text: failureText(r) };
       await loadJob();
@@ -338,13 +384,17 @@ export function BroadcastTab() {
 
   function progressLines(j: JobStatus): string[] {
     const lines: string[] = [];
-    if (j.audience === "servers" || j.audience === "both")
+    const showServers =
+      j.audience === "servers" || j.audience === "both" || (j.audience === "specific" && (j.servers_requested ?? 0) > 0);
+    const showUsers =
+      j.audience === "users" || j.audience === "both" || (j.audience === "specific" && (j.users_requested ?? 0) > 0);
+    if (showServers)
       lines.push(
         `Servers: ${j.servers_sent ?? 0}/${j.servers_total ?? 0} sent` +
           (j.servers_failed ? ` · ${j.servers_failed} failed` : "") +
           (j.servers_skipped ? ` · ${j.servers_skipped} skipped` : ""),
       );
-    if (j.audience === "users" || j.audience === "both") {
+    if (showUsers) {
       const done = (j.users_sent ?? 0) + (j.users_closed ?? 0) + (j.users_failed ?? 0);
       lines.push(
         `Players (DMs): ${done}/${j.users_total ?? 0} processed · ${j.users_sent ?? 0} delivered` +
@@ -353,6 +403,9 @@ export function BroadcastTab() {
           (j.users_left_out ? ` · ${j.users_left_out} left out (opted out / blacklisted)` : ""),
       );
     }
+    if (j.skipped_names?.length)
+      lines.push(`Couldn't reach: ${j.skipped_names.join(", ")} (no channel the bot can post embeds in, or blacklisted)`);
+    if (j.user_problems?.length) lines.push(...j.user_problems.map((p) => `Player ${p}`));
     if (j.error) lines.push(j.error);
     return lines;
   }
@@ -386,8 +439,92 @@ export function BroadcastTab() {
               <option value="servers">Servers{targets ? ` (${targets.servers})` : ""}</option>
               <option value="users">Players — DM{targets ? ` (${targets.users})` : ""}</option>
               <option value="both">Servers + players</option>
+              <option value="specific">Specific server(s) / player(s)</option>
             </select>
           </Field>
+          {specific ? (
+            <div className="grid gap-4 rounded-md border border-line bg-void p-4">
+              <Field
+                label={`Servers — ${pickedGuilds.length} selected`}
+                hint="Goes to each server's spawn channel (or its system channel), same as a normal global message."
+              >
+                <input
+                  className={inputCls}
+                  value={guildFilter}
+                  placeholder="Search servers…"
+                  onChange={(e) => setGuildFilter(e.target.value)}
+                />
+                <div className="mt-2 max-h-56 overflow-y-auto rounded-md border border-line">
+                  {!guilds ? (
+                    <div className="px-3 py-2 font-mono text-[12px] text-bone-faint">Loading servers…</div>
+                  ) : (
+                    guilds
+                      .filter((g) => g.name.toLowerCase().includes(guildFilter.trim().toLowerCase()) || g.id.includes(guildFilter.trim()))
+                      .map((g) => (
+                        <label
+                          key={g.id}
+                          className="flex cursor-pointer items-center gap-3 border-b border-line px-3 py-2 text-[13px] last:border-b-0 hover:bg-void-raised"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={pickedGuilds.includes(g.id)}
+                            onChange={() => toggleGuild(g.id)}
+                          />
+                          <span className="min-w-0 flex-1 truncate text-bone">{g.name}</span>
+                          <span className="font-mono text-[11px] text-bone-faint">{g.member_count.toLocaleString()} members</span>
+                        </label>
+                      ))
+                  )}
+                </div>
+                {pickedGuilds.length ? (
+                  <button
+                    type="button"
+                    className="mt-2 font-mono text-[11.5px] text-bone-dim underline"
+                    onClick={() => setPickedGuilds([])}
+                  >
+                    Clear selection
+                  </button>
+                ) : null}
+              </Field>
+              <Field
+                label={`Players — ${userIds.length} Discord id${userIds.length === 1 ? "" : "s"}`}
+                hint="Paste one or more Discord user IDs (spaces, commas or new lines between them). Sent as a DM; this is a direct staff message, so /announcements off is not applied."
+              >
+                <textarea
+                  className={`${inputCls} min-h-[84px] resize-y font-mono text-[13px]`}
+                  value={userInput}
+                  placeholder="e.g. 920697629787189338"
+                  onChange={(e) => {
+                    setUserInput(e.target.value);
+                    setResolved(null);
+                  }}
+                />
+                <div className="mt-2 flex flex-wrap items-center gap-3">
+                  <button
+                    type="button"
+                    className="btn btn-outline px-4 py-2 text-[13px]"
+                    disabled={lookup.busy || userIds.length === 0}
+                    onClick={lookUpPlayers}
+                  >
+                    {lookup.busy ? "Looking up…" : "Look up names"}
+                  </button>
+                  <Status msg={lookup.msg} />
+                </div>
+                {resolved ? (
+                  <div className="mt-2 grid gap-1 font-mono text-[12px]">
+                    {resolved.map((u) => (
+                      <div key={u.id} className={u.found && !u.is_bot ? "text-bone-dim" : "text-ember-bright"}>
+                        {u.found ? u.name : "No Discord account"} · {u.id}
+                        {u.is_bot ? " · is a bot (can't be messaged)" : ""}
+                        {u.found && !u.is_bot && !u.is_player ? " · hasn't used the bot yet" : ""}
+                        {u.opted_out ? " · opted out of announcements (will still get this DM)" : ""}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </Field>
+            </div>
+          ) : null}
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Colour">
               <div className="flex items-center gap-2">
@@ -452,7 +589,7 @@ export function BroadcastTab() {
 
       <div className="lg:sticky lg:top-24 lg:self-start">
         <Panel title="Preview" blurb="This is how it will look in Discord (desktop, dark theme).">
-          <DiscordPreview title={title} message={message} color={color} image={image} footer={footer} dm={audience !== "servers"} />
+          <DiscordPreview title={title} message={message} color={color} image={image} footer={footer} dm={audience === "users" || audience === "both"} />
         </Panel>
       </div>
     </div>

@@ -139,6 +139,19 @@ export const adminListChannels = createServerFn({ method: "POST" })
     ),
   );
 
+export type AdminRole = { id: string; name: string; color: string };
+
+export const adminListRoles = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .inputValidator((data: { guildId: string }) => data)
+  .handler(async ({ context, data }) =>
+    adminCall<{ roles: AdminRole[] }>(
+      context.bearerToken,
+      "full",
+      `/internal/admin/guilds/${encodeURIComponent(String(data.guildId).replace(/\D/g, ""))}/roles`,
+    ),
+  );
+
 export const adminListCharacters = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .handler(async ({ context }) =>
@@ -192,7 +205,7 @@ export const adminSpawn = createServerFn({ method: "POST" })
  * Discord id against ADMIN_USER_IDS on every call — see `adminCall` above.
  */
 const ADMIN_PATH =
-  /^\/internal\/admin\/(?:meta|weapons|characters|spawn|give|bossbattle|broadcast(?:\/(?:targets|status))?|blacklist(?:\/remove)?|emoji|craftable|achievement-icon|template|character|weapon|seed\/[a-z]+|(?:character|weapon)\/\d+(?:\/enabled)?)$/;
+  /^\/internal\/admin\/(?:meta|weapons|characters|spawn|give|bossbattle|broadcast(?:\/(?:targets|status|resolve))?|premium\/(?:status|setup|schedule|giveaway|grant|revoke|link|event|test)|blacklist(?:\/remove)?|emoji|craftable|achievement-icon|template|character|weapon|seed\/[a-z]+|(?:character|weapon)\/\d+(?:\/enabled)?)$/;
 
 export const adminApi = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
