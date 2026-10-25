@@ -8,6 +8,7 @@ import AdBanner from "@/components/AdBanner";
 import { APP_NAME } from "@/lib/titles";
 import { useCatalogAutoSync } from "@/lib/catalog-live";
 import appCss from "../styles.css?url";
+import { SITE_URL } from "@/lib/site";
 
 const OG_DESCRIPTION =
   "Souls spawn in your Discord server. Catch them, open packs, craft rare characters and climb the leaderboard.";
@@ -23,14 +24,14 @@ export const Route = createRootRoute({
       { property: "og:site_name", content: "BleachDex" },
       { property: "og:title", content: "BleachDex" },
       { property: "og:description", content: OG_DESCRIPTION },
-      { property: "og:url", content: "https://bleachdex.vercel.app" },
-      { property: "og:image", content: "https://bleachdex.vercel.app/brand/bot-avatar.png" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: `${SITE_URL}/brand/bot-avatar.png` },
       { property: "og:image:width", content: "256" },
       { property: "og:image:height", content: "256" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "BleachDex" },
       { name: "twitter:description", content: OG_DESCRIPTION },
-      { name: "twitter:image", content: "https://bleachdex.vercel.app/brand/bot-avatar.png" },
+      { name: "twitter:image", content: `${SITE_URL}/brand/bot-avatar.png` },
       {
         name: "description",
         content:

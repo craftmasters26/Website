@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage, LegalSection, SUPPORT_URL } from "@/components/legal-page";
+import { SITE_HOST } from "@/lib/site";
 
 export const Route = createFileRoute("/terms")({
   head: () => ({
@@ -21,7 +22,7 @@ function TermsPage() {
     <LegalPage eyebrow="Legal" title="Terms of Service">
       <LegalSection heading="Agreement">
         <p>
-          By adding the BleachDex bot to a server or using bleachdex.vercel.app you agree to these
+          By adding the BleachDex bot to a server or using {SITE_HOST} you agree to these
           terms and to Discord's Terms of Service and Community Guidelines. If you do not agree,
           do not use the service.
         </p>
