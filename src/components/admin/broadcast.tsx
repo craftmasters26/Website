@@ -1,21 +1,35 @@
-import { Fragment, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { adminRequest, type AdminGuild } from "@/lib/admin";
 import { Field, Panel, Status, failureText, inputCls, useAction } from "./ui";
+import { FormatToolbar, formatShortcut, inline, markdown } from "./rich-text";
 
 /**
- * Global message tab: write an announcement, see exactly how it will look in
- * Discord, then send it to every server the bot is in (same as /admin globalmessage).
- * The embed shape mirrors cogs/broadcast.py build_embed().
+ * Global message tab: write an announcement, see exactly how it will look in Discord, then
+ * send it to every server the bot is in (same as /admin globalmessage), or only to the
+ * servers / players you pick.
+ *
+ * Two shapes, both built by cogs/broadcast.py:
+ *   - "embed": the coloured card (title, text, author, thumbnail, fields, image, footer, time)
+ *   - "plain": an ordinary Discord message
  */
 
 const TITLE_MAX = 256;
 const MESSAGE_MAX = 4000;
+const PLAIN_MAX = 1880; // the bot keeps room for the DM opt-out line (2000 - 120)
 const FOOTER_MAX = 200;
+const AUTHOR_MAX = 256;
+const FIELD_NAME_MAX = 256;
+const FIELD_VALUE_MAX = 1024;
+const MAX_FIELDS = 6;
+const EMBED_TOTAL_MAX = 6000;
 const DEFAULT_COLOR = "#5C8DFF";
 const DEFAULT_FOOTER = "BleachDex announcement";
 const DM_FOOTER_NOTE = "Don't want these DMs? Use /announcements off";
+const DRAFT_KEY = "bleachdex-admin-message-draft";
 
+type Mode = "embed" | "plain";
 type Audience = "servers" | "users" | "both" | "specific";
+type EmbedField = { id: number; name: string; value: string; inline: boolean };
 type ResolvedUser = { id: string; found: boolean; name: string; is_bot: boolean; is_player: boolean; opted_out: boolean };
 const MAX_SPECIFIC_USERS = 500;
 type Counts = { servers: number; skipped: number; users: number; opted_out: number };
@@ -39,104 +53,26 @@ type JobStatus = {
   user_problems?: string[];
 };
 
-// ---------------------------------------------------------------- tiny Discord-markdown renderer
-
-const INLINE =
-  /\*\*\*(.+?)\*\*\*|\*\*(.+?)\*\*|__(.+?)__|~~(.+?)~~|\*(.+?)\*|(?<![A-Za-z0-9])_(.+?)_(?![A-Za-z0-9])|`([^`\n]+)`|\[([^\]\n]+)\]\((https?:\/\/[^)\s]+)\)/gs;
-
-function inline(text: string, keyBase = "i"): ReactNode[] {
-  const out: ReactNode[] = [];
-  let last = 0;
-  let n = 0;
-  for (const m of text.matchAll(INLINE)) {
-    const idx = m.index ?? 0;
-    if (idx > last) out.push(text.slice(last, idx));
-    const key = `${keyBase}-${n++}`;
-    if (m[1] !== undefined) out.push(<strong key={key}><em>{inline(m[1], key)}</em></strong>);
-    else if (m[2] !== undefined) out.push(<strong key={key}>{inline(m[2], key)}</strong>);
-    else if (m[3] !== undefined) out.push(<u key={key}>{inline(m[3], key)}</u>);
-    else if (m[4] !== undefined) out.push(<s key={key}>{inline(m[4], key)}</s>);
-    else if (m[5] !== undefined || m[6] !== undefined) out.push(<em key={key}>{inline((m[5] ?? m[6]) as string, key)}</em>);
-    else if (m[7] !== undefined)
-      out.push(
-        <code key={key} style={{ background: "#1e1f22", borderRadius: 3, padding: "1px 4px", fontSize: "0.85em" }}>
-          {m[7]}
-        </code>,
-      );
-    else if (m[8] !== undefined)
-      out.push(
-        <span key={key} style={{ color: "#00a8fc" }}>
-          {inline(m[8], key)}
-        </span>,
-      );
-    last = idx + m[0].length;
-  }
-  if (last < text.length) out.push(text.slice(last));
-  return out;
-}
-
-function markdown(text: string): ReactNode {
-  const lines = text.split("\n");
-  const blocks: ReactNode[] = [];
-  let i = 0;
-  let k = 0;
-  while (i < lines.length) {
-    const line = lines[i];
-    if (line.startsWith("```")) {
-      const body: string[] = [];
-      i++;
-      while (i < lines.length && !lines[i].startsWith("```")) body.push(lines[i++]);
-      i++;
-      blocks.push(
-        <pre
-          key={k++}
-          style={{
-            background: "#1e1f22",
-            border: "1px solid #3f4147",
-            borderRadius: 4,
-            padding: 8,
-            margin: "4px 0",
-            fontSize: 13,
-            whiteSpace: "pre-wrap",
-          }}
-        >
-          {body.join("\n")}
-        </pre>,
-      );
-      continue;
-    }
-    const heading = /^(#{1,3}) (.+)$/.exec(line);
-    if (heading) {
-      const size = { 1: 20, 2: 17, 3: 15 }[heading[1].length as 1 | 2 | 3];
-      blocks.push(
-        <div key={k++} style={{ fontWeight: 700, fontSize: size, margin: "6px 0 2px" }}>
-          {inline(heading[2], `h${k}`)}
-        </div>,
-      );
-    } else if (line.startsWith("> ")) {
-      blocks.push(
-        <div key={k++} style={{ borderLeft: "4px solid #4e5058", paddingLeft: 10, margin: "2px 0" }}>
-          {inline(line.slice(2), `q${k}`)}
-        </div>,
-      );
-    } else if (/^[-*] /.test(line)) {
-      blocks.push(
-        <div key={k++} style={{ paddingLeft: 8 }}>
-          • {inline(line.slice(2), `l${k}`)}
-        </div>,
-      );
-    } else {
-      blocks.push(
-        <Fragment key={k++}>
-          {inline(line, `p${k}`)}
-          {i < lines.length - 1 ? <br /> : null}
-        </Fragment>,
-      );
-    }
-    i++;
-  }
-  return blocks;
-}
+const TEMPLATES: { label: string; title: string; message: string; color: string }[] = [
+  {
+    label: "Update / patch notes",
+    title: "📣 BleachDex update",
+    message: "## What's new\n- **New:** \n- **Improved:** \n- **Fixed:** \n\n-# Thanks for playing!",
+    color: "#5C8DFF",
+  },
+  {
+    label: "Event",
+    title: "🎉 A new event has started!",
+    message: "Something special is happening in BleachDex.\n\n> **Starts:** \n> **Ends:** \n\nGood luck, and have fun!",
+    color: "#FF8F4D",
+  },
+  {
+    label: "Maintenance",
+    title: "🛠️ Scheduled maintenance",
+    message: "The bot will be offline for a short while.\n\n> **When:** \n> **How long:** about \n\nNothing will be lost — see you soon!",
+    color: "#F2C94C",
+  },
+];
 
 // ---------------------------------------------------------------- the preview
 
@@ -146,24 +82,34 @@ function normalizeColor(c: string): string | null {
   return /^[0-9a-fA-F]{6}$/.test(t) ? `#${t}` : null;
 }
 
-function DiscordPreview({
-  title,
-  message,
-  color,
-  image,
-  footer,
-  dm,
-}: {
+type PreviewProps = {
+  mode: Mode;
   title: string;
   message: string;
   color: string;
   image: string;
+  thumbnail: string;
+  author: string;
+  timestamp: boolean;
+  fields: EmbedField[];
   footer: string;
   dm: boolean;
-}) {
-  const accent = normalizeColor(color) ?? DEFAULT_COLOR;
-  const imageOk = image.trim().toLowerCase().startsWith("https://");
-  const empty = !title.trim() && !message.trim();
+};
+
+const isHttps = (v: string) => v.trim().toLowerCase().startsWith("https://");
+
+function DiscordPreview(p: PreviewProps) {
+  const accent = normalizeColor(p.color) ?? DEFAULT_COLOR;
+  const plain = p.mode === "plain";
+  const imageOk = isHttps(p.image);
+  const thumbOk = isHttps(p.thumbnail);
+  const shownFields = p.fields.filter((f) => f.name.trim() && f.value.trim());
+  const empty = plain ? !p.message.trim() : !p.title.trim() && !p.message.trim() && shownFields.length === 0;
+  const now = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  const footerText = (p.footer.trim() || DEFAULT_FOOTER) + (p.dm ? ` · ${DM_FOOTER_NOTE}` : "");
+
+  const emptyNote = <div style={{ color: "#949ba4", paddingTop: 4 }}>Your message will appear here…</div>;
+
   return (
     <div
       style={{
@@ -207,34 +153,67 @@ function DiscordPreview({
             </span>
             <span style={{ color: "#949ba4", fontSize: 12 }}>Today</span>
           </div>
-          <div
-            style={{
-              background: "#2b2d31",
-              borderLeft: `4px solid ${accent}`,
-              borderRadius: 4,
-              padding: "8px 16px 16px 12px",
-              maxWidth: 520,
-              fontSize: 14,
-              lineHeight: 1.375,
-              overflowWrap: "anywhere",
-            }}
-          >
-            {empty ? (
-              <div style={{ color: "#949ba4", paddingTop: 8 }}>Your message will appear here…</div>
-            ) : null}
-            {title.trim() ? (
-              <div style={{ color: "#fff", fontWeight: 600, fontSize: 16, marginTop: 8 }}>{inline(title, "t")}</div>
-            ) : null}
-            {message.trim() ? <div style={{ marginTop: 8 }}>{markdown(message)}</div> : null}
-            {imageOk ? (
-              <img
-                src={image.trim()}
-                alt=""
-                style={{ marginTop: 16, maxWidth: "100%", borderRadius: 4, display: "block" }}
-              />
-            ) : null}
-            <div style={{ marginTop: 8, fontSize: 12, color: "#b5bac1" }}>{(footer.trim() || DEFAULT_FOOTER) + (dm ? ` · ${DM_FOOTER_NOTE}` : "")}</div>
-          </div>
+
+          {plain ? (
+            <div style={{ fontSize: 14, lineHeight: 1.375, overflowWrap: "anywhere", maxWidth: 560 }}>
+              {empty ? emptyNote : markdown(p.message)}
+              {p.dm && !empty ? <div style={{ fontSize: 12, color: "#949ba4" }}>{DM_FOOTER_NOTE}</div> : null}
+            </div>
+          ) : (
+            <div
+              style={{
+                background: "#2b2d31",
+                borderLeft: `4px solid ${accent}`,
+                borderRadius: 4,
+                padding: "8px 16px 16px 12px",
+                maxWidth: 520,
+                fontSize: 14,
+                lineHeight: 1.375,
+                overflowWrap: "anywhere",
+              }}
+            >
+              <div style={{ display: "flex", gap: 16 }}>
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  {empty ? emptyNote : null}
+                  {p.author.trim() ? (
+                    <div style={{ color: "#fff", fontWeight: 600, fontSize: 14, marginTop: 8 }}>{p.author.trim()}</div>
+                  ) : null}
+                  {p.title.trim() ? (
+                    <div style={{ color: "#fff", fontWeight: 600, fontSize: 16, marginTop: 8 }}>{inline(p.title, "t")}</div>
+                  ) : null}
+                  {p.message.trim() ? <div style={{ marginTop: 8 }}>{markdown(p.message)}</div> : null}
+                </div>
+                {thumbOk ? (
+                  <img
+                    src={p.thumbnail.trim()}
+                    alt=""
+                    style={{ width: 80, height: 80, objectFit: "cover", borderRadius: 4, flex: "none", marginTop: 8 }}
+                  />
+                ) : null}
+              </div>
+              {shownFields.length ? (
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 8, marginTop: 8 }}>
+                  {shownFields.map((f) => (
+                    <div key={f.id} style={{ gridColumn: f.inline ? "span 1" : "1 / -1", minWidth: 0 }}>
+                      <div style={{ color: "#fff", fontWeight: 600, fontSize: 14 }}>{f.name}</div>
+                      <div style={{ fontSize: 14 }}>{markdown(f.value)}</div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+              {imageOk ? (
+                <img
+                  src={p.image.trim()}
+                  alt=""
+                  style={{ marginTop: 16, maxWidth: "100%", borderRadius: 4, display: "block" }}
+                />
+              ) : null}
+              <div style={{ marginTop: 8, fontSize: 12, color: "#b5bac1" }}>
+                {footerText}
+                {p.timestamp ? ` • Today at ${now}` : ""}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -243,12 +222,63 @@ function DiscordPreview({
 
 // ---------------------------------------------------------------- the tab
 
+type Draft = {
+  mode: Mode;
+  title: string;
+  message: string;
+  color: string;
+  image: string;
+  footer: string;
+  thumbnail: string;
+  author: string;
+  timestamp: boolean;
+  fields: { name: string; value: string; inline: boolean }[];
+};
+
+function readDraft(): Draft | null {
+  try {
+    const raw = window.localStorage.getItem(DRAFT_KEY);
+    if (!raw) return null;
+    const d = JSON.parse(raw) as Partial<Draft>;
+    if (typeof d !== "object" || d === null) return null;
+    return {
+      mode: d.mode === "plain" ? "plain" : "embed",
+      title: String(d.title ?? ""),
+      message: String(d.message ?? ""),
+      color: String(d.color ?? DEFAULT_COLOR),
+      image: String(d.image ?? ""),
+      footer: String(d.footer ?? ""),
+      thumbnail: String(d.thumbnail ?? ""),
+      author: String(d.author ?? ""),
+      timestamp: Boolean(d.timestamp),
+      fields: Array.isArray(d.fields)
+        ? d.fields.slice(0, MAX_FIELDS).map((f) => ({
+            name: String(f?.name ?? ""),
+            value: String(f?.value ?? ""),
+            inline: Boolean(f?.inline),
+          }))
+        : [],
+    };
+  } catch {
+    return null;
+  }
+}
+
 export function BroadcastTab({ guilds }: { guilds: AdminGuild[] | null }) {
+  const [mode, setMode] = useState<Mode>("embed");
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [color, setColor] = useState(DEFAULT_COLOR);
   const [image, setImage] = useState("");
   const [footer, setFooter] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
+  const [author, setAuthor] = useState("");
+  const [timestamp, setTimestamp] = useState(false);
+  const [fields, setFields] = useState<EmbedField[]>([]);
+  const [draftReady, setDraftReady] = useState(false);
+  const fieldId = useRef(1);
+  const textRef = useRef<HTMLTextAreaElement | null>(null);
+
   const [audience, setAudience] = useState<Audience>("servers");
   const [confirming, setConfirming] = useState(false);
   const [pickedGuilds, setPickedGuilds] = useState<string[]>([]);
@@ -261,6 +291,83 @@ export function BroadcastTab({ guilds }: { guilds: AdminGuild[] | null }) {
   const [job, setJob] = useState<JobStatus | null>(null);
   const send = useAction();
   const poll = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const embed = mode === "embed";
+  const messageMax = embed ? MESSAGE_MAX : PLAIN_MAX;
+
+  // ---- draft: restore once, then save while typing (so a refresh doesn't lose a long announcement)
+  useEffect(() => {
+    const d = readDraft();
+    if (d) {
+      setMode(d.mode);
+      setTitle(d.title);
+      setMessage(d.message);
+      setColor(d.color);
+      setImage(d.image);
+      setFooter(d.footer);
+      setThumbnail(d.thumbnail);
+      setAuthor(d.author);
+      setTimestamp(d.timestamp);
+      setFields(d.fields.map((f) => ({ ...f, id: fieldId.current++ })));
+    }
+    setDraftReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!draftReady) return;
+    const t = setTimeout(() => {
+      try {
+        const draft: Draft = {
+          mode,
+          title,
+          message,
+          color,
+          image,
+          footer,
+          thumbnail,
+          author,
+          timestamp,
+          fields: fields.map(({ name, value, inline }) => ({ name, value, inline })),
+        };
+        const empty = !title && !message && !image && !footer && !thumbnail && !author && fields.length === 0;
+        if (empty) window.localStorage.removeItem(DRAFT_KEY);
+        else window.localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      } catch {
+        /* storage is blocked or full — the draft just isn't kept */
+      }
+    }, 400);
+    return () => clearTimeout(t);
+  }, [draftReady, mode, title, message, color, image, footer, thumbnail, author, timestamp, fields]);
+
+  function clearForm() {
+    setTitle("");
+    setMessage("");
+    setColor(DEFAULT_COLOR);
+    setImage("");
+    setFooter("");
+    setThumbnail("");
+    setAuthor("");
+    setTimestamp(false);
+    setFields([]);
+    setConfirming(false);
+  }
+
+  function loadTemplate(i: number) {
+    const t = TEMPLATES[i];
+    if (!t) return;
+    if (message.trim() && !window.confirm("Replace what you've written with this template?")) return;
+    setMode("embed");
+    setTitle(t.title);
+    setMessage(t.message);
+    setColor(t.color);
+  }
+
+  function addField() {
+    setFields((cur) => (cur.length >= MAX_FIELDS ? cur : [...cur, { id: fieldId.current++, name: "", value: "", inline: false }]));
+  }
+  function patchField(id: number, patch: Partial<EmbedField>) {
+    setFields((cur) => cur.map((f) => (f.id === id ? { ...f, ...patch } : f)));
+  }
 
   const loadTargets = useCallback(async () => {
     setTargetError(null);
@@ -323,7 +430,18 @@ export function BroadcastTab({ guilds }: { guilds: AdminGuild[] | null }) {
   }
 
   const colorValue = normalizeColor(color);
-  const imageBad = image.trim() !== "" && !image.trim().toLowerCase().startsWith("https://");
+  const imageBad = embed && image.trim() !== "" && !isHttps(image);
+  const thumbBad = embed && thumbnail.trim() !== "" && !isHttps(thumbnail);
+  const usedFields = fields.filter((f) => f.name.trim() || f.value.trim());
+  const halfField = usedFields.some((f) => !f.name.trim() || !f.value.trim());
+  const embedTotal =
+    title.trim().length +
+    message.trim().length +
+    (footer.trim() || DEFAULT_FOOTER).length +
+    DM_FOOTER_NOTE.length +
+    3 +
+    author.trim().length +
+    usedFields.reduce((n, f) => n + f.name.trim().length + f.value.trim().length, 0);
   const specificReach = pickedGuilds.length + userIds.length;
   const reach = specific
     ? specificReach
@@ -349,32 +467,60 @@ export function BroadcastTab({ guilds }: { guilds: AdminGuild[] | null }) {
         : audience === "users"
           ? `${targets.users} players (DM)`
           : `${targets.servers} servers + ${targets.users} players`;
-  const problem =
-    !title.trim() && !message.trim()
-      ? "Write a title or a message."
-      : specific && specificReach === 0
-        ? "Pick at least one server or paste at least one player ID."
-        : specific && userIds.length > MAX_SPECIFIC_USERS
-          ? `At most ${MAX_SPECIFIC_USERS} players at a time.`
-      : colorValue === null
-        ? "Colour must be a 6-digit hex code like #5C8DFF."
-        : imageBad
-          ? "The image link must start with https://"
-          : null;
+
+  const problem = embed
+    ? !title.trim() && !message.trim() && usedFields.length === 0
+      ? "Write a title, a message or add a field."
+      : message.trim().length > MESSAGE_MAX
+        ? `The message can be at most ${MESSAGE_MAX} characters.`
+        : halfField
+          ? "Every field needs both a name and a value."
+          : embedTotal > EMBED_TOTAL_MAX
+            ? `All the text in one embed can be at most ${EMBED_TOTAL_MAX} characters (now ${embedTotal}).`
+            : colorValue === null
+              ? "Colour must be a 6-digit hex code like #5C8DFF."
+              : imageBad
+                ? "The image link must start with https://"
+                : thumbBad
+                  ? "The thumbnail link must start with https://"
+                  : null
+    : !message.trim()
+      ? "Write a message."
+      : message.trim().length > PLAIN_MAX
+        ? `A plain message can be at most ${PLAIN_MAX} characters.`
+        : null;
+  const sendProblem =
+    problem ??
+    (specific && specificReach === 0
+      ? "Pick at least one server or paste at least one player ID."
+      : specific && userIds.length > MAX_SPECIFIC_USERS
+        ? `At most ${MAX_SPECIFIC_USERS} players at a time.`
+        : null);
   const sending = Boolean(job?.running);
 
   function doSend() {
     setConfirming(false);
     void send.run(async () => {
-      const r = await adminRequest<{ started: boolean }>("/internal/admin/broadcast", {
-        title: title.trim(),
-        message: message.trim(),
-        color: colorValue ?? DEFAULT_COLOR,
-        image_url: image.trim(),
-        footer: footer.trim(),
-        audience,
-        ...(specific ? { guild_ids: pickedGuilds, user_ids: userIds } : {}),
-      });
+      const body: Record<string, unknown> = embed
+        ? {
+            mode: "embed",
+            title: title.trim(),
+            message: message.trim(),
+            color: colorValue ?? DEFAULT_COLOR,
+            image_url: image.trim(),
+            footer: footer.trim(),
+            thumbnail_url: thumbnail.trim(),
+            author: author.trim(),
+            timestamp,
+            fields: usedFields.map((f) => ({ name: f.name.trim(), value: f.value.trim(), inline: f.inline })),
+            audience,
+          }
+        : { mode: "plain", message: message.trim(), audience };
+      if (specific) {
+        body.guild_ids = pickedGuilds;
+        body.user_ids = userIds;
+      }
+      const r = await adminRequest<{ started: boolean }>("/internal/admin/broadcast", body);
       if (r.status !== "ok") return { ok: false, text: failureText(r) };
       await loadJob();
       if (!poll.current) poll.current = setInterval(() => void loadJob(), 2500);
@@ -410,6 +556,12 @@ export function BroadcastTab({ guilds }: { guilds: AdminGuild[] | null }) {
     return lines;
   }
 
+  const segCls = (on: boolean) =>
+    `rounded-md border px-4 py-2 font-mono text-[12.5px] transition-colors ${
+      on ? "border-azure-bright bg-void text-bone" : "border-line-bright text-bone-dim hover:text-bone"
+    }`;
+  const over = message.length > messageMax;
+
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <Panel
@@ -417,20 +569,152 @@ export function BroadcastTab({ guilds }: { guilds: AdminGuild[] | null }) {
         blurb="Sends an announcement to every server the bot is in (their spawn channel, or the system channel) and/or as a DM to every player who has used the bot. Pings are always off. Same as /admin globalmessage."
       >
         <div className="grid gap-4">
-          <Field label={`Title (optional) — ${title.length}/${TITLE_MAX}`}>
-            <input className={inputCls} value={title} maxLength={TITLE_MAX} onChange={(e) => setTitle(e.target.value)} />
-          </Field>
+          <div className="flex flex-wrap items-center gap-2">
+            <button type="button" className={segCls(embed)} onClick={() => setMode("embed")}>
+              Embed (coloured card)
+            </button>
+            <button type="button" className={segCls(!embed)} onClick={() => setMode("plain")}>
+              Plain message
+            </button>
+            <select
+              className={`${inputCls} ml-auto !w-auto`}
+              value=""
+              aria-label="Load a template"
+              onChange={(e) => {
+                if (e.target.value !== "") loadTemplate(Number(e.target.value));
+              }}
+            >
+              <option value="">Load a template…</option>
+              {TEMPLATES.map((t, i) => (
+                <option key={t.label} value={i}>
+                  {t.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {embed ? (
+            <Field label={`Title (optional) — ${title.length}/${TITLE_MAX}`}>
+              <input className={inputCls} value={title} maxLength={TITLE_MAX} onChange={(e) => setTitle(e.target.value)} />
+            </Field>
+          ) : null}
+
           <Field
-            label={`Message — ${message.length}/${MESSAGE_MAX}`}
-            hint="Discord markdown works: **bold**, *italic*, __underline__, ~~strike~~, `code`, > quote, # heading, [link](https://…)"
+            label={`Message — ${message.length}/${messageMax}`}
+            hint={
+              embed
+                ? "Select text, then use the buttons (or Ctrl+B / I / U / K). Everything is saved as Discord markdown."
+                : "A normal Discord message, no card. Select text, then use the buttons (or Ctrl+B / I / U / K). A pasted image link is previewed by Discord itself."
+            }
           >
+            <FormatToolbar getEl={() => textRef.current} />
             <textarea
-              className={`${inputCls} min-h-[180px] resize-y`}
+              ref={textRef}
+              className={`${inputCls} min-h-[200px] resize-y ${over ? "!border-ember-bright" : ""}`}
               value={message}
-              maxLength={MESSAGE_MAX}
               onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={formatShortcut}
             />
           </Field>
+
+          {embed ? (
+            <>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Colour">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="color"
+                      aria-label="Pick a colour"
+                      className="h-10 w-12 cursor-pointer rounded-md border border-line-bright bg-void p-1"
+                      value={colorValue ?? DEFAULT_COLOR}
+                      onChange={(e) => setColor(e.target.value)}
+                    />
+                    <input className={inputCls} value={color} maxLength={7} onChange={(e) => setColor(e.target.value)} />
+                  </div>
+                </Field>
+                <Field label="Footer (optional)" hint={`Default: ${DEFAULT_FOOTER}`}>
+                  <input className={inputCls} value={footer} maxLength={FOOTER_MAX} onChange={(e) => setFooter(e.target.value)} />
+                </Field>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Author line (optional)" hint="Small bold line above the title.">
+                  <input className={inputCls} value={author} maxLength={AUTHOR_MAX} onChange={(e) => setAuthor(e.target.value)} />
+                </Field>
+                <Field label="Thumbnail link (optional)" hint="Small picture top-right. Must start with https://">
+                  <input
+                    className={inputCls}
+                    value={thumbnail}
+                    placeholder="https://…"
+                    onChange={(e) => setThumbnail(e.target.value)}
+                  />
+                </Field>
+              </div>
+              <Field label="Image link (optional)" hint="Big picture under the message. Must start with https://">
+                <input className={inputCls} value={image} placeholder="https://…" onChange={(e) => setImage(e.target.value)} />
+              </Field>
+
+              <div className="grid gap-3 rounded-md border border-line bg-void p-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-bone-faint">
+                    Fields — {fields.length}/{MAX_FIELDS}
+                  </span>
+                  <button
+                    type="button"
+                    className="btn btn-outline px-4 py-1.5 text-[12.5px]"
+                    disabled={fields.length >= MAX_FIELDS}
+                    onClick={addField}
+                  >
+                    + Add field
+                  </button>
+                </div>
+                {fields.length === 0 ? (
+                  <span className="font-mono text-[11.5px] text-bone-faint">
+                    Optional name / value blocks under the message — good for dates, rewards or a list of changes.
+                  </span>
+                ) : null}
+                {fields.map((f, i) => (
+                  <div key={f.id} className="grid gap-2 rounded-md border border-line bg-void-raised p-3">
+                    <input
+                      className={inputCls}
+                      value={f.name}
+                      maxLength={FIELD_NAME_MAX}
+                      placeholder={`Field ${i + 1} name`}
+                      onChange={(e) => patchField(f.id, { name: e.target.value })}
+                    />
+                    <textarea
+                      className={`${inputCls} min-h-[64px] resize-y`}
+                      value={f.value}
+                      maxLength={FIELD_VALUE_MAX}
+                      placeholder="Value (markdown works)"
+                      onChange={(e) => patchField(f.id, { value: e.target.value })}
+                    />
+                    <div className="flex items-center justify-between gap-3">
+                      <label className="flex cursor-pointer items-center gap-2 text-[13px] text-bone-dim">
+                        <input type="checkbox" checked={f.inline} onChange={(e) => patchField(f.id, { inline: e.target.checked })} />
+                        Show side by side with the next field
+                      </label>
+                      <button
+                        type="button"
+                        className="font-mono text-[11.5px] text-bone-dim underline"
+                        onClick={() => setFields((cur) => cur.filter((x) => x.id !== f.id))}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <label className="flex cursor-pointer items-center gap-2 text-[13px] text-bone-dim">
+                <input type="checkbox" checked={timestamp} onChange={(e) => setTimestamp(e.target.checked)} />
+                Show the time it was sent next to the footer
+              </label>
+              <span className={`font-mono text-[11.5px] ${embedTotal > EMBED_TOTAL_MAX ? "text-ember-bright" : "text-bone-faint"}`}>
+                All text in the embed: {embedTotal}/{EMBED_TOTAL_MAX} (Discord's limit)
+              </span>
+            </>
+          ) : null}
+
           <Field
             label="Send to"
             hint="Players = everyone who has used the bot (DMs go out about 1 per second, so big lists take a while). People who ran /announcements off or are blacklisted are skipped."
@@ -525,26 +809,6 @@ export function BroadcastTab({ guilds }: { guilds: AdminGuild[] | null }) {
               </Field>
             </div>
           ) : null}
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Colour">
-              <div className="flex items-center gap-2">
-                <input
-                  type="color"
-                  aria-label="Pick a colour"
-                  className="h-10 w-12 cursor-pointer rounded-md border border-line-bright bg-void p-1"
-                  value={colorValue ?? DEFAULT_COLOR}
-                  onChange={(e) => setColor(e.target.value)}
-                />
-                <input className={inputCls} value={color} maxLength={7} onChange={(e) => setColor(e.target.value)} />
-              </div>
-            </Field>
-            <Field label="Footer (optional)" hint={`Default: ${DEFAULT_FOOTER}`}>
-              <input className={inputCls} value={footer} maxLength={FOOTER_MAX} onChange={(e) => setFooter(e.target.value)} />
-            </Field>
-          </div>
-          <Field label="Image link (optional)" hint="Shown under the message. Must start with https://">
-            <input className={inputCls} value={image} placeholder="https://…" onChange={(e) => setImage(e.target.value)} />
-          </Field>
 
           <div className="flex flex-wrap items-center gap-4 border-t border-line pt-4">
             {confirming ? (
@@ -558,18 +822,30 @@ export function BroadcastTab({ guilds }: { guilds: AdminGuild[] | null }) {
                 </button>
               </>
             ) : (
-              <button
-                type="button"
-                className="btn btn-fill px-6 py-2.5 text-sm"
-                disabled={send.busy || sending || problem !== null || !reach}
-                onClick={() => setConfirming(true)}
-              >
-                {send.busy ? "Starting…" : sending ? "Sending…" : `Send to ${audienceText}`}
-              </button>
+              <>
+                <button
+                  type="button"
+                  className="btn btn-fill px-6 py-2.5 text-sm"
+                  disabled={send.busy || sending || sendProblem !== null || !reach}
+                  onClick={() => setConfirming(true)}
+                >
+                  {send.busy ? "Starting…" : sending ? "Sending…" : `Send to ${audienceText}`}
+                </button>
+                <button
+                  type="button"
+                  className="font-mono text-[12px] text-bone-dim underline"
+                  onClick={() => {
+                    if (!message.trim() && !title.trim() && fields.length === 0) return clearForm();
+                    if (window.confirm("Clear everything you've written?")) clearForm();
+                  }}
+                >
+                  Clear form
+                </button>
+              </>
             )}
             <Status msg={send.msg} />
           </div>
-          {problem ? <span className="font-mono text-[12px] text-ember-bright">{problem}</span> : null}
+          {sendProblem ? <span className="font-mono text-[12px] text-ember-bright">{sendProblem}</span> : null}
           {targetError ? <span className="font-mono text-[12px] text-ember-bright">{targetError}</span> : null}
           {job?.started_at ? (
             <div className="rounded-md border border-line bg-void px-3.5 py-3 font-mono text-[12px] leading-relaxed text-bone-dim">
@@ -588,8 +864,20 @@ export function BroadcastTab({ guilds }: { guilds: AdminGuild[] | null }) {
       </Panel>
 
       <div className="lg:sticky lg:top-24 lg:self-start">
-        <Panel title="Preview" blurb="This is how it will look in Discord (desktop, dark theme).">
-          <DiscordPreview title={title} message={message} color={color} image={image} footer={footer} dm={audience === "users" || audience === "both"} />
+        <Panel title="Preview" blurb="This is how it will look in Discord (desktop, dark theme). Spoilers can be clicked to reveal.">
+          <DiscordPreview
+            mode={mode}
+            title={title}
+            message={message}
+            color={color}
+            image={image}
+            thumbnail={thumbnail}
+            author={author}
+            timestamp={timestamp}
+            fields={fields}
+            footer={footer}
+            dm={audience === "users" || audience === "both"}
+          />
         </Panel>
       </div>
     </div>
