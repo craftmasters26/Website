@@ -229,7 +229,14 @@ export function ensureDbReady(): Promise<void> {
 const globalBoot = globalThis as typeof globalThis & {
   __pgBootstrapPromise__?: Promise<void>;
 };
-if (typeof window === "undefined" && dbSource === "pglite") {
+// Skipped when MONGODB_URI is set: this site stores users/sessions in MongoDB, so
+// the embedded PGLite database is never used (and its wasm data file isn't
+// shipped in the self-hosted Node build).
+if (
+  typeof window === "undefined" &&
+  dbSource === "pglite" &&
+  !process.env.MONGODB_URI?.trim()
+) {
   globalBoot.__pgBootstrapPromise__ ??= ensureDbReady().catch((err) => {
     globalBoot.__pgBootstrapPromise__ = undefined;
     console.error("[db] PGLite bootstrap failed:", err);

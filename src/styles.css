@@ -12,10 +12,10 @@
   --color-azure: #2f6feb;
   --color-azure-bright: #5c8dff;
   --color-azure-dim: #1a2f5c;
-  --color-ember: #ff6a2c;
-  --color-ember-bright: #ff8f4d;
-  --color-ember-dim: #4a2413;
-  --color-gold: #e8b23e;
+  --color-ember: #2f6feb;
+  --color-ember-bright: #5c8dff;
+  --color-ember-dim: #1a2f5c;
+  --color-gold: #ffffff;
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Fraunces", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
@@ -129,7 +129,6 @@
 
 .btn {
   position: relative;
-  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -138,34 +137,18 @@
   font-weight: 700;
   font-size: 15px;
   padding: 15px 30px;
-  border-radius: var(--radius-blade);
+  border-radius: 0;
   border: 1px solid transparent;
   text-decoration: none;
-  transition:
-    border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.3s ease,
-    box-shadow 0.35s ease,
-    background 0.3s ease,
-    border-color 0.3s ease,
-    color 0.3s ease;
-}
-
-.btn:hover {
-  border-radius: var(--radius-blade-flip);
-  transform: translateY(-3px);
-}
-
-.btn:active {
-  transform: translateY(-1px) scale(0.96);
 }
 
 .btn-fill {
-  background: var(--color-ember);
-  color: #0a0603;
+  background: #ffffff;
+  color: #070a13;
 }
 
 .btn-fill:hover {
-  background: var(--color-ember-bright);
+  background: #dbe6ff;
 }
 
 .btn-outline {
@@ -177,9 +160,6 @@
 .btn-outline:hover {
   border-color: var(--color-azure-bright);
   color: #fff;
-  box-shadow:
-    0 0 0 1px var(--color-azure-bright) inset,
-    0 10px 26px -14px rgba(47, 111, 235, 0.6);
 }
 
 .btn-azure {
@@ -281,7 +261,7 @@
 .pack-cards:hover .pack-card:nth-child(2) {
   transform: translateY(-14px) scale(1.04);
   border-color: var(--color-gold);
-  box-shadow: 0 26px 50px -20px rgba(232, 178, 62, 0.35);
+  box-shadow: 0 26px 50px -20px rgba(255, 255, 255, 0.25);
 }
 
 .pack-cards:hover .pack-card:nth-child(3) {
@@ -317,7 +297,7 @@
 }
 
 .soul-card-mythic {
-  box-shadow: 0 0 0 1px rgba(232, 178, 62, 0.5);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 .chip {
@@ -384,13 +364,13 @@
   background: var(--color-ember);
 }
 .tier-epic {
-  background: #c86bd8;
+  background: #9db8ff;
 }
 .tier-legendary {
   background: var(--color-gold);
 }
 .tier-mythic {
-  background: #e8455a;
+  background: #dbe6ff;
 }
 
 .panel {

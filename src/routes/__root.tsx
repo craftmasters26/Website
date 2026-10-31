@@ -1,40 +1,41 @@
-import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+import { createRootRoute, HeadContent, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteHeader, SiteFooter } from "@/components/site-header";
 import { DocumentTitle } from "@/components/document-title";
 import { NotFound } from "@/components/not-found";
+import { COMPANY_PATHS } from "@/components/bp-layout";
 import AdBanner from "@/components/AdBanner";
-import { APP_NAME } from "@/lib/titles";
 import { useCatalogAutoSync } from "@/lib/catalog-live";
 import appCss from "../styles.css?url";
+import { SITE_URL } from "@/lib/site";
 
 const OG_DESCRIPTION =
-  "Souls spawn in your Discord server. Catch them, open packs, craft rare characters and climb the leaderboard.";
+  "Boundless Production is an independent studio making games and Discord bots. Home of BleachDex, with Boundless and Scattered Stars coming soon.";
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: APP_NAME },
+      { title: "Boundless Production — Games & Discord Bots" },
       { name: "theme-color", content: "#070a13" },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "BleachDex" },
-      { property: "og:title", content: "BleachDex" },
+      { property: "og:site_name", content: "Boundless Production" },
+      { property: "og:title", content: "Boundless Production" },
       { property: "og:description", content: OG_DESCRIPTION },
-      { property: "og:url", content: "https://bleachdex.vercel.app" },
-      { property: "og:image", content: "https://bleachdex.vercel.app/brand/bot-avatar.png" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: `${SITE_URL}/brand/bot-avatar.png` },
       { property: "og:image:width", content: "256" },
       { property: "og:image:height", content: "256" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "BleachDex" },
+      { name: "twitter:title", content: "Boundless Production" },
       { name: "twitter:description", content: OG_DESCRIPTION },
-      { name: "twitter:image", content: "https://bleachdex.vercel.app/brand/bot-avatar.png" },
+      { name: "twitter:image", content: `${SITE_URL}/brand/bot-avatar.png` },
       {
         name: "description",
         content:
-          "BleachDex is a Discord bot where souls spawn in chat. Browse every soul, weapon and craft-only character, and log in with Discord to see your own collection.",
+          "Boundless Production is an independent studio making games and Discord bots — including BleachDex, where souls spawn in your server.",
       },
     ],
     links: [
@@ -64,6 +65,11 @@ export const Route = createRootRoute({
 
 function RootDocument() {
   useCatalogAutoSync();
+  // The company pages (/, /about, /what-we-make, /projects, /contact-us) have its own header/footer and no ad slot;
+  // every other route keeps the BleachDex chrome.
+  const isCompanyHome = useRouterState({
+    select: (s) => COMPANY_PATHS.includes(s.location.pathname.replace(/\/+$/, "") || "/"),
+  });
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <head>
@@ -72,19 +78,23 @@ function RootDocument() {
       <body>
         <PreviewHostBridge />
         <AuthProvider>
-          <div className="site-bg">
-            <DocumentTitle />
-            <div className="relative z-10 flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="flex-1">
-                <Outlet />
+          <DocumentTitle />
+          {isCompanyHome ? (
+            <Outlet />
+          ) : (
+            <div className="site-bg">
+              <div className="relative z-10 flex min-h-screen flex-col">
+                <SiteHeader />
+                <div className="flex-1">
+                  <Outlet />
+                </div>
+                <div className="mx-auto w-full max-w-6xl px-4 py-6">
+                  <AdBanner />
+                </div>
+                <SiteFooter />
               </div>
-              <div className="mx-auto w-full max-w-6xl px-4 py-6">
-                <AdBanner />
-              </div>
-              <SiteFooter />
             </div>
-          </div>
+          )}
         </AuthProvider>
         <Scripts />
       </body>

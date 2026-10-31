@@ -9,7 +9,7 @@ export function NotFound() {
         This soul wandered off. The page you're looking for doesn't exist.
       </p>
       <Link to="/" className="btn btn-fill mt-8">
-        Back to BleachDex
+        Back to Boundless Production
       </Link>
     </main>
   );

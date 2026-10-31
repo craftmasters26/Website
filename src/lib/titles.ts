@@ -1,7 +1,12 @@
 const APP_NAME = "BleachDex";
 
 const PAGE_TITLES: Record<string, string> = {
-  "/": APP_NAME,
+  "/": "Boundless Production — Games & Discord Bots",
+  "/bleachdex": APP_NAME,
+  "/about": "About — Boundless Production",
+  "/what-we-make": "What we make — Boundless Production",
+  "/projects": "Projects — Boundless Production",
+  "/contact-us": "Contact — Boundless Production",
   "/list": `List · ${APP_NAME}`,
   "/commands": `Commands · ${APP_NAME}`,
   "/premium": `Premium · ${APP_NAME}`,

@@ -170,7 +170,9 @@ export default defineConfig(({ command, isPreview }) => ({
     ...(command === "build" || isPreview
       ? [
           nitro({
-            preset: "vercel",
+            // Self-hosted VPS => plain Node server (.output/server/index.mjs).
+            // Still builds for Vercel automatically when VERCEL=1 is set.
+            preset: process.env.VERCEL ? "vercel" : "node-server",
             // Auto-registers server/middleware/* (the PWA install page +
             // manifest + head-tag middleware). Nitro v3 defaults serverDir to
             // false, so removing this silently unwires /?install=1 on deploys.

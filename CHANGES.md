@@ -182,3 +182,8 @@ specifically — this archive doesn't contain either.
 - **Admin:** `/admin` (`src/routes/admin.tsx`, `src/lib/admin.ts`, `src/lib/admin-access.ts`). Visible only to Discord ids on the BOT's `ADMIN_USER_IDS` (full) / `LIMITED_ADMIN_USER_IDS` (spawn only); the site asks the bot on every call.
 - Shared bot caller + signed tokens: `src/lib/bot-api.server.ts`.
 - New env vars (Vercel): `VITE_GAM_REWARDED_AD_UNIT` (or `VITE_REWARDED_AD_TEST=true` while testing), optional `AD_MIN_WATCH_SECONDS` (default 8), optional `AD_REWARD_SECRET` (falls back to BETTER_AUTH_SECRET / BOT_API_SECRET).
+
+## Boundless Production company site + blue/white theme
+- Company pages: `/`, `/about`, `/what-we-make`, `/projects`, `/contact-us` (`src/routes/`). Shared header/footer/cards: `src/components/bp-layout.tsx`.
+- The whole site (company pages and BleachDex) now uses one blue + white palette. The colours are the `--color-ember*` / `--color-gold` tokens at the top of `src/styles.css`; rarity colours are shades of blue/white (`.tier-*`).
+- The old BleachDex home moved to `/bleachdex`. Boundless and Scattered Stars show "Coming soon".

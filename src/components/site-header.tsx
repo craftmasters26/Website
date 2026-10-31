@@ -8,7 +8,7 @@ import { useAdminAccess } from "@/lib/admin-access";
 import { botAvatar, discordMark } from "@/assets";
 
 type NavLink = {
-  to: "/" | "/list" | "/owned" | "/leaderboard" | "/commands" | "/premium" | "/admin";
+  to: "/" | "/bleachdex" | "/list" | "/owned" | "/leaderboard" | "/commands" | "/premium" | "/admin";
   label: string;
   /** Shows a small pulsing "live" dot. */
   live?: boolean;
@@ -19,7 +19,7 @@ function useNavLinks(): NavLink[] {
   const signedIn = Boolean(user) && !user?.isDevFallback;
   const admin = useAdminAccess();
   const links: NavLink[] = [
-    { to: "/", label: "Home" },
+    { to: "/bleachdex", label: "Home" },
     { to: "/list", label: "List" },
   ];
   // Inventory slots in after "List" once logged in.
@@ -37,7 +37,7 @@ function useNavLinks(): NavLink[] {
 function LiveDot() {
   return (
     <span
-      className="ml-1.5 inline-block size-1.5 animate-pulse rounded-full bg-emerald-400 align-middle"
+      className="ml-1.5 inline-block size-1.5 animate-pulse rounded-full bg-azure-bright align-middle"
       aria-hidden="true"
     />
   );
@@ -98,7 +98,7 @@ function AccountMenu({ className }: { className?: string }) {
       <button
         type="button"
         className="font-mono text-[11px] text-bone-faint underline-offset-4 hover:text-bone hover:underline"
-        onClick={() => signOut("/")}
+        onClick={() => signOut("/bleachdex")}
       >
         Log out
       </button>
@@ -178,7 +178,7 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="wrap flex items-center justify-between gap-2 py-3">
-        <Link to="/" className="brand flex shrink-0 items-center gap-3 no-underline">
+        <Link to="/bleachdex" className="brand flex shrink-0 items-center gap-3 no-underline">
           <BrandMark />
           <span className="leading-tight">
             <span className="block font-serif text-[19px] font-bold text-bone">BleachDex</span>
@@ -187,10 +187,7 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
           {links.map((link) => {
-            const active =
-              link.to === "/"
-                ? pathname === "/"
-                : pathname === link.to || pathname.startsWith(`${link.to}/`);
+            const active = pathname === link.to || pathname.startsWith(`${link.to}/`);
             return (
               <Link
                 key={link.to}
@@ -205,10 +202,16 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
+          <Link
+            to="/"
+            className="hidden font-mono text-[11.5px] text-bone-faint underline-offset-4 hover:text-bone hover:underline xl:inline"
+          >
+            ← Boundless Production
+          </Link>
           <HeaderAuth />
           <button
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-[var(--radius-blade)] border border-line-bright text-bone lg:hidden"
+            className="inline-flex size-11 items-center justify-center border border-line-bright text-bone lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
           >
@@ -250,6 +253,9 @@ export function SiteFooter() {
           BleachDex · not affiliated with Shueisha/Studio Pierrot
         </span>
         <div className="flex flex-wrap gap-5 text-[13px] text-bone-dim">
+          <Link to="/" className="hover:text-azure-bright">
+            Boundless Production
+          </Link>
           <Link to="/list" className="hover:text-azure-bright">
             List
           </Link>

@@ -35,8 +35,8 @@ export const TIER_META: Record<
   },
   "urahara-foundation-shareholder": {
     price: "$5",
-    accent: "#ff8f4d",
-    whopAccent: "orange",
+    accent: "#ffffff",
+    whopAccent: "blue",
     tag: "Best value",
     cta: "Become a Shareholder",
     perks: [

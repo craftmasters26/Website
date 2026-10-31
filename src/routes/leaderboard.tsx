@@ -215,11 +215,11 @@ function LeaderboardPage() {
               <span
                 className={cn(
                   "size-2 rounded-full",
-                  live ? "animate-pulse bg-emerald-400" : "bg-ember",
+                  live ? "animate-pulse bg-azure-bright" : "bg-ember",
                 )}
                 aria-hidden="true"
               />
-              <span className={live ? "text-emerald-300" : "text-ember-bright"}>
+              <span className={live ? "text-azure-bright" : "text-ember-bright"}>
                 {live ? "LIVE" : error ? "OFFLINE" : "DELAYED"}
               </span>
               {ago !== null ? <span>· updated {ago}s ago</span> : null}
