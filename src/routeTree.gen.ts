@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-<<<<<<< HEAD
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as BleachdexRouteImport } from './routes/bleachdex'
@@ -29,7 +28,6 @@ import { Route as ListRouteImport } from './routes/list'
 import { Route as OwnedRouteImport } from './routes/owned'
 import { Route as PremiumRouteImport } from './routes/premium'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-<<<<<<< HEAD
 import { Route as ProjectsRouteImport } from './routes/projects'
 =======
 >>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
@@ -48,7 +46,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-<<<<<<< HEAD
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -61,7 +58,6 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-<<<<<<< HEAD
 const BleachdexRoute = BleachdexRouteImport.update({
   id: '/bleachdex',
   path: '/bleachdex',
@@ -84,7 +80,6 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-<<<<<<< HEAD
 const ContactUsRoute = ContactUsRouteImport.update({
   id: '/contact-us',
   path: '/contact-us',
@@ -115,7 +110,6 @@ const PremiumRoute = PremiumRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
-<<<<<<< HEAD
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -173,7 +167,6 @@ const WeaponsIdRoute = WeaponsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-<<<<<<< HEAD
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/bleachdex': typeof BleachdexRoute
@@ -192,7 +185,6 @@ export interface FileRoutesByFullPath {
   '/owned': typeof OwnedRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
-<<<<<<< HEAD
   '/projects': typeof ProjectsRoute
 =======
 >>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
@@ -208,7 +200,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-<<<<<<< HEAD
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/bleachdex': typeof BleachdexRoute
@@ -227,7 +218,6 @@ export interface FileRoutesByTo {
   '/owned': typeof OwnedRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
-<<<<<<< HEAD
   '/projects': typeof ProjectsRoute
   '/ranks': typeof RanksRoute
   '/terms': typeof TermsRoute
@@ -244,7 +234,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-<<<<<<< HEAD
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/bleachdex': typeof BleachdexRoute
@@ -263,7 +252,6 @@ export interface FileRoutesById {
   '/owned': typeof OwnedRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
-<<<<<<< HEAD
   '/projects': typeof ProjectsRoute
 =======
 >>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
@@ -281,7 +269,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-<<<<<<< HEAD
     | '/about'
     | '/admin'
     | '/bleachdex'
@@ -300,7 +287,6 @@ export interface FileRouteTypes {
     | '/owned'
     | '/premium'
     | '/privacy'
-<<<<<<< HEAD
     | '/projects'
 =======
 >>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
@@ -316,7 +302,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-<<<<<<< HEAD
     | '/about'
     | '/admin'
     | '/bleachdex'
@@ -335,7 +320,6 @@ export interface FileRouteTypes {
     | '/owned'
     | '/premium'
     | '/privacy'
-<<<<<<< HEAD
     | '/projects'
     | '/ranks'
     | '/terms'
@@ -351,7 +335,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-<<<<<<< HEAD
     | '/about'
     | '/admin'
     | '/bleachdex'
@@ -370,7 +353,6 @@ export interface FileRouteTypes {
     | '/owned'
     | '/premium'
     | '/privacy'
-<<<<<<< HEAD
     | '/projects'
 =======
 >>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
@@ -387,7 +369,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-<<<<<<< HEAD
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
   BleachdexRoute: typeof BleachdexRoute
@@ -406,7 +387,6 @@ export interface RootRouteChildren {
   OwnedRoute: typeof OwnedRoute
   PremiumRoute: typeof PremiumRoute
   PrivacyRoute: typeof PrivacyRoute
-<<<<<<< HEAD
   ProjectsRoute: typeof ProjectsRoute
 =======
 >>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
@@ -426,7 +406,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-<<<<<<< HEAD
     '/about': {
       id: '/about'
       path: '/about'
@@ -443,7 +422,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-<<<<<<< HEAD
     '/bleachdex': {
       id: '/bleachdex'
       path: '/bleachdex'
@@ -474,7 +452,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-<<<<<<< HEAD
     '/contact-us': {
       id: '/contact-us'
       path: '/contact-us'
@@ -517,7 +494,6 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-<<<<<<< HEAD
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -623,7 +599,6 @@ const WeaponsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-<<<<<<< HEAD
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
   BleachdexRoute: BleachdexRoute,
@@ -642,7 +617,6 @@ const rootRouteChildren: RootRouteChildren = {
   OwnedRoute: OwnedRoute,
   PremiumRoute: PremiumRoute,
   PrivacyRoute: PrivacyRoute,
-<<<<<<< HEAD
   ProjectsRoute: ProjectsRoute,
 =======
 >>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
