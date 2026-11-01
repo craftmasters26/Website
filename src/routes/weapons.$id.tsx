@@ -28,7 +28,7 @@ function WeaponDetail() {
       <div className="wrap grid items-start gap-12 md:grid-cols-[minmax(0,380px)_1fr]">
         <div
           className={cn(
-            "overflow-hidden rounded-[10px_28px_10px_28px] border border-line bg-void-raised",
+            "overflow-hidden rounded-[10px] border border-line bg-void-raised",
             weapon.tier === "mythic" && "soul-card-mythic",
           )}
         >
@@ -46,7 +46,7 @@ function WeaponDetail() {
           >
             ← Back to the list
           </Link>
-          <div className="kicker mt-6">{FACTION_LABEL[weapon.faction]}</div>
+          <div className="mt-6 font-mono text-[13px] text-azure-bright">{FACTION_LABEL[weapon.faction]}</div>
           <h1 className="font-serif text-4xl md:text-5xl">{weapon.name}</h1>
           <p className="mt-3 font-mono text-sm text-gold">{TIER_LABEL[weapon.tier]}</p>
 

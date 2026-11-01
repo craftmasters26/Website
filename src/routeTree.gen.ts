@@ -13,33 +13,29 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as BleachdexRouteImport } from './routes/bleachdex'
+import { Route as BotsRouteImport } from './routes/bots'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CommandsRouteImport } from './routes/commands'
+import { Route as CompanyPrivacyRouteImport } from './routes/company-privacy'
+import { Route as CompanyTermsRouteImport } from './routes/company-terms'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
-=======
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as CheckoutRouteImport } from './routes/checkout'
-import { Route as CommandsRouteImport } from './routes/commands'
-import { Route as ContactRouteImport } from './routes/contact'
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+import { Route as GamesRouteImport } from './routes/games'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as ListRouteImport } from './routes/list'
 import { Route as OwnedRouteImport } from './routes/owned'
 import { Route as PremiumRouteImport } from './routes/premium'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProjectsRouteImport } from './routes/projects'
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
 import { Route as RanksRouteImport } from './routes/ranks'
 import { Route as RosterRouteImport } from './routes/roster'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as WeaponsRouteImport } from './routes/weapons'
 import { Route as WhatWeMakeRouteImport } from './routes/what-we-make'
-import { Route as RosterIndexRouteImport } from './routes/roster.index'
 import { Route as RosterIdRouteImport } from './routes/roster.$id'
-import { Route as WeaponsIndexRouteImport } from './routes/weapons.index'
 import { Route as WeaponsIdRouteImport } from './routes/weapons.$id'
+import { Route as RosterIndexRouteImport } from './routes/roster.index'
+import { Route as WeaponsIndexRouteImport } from './routes/weapons.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -51,8 +47,6 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -63,8 +57,11 @@ const BleachdexRoute = BleachdexRouteImport.update({
   path: '/bleachdex',
   getParentRoute: () => rootRouteImport,
 } as any)
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+const BotsRoute = BotsRouteImport.update({
+  id: '/bots',
+  path: '/bots',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
@@ -73,6 +70,16 @@ const CheckoutRoute = CheckoutRouteImport.update({
 const CommandsRoute = CommandsRouteImport.update({
   id: '/commands',
   path: '/commands',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyPrivacyRoute = CompanyPrivacyRouteImport.update({
+  id: '/company-privacy',
+  path: '/company-privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyTermsRoute = CompanyTermsRouteImport.update({
+  id: '/company-terms',
+  path: '/company-terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -85,8 +92,11 @@ const ContactUsRoute = ContactUsRouteImport.update({
   path: '/contact-us',
   getParentRoute: () => rootRouteImport,
 } as any)
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+const GamesRoute = GamesRouteImport.update({
+  id: '/games',
+  path: '/games',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LeaderboardRoute = LeaderboardRouteImport.update({
   id: '/leaderboard',
   path: '/leaderboard',
@@ -115,8 +125,6 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
   getParentRoute: () => rootRouteImport,
 } as any)
 const RanksRoute = RanksRouteImport.update({
@@ -144,24 +152,24 @@ const WhatWeMakeRoute = WhatWeMakeRouteImport.update({
   path: '/what-we-make',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RosterIndexRoute = RosterIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => RosterRoute,
-} as any)
 const RosterIdRoute = RosterIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => RosterRoute,
 } as any)
-const WeaponsIndexRoute = WeaponsIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => WeaponsRoute,
-} as any)
 const WeaponsIdRoute = WeaponsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
+  getParentRoute: () => WeaponsRoute,
+} as any)
+const RosterIndexRoute = RosterIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => RosterRoute,
+} as any)
+const WeaponsIndexRoute = WeaponsIndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => WeaponsRoute,
 } as any)
 
@@ -170,24 +178,20 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/bleachdex': typeof BleachdexRoute
+  '/bots': typeof BotsRoute
   '/checkout': typeof CheckoutRoute
   '/commands': typeof CommandsRoute
+  '/company-privacy': typeof CompanyPrivacyRoute
+  '/company-terms': typeof CompanyTermsRoute
   '/contact': typeof ContactRoute
   '/contact-us': typeof ContactUsRoute
-=======
-  '/admin': typeof AdminRoute
-  '/checkout': typeof CheckoutRoute
-  '/commands': typeof CommandsRoute
-  '/contact': typeof ContactRoute
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+  '/games': typeof GamesRoute
   '/leaderboard': typeof LeaderboardRoute
   '/list': typeof ListRoute
   '/owned': typeof OwnedRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
   '/ranks': typeof RanksRoute
   '/roster': typeof RosterRouteWithChildren
   '/terms': typeof TermsRoute
@@ -203,16 +207,14 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/bleachdex': typeof BleachdexRoute
+  '/bots': typeof BotsRoute
   '/checkout': typeof CheckoutRoute
   '/commands': typeof CommandsRoute
+  '/company-privacy': typeof CompanyPrivacyRoute
+  '/company-terms': typeof CompanyTermsRoute
   '/contact': typeof ContactRoute
   '/contact-us': typeof ContactUsRoute
-=======
-  '/admin': typeof AdminRoute
-  '/checkout': typeof CheckoutRoute
-  '/commands': typeof CommandsRoute
-  '/contact': typeof ContactRoute
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+  '/games': typeof GamesRoute
   '/leaderboard': typeof LeaderboardRoute
   '/list': typeof ListRoute
   '/owned': typeof OwnedRoute
@@ -222,10 +224,6 @@ export interface FileRoutesByTo {
   '/ranks': typeof RanksRoute
   '/terms': typeof TermsRoute
   '/what-we-make': typeof WhatWeMakeRoute
-=======
-  '/ranks': typeof RanksRoute
-  '/terms': typeof TermsRoute
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
   '/roster/$id': typeof RosterIdRoute
   '/weapons/$id': typeof WeaponsIdRoute
   '/roster': typeof RosterIndexRoute
@@ -237,24 +235,20 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/bleachdex': typeof BleachdexRoute
+  '/bots': typeof BotsRoute
   '/checkout': typeof CheckoutRoute
   '/commands': typeof CommandsRoute
+  '/company-privacy': typeof CompanyPrivacyRoute
+  '/company-terms': typeof CompanyTermsRoute
   '/contact': typeof ContactRoute
   '/contact-us': typeof ContactUsRoute
-=======
-  '/admin': typeof AdminRoute
-  '/checkout': typeof CheckoutRoute
-  '/commands': typeof CommandsRoute
-  '/contact': typeof ContactRoute
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+  '/games': typeof GamesRoute
   '/leaderboard': typeof LeaderboardRoute
   '/list': typeof ListRoute
   '/owned': typeof OwnedRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
   '/ranks': typeof RanksRoute
   '/roster': typeof RosterRouteWithChildren
   '/terms': typeof TermsRoute
@@ -272,24 +266,20 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/bleachdex'
+    | '/bots'
     | '/checkout'
     | '/commands'
+    | '/company-privacy'
+    | '/company-terms'
     | '/contact'
     | '/contact-us'
-=======
-    | '/admin'
-    | '/checkout'
-    | '/commands'
-    | '/contact'
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+    | '/games'
     | '/leaderboard'
     | '/list'
     | '/owned'
     | '/premium'
     | '/privacy'
     | '/projects'
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
     | '/ranks'
     | '/roster'
     | '/terms'
@@ -305,16 +295,14 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/bleachdex'
+    | '/bots'
     | '/checkout'
     | '/commands'
+    | '/company-privacy'
+    | '/company-terms'
     | '/contact'
     | '/contact-us'
-=======
-    | '/admin'
-    | '/checkout'
-    | '/commands'
-    | '/contact'
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+    | '/games'
     | '/leaderboard'
     | '/list'
     | '/owned'
@@ -324,10 +312,6 @@ export interface FileRouteTypes {
     | '/ranks'
     | '/terms'
     | '/what-we-make'
-=======
-    | '/ranks'
-    | '/terms'
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
     | '/roster/$id'
     | '/weapons/$id'
     | '/roster'
@@ -338,24 +322,20 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/bleachdex'
+    | '/bots'
     | '/checkout'
     | '/commands'
+    | '/company-privacy'
+    | '/company-terms'
     | '/contact'
     | '/contact-us'
-=======
-    | '/admin'
-    | '/checkout'
-    | '/commands'
-    | '/contact'
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+    | '/games'
     | '/leaderboard'
     | '/list'
     | '/owned'
     | '/premium'
     | '/privacy'
     | '/projects'
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
     | '/ranks'
     | '/roster'
     | '/terms'
@@ -372,24 +352,20 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
   BleachdexRoute: typeof BleachdexRoute
+  BotsRoute: typeof BotsRoute
   CheckoutRoute: typeof CheckoutRoute
   CommandsRoute: typeof CommandsRoute
+  CompanyPrivacyRoute: typeof CompanyPrivacyRoute
+  CompanyTermsRoute: typeof CompanyTermsRoute
   ContactRoute: typeof ContactRoute
   ContactUsRoute: typeof ContactUsRoute
-=======
-  AdminRoute: typeof AdminRoute
-  CheckoutRoute: typeof CheckoutRoute
-  CommandsRoute: typeof CommandsRoute
-  ContactRoute: typeof ContactRoute
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+  GamesRoute: typeof GamesRoute
   LeaderboardRoute: typeof LeaderboardRoute
   ListRoute: typeof ListRoute
   OwnedRoute: typeof OwnedRoute
   PremiumRoute: typeof PremiumRoute
   PrivacyRoute: typeof PrivacyRoute
   ProjectsRoute: typeof ProjectsRoute
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
   RanksRoute: typeof RanksRoute
   RosterRoute: typeof RosterRouteWithChildren
   TermsRoute: typeof TermsRoute
@@ -413,8 +389,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -429,8 +403,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BleachdexRouteImport
       parentRoute: typeof rootRouteImport
     }
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+    '/bots': {
+      id: '/bots'
+      path: '/bots'
+      fullPath: '/bots'
+      preLoaderRoute: typeof BotsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout': {
       id: '/checkout'
       path: '/checkout'
@@ -443,6 +422,20 @@ declare module '@tanstack/react-router' {
       path: '/commands'
       fullPath: '/commands'
       preLoaderRoute: typeof CommandsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company-privacy': {
+      id: '/company-privacy'
+      path: '/company-privacy'
+      fullPath: '/company-privacy'
+      preLoaderRoute: typeof CompanyPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company-terms': {
+      id: '/company-terms'
+      path: '/company-terms'
+      fullPath: '/company-terms'
+      preLoaderRoute: typeof CompanyTermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -459,8 +452,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactUsRouteImport
       parentRoute: typeof rootRouteImport
     }
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+    '/games': {
+      id: '/games'
+      path: '/games'
+      fullPath: '/games'
+      preLoaderRoute: typeof GamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/leaderboard': {
       id: '/leaderboard'
       path: '/leaderboard'
@@ -501,8 +499,6 @@ declare module '@tanstack/react-router' {
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
       parentRoute: typeof rootRouteImport
     }
     '/ranks': {
@@ -540,13 +536,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WhatWeMakeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/roster/': {
-      id: '/roster/'
-      path: '/'
-      fullPath: '/roster/'
-      preLoaderRoute: typeof RosterIndexRouteImport
-      parentRoute: typeof RosterRoute
-    }
     '/roster/$id': {
       id: '/roster/$id'
       path: '/$id'
@@ -554,18 +543,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RosterIdRouteImport
       parentRoute: typeof RosterRoute
     }
-    '/weapons/': {
-      id: '/weapons/'
-      path: '/'
-      fullPath: '/weapons/'
-      preLoaderRoute: typeof WeaponsIndexRouteImport
-      parentRoute: typeof WeaponsRoute
-    }
     '/weapons/$id': {
       id: '/weapons/$id'
       path: '/$id'
       fullPath: '/weapons/$id'
       preLoaderRoute: typeof WeaponsIdRouteImport
+      parentRoute: typeof WeaponsRoute
+    }
+    '/roster/': {
+      id: '/roster/'
+      path: '/'
+      fullPath: '/roster/'
+      preLoaderRoute: typeof RosterIndexRouteImport
+      parentRoute: typeof RosterRoute
+    }
+    '/weapons/': {
+      id: '/weapons/'
+      path: '/'
+      fullPath: '/weapons/'
+      preLoaderRoute: typeof WeaponsIndexRouteImport
       parentRoute: typeof WeaponsRoute
     }
   }
@@ -602,24 +598,20 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
   BleachdexRoute: BleachdexRoute,
+  BotsRoute: BotsRoute,
   CheckoutRoute: CheckoutRoute,
   CommandsRoute: CommandsRoute,
+  CompanyPrivacyRoute: CompanyPrivacyRoute,
+  CompanyTermsRoute: CompanyTermsRoute,
   ContactRoute: ContactRoute,
   ContactUsRoute: ContactUsRoute,
-=======
-  AdminRoute: AdminRoute,
-  CheckoutRoute: CheckoutRoute,
-  CommandsRoute: CommandsRoute,
-  ContactRoute: ContactRoute,
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
+  GamesRoute: GamesRoute,
   LeaderboardRoute: LeaderboardRoute,
   ListRoute: ListRoute,
   OwnedRoute: OwnedRoute,
   PremiumRoute: PremiumRoute,
   PrivacyRoute: PrivacyRoute,
   ProjectsRoute: ProjectsRoute,
-=======
->>>>>>> 60ec52effb3113173e0106f81c62e2d6b5b25a38
   RanksRoute: RanksRoute,
   RosterRoute: RosterRouteWithChildren,
   TermsRoute: TermsRoute,

@@ -12,7 +12,6 @@ function PremiumPage() {
   return (
     <main className="page-enter py-16 md:py-20">
       <div className="wrap">
-        <div className="kicker">Premium</div>
         <h1 className="mb-3 font-serif text-[38px] leading-tight">
           Support the bot.
         </h1>

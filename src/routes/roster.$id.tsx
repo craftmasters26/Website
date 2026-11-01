@@ -87,7 +87,7 @@ function SoulDetail() {
           >
             ← Back to the list
           </Link>
-          <div className="kicker mt-6">
+          <div className="mt-6 font-mono text-[13px] text-azure-bright">
             {soul.craftOnly ? `Craft only · ${soul.craftCategory}` : FACTION_LABEL[soul.faction]}
           </div>
           <h1 className="font-serif text-4xl md:text-5xl">{soul.name}</h1>
@@ -173,7 +173,7 @@ function SoulArt({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-[10px_28px_10px_28px] border border-line bg-void-raised",
+        "overflow-hidden rounded-[10px] border border-line bg-void-raised",
         mythic && "soul-card-mythic",
       )}
       data-soul-art={soulId}

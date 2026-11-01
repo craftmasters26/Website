@@ -9,7 +9,7 @@ export const Route = createFileRoute("/what-we-make")({
 function WhatWeMake() {
   return (
     <BpLayout>
-      <PageHead kicker="What we make" title="Games and Discord bots." />
+      <PageHead title="Games and Discord bots." />
       <section className="pb-24">
         <div className="wrap">
           <MakeCards />

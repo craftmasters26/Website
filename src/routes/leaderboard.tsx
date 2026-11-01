@@ -179,7 +179,6 @@ function LeaderboardPage() {
   return (
     <main className="page-enter py-16 md:py-20">
       <div className="wrap">
-        <div className="kicker">Leaderboard</div>
         <div
           role="tablist"
           aria-label="Leaderboard period"

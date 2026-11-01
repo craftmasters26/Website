@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage, LegalSection, SUPPORT_URL } from "@/components/legal-page";
-import { SITE_HOST } from "@/lib/site";
+import { BLEACHDEX_HOST } from "@/lib/site";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -23,7 +23,7 @@ function PrivacyPage() {
     <LegalPage eyebrow="Legal" title="Privacy Policy">
       <LegalSection heading="Who we are">
         <p>
-          BleachDex is a Discord bot and companion website at {SITE_HOST}. This policy
+          BleachDex is a Discord bot and companion website at {BLEACHDEX_HOST}. This policy
           explains what information the website and bot collect, why, and the choices you have.
         </p>
       </LegalSection>
