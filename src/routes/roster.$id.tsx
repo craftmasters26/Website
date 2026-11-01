@@ -173,7 +173,7 @@ function SoulArt({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-[10px_28px_10px_28px] border border-line bg-void-raised",
+        "overflow-hidden rounded-[10px] border border-line bg-void-raised",
         mythic && "soul-card-mythic",
       )}
       data-soul-art={soulId}

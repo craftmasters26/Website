@@ -211,7 +211,7 @@ export function SiteHeader() {
           <HeaderAuth />
           <button
             type="button"
-            className="inline-flex size-11 items-center justify-center border border-line-bright text-bone lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-lg border border-line-bright text-bone lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
           >

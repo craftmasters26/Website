@@ -28,7 +28,7 @@ function WeaponDetail() {
       <div className="wrap grid items-start gap-12 md:grid-cols-[minmax(0,380px)_1fr]">
         <div
           className={cn(
-            "overflow-hidden rounded-[10px_28px_10px_28px] border border-line bg-void-raised",
+            "overflow-hidden rounded-[10px] border border-line bg-void-raised",
             weapon.tier === "mythic" && "soul-card-mythic",
           )}
         >

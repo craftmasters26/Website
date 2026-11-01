@@ -2,10 +2,93 @@ import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { botAvatar } from "@/assets";
-import { SUPPORT_SERVER } from "@/lib/catalog";
+import { botAvatar, discordMark } from "@/assets";
 
 /** Paths that use the Boundless Production header/footer instead of BleachDex's. */
+export const BOUNDLESS_DISCORD = "https://discord.gg/unmtvJxR9h";
+
+/** Fill in the empty links when the accounts are ready; buttons with no link show as "coming soon". */
+export const SOCIAL_LINKS = {
+  youtube: "",
+  tiktok: "",
+  instagram: "",
+  discord: BOUNDLESS_DISCORD,
+};
+
+export const ABOUT_TEXT =
+  "We\u2019re Boundless Production: we strive to be boundless in the things we do such as the production and releasing of games, and discord bots, but being boundless demands of us having no limits, and as such we will strive to be limitless not only in how we do things, but in the things we do for that is what it means to be Boundless Production.";
+
+const ico = {
+  width: 18,
+  height: 18,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  "aria-hidden": true,
+} as const;
+
+function YouTubeIcon() {
+  return (
+    <svg {...ico}>
+      <rect x="2" y="5" width="20" height="14" rx="4" />
+      <path d="m10 9 5 3-5 3z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function InstagramIcon() {
+  return (
+    <svg {...ico}>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+function TikTokIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+    </svg>
+  );
+}
+
+/** YouTube, TikTok, Instagram and Discord buttons (render inside a flex row). */
+export function Socials() {
+  const items = [
+    { label: "YouTube", href: SOCIAL_LINKS.youtube, icon: <YouTubeIcon /> },
+    { label: "TikTok", href: SOCIAL_LINKS.tiktok, icon: <TikTokIcon /> },
+    { label: "Instagram", href: SOCIAL_LINKS.instagram, icon: <InstagramIcon /> },
+    {
+      label: "Discord",
+      href: SOCIAL_LINKS.discord,
+      icon: <img src={discordMark} alt="" className="size-[18px] rounded-[4px]" />,
+    },
+  ];
+  return (
+    <>
+      {items.map((i) => (
+        <a
+          key={i.label}
+          href={i.href || undefined}
+          target={i.href ? "_blank" : undefined}
+          rel="noreferrer"
+          aria-disabled={i.href ? undefined : true}
+          title={i.href ? undefined : "Link coming soon"}
+          className={cn("btn btn-outline", !i.href && "cursor-default opacity-60")}
+        >
+          {i.icon}
+          {i.label}
+        </a>
+      ))}
+    </>
+  );
+}
+
 export const COMPANY_PATHS = ["/", "/about", "/what-we-make", "/projects", "/contact-us"];
 
 const NAV = [
@@ -58,7 +141,7 @@ export function BpLayout({ children }: { children: ReactNode }) {
               </Link>
               <button
                 type="button"
-                className="inline-flex size-11 items-center justify-center border border-line-bright text-bone lg:hidden"
+                className="inline-flex size-11 items-center justify-center rounded-lg border border-line-bright text-bone lg:hidden"
                 aria-label={open ? "Close menu" : "Open menu"}
                 onClick={() => setOpen((v) => !v)}
               >
@@ -99,7 +182,7 @@ export function BpLayout({ children }: { children: ReactNode }) {
               <Link to="/contact-us" className="hover:text-azure-bright">Contact</Link>
               <Link to="/privacy" className="hover:text-azure-bright">Privacy</Link>
               <Link to="/terms" className="hover:text-azure-bright">Terms</Link>
-              <a href={SUPPORT_SERVER} className="hover:text-azure-bright" target="_blank" rel="noreferrer">
+              <a href={BOUNDLESS_DISCORD} className="hover:text-azure-bright" target="_blank" rel="noreferrer">
                 Discord
               </a>
             </div>
@@ -123,7 +206,7 @@ export function PageHead({ kicker, title, children }: { kicker: string; title: s
 }
 
 const cardBase =
-  "relative flex flex-col rounded-[10px_28px_10px_28px] border border-line-bright bg-void-raised p-7";
+  "relative flex flex-col rounded-[10px] border border-line-bright bg-void-raised p-7";
 
 function Chip({ children, live }: { children: ReactNode; live?: boolean }) {
   return (
