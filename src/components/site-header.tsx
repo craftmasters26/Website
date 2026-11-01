@@ -6,6 +6,7 @@ import { signInWithDiscord, signOut } from "@/lib/auth/client";
 import { useCurrentUser } from "@/lib/auth/use-current-user";
 import { useAdminAccess } from "@/lib/admin-access";
 import { botAvatar, discordMark } from "@/assets";
+import { SITE_URL } from "@/lib/site";
 
 type NavLink = {
   to: "/" | "/bleachdex" | "/list" | "/owned" | "/leaderboard" | "/commands" | "/premium" | "/admin";
@@ -202,9 +203,9 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
-          <Link to="/" className="hidden font-mono text-[11.5px] text-bone-faint underline-offset-4 hover:text-bone hover:underline xl:inline">
+          <a href={SITE_URL} className="hidden font-mono text-[11.5px] text-bone-faint underline-offset-4 hover:text-bone hover:underline xl:inline">
             ← Boundless Production
-          </Link>
+          </a>
           <HeaderAuth />
           <button
             type="button"
@@ -250,9 +251,9 @@ export function SiteFooter() {
           BleachDex · not affiliated with Shueisha/Studio Pierrot
         </span>
         <div className="flex flex-wrap gap-5 text-[13px] text-bone-dim">
-          <Link to="/" className="hover:text-azure-bright">
+          <a href={SITE_URL} className="hover:text-azure-bright">
             Boundless Production
-          </Link>
+          </a>
           <Link to="/list" className="hover:text-azure-bright">
             List
           </Link>
