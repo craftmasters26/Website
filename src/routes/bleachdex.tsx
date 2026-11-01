@@ -27,7 +27,7 @@ function Home() {
     <main className="page-enter">
       <section className="py-20 md:py-24">
         <div className="wrap grid items-center gap-14 md:grid-cols-[1.15fr_.85fr]">
-          <div>
+          <div className="hero-seq">
             <img src={brandIcon} alt="BleachDex" className="h-9 w-auto rounded-md" />
             <h1 className="mt-5 font-serif text-[52px] leading-[0.98] tracking-[-0.01em] md:text-[76px]">
               Bleach
@@ -67,7 +67,7 @@ function Home() {
           </div>
 
           <figure className="mx-auto w-full max-w-[340px] md:ml-auto">
-            <div className="rotate-[2deg] overflow-hidden rounded-[10px_28px_10px_28px] border border-line-bright bg-void-raised">
+            <div className="hero-float rotate-[2deg] overflow-hidden rounded-[10px] border border-line-bright bg-void-raised">
               <CatalogImage
                 src={featured.imagePath}
                 name={featured.name}
@@ -84,7 +84,6 @@ function Home() {
 
       <section className="border-t border-line py-24">
         <div className="wrap">
-          <div className="kicker">Packs</div>
           <div className="mb-12 flex flex-wrap items-end justify-between gap-10">
             <h2 className="max-w-xl font-serif text-[38px] leading-tight">
               3 daily pulls, 1 weekly pull — plus 2 more for watching ads.
@@ -117,7 +116,6 @@ function Home() {
       <section className="border-t border-line py-24">
         <div className="wrap flex flex-wrap items-end justify-between gap-8">
           <div>
-            <div className="kicker">Look first</div>
             <h2 className="font-serif text-[38px] leading-tight">
               Check the numbers, then invite it.
             </h2>

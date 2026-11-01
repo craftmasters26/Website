@@ -19,7 +19,7 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Boundless Production — Games & Discord Bots" },
-      { name: "theme-color", content: "#070a13" },
+      { name: "theme-color", content: "#d9eeff" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Boundless Production" },
       { property: "og:title", content: "Boundless Production" },

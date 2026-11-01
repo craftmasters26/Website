@@ -9,7 +9,7 @@ export const Route = createFileRoute("/projects")({
 function Projects() {
   return (
     <BpLayout>
-      <PageHead kicker="Projects" title="Our projects.">
+      <PageHead title="Our projects.">
         Click BleachDex to open its website. The others are coming soon.
       </PageHead>
       <section className="pb-24">

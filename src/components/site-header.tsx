@@ -202,16 +202,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
-          <Link
-            to="/"
-            className="hidden font-mono text-[11.5px] text-bone-faint underline-offset-4 hover:text-bone hover:underline xl:inline"
-          >
+          <Link to="/" className="hidden font-mono text-[11.5px] text-bone-faint underline-offset-4 hover:text-bone hover:underline xl:inline">
             ← Boundless Production
           </Link>
           <HeaderAuth />
           <button
             type="button"
-            className="inline-flex size-11 items-center justify-center border border-line-bright text-bone lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-lg border border-line-bright text-bone lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
           >

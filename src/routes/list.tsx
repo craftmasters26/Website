@@ -218,7 +218,6 @@ function ListPage() {
   return (
     <main className="page-enter py-16 md:py-20">
       <div className="wrap">
-        <div className="kicker">List</div>
         <div className="mb-10 flex flex-wrap items-end justify-between gap-8">
           <h1 className="max-w-xl font-serif text-[38px] leading-tight">
             One list for the whole roster.

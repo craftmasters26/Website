@@ -58,7 +58,6 @@ function AdminPage() {
   return (
     <main className="page-enter py-12 md:py-20">
       <div className="wrap">
-        <div className="kicker">Admin</div>
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <h1 className="font-serif text-[34px] leading-tight md:text-[38px]">Control panel.</h1>
           <span className="rounded-full border border-line-bright px-3 py-1 font-mono text-[11.5px] text-bone-dim">
