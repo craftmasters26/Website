@@ -3,7 +3,10 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { botAvatar, discordMark } from "@/assets";
+<<<<<<< HEAD
 import { BLEACHDEX_URL } from "@/lib/site";
+=======
+>>>>>>> 1b6b405a67324b36d9de831190e529232c97c2c5
 
 /** Paths that use the Boundless Production header/footer instead of BleachDex's. */
 export const BOUNDLESS_DISCORD = "https://discord.gg/unmtvJxR9h";
@@ -90,6 +93,7 @@ export function Socials() {
   );
 }
 
+<<<<<<< HEAD
 export const COMPANY_PATHS = [
   "/",
   "/what-we-make",
@@ -100,6 +104,9 @@ export const COMPANY_PATHS = [
   "/company-privacy",
   "/company-terms",
 ];
+=======
+export const COMPANY_PATHS = ["/", "/about", "/what-we-make", "/projects", "/contact-us"];
+>>>>>>> 1b6b405a67324b36d9de831190e529232c97c2c5
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -185,8 +192,13 @@ export function BpLayout({ children }: { children: ReactNode }) {
               <Link to="/what-we-make" className="hover:text-azure-bright">What we make</Link>
               <Link to="/projects" className="hover:text-azure-bright">Projects</Link>
               <Link to="/contact-us" className="hover:text-azure-bright">Contact</Link>
+<<<<<<< HEAD
               <Link to="/company-privacy" className="hover:text-azure-bright">Privacy</Link>
               <Link to="/company-terms" className="hover:text-azure-bright">Terms</Link>
+=======
+              <Link to="/privacy" className="hover:text-azure-bright">Privacy</Link>
+              <Link to="/terms" className="hover:text-azure-bright">Terms</Link>
+>>>>>>> 1b6b405a67324b36d9de831190e529232c97c2c5
               <a href={BOUNDLESS_DISCORD} className="hover:text-azure-bright" target="_blank" rel="noreferrer">
                 Discord
               </a>
