@@ -30,6 +30,13 @@ export type OgSite = {
   image?: string;
   banner?: string;
   color?: string;
+  siteName?: string;
+  url?: string;
+  shareImage?: string;
+  shareImageWidth?: number;
+  shareImageHeight?: number;
+  twitterCard?: string;
+  company?: OgSite;
 };
 
 export type GrokHeadContext = {
@@ -78,3 +85,6 @@ export declare function createHeadInjector(ctx?: GrokHeadContext): {
   push(chunk: Uint8Array | string): Uint8Array[];
   flush(): Uint8Array[];
 };
+
+export declare const COMPANY_OG_PATHS: string[];
+export declare function siteForPath(site: OgSite | undefined, pathname: string): OgSite;

@@ -1,7 +1,7 @@
 {
   "title": "BleachDex",
   "description": "Souls spawn in your Discord server. Catch them, open packs, craft rare characters and climb the leaderboard.",
-  "url": "https://boundless.run.place",
+  "url": "https://boundlessproductions.org",
   "type": "website",
   "card": "custom",
   "image": "/og.jpg",
@@ -9,5 +9,15 @@
   "shareImageWidth": 256,
   "shareImageHeight": 256,
   "twitterCard": "summary",
-  "color": "070a13"
+  "color": "070a13",
+  "company": {
+    "title": "Boundless Production",
+    "siteName": "Boundless Production",
+    "description": "Boundless Production is an independent studio making games and Discord bots. Home of BleachDex, with Boundless and Scattered Stars coming soon.",
+    "url": "https://boundlessproductions.org",
+    "shareImage": "/brand/boundless-card.png",
+    "shareImageWidth": 1200,
+    "shareImageHeight": 630,
+    "twitterCard": "summary_large_image"
+  }
 }

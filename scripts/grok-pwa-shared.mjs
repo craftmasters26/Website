@@ -357,7 +357,7 @@ export function grokOgHeadTags({
     tags.push(`<meta property="og:description" content="${escapeHtml(description)}">`);
     tags.push(`<meta name="twitter:description" content="${escapeHtml(description)}">`);
   }
-  tags.push(`<meta property="og:site_name" content="BleachDex">`);
+  tags.push(`<meta property="og:site_name" content="${escapeHtml(String(site.siteName ?? "BleachDex"))}">`);
   tags.push(`<meta property="og:type" content="website">`);
   if (String(site.type ?? "").toLowerCase() === "x:game") {
     tags.push(`<meta property="og:type" content="x:game">`);
@@ -382,6 +382,30 @@ export function grokOgHeadTags({
     }
   }
   return tags;
+}
+
+/**
+ * Company (Boundless Production) pages get the company share card; every other
+ * path (/bleachdex, /premium, /roster ...) keeps the BleachDex card.
+ * Keep in sync with COMPANY_PATHS in src/components/bp-layout.tsx.
+ */
+export const COMPANY_OG_PATHS = [
+  "/",
+  "/about",
+  "/what-we-make",
+  "/games",
+  "/bots",
+  "/projects",
+  "/contact-us",
+  "/company-privacy",
+  "/company-terms",
+];
+
+export function siteForPath(site = {}, pathname = "/") {
+  const { company, ...base } = site ?? {};
+  const clean = String(pathname || "/").replace(/\/+$/, "") || "/";
+  if (company && COMPANY_OG_PATHS.includes(clean)) return { ...base, ...company };
+  return base;
 }
 
 export function stripShareMetaTags(html) {

@@ -23,6 +23,7 @@ import {
   isInstallQuery,
   renderInstallPageHtml,
   renderWebManifest,
+  siteForPath,
 } from "../../scripts/grok-pwa-shared.mjs";
 
 interface GrokPwaEvent {
@@ -36,10 +37,10 @@ function requestHost(event: GrokPwaEvent): string {
   );
 }
 
-function injectHeadStreaming(response: Response, host: string): Response {
+function injectHeadStreaming(response: Response, host: string, pathname: string): Response {
   const injector = createHeadInjector({
     host,
-    site: grokOgIdentity.site,
+    site: siteForPath(grokOgIdentity.site, pathname),
   });
   const transformed = response.body!.pipeThrough(
     new TransformStream<Uint8Array, Uint8Array>({
@@ -105,7 +106,7 @@ export default async function grokPwaMiddleware(
     String(result.headers.get("content-type") ?? "").includes("text/html") &&
     !result.headers.get("content-encoding")
   ) {
-    return injectHeadStreaming(result, requestHost(event));
+    return injectHeadStreaming(result, requestHost(event), path);
   }
   return result;
 }
