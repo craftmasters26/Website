@@ -27,7 +27,7 @@ function CompanyPrivacy() {
           This policy covers the Boundless Production company website: the home, what we make,
           games, bots, projects and contact pages. It does not cover our products. Each product
           has its own privacy policy. BleachDex’s policy is at{" "}
-          <Link to="/privacy" className={companyLink}>
+          <Link to="/bleachdex/privacy" className={companyLink}>
             its Privacy Policy page
           </Link>
           .

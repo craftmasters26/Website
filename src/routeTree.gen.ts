@@ -11,31 +11,31 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as BleachdexRouteImport } from './routes/bleachdex'
 import { Route as BotsRouteImport } from './routes/bots'
-import { Route as CheckoutRouteImport } from './routes/checkout'
-import { Route as CommandsRouteImport } from './routes/commands'
 import { Route as CompanyPrivacyRouteImport } from './routes/company-privacy'
 import { Route as CompanyTermsRouteImport } from './routes/company-terms'
-import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as GamesRouteImport } from './routes/games'
-import { Route as LeaderboardRouteImport } from './routes/leaderboard'
-import { Route as ListRouteImport } from './routes/list'
-import { Route as OwnedRouteImport } from './routes/owned'
-import { Route as PremiumRouteImport } from './routes/premium'
-import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProjectsRouteImport } from './routes/projects'
-import { Route as RanksRouteImport } from './routes/ranks'
-import { Route as RosterRouteImport } from './routes/roster'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as WeaponsRouteImport } from './routes/weapons'
 import { Route as WhatWeMakeRouteImport } from './routes/what-we-make'
-import { Route as RosterIdRouteImport } from './routes/roster.$id'
-import { Route as WeaponsIdRouteImport } from './routes/weapons.$id'
-import { Route as RosterIndexRouteImport } from './routes/roster.index'
-import { Route as WeaponsIndexRouteImport } from './routes/weapons.index'
+import { Route as BleachdexIndexRouteImport } from './routes/bleachdex.index'
+import { Route as BleachdexAdminRouteImport } from './routes/bleachdex.admin'
+import { Route as BleachdexCheckoutRouteImport } from './routes/bleachdex.checkout'
+import { Route as BleachdexCommandsRouteImport } from './routes/bleachdex.commands'
+import { Route as BleachdexContactRouteImport } from './routes/bleachdex.contact'
+import { Route as BleachdexLeaderboardRouteImport } from './routes/bleachdex.leaderboard'
+import { Route as BleachdexListRouteImport } from './routes/bleachdex.list'
+import { Route as BleachdexOwnedRouteImport } from './routes/bleachdex.owned'
+import { Route as BleachdexPremiumRouteImport } from './routes/bleachdex.premium'
+import { Route as BleachdexPrivacyRouteImport } from './routes/bleachdex.privacy'
+import { Route as BleachdexRanksRouteImport } from './routes/bleachdex.ranks'
+import { Route as BleachdexRosterRouteImport } from './routes/bleachdex.roster'
+import { Route as BleachdexTermsRouteImport } from './routes/bleachdex.terms'
+import { Route as BleachdexWeaponsRouteImport } from './routes/bleachdex.weapons'
+import { Route as BleachdexRosterIndexRouteImport } from './routes/bleachdex.roster.index'
+import { Route as BleachdexRosterIdRouteImport } from './routes/bleachdex.roster.$id'
+import { Route as BleachdexWeaponsIndexRouteImport } from './routes/bleachdex.weapons.index'
+import { Route as BleachdexWeaponsIdRouteImport } from './routes/bleachdex.weapons.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -47,29 +47,9 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BleachdexRoute = BleachdexRouteImport.update({
-  id: '/bleachdex',
-  path: '/bleachdex',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BotsRoute = BotsRouteImport.update({
   id: '/bots',
   path: '/bots',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CheckoutRoute = CheckoutRouteImport.update({
-  id: '/checkout',
-  path: '/checkout',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CommandsRoute = CommandsRouteImport.update({
-  id: '/commands',
-  path: '/commands',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompanyPrivacyRoute = CompanyPrivacyRouteImport.update({
@@ -82,11 +62,6 @@ const CompanyTermsRoute = CompanyTermsRouteImport.update({
   path: '/company-terms',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ContactUsRoute = ContactUsRouteImport.update({
   id: '/contact-us',
   path: '/contact-us',
@@ -97,54 +72,9 @@ const GamesRoute = GamesRouteImport.update({
   path: '/games',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LeaderboardRoute = LeaderboardRouteImport.update({
-  id: '/leaderboard',
-  path: '/leaderboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ListRoute = ListRouteImport.update({
-  id: '/list',
-  path: '/list',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OwnedRoute = OwnedRouteImport.update({
-  id: '/owned',
-  path: '/owned',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PremiumRoute = PremiumRouteImport.update({
-  id: '/premium',
-  path: '/premium',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RanksRoute = RanksRouteImport.update({
-  id: '/ranks',
-  path: '/ranks',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RosterRoute = RosterRouteImport.update({
-  id: '/roster',
-  path: '/roster',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const WeaponsRoute = WeaponsRouteImport.update({
-  id: '/weapons',
-  path: '/weapons',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WhatWeMakeRoute = WhatWeMakeRouteImport.update({
@@ -152,225 +82,295 @@ const WhatWeMakeRoute = WhatWeMakeRouteImport.update({
   path: '/what-we-make',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RosterIdRoute = RosterIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => RosterRoute,
+const BleachdexIndexRoute = BleachdexIndexRouteImport.update({
+  id: '/bleachdex/',
+  path: '/bleachdex/',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const WeaponsIdRoute = WeaponsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => WeaponsRoute,
+const BleachdexAdminRoute = BleachdexAdminRouteImport.update({
+  id: '/bleachdex/admin',
+  path: '/bleachdex/admin',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const RosterIndexRoute = RosterIndexRouteImport.update({
+const BleachdexCheckoutRoute = BleachdexCheckoutRouteImport.update({
+  id: '/bleachdex/checkout',
+  path: '/bleachdex/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexCommandsRoute = BleachdexCommandsRouteImport.update({
+  id: '/bleachdex/commands',
+  path: '/bleachdex/commands',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexContactRoute = BleachdexContactRouteImport.update({
+  id: '/bleachdex/contact',
+  path: '/bleachdex/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexLeaderboardRoute = BleachdexLeaderboardRouteImport.update({
+  id: '/bleachdex/leaderboard',
+  path: '/bleachdex/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexListRoute = BleachdexListRouteImport.update({
+  id: '/bleachdex/list',
+  path: '/bleachdex/list',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexOwnedRoute = BleachdexOwnedRouteImport.update({
+  id: '/bleachdex/owned',
+  path: '/bleachdex/owned',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexPremiumRoute = BleachdexPremiumRouteImport.update({
+  id: '/bleachdex/premium',
+  path: '/bleachdex/premium',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexPrivacyRoute = BleachdexPrivacyRouteImport.update({
+  id: '/bleachdex/privacy',
+  path: '/bleachdex/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexRanksRoute = BleachdexRanksRouteImport.update({
+  id: '/bleachdex/ranks',
+  path: '/bleachdex/ranks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexRosterRoute = BleachdexRosterRouteImport.update({
+  id: '/bleachdex/roster',
+  path: '/bleachdex/roster',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexTermsRoute = BleachdexTermsRouteImport.update({
+  id: '/bleachdex/terms',
+  path: '/bleachdex/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexWeaponsRoute = BleachdexWeaponsRouteImport.update({
+  id: '/bleachdex/weapons',
+  path: '/bleachdex/weapons',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexRosterIndexRoute = BleachdexRosterIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => RosterRoute,
+  getParentRoute: () => BleachdexRosterRoute,
 } as any)
-const WeaponsIndexRoute = WeaponsIndexRouteImport.update({
+const BleachdexRosterIdRoute = BleachdexRosterIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => BleachdexRosterRoute,
+} as any)
+const BleachdexWeaponsIndexRoute = BleachdexWeaponsIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => WeaponsRoute,
+  getParentRoute: () => BleachdexWeaponsRoute,
+} as any)
+const BleachdexWeaponsIdRoute = BleachdexWeaponsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => BleachdexWeaponsRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
-  '/bleachdex': typeof BleachdexRoute
   '/bots': typeof BotsRoute
-  '/checkout': typeof CheckoutRoute
-  '/commands': typeof CommandsRoute
   '/company-privacy': typeof CompanyPrivacyRoute
   '/company-terms': typeof CompanyTermsRoute
-  '/contact': typeof ContactRoute
   '/contact-us': typeof ContactUsRoute
   '/games': typeof GamesRoute
-  '/leaderboard': typeof LeaderboardRoute
-  '/list': typeof ListRoute
-  '/owned': typeof OwnedRoute
-  '/premium': typeof PremiumRoute
-  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
-  '/ranks': typeof RanksRoute
-  '/roster': typeof RosterRouteWithChildren
-  '/terms': typeof TermsRoute
-  '/weapons': typeof WeaponsRouteWithChildren
   '/what-we-make': typeof WhatWeMakeRoute
-  '/roster/$id': typeof RosterIdRoute
-  '/weapons/$id': typeof WeaponsIdRoute
-  '/roster/': typeof RosterIndexRoute
-  '/weapons/': typeof WeaponsIndexRoute
+  '/bleachdex/admin': typeof BleachdexAdminRoute
+  '/bleachdex/checkout': typeof BleachdexCheckoutRoute
+  '/bleachdex/commands': typeof BleachdexCommandsRoute
+  '/bleachdex/contact': typeof BleachdexContactRoute
+  '/bleachdex/leaderboard': typeof BleachdexLeaderboardRoute
+  '/bleachdex/list': typeof BleachdexListRoute
+  '/bleachdex/owned': typeof BleachdexOwnedRoute
+  '/bleachdex/premium': typeof BleachdexPremiumRoute
+  '/bleachdex/privacy': typeof BleachdexPrivacyRoute
+  '/bleachdex/ranks': typeof BleachdexRanksRoute
+  '/bleachdex/roster': typeof BleachdexRosterRouteWithChildren
+  '/bleachdex/terms': typeof BleachdexTermsRoute
+  '/bleachdex/weapons': typeof BleachdexWeaponsRouteWithChildren
+  '/bleachdex/': typeof BleachdexIndexRoute
+  '/bleachdex/roster/$id': typeof BleachdexRosterIdRoute
+  '/bleachdex/weapons/$id': typeof BleachdexWeaponsIdRoute
+  '/bleachdex/roster/': typeof BleachdexRosterIndexRoute
+  '/bleachdex/weapons/': typeof BleachdexWeaponsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
-  '/bleachdex': typeof BleachdexRoute
   '/bots': typeof BotsRoute
-  '/checkout': typeof CheckoutRoute
-  '/commands': typeof CommandsRoute
   '/company-privacy': typeof CompanyPrivacyRoute
   '/company-terms': typeof CompanyTermsRoute
-  '/contact': typeof ContactRoute
   '/contact-us': typeof ContactUsRoute
   '/games': typeof GamesRoute
-  '/leaderboard': typeof LeaderboardRoute
-  '/list': typeof ListRoute
-  '/owned': typeof OwnedRoute
-  '/premium': typeof PremiumRoute
-  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
-  '/ranks': typeof RanksRoute
-  '/terms': typeof TermsRoute
   '/what-we-make': typeof WhatWeMakeRoute
-  '/roster/$id': typeof RosterIdRoute
-  '/weapons/$id': typeof WeaponsIdRoute
-  '/roster': typeof RosterIndexRoute
-  '/weapons': typeof WeaponsIndexRoute
+  '/bleachdex/admin': typeof BleachdexAdminRoute
+  '/bleachdex/checkout': typeof BleachdexCheckoutRoute
+  '/bleachdex/commands': typeof BleachdexCommandsRoute
+  '/bleachdex/contact': typeof BleachdexContactRoute
+  '/bleachdex/leaderboard': typeof BleachdexLeaderboardRoute
+  '/bleachdex/list': typeof BleachdexListRoute
+  '/bleachdex/owned': typeof BleachdexOwnedRoute
+  '/bleachdex/premium': typeof BleachdexPremiumRoute
+  '/bleachdex/privacy': typeof BleachdexPrivacyRoute
+  '/bleachdex/ranks': typeof BleachdexRanksRoute
+  '/bleachdex/terms': typeof BleachdexTermsRoute
+  '/bleachdex': typeof BleachdexIndexRoute
+  '/bleachdex/roster/$id': typeof BleachdexRosterIdRoute
+  '/bleachdex/weapons/$id': typeof BleachdexWeaponsIdRoute
+  '/bleachdex/roster': typeof BleachdexRosterIndexRoute
+  '/bleachdex/weapons': typeof BleachdexWeaponsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
-  '/bleachdex': typeof BleachdexRoute
   '/bots': typeof BotsRoute
-  '/checkout': typeof CheckoutRoute
-  '/commands': typeof CommandsRoute
   '/company-privacy': typeof CompanyPrivacyRoute
   '/company-terms': typeof CompanyTermsRoute
-  '/contact': typeof ContactRoute
   '/contact-us': typeof ContactUsRoute
   '/games': typeof GamesRoute
-  '/leaderboard': typeof LeaderboardRoute
-  '/list': typeof ListRoute
-  '/owned': typeof OwnedRoute
-  '/premium': typeof PremiumRoute
-  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
-  '/ranks': typeof RanksRoute
-  '/roster': typeof RosterRouteWithChildren
-  '/terms': typeof TermsRoute
-  '/weapons': typeof WeaponsRouteWithChildren
   '/what-we-make': typeof WhatWeMakeRoute
-  '/roster/$id': typeof RosterIdRoute
-  '/weapons/$id': typeof WeaponsIdRoute
-  '/roster/': typeof RosterIndexRoute
-  '/weapons/': typeof WeaponsIndexRoute
+  '/bleachdex/admin': typeof BleachdexAdminRoute
+  '/bleachdex/checkout': typeof BleachdexCheckoutRoute
+  '/bleachdex/commands': typeof BleachdexCommandsRoute
+  '/bleachdex/contact': typeof BleachdexContactRoute
+  '/bleachdex/leaderboard': typeof BleachdexLeaderboardRoute
+  '/bleachdex/list': typeof BleachdexListRoute
+  '/bleachdex/owned': typeof BleachdexOwnedRoute
+  '/bleachdex/premium': typeof BleachdexPremiumRoute
+  '/bleachdex/privacy': typeof BleachdexPrivacyRoute
+  '/bleachdex/ranks': typeof BleachdexRanksRoute
+  '/bleachdex/roster': typeof BleachdexRosterRouteWithChildren
+  '/bleachdex/terms': typeof BleachdexTermsRoute
+  '/bleachdex/weapons': typeof BleachdexWeaponsRouteWithChildren
+  '/bleachdex/': typeof BleachdexIndexRoute
+  '/bleachdex/roster/$id': typeof BleachdexRosterIdRoute
+  '/bleachdex/weapons/$id': typeof BleachdexWeaponsIdRoute
+  '/bleachdex/roster/': typeof BleachdexRosterIndexRoute
+  '/bleachdex/weapons/': typeof BleachdexWeaponsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/admin'
-    | '/bleachdex'
     | '/bots'
-    | '/checkout'
-    | '/commands'
     | '/company-privacy'
     | '/company-terms'
-    | '/contact'
     | '/contact-us'
     | '/games'
-    | '/leaderboard'
-    | '/list'
-    | '/owned'
-    | '/premium'
-    | '/privacy'
     | '/projects'
-    | '/ranks'
-    | '/roster'
-    | '/terms'
-    | '/weapons'
     | '/what-we-make'
-    | '/roster/$id'
-    | '/weapons/$id'
-    | '/roster/'
-    | '/weapons/'
+    | '/bleachdex/admin'
+    | '/bleachdex/checkout'
+    | '/bleachdex/commands'
+    | '/bleachdex/contact'
+    | '/bleachdex/leaderboard'
+    | '/bleachdex/list'
+    | '/bleachdex/owned'
+    | '/bleachdex/premium'
+    | '/bleachdex/privacy'
+    | '/bleachdex/ranks'
+    | '/bleachdex/roster'
+    | '/bleachdex/terms'
+    | '/bleachdex/weapons'
+    | '/bleachdex/'
+    | '/bleachdex/roster/$id'
+    | '/bleachdex/weapons/$id'
+    | '/bleachdex/roster/'
+    | '/bleachdex/weapons/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/admin'
-    | '/bleachdex'
     | '/bots'
-    | '/checkout'
-    | '/commands'
     | '/company-privacy'
     | '/company-terms'
-    | '/contact'
     | '/contact-us'
     | '/games'
-    | '/leaderboard'
-    | '/list'
-    | '/owned'
-    | '/premium'
-    | '/privacy'
     | '/projects'
-    | '/ranks'
-    | '/terms'
     | '/what-we-make'
-    | '/roster/$id'
-    | '/weapons/$id'
-    | '/roster'
-    | '/weapons'
+    | '/bleachdex/admin'
+    | '/bleachdex/checkout'
+    | '/bleachdex/commands'
+    | '/bleachdex/contact'
+    | '/bleachdex/leaderboard'
+    | '/bleachdex/list'
+    | '/bleachdex/owned'
+    | '/bleachdex/premium'
+    | '/bleachdex/privacy'
+    | '/bleachdex/ranks'
+    | '/bleachdex/terms'
+    | '/bleachdex'
+    | '/bleachdex/roster/$id'
+    | '/bleachdex/weapons/$id'
+    | '/bleachdex/roster'
+    | '/bleachdex/weapons'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/admin'
-    | '/bleachdex'
     | '/bots'
-    | '/checkout'
-    | '/commands'
     | '/company-privacy'
     | '/company-terms'
-    | '/contact'
     | '/contact-us'
     | '/games'
-    | '/leaderboard'
-    | '/list'
-    | '/owned'
-    | '/premium'
-    | '/privacy'
     | '/projects'
-    | '/ranks'
-    | '/roster'
-    | '/terms'
-    | '/weapons'
     | '/what-we-make'
-    | '/roster/$id'
-    | '/weapons/$id'
-    | '/roster/'
-    | '/weapons/'
+    | '/bleachdex/admin'
+    | '/bleachdex/checkout'
+    | '/bleachdex/commands'
+    | '/bleachdex/contact'
+    | '/bleachdex/leaderboard'
+    | '/bleachdex/list'
+    | '/bleachdex/owned'
+    | '/bleachdex/premium'
+    | '/bleachdex/privacy'
+    | '/bleachdex/ranks'
+    | '/bleachdex/roster'
+    | '/bleachdex/terms'
+    | '/bleachdex/weapons'
+    | '/bleachdex/'
+    | '/bleachdex/roster/$id'
+    | '/bleachdex/weapons/$id'
+    | '/bleachdex/roster/'
+    | '/bleachdex/weapons/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  AdminRoute: typeof AdminRoute
-  BleachdexRoute: typeof BleachdexRoute
   BotsRoute: typeof BotsRoute
-  CheckoutRoute: typeof CheckoutRoute
-  CommandsRoute: typeof CommandsRoute
   CompanyPrivacyRoute: typeof CompanyPrivacyRoute
   CompanyTermsRoute: typeof CompanyTermsRoute
-  ContactRoute: typeof ContactRoute
   ContactUsRoute: typeof ContactUsRoute
   GamesRoute: typeof GamesRoute
-  LeaderboardRoute: typeof LeaderboardRoute
-  ListRoute: typeof ListRoute
-  OwnedRoute: typeof OwnedRoute
-  PremiumRoute: typeof PremiumRoute
-  PrivacyRoute: typeof PrivacyRoute
   ProjectsRoute: typeof ProjectsRoute
-  RanksRoute: typeof RanksRoute
-  RosterRoute: typeof RosterRouteWithChildren
-  TermsRoute: typeof TermsRoute
-  WeaponsRoute: typeof WeaponsRouteWithChildren
   WhatWeMakeRoute: typeof WhatWeMakeRoute
+  BleachdexAdminRoute: typeof BleachdexAdminRoute
+  BleachdexCheckoutRoute: typeof BleachdexCheckoutRoute
+  BleachdexCommandsRoute: typeof BleachdexCommandsRoute
+  BleachdexContactRoute: typeof BleachdexContactRoute
+  BleachdexLeaderboardRoute: typeof BleachdexLeaderboardRoute
+  BleachdexListRoute: typeof BleachdexListRoute
+  BleachdexOwnedRoute: typeof BleachdexOwnedRoute
+  BleachdexPremiumRoute: typeof BleachdexPremiumRoute
+  BleachdexPrivacyRoute: typeof BleachdexPrivacyRoute
+  BleachdexRanksRoute: typeof BleachdexRanksRoute
+  BleachdexRosterRoute: typeof BleachdexRosterRouteWithChildren
+  BleachdexTermsRoute: typeof BleachdexTermsRoute
+  BleachdexWeaponsRoute: typeof BleachdexWeaponsRouteWithChildren
+  BleachdexIndexRoute: typeof BleachdexIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -389,39 +389,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bleachdex': {
-      id: '/bleachdex'
-      path: '/bleachdex'
-      fullPath: '/bleachdex'
-      preLoaderRoute: typeof BleachdexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/bots': {
       id: '/bots'
       path: '/bots'
       fullPath: '/bots'
       preLoaderRoute: typeof BotsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/checkout': {
-      id: '/checkout'
-      path: '/checkout'
-      fullPath: '/checkout'
-      preLoaderRoute: typeof CheckoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/commands': {
-      id: '/commands'
-      path: '/commands'
-      fullPath: '/commands'
-      preLoaderRoute: typeof CommandsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/company-privacy': {
@@ -438,13 +410,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompanyTermsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/contact-us': {
       id: '/contact-us'
       path: '/contact-us'
@@ -459,74 +424,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GamesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/leaderboard': {
-      id: '/leaderboard'
-      path: '/leaderboard'
-      fullPath: '/leaderboard'
-      preLoaderRoute: typeof LeaderboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/list': {
-      id: '/list'
-      path: '/list'
-      fullPath: '/list'
-      preLoaderRoute: typeof ListRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/owned': {
-      id: '/owned'
-      path: '/owned'
-      fullPath: '/owned'
-      preLoaderRoute: typeof OwnedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/premium': {
-      id: '/premium'
-      path: '/premium'
-      fullPath: '/premium'
-      preLoaderRoute: typeof PremiumRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/projects': {
       id: '/projects'
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ranks': {
-      id: '/ranks'
-      path: '/ranks'
-      fullPath: '/ranks'
-      preLoaderRoute: typeof RanksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/roster': {
-      id: '/roster'
-      path: '/roster'
-      fullPath: '/roster'
-      preLoaderRoute: typeof RosterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/weapons': {
-      id: '/weapons'
-      path: '/weapons'
-      fullPath: '/weapons'
-      preLoaderRoute: typeof WeaponsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/what-we-make': {
@@ -536,87 +438,186 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WhatWeMakeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/roster/$id': {
-      id: '/roster/$id'
-      path: '/$id'
-      fullPath: '/roster/$id'
-      preLoaderRoute: typeof RosterIdRouteImport
-      parentRoute: typeof RosterRoute
+    '/bleachdex/': {
+      id: '/bleachdex/'
+      path: '/bleachdex'
+      fullPath: '/bleachdex/'
+      preLoaderRoute: typeof BleachdexIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/weapons/$id': {
-      id: '/weapons/$id'
-      path: '/$id'
-      fullPath: '/weapons/$id'
-      preLoaderRoute: typeof WeaponsIdRouteImport
-      parentRoute: typeof WeaponsRoute
+    '/bleachdex/admin': {
+      id: '/bleachdex/admin'
+      path: '/bleachdex/admin'
+      fullPath: '/bleachdex/admin'
+      preLoaderRoute: typeof BleachdexAdminRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/roster/': {
-      id: '/roster/'
+    '/bleachdex/checkout': {
+      id: '/bleachdex/checkout'
+      path: '/bleachdex/checkout'
+      fullPath: '/bleachdex/checkout'
+      preLoaderRoute: typeof BleachdexCheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/commands': {
+      id: '/bleachdex/commands'
+      path: '/bleachdex/commands'
+      fullPath: '/bleachdex/commands'
+      preLoaderRoute: typeof BleachdexCommandsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/contact': {
+      id: '/bleachdex/contact'
+      path: '/bleachdex/contact'
+      fullPath: '/bleachdex/contact'
+      preLoaderRoute: typeof BleachdexContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/leaderboard': {
+      id: '/bleachdex/leaderboard'
+      path: '/bleachdex/leaderboard'
+      fullPath: '/bleachdex/leaderboard'
+      preLoaderRoute: typeof BleachdexLeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/list': {
+      id: '/bleachdex/list'
+      path: '/bleachdex/list'
+      fullPath: '/bleachdex/list'
+      preLoaderRoute: typeof BleachdexListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/owned': {
+      id: '/bleachdex/owned'
+      path: '/bleachdex/owned'
+      fullPath: '/bleachdex/owned'
+      preLoaderRoute: typeof BleachdexOwnedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/premium': {
+      id: '/bleachdex/premium'
+      path: '/bleachdex/premium'
+      fullPath: '/bleachdex/premium'
+      preLoaderRoute: typeof BleachdexPremiumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/privacy': {
+      id: '/bleachdex/privacy'
+      path: '/bleachdex/privacy'
+      fullPath: '/bleachdex/privacy'
+      preLoaderRoute: typeof BleachdexPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/ranks': {
+      id: '/bleachdex/ranks'
+      path: '/bleachdex/ranks'
+      fullPath: '/bleachdex/ranks'
+      preLoaderRoute: typeof BleachdexRanksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/roster': {
+      id: '/bleachdex/roster'
+      path: '/bleachdex/roster'
+      fullPath: '/bleachdex/roster'
+      preLoaderRoute: typeof BleachdexRosterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/terms': {
+      id: '/bleachdex/terms'
+      path: '/bleachdex/terms'
+      fullPath: '/bleachdex/terms'
+      preLoaderRoute: typeof BleachdexTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/weapons': {
+      id: '/bleachdex/weapons'
+      path: '/bleachdex/weapons'
+      fullPath: '/bleachdex/weapons'
+      preLoaderRoute: typeof BleachdexWeaponsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/roster/': {
+      id: '/bleachdex/roster/'
       path: '/'
-      fullPath: '/roster/'
-      preLoaderRoute: typeof RosterIndexRouteImport
-      parentRoute: typeof RosterRoute
+      fullPath: '/bleachdex/roster/'
+      preLoaderRoute: typeof BleachdexRosterIndexRouteImport
+      parentRoute: typeof BleachdexRosterRoute
     }
-    '/weapons/': {
-      id: '/weapons/'
+    '/bleachdex/roster/$id': {
+      id: '/bleachdex/roster/$id'
+      path: '/$id'
+      fullPath: '/bleachdex/roster/$id'
+      preLoaderRoute: typeof BleachdexRosterIdRouteImport
+      parentRoute: typeof BleachdexRosterRoute
+    }
+    '/bleachdex/weapons/': {
+      id: '/bleachdex/weapons/'
       path: '/'
-      fullPath: '/weapons/'
-      preLoaderRoute: typeof WeaponsIndexRouteImport
-      parentRoute: typeof WeaponsRoute
+      fullPath: '/bleachdex/weapons/'
+      preLoaderRoute: typeof BleachdexWeaponsIndexRouteImport
+      parentRoute: typeof BleachdexWeaponsRoute
+    }
+    '/bleachdex/weapons/$id': {
+      id: '/bleachdex/weapons/$id'
+      path: '/$id'
+      fullPath: '/bleachdex/weapons/$id'
+      preLoaderRoute: typeof BleachdexWeaponsIdRouteImport
+      parentRoute: typeof BleachdexWeaponsRoute
     }
   }
 }
 
-interface RosterRouteChildren {
-  RosterIdRoute: typeof RosterIdRoute
-  RosterIndexRoute: typeof RosterIndexRoute
+interface BleachdexRosterRouteChildren {
+  BleachdexRosterIdRoute: typeof BleachdexRosterIdRoute
+  BleachdexRosterIndexRoute: typeof BleachdexRosterIndexRoute
 }
 
-const RosterRouteChildren: RosterRouteChildren = {
-  RosterIdRoute: RosterIdRoute,
-  RosterIndexRoute: RosterIndexRoute,
+const BleachdexRosterRouteChildren: BleachdexRosterRouteChildren = {
+  BleachdexRosterIdRoute: BleachdexRosterIdRoute,
+  BleachdexRosterIndexRoute: BleachdexRosterIndexRoute,
 }
 
-const RosterRouteWithChildren =
-  RosterRoute._addFileChildren(RosterRouteChildren)
+const BleachdexRosterRouteWithChildren = BleachdexRosterRoute._addFileChildren(
+  BleachdexRosterRouteChildren,
+)
 
-interface WeaponsRouteChildren {
-  WeaponsIdRoute: typeof WeaponsIdRoute
-  WeaponsIndexRoute: typeof WeaponsIndexRoute
+interface BleachdexWeaponsRouteChildren {
+  BleachdexWeaponsIdRoute: typeof BleachdexWeaponsIdRoute
+  BleachdexWeaponsIndexRoute: typeof BleachdexWeaponsIndexRoute
 }
 
-const WeaponsRouteChildren: WeaponsRouteChildren = {
-  WeaponsIdRoute: WeaponsIdRoute,
-  WeaponsIndexRoute: WeaponsIndexRoute,
+const BleachdexWeaponsRouteChildren: BleachdexWeaponsRouteChildren = {
+  BleachdexWeaponsIdRoute: BleachdexWeaponsIdRoute,
+  BleachdexWeaponsIndexRoute: BleachdexWeaponsIndexRoute,
 }
 
-const WeaponsRouteWithChildren =
-  WeaponsRoute._addFileChildren(WeaponsRouteChildren)
+const BleachdexWeaponsRouteWithChildren =
+  BleachdexWeaponsRoute._addFileChildren(BleachdexWeaponsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  AdminRoute: AdminRoute,
-  BleachdexRoute: BleachdexRoute,
   BotsRoute: BotsRoute,
-  CheckoutRoute: CheckoutRoute,
-  CommandsRoute: CommandsRoute,
   CompanyPrivacyRoute: CompanyPrivacyRoute,
   CompanyTermsRoute: CompanyTermsRoute,
-  ContactRoute: ContactRoute,
   ContactUsRoute: ContactUsRoute,
   GamesRoute: GamesRoute,
-  LeaderboardRoute: LeaderboardRoute,
-  ListRoute: ListRoute,
-  OwnedRoute: OwnedRoute,
-  PremiumRoute: PremiumRoute,
-  PrivacyRoute: PrivacyRoute,
   ProjectsRoute: ProjectsRoute,
-  RanksRoute: RanksRoute,
-  RosterRoute: RosterRouteWithChildren,
-  TermsRoute: TermsRoute,
-  WeaponsRoute: WeaponsRouteWithChildren,
   WhatWeMakeRoute: WhatWeMakeRoute,
+  BleachdexAdminRoute: BleachdexAdminRoute,
+  BleachdexCheckoutRoute: BleachdexCheckoutRoute,
+  BleachdexCommandsRoute: BleachdexCommandsRoute,
+  BleachdexContactRoute: BleachdexContactRoute,
+  BleachdexLeaderboardRoute: BleachdexLeaderboardRoute,
+  BleachdexListRoute: BleachdexListRoute,
+  BleachdexOwnedRoute: BleachdexOwnedRoute,
+  BleachdexPremiumRoute: BleachdexPremiumRoute,
+  BleachdexPrivacyRoute: BleachdexPrivacyRoute,
+  BleachdexRanksRoute: BleachdexRanksRoute,
+  BleachdexRosterRoute: BleachdexRosterRouteWithChildren,
+  BleachdexTermsRoute: BleachdexTermsRoute,
+  BleachdexWeaponsRoute: BleachdexWeaponsRouteWithChildren,
+  BleachdexIndexRoute: BleachdexIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

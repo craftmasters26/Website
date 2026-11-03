@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { COMMAND_GROUPS } from "@/lib/commands";
 
-export const Route = createFileRoute("/commands")({
+export const Route = createFileRoute("/bleachdex/commands")({
   head: () => ({
     meta: [{ title: "Commands · BleachDex" }],
   }),

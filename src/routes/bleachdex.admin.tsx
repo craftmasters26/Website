@@ -15,7 +15,7 @@ import { ServersTab } from "@/components/admin/servers";
 import { SpawnsTab } from "@/components/admin/spawns";
 import { ToolsTab } from "@/components/admin/tools";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/bleachdex/admin")({
   head: () => ({
     meta: [{ title: "Admin · BleachDex" }, { name: "robots", content: "noindex,nofollow" }],
   }),

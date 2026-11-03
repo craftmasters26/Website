@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage, LegalSection, SUPPORT_URL } from "@/components/legal-page";
 import { BLEACHDEX_HOST } from "@/lib/site";
 
-export const Route = createFileRoute("/privacy")({
+export const Route = createFileRoute("/bleachdex/privacy")({
   head: () => ({
     meta: [
       { title: "Privacy Policy · BleachDex" },
@@ -130,7 +130,7 @@ function PrivacyPage() {
           <a className={link} href={SUPPORT_URL} target="_blank" rel="noreferrer">
             BleachDex support server
           </a>{" "}
-          or on the <a className={link} href="/contact">Contact page</a>.
+          or on the <a className={link} href="/bleachdex/contact">Contact page</a>.
         </p>
       </LegalSection>
     </LegalPage>

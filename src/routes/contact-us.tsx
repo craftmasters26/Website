@@ -15,7 +15,7 @@ function ContactUs() {
           <a href={BOUNDLESS_DISCORD} target="_blank" rel="noreferrer" className="btn btn-fill">
             Join our Discord
           </a>
-          <Link to="/contact" className="btn btn-outline">
+          <Link to="/bleachdex/contact" className="btn btn-outline">
             BleachDex support
           </Link>
         </div>

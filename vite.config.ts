@@ -177,6 +177,22 @@ export default defineConfig(({ command, isPreview }) => ({
             // manifest + head-tag middleware). Nitro v3 defaults serverDir to
             // false, so removing this silently unwires /?install=1 on deploys.
             serverDir: "./server",
+            // Old bookmarks / links from before BleachDex moved under /bleachdex.
+            routeRules: {
+              "/list": { redirect: { to: "/bleachdex/list", status: 301 } },
+              "/owned": { redirect: { to: "/bleachdex/owned", status: 301 } },
+              "/leaderboard": { redirect: { to: "/bleachdex/leaderboard", status: 301 } },
+              "/commands": { redirect: { to: "/bleachdex/commands", status: 301 } },
+              "/premium": { redirect: { to: "/bleachdex/premium", status: 301 } },
+              "/checkout": { redirect: { to: "/bleachdex/checkout", status: 301 } },
+              "/admin": { redirect: { to: "/bleachdex/admin", status: 301 } },
+              "/privacy": { redirect: { to: "/bleachdex/privacy", status: 301 } },
+              "/terms": { redirect: { to: "/bleachdex/terms", status: 301 } },
+              "/contact": { redirect: { to: "/bleachdex/contact", status: 301 } },
+              "/ranks": { redirect: { to: "/bleachdex/ranks", status: 301 } },
+              "/roster/**": { redirect: { to: "/bleachdex/roster/**", status: 301 } },
+              "/weapons/**": { redirect: { to: "/bleachdex/weapons/**", status: 301 } },
+            },
           }),
         ]
       : []),

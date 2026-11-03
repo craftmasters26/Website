@@ -26,7 +26,7 @@ function CompanyTerms() {
         <p>
           These terms cover your use of the Boundless Production company website. Our products have
           their own terms. BleachDex’s terms are on{" "}
-          <Link to="/terms" className={companyLink}>
+          <Link to="/bleachdex/terms" className={companyLink}>
             its Terms of Service page
           </Link>
           . By using this website you agree to these terms.

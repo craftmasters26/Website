@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/leaderboard")({
+export const Route = createFileRoute("/bleachdex/leaderboard")({
   head: () => ({
     meta: [
       { title: "Leaderboard · BleachDex" },

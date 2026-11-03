@@ -58,7 +58,7 @@ export function CatchButton({
           onClick={async () => {
             setPending(true);
             try {
-              await signInWithDiscord("/owned");
+              await signInWithDiscord("/bleachdex/owned");
             } catch (err) {
               console.error(err);
               setPending(false);

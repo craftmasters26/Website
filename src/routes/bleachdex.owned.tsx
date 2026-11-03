@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 import { discordMark } from "@/assets";
 import { WatchAdCard } from "@/components/watch-ad-card";
 
-export const Route = createFileRoute("/owned")({
+export const Route = createFileRoute("/bleachdex/owned")({
   head: () => ({
     meta: [
       { title: "Owned · BleachDex" },
@@ -129,11 +129,11 @@ function Row({ entry }: { entry: Entry }) {
   const className =
     "grid grid-cols-[3px_44px_minmax(0,1fr)] items-center gap-3 border-t border-line bg-void-raised px-3 py-2 no-underline transition-colors first:border-t-0 hover:bg-void-raised-2 md:grid-cols-[3px_44px_minmax(0,1fr)_110px_100px_150px]";
   return entry.kind === "weapon" ? (
-    <Link to="/weapons/$id" params={{ id: String(entry.id) }} className={className}>
+    <Link to="/bleachdex/weapons/$id" params={{ id: String(entry.id) }} className={className}>
       {inner}
     </Link>
   ) : (
-    <Link to="/roster/$id" params={{ id: String(entry.id) }} className={className}>
+    <Link to="/bleachdex/roster/$id" params={{ id: String(entry.id) }} className={className}>
       {inner}
     </Link>
   );
@@ -153,7 +153,7 @@ function SignedOutView() {
         onClick={async () => {
           setPending(true);
           try {
-            await signInWithDiscord("/owned");
+            await signInWithDiscord("/bleachdex/owned");
           } catch (err) {
             console.error(err);
             setPending(false);
@@ -174,7 +174,7 @@ function NoRecordView() {
         You're logged in, but the bot hasn't seen this Discord account yet. Catch a soul or claim
         a blade in Discord, then come back.
       </p>
-      <Link to="/list" className="btn btn-outline px-6 py-3 text-sm">
+      <Link to="/bleachdex/list" className="btn btn-outline px-6 py-3 text-sm">
         Browse the full list
       </Link>
     </div>
@@ -340,7 +340,7 @@ function OwnedPage() {
             <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">
               You don't own anything yet. Catch a soul or claim a blade in Discord, then come back.
             </p>
-            <Link to="/list" className="btn btn-outline px-6 py-3 text-sm">
+            <Link to="/bleachdex/list" className="btn btn-outline px-6 py-3 text-sm">
               Browse the full list
             </Link>
           </div>

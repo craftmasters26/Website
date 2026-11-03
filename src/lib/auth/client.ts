@@ -162,14 +162,11 @@ export async function signIn(
  * live preview isn't relevant here since Discord login only matters once
  * this app is actually deployed at a real URL.
  */
-export async function signInWithDiscord(callbackURL = "/owned"): Promise<void> {
-  const { data, error } = await authClient.signIn.social({
-    provider: "discord",
-    callbackURL,
-    errorCallbackURL: callbackURL,
-  });
-  if (error) throw new Error(error.message ?? "Discord sign-in failed");
-  if (data?.url) window.location.href = data.url;
+export async function signInWithDiscord(callbackURL = "/bleachdex/owned"): Promise<void> {
+  // Plain browser navigation to a server route that 302s to Discord (see
+  // server/routes/api/login/discord.get.ts). Unlike a client-side fetch, a failure
+  // there shows a readable error page instead of silently doing nothing.
+  window.location.assign(`/api/login/discord?next=${encodeURIComponent(callbackURL)}`);
 }
 
 /**

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage, LegalSection, SUPPORT_URL } from "@/components/legal-page";
 
-export const Route = createFileRoute("/contact")({
+export const Route = createFileRoute("/bleachdex/contact")({
   head: () => ({
     meta: [
       { title: "Contact · BleachDex" },
@@ -40,8 +40,8 @@ function ContactPage() {
 
       <LegalSection heading="Policies">
         <p>
-          Read our <a className={link} href="/privacy">Privacy Policy</a> and{" "}
-          <a className={link} href="/terms">Terms of Service</a>.
+          Read our <a className={link} href="/bleachdex/privacy">Privacy Policy</a> and{" "}
+          <a className={link} href="/bleachdex/terms">Terms of Service</a>.
         </p>
       </LegalSection>
     </LegalPage>

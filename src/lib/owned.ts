@@ -86,5 +86,5 @@ export function useOwnedMe(): [OwnedState, () => void] {
 }
 
 export function signOutOwned(): void {
-  void signOut("/owned");
+  void signOut("/bleachdex/owned");
 }

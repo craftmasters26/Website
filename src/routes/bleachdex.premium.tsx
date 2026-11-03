@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { TIER_META, WHOP_LABEL, type Tier } from "@/lib/premium-tiers";
 
-export const Route = createFileRoute("/premium")({
+export const Route = createFileRoute("/bleachdex/premium")({
   head: () => ({
     meta: [{ title: "Premium · BleachDex" }],
   }),
@@ -93,7 +93,7 @@ function TierCard({ kind }: { kind: Tier }) {
         ))}
       </ul>
       <Link
-        to="/checkout"
+        to="/bleachdex/checkout"
         search={{ tier: kind }}
         className={
           kind === "urahara-foundation-shareholder" ? "btn btn-fill relative" : "btn btn-outline relative"

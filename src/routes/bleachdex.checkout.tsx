@@ -10,7 +10,7 @@ import { getMyDiscordId } from "@/lib/premium";
 import { signInWithDiscord } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 
-export const Route = createFileRoute("/checkout")({
+export const Route = createFileRoute("/bleachdex/checkout")({
   validateSearch: (
     search: Record<string, unknown>,
   ): { tier: Tier; status?: string } => ({
@@ -89,7 +89,7 @@ function CheckoutPage() {
   async function signIn() {
     setSignInError(null);
     try {
-      await signInWithDiscord(`/checkout?tier=${tier}`);
+      await signInWithDiscord(`/bleachdex/checkout?tier=${tier}`);
     } catch (e) {
       setSignInError(e instanceof Error ? e.message : "Sign-in failed.");
     }
@@ -146,7 +146,7 @@ function CheckoutPage() {
             key={tier}
             plan={WHOP_PLAN[tier]}
             metadata={{ discord_id: discordId, tier }}
-            returnUrl={`${window.location.origin}/checkout?tier=${tier}`}
+            returnUrl={`${window.location.origin}/bleachdex/checkout?tier=${tier}`}
             onComplete={(completion: { result?: string }) => {
               if (completion.result === "payment") setDone(true);
             }}
@@ -162,7 +162,7 @@ function CheckoutPage() {
     <main className="page-enter py-10 md:py-14">
       <div className="wrap">
         <Link
-          to="/premium"
+          to="/bleachdex/premium"
           className="mb-6 inline-flex items-center gap-2 font-mono text-[12px] text-bone-faint transition-colors hover:text-azure-bright"
         >
           <svg
@@ -186,7 +186,7 @@ function CheckoutPage() {
             return (
               <Link
                 key={t}
-                to="/checkout"
+                to="/bleachdex/checkout"
                 search={{ tier: t }}
                 replace
                 className="rounded-full border px-4 py-2 font-mono text-[12px] transition-colors"
@@ -319,7 +319,7 @@ function CheckoutPage() {
                     <span className="font-mono">/redeem rewards</span> in the
                     server to pick your cards and create your custom role.
                   </p>
-                  <Link to="/premium" className="btn btn-outline mt-7">
+                  <Link to="/bleachdex/premium" className="btn btn-outline mt-7">
                     Back to Premium
                   </Link>
                 </div>

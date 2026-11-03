@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage, LegalSection, SUPPORT_URL } from "@/components/legal-page";
 import { BLEACHDEX_HOST } from "@/lib/site";
 
-export const Route = createFileRoute("/terms")({
+export const Route = createFileRoute("/bleachdex/terms")({
   head: () => ({
     meta: [
       { title: "Terms of Service · BleachDex" },
@@ -66,7 +66,7 @@ function TermsPage() {
       <LegalSection heading="Advertising">
         <p>
           The website shows ads served by Google AdSense. See our{" "}
-          <a className={link} href="/privacy">Privacy Policy</a> for details.
+          <a className={link} href="/bleachdex/privacy">Privacy Policy</a> for details.
         </p>
       </LegalSection>
 
@@ -87,7 +87,7 @@ function TermsPage() {
 
       <LegalSection heading="Contact">
         <p>
-          Questions? Visit the <a className={link} href="/contact">Contact page</a>.
+          Questions? Visit the <a className={link} href="/bleachdex/contact">Contact page</a>.
         </p>
       </LegalSection>
     </LegalPage>

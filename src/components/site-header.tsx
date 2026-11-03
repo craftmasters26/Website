@@ -9,7 +9,15 @@ import { botAvatar, discordMark } from "@/assets";
 import { SITE_URL } from "@/lib/site";
 
 type NavLink = {
-  to: "/" | "/bleachdex" | "/list" | "/owned" | "/leaderboard" | "/commands" | "/premium" | "/admin";
+  to:
+    | "/"
+    | "/bleachdex"
+    | "/bleachdex/list"
+    | "/bleachdex/owned"
+    | "/bleachdex/leaderboard"
+    | "/bleachdex/commands"
+    | "/bleachdex/premium"
+    | "/bleachdex/admin";
   label: string;
   /** Shows a small pulsing "live" dot. */
   live?: boolean;
@@ -21,17 +29,17 @@ function useNavLinks(): NavLink[] {
   const admin = useAdminAccess();
   const links: NavLink[] = [
     { to: "/bleachdex", label: "Home" },
-    { to: "/list", label: "List" },
+    { to: "/bleachdex/list", label: "List" },
   ];
   // Inventory slots in after "List" once logged in.
-  if (signedIn) links.push({ to: "/owned", label: "Inventory" });
+  if (signedIn) links.push({ to: "/bleachdex/owned", label: "Inventory" });
   links.push(
-    { to: "/leaderboard", label: "Leaderboard", live: true },
-    { to: "/commands", label: "Commands" },
-    { to: "/premium", label: "Premium" },
+    { to: "/bleachdex/leaderboard", label: "Leaderboard", live: true },
+    { to: "/bleachdex/commands", label: "Commands" },
+    { to: "/bleachdex/premium", label: "Premium" },
   );
   // Only people on the bot's admin list ever see this link.
-  if (admin.level) links.push({ to: "/admin", label: "Admin" });
+  if (admin.level) links.push({ to: "/bleachdex/admin", label: "Admin" });
   return links;
 }
 
@@ -68,7 +76,7 @@ function DiscordLoginButton({ className }: { className: string }) {
       onClick={async () => {
         setPending(true);
         try {
-          await signInWithDiscord("/owned");
+          await signInWithDiscord("/bleachdex/owned");
         } catch (err) {
           console.error(err);
           setPending(false);
@@ -120,7 +128,7 @@ function HeaderAuth() {
   async function login() {
     setPending(true);
     try {
-      await signInWithDiscord("/owned");
+      await signInWithDiscord("/bleachdex/owned");
     } catch (err) {
       console.error(err);
       setPending(false);
@@ -188,7 +196,11 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
           {links.map((link) => {
-            const active = pathname === link.to || pathname.startsWith(`${link.to}/`);
+            const here = pathname.replace(/\/+$/, "") || "/";
+            // Home (/bleachdex) must only light up on the home page itself, because every
+            // other BleachDex page now lives under /bleachdex/.
+            const active =
+              link.to === "/bleachdex" ? here === link.to : here === link.to || here.startsWith(`${link.to}/`);
             return (
               <Link
                 key={link.to}
@@ -254,28 +266,28 @@ export function SiteFooter() {
           <a href={SITE_URL} className="hover:text-azure-bright">
             Boundless Production
           </a>
-          <Link to="/list" className="hover:text-azure-bright">
+          <Link to="/bleachdex/list" className="hover:text-azure-bright">
             List
           </Link>
-          <Link to="/owned" className="hover:text-azure-bright">
+          <Link to="/bleachdex/owned" className="hover:text-azure-bright">
             Inventory
           </Link>
-          <Link to="/leaderboard" className="hover:text-azure-bright">
+          <Link to="/bleachdex/leaderboard" className="hover:text-azure-bright">
             Leaderboard
           </Link>
-          <Link to="/commands" className="hover:text-azure-bright">
+          <Link to="/bleachdex/commands" className="hover:text-azure-bright">
             Commands
           </Link>
-          <Link to="/premium" className="hover:text-azure-bright">
+          <Link to="/bleachdex/premium" className="hover:text-azure-bright">
             Premium
           </Link>
-          <Link to="/privacy" className="hover:text-azure-bright">
+          <Link to="/bleachdex/privacy" className="hover:text-azure-bright">
             Privacy
           </Link>
-          <Link to="/terms" className="hover:text-azure-bright">
+          <Link to="/bleachdex/terms" className="hover:text-azure-bright">
             Terms
           </Link>
-          <Link to="/contact" className="hover:text-azure-bright">
+          <Link to="/bleachdex/contact" className="hover:text-azure-bright">
             Contact
           </Link>
           <a

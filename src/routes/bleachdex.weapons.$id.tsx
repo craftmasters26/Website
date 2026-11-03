@@ -4,7 +4,7 @@ import { CatalogImage } from "@/components/catalog-image";
 import { FACTION_LABEL, TIER_LABEL, getWeapon } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/weapons/$id")({
+export const Route = createFileRoute("/bleachdex/weapons/$id")({
   loader: ({ params }) => {
     const weapon = getWeapon(params.id);
     if (!weapon) throw notFound();
@@ -40,7 +40,7 @@ function WeaponDetail() {
         </div>
         <div>
           <Link
-            to="/list"
+            to="/bleachdex/list"
             search={{ kind: "weapon" }}
             className="font-mono text-sm text-azure-bright no-underline hover:underline"
           >

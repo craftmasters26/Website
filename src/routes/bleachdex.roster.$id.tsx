@@ -13,7 +13,7 @@ import {
 import { reiatsuAttack, reiatsuHp } from "@/lib/reiatsu";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/roster/$id")({
+export const Route = createFileRoute("/bleachdex/roster/$id")({
   loader: ({ params }) => {
     const soul = getSoul(params.id);
     if (!soul) throw notFound();
@@ -47,7 +47,7 @@ function IngredientRow({ ingredient }: { ingredient: Ingredient }) {
     const soul = ALL_SOULS.find((s) => s.name === ingredient.name);
     if (soul) {
       return (
-        <Link to="/roster/$id" params={{ id: String(soul.id) }} className={className}>
+        <Link to="/bleachdex/roster/$id" params={{ id: String(soul.id) }} className={className}>
           {label}
         </Link>
       );
@@ -57,7 +57,7 @@ function IngredientRow({ ingredient }: { ingredient: Ingredient }) {
     const weapon = WEAPONS.find((w) => w.name === ingredient.name);
     if (weapon) {
       return (
-        <Link to="/weapons/$id" params={{ id: String(weapon.id) }} className={className}>
+        <Link to="/bleachdex/weapons/$id" params={{ id: String(weapon.id) }} className={className}>
           {label}
         </Link>
       );
@@ -81,7 +81,7 @@ function SoulDetail() {
         />
         <div>
           <Link
-            to="/list"
+            to="/bleachdex/list"
             search={{ kind: soul.craftOnly ? "craft" : "soul" }}
             className="font-mono text-sm text-azure-bright no-underline hover:underline"
           >

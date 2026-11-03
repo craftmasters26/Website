@@ -5,7 +5,7 @@ import { brandIcon } from "@/assets";
 import { CRAFT_SOULS, DISCORD_INVITE, SOULS, TIER_LABEL, WEAPONS, getSoul } from "@/lib/catalog";
 import { useCatalogVersion } from "@/lib/catalog-version";
 
-export const Route = createFileRoute("/bleachdex")({
+export const Route = createFileRoute("/bleachdex/")({
   head: () => ({ meta: [{ title: "BleachDex" }] }),
   component: Home,
 });
@@ -42,10 +42,10 @@ function Home() {
               <a href={DISCORD_INVITE} className="btn btn-fill">
                 Add to Discord
               </a>
-              <Link to="/list" className="btn btn-outline">
+              <Link to="/bleachdex/list" className="btn btn-outline">
                 Browse the list
               </Link>
-              <Link to="/leaderboard" className="btn btn-outline">
+              <Link to="/bleachdex/leaderboard" className="btn btn-outline">
                 <span className="mr-2 inline-block size-2 animate-pulse rounded-full bg-azure-bright" aria-hidden="true" />
                 Live leaderboard
               </Link>
@@ -105,7 +105,7 @@ function Home() {
               <a href={DISCORD_INVITE} className="btn btn-fill">
                 Pull one in Discord
               </a>
-              <Link to="/list" className="btn btn-outline">
+              <Link to="/bleachdex/list" className="btn btn-outline">
                 Browse the list
               </Link>
             </div>
@@ -125,7 +125,7 @@ function Home() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link to="/list" className="btn btn-azure">
+            <Link to="/bleachdex/list" className="btn btn-azure">
               Open the list
             </Link>
             <a href={DISCORD_INVITE} className="btn btn-outline">

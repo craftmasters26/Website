@@ -25,7 +25,7 @@ export function SoulCard({ soul }: { soul: Soul }) {
   return (
     <Link
       ref={ref}
-      to="/roster/$id"
+      to="/bleachdex/roster/$id"
       params={{ id: String(soul.id) }}
       className={cn(
         "soul-card block no-underline",
@@ -74,7 +74,7 @@ export function WeaponCard({ weapon }: { weapon: Zanpakuto }) {
   return (
     <Link
       ref={ref}
-      to="/weapons/$id"
+      to="/bleachdex/weapons/$id"
       params={{ id: String(weapon.id) }}
       className={cn(
         "soul-card block no-underline",

@@ -19,7 +19,7 @@ type Kind = "soul" | "craft" | "weapon";
 type KindFilter = Kind | "all";
 type Sort = "rarity" | "strongest" | "name";
 
-export const Route = createFileRoute("/list")({
+export const Route = createFileRoute("/bleachdex/list")({
   validateSearch: (search: Record<string, unknown>): { kind?: Kind } => {
     const kind = search.kind;
     return kind === "soul" || kind === "craft" || kind === "weapon" ? { kind } : {};
@@ -163,11 +163,11 @@ function Row({ entry }: { entry: Entry }) {
   const className =
     "grid grid-cols-[3px_44px_minmax(0,1fr)] items-center gap-3 border-t border-line bg-void-raised px-3 py-2 no-underline transition-colors first:border-t-0 hover:bg-void-raised-2 md:grid-cols-[3px_44px_minmax(0,1fr)_110px_100px_150px]";
   return entry.kind === "weapon" ? (
-    <Link to="/weapons/$id" params={{ id: String(entry.id) }} className={className}>
+    <Link to="/bleachdex/weapons/$id" params={{ id: String(entry.id) }} className={className}>
       {inner}
     </Link>
   ) : (
-    <Link to="/roster/$id" params={{ id: String(entry.id) }} className={className}>
+    <Link to="/bleachdex/roster/$id" params={{ id: String(entry.id) }} className={className}>
       {inner}
     </Link>
   );
