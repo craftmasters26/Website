@@ -5,19 +5,53 @@
   "type": "website",
   "card": "custom",
   "image": "/og.jpg",
-  "shareImage": "/brand/bot-avatar.png",
-  "shareImageWidth": 256,
-  "shareImageHeight": 256,
-  "twitterCard": "summary",
+  "shareImage": "/og.jpg",
+  "shareImageWidth": 1200,
+  "shareImageHeight": 630,
+  "twitterCard": "summary_large_image",
   "color": "070a13",
   "company": {
     "title": "Boundless Production",
     "siteName": "Boundless Production",
-    "description": "Boundless Production is an independent studio making games and Discord bots. Home of BleachDex, with Boundless and Scattered Stars coming soon.",
+    "description": "Boundless Production is an independent studio making collectible games and Discord bots. Home of BleachDex, a live character-collection game for Discord.",
     "url": "https://boundlessproductions.org",
     "shareImage": "/brand/boundless-card.png",
     "shareImageWidth": 1200,
     "shareImageHeight": 630,
     "twitterCard": "summary_large_image"
+  },
+  "pages": {
+    "/projects": {
+      "title": "Projects — Boundless Production",
+      "description": "Everything Boundless Production is making: BleachDex, our live Discord collection game, and the games and bots in development."
+    },
+    "/about": {
+      "title": "About — Boundless Production",
+      "description": "Boundless Production is an independent studio building collectible games and Discord bots around communities and repeat play."
+    },
+    "/contact-us": {
+      "title": "Contact — Boundless Production",
+      "description": "BleachDex support, partnerships, creator collaborations and business enquiries."
+    },
+    "/bleachdex": {
+      "title": "BleachDex — Collect souls in Discord",
+      "description": "Souls spawn in your Discord server. Catch them, build a three-character team, fight bosses, craft rare characters and climb the leaderboard."
+    },
+    "/bleachdex/list": {
+      "title": "BleachDex characters and weapons",
+      "description": "Browse every BleachDex character: tiers, factions, stats and abilities."
+    },
+    "/bleachdex/leaderboard": {
+      "title": "BleachDex leaderboard",
+      "description": "See the top BleachDex players this week, this month and all time."
+    },
+    "/bleachdex/commands": {
+      "title": "BleachDex commands",
+      "description": "Every BleachDex slash command, what it does and how to use it."
+    },
+    "/bleachdex/premium": {
+      "title": "BleachDex Premium",
+      "description": "Support BleachDex and get extra giveaway entries, a custom role, exclusive boss and spawn parties and bonus cards."
+    }
   }
 }

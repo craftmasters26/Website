@@ -1,8 +1,10 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site";
 import { TIER_META, WHOP_LABEL, type Tier } from "@/lib/premium-tiers";
 
 export const Route = createFileRoute("/bleachdex/premium")({
   head: () => ({
+    links: [{ rel: "canonical", href: `${SITE_URL}/bleachdex/premium` }],
     meta: [{ title: "Premium · BleachDex" }],
   }),
   component: PremiumPage,

@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site";
 import { LegalPage, LegalSection, SUPPORT_URL } from "@/components/legal-page";
 
 export const Route = createFileRoute("/bleachdex/contact")({
   head: () => ({
+    links: [{ rel: "canonical", href: `${SITE_URL}/bleachdex/contact` }],
     meta: [
       { title: "Contact · BleachDex" },
       {

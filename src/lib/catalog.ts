@@ -83,13 +83,19 @@ function asFaction(value: string | undefined): Faction {
     : "unaffiliated";
 }
 
+const GH_RAW = "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/";
+/** In production, serve GitHub-hosted art through our own cached /gh-img/ route (see deploy/nginx-boundless.conf). */
+export function cdnImage(url: string): string {
+  return !import.meta.env.DEV && url.startsWith(GH_RAW) ? `/gh-img/${url.slice(GH_RAW.length)}` : url;
+}
+
 function buildSouls(raw: RawCharacter[]): Soul[] {
   return raw
     .filter((row) => row.enabled !== 0)
     .map((row) => ({
       id: row.id,
       name: row.name,
-      imagePath: row.image_path,
+      imagePath: cdnImage(row.image_path),
       hp: row.hp,
       attack: row.attack,
       pressure: row.hp + row.attack,
@@ -113,7 +119,7 @@ function buildWeapons(raw: RawWeapon[]): Zanpakuto[] {
     .map((row) => ({
       id: row.id,
       name: row.name,
-      imagePath: row.image_path,
+      imagePath: cdnImage(row.image_path),
       attackBonus: row.attack_bonus,
       boostType: row.boost_type === "hp" ? "hp" : "damage",
       boostPercent: row.boost_percent ?? 0,

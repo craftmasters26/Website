@@ -1,23 +1,21 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { botAvatar, discordMark } from "@/assets";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { discordMark } from "@/assets";
 import { BLEACHDEX_URL } from "@/lib/site";
+import { DISCORD_INVITE, SUPPORT_SERVER } from "@/lib/catalog";
 
-/** Paths that use the Boundless Production header/footer instead of BleachDex's. */
 export const BOUNDLESS_DISCORD = "https://discord.gg/unmtvJxR9h";
 
-/** Fill in the empty links when the accounts are ready; buttons with no link show as "coming soon". */
+/** Fill these in when an account is live. Empty links are not rendered at all. */
 export const SOCIAL_LINKS = {
   youtube: "",
   tiktok: "",
   instagram: "",
   discord: BOUNDLESS_DISCORD,
 };
-
-export const ABOUT_TEXT =
-  "We\u2019re Boundless Production: we strive to be boundless in the things we do such as the production and releasing of games, and discord bots, but being boundless demands of us having no limits, and as such we will strive to be limitless not only in how we do things, but in the things we do for that is what it means to be Boundless Production.";
 
 const ico = {
   width: 18,
@@ -58,8 +56,8 @@ function TikTokIcon() {
   );
 }
 
-/** YouTube, TikTok, Instagram and Discord buttons (render inside a flex row). */
-export function Socials() {
+/** Only the social accounts that are live. Renders nothing for empty links (no dead buttons). */
+export function Socials({ className = "btn btn-outline" }: { className?: string }) {
   const items = [
     { label: "YouTube", href: SOCIAL_LINKS.youtube, icon: <YouTubeIcon /> },
     { label: "TikTok", href: SOCIAL_LINKS.tiktok, icon: <TikTokIcon /> },
@@ -67,21 +65,13 @@ export function Socials() {
     {
       label: "Discord",
       href: SOCIAL_LINKS.discord,
-      icon: <img src={discordMark} alt="" className="size-[18px] rounded-[4px]" />,
+      icon: <img src={discordMark} alt="" width={18} height={18} className="size-[18px] rounded-[4px]" />,
     },
-  ];
+  ].filter((i) => i.href);
   return (
     <>
       {items.map((i) => (
-        <a
-          key={i.label}
-          href={i.href || undefined}
-          target={i.href ? "_blank" : undefined}
-          rel="noreferrer"
-          aria-disabled={i.href ? undefined : true}
-          title={i.href ? undefined : "Link coming soon"}
-          className={cn("btn btn-outline", !i.href && "cursor-default opacity-60")}
-        >
+        <a key={i.label} href={i.href} target="_blank" rel="noreferrer" className={className}>
           {i.icon}
           {i.label}
         </a>
@@ -92,99 +82,185 @@ export function Socials() {
 
 export const COMPANY_PATHS = [
   "/",
-  "/what-we-make",
-  "/games",
-  "/bots",
+  "/about",
   "/projects",
   "/contact-us",
   "/company-privacy",
   "/company-terms",
 ];
 
-const NAV = [
-  { to: "/", label: "Home" },
-  { to: "/what-we-make", label: "What we make" },
-  { to: "/projects", label: "Projects" },
-  { to: "/contact-us", label: "Contact" },
-] as const;
+type NavItem =
+  | { label: string; to: "/projects" | "/about" | "/contact-us" }
+  | { label: string; href: string; external?: boolean };
 
-function BrandMark() {
+const NAV: NavItem[] = [
+  { to: "/projects", label: "Projects" },
+  { href: BLEACHDEX_URL, label: "BleachDex" },
+  { to: "/about", label: "About" },
+  { href: BOUNDLESS_DISCORD, label: "Community", external: true },
+  { to: "/contact-us", label: "Contact" },
+];
+
+/** Boundless mark: two linked loops (no edge, no limit) inside a rounded tile. Works from 16px up. */
+export function BrandMark({ size = 42 }: { size?: number }) {
   return (
-    <div className="brand-mark" aria-hidden="true">
-      <span className="font-serif text-[22px] font-bold text-bone">B</span>
-    </div>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      role="img"
+      aria-label="Boundless Production"
+      className="shrink-0"
+    >
+      <defs>
+        <linearGradient id="bp-mark-g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#2b8cff" />
+          <stop offset="1" stopColor="#0a3fa8" />
+        </linearGradient>
+      </defs>
+      <rect width="48" height="48" rx="11" fill="url(#bp-mark-g)" />
+      <path
+        d="M24 24c-3.2-5.2-5.6-7-8.6-7a7 7 0 0 0 0 14c3 0 5.4-1.8 8.6-7Zm0 0c3.2 5.2 5.6 7 8.6 7a7 7 0 0 0 0-14c-3 0-5.4 1.8-8.6 7Z"
+        fill="none"
+        stroke="#fff"
+        strokeWidth="3.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="39.5" cy="9.5" r="2.6" fill="#f2a516" />
+    </svg>
+  );
+}
+
+function NavEntry({ item, onClick, mobile }: { item: NavItem; onClick?: () => void; mobile?: boolean }) {
+  const cls = mobile
+    ? "rounded-[var(--radius-blade)] px-3 py-3 text-bone-dim hover:bg-void-raised hover:text-bone"
+    : "nav-link";
+  if ("to" in item) {
+    return (
+      <Link
+        to={item.to}
+        activeOptions={{ exact: true }}
+        className={cls}
+        activeProps={{ className: cn(cls, !mobile && "nav-link-active", mobile && "bg-void-raised text-bone") }}
+        onClick={onClick}
+      >
+        {item.label}
+      </Link>
+    );
+  }
+  return (
+    <a
+      href={item.href}
+      className={cls}
+      onClick={onClick}
+      {...(item.external ? { target: "_blank", rel: "noreferrer" } : {})}
+    >
+      {item.label}
+    </a>
+  );
+}
+
+export function SkipLink() {
+  return (
+    <a href="#content" className="skip-link">
+      Skip to main content
+    </a>
   );
 }
 
 export function BpLayout({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        btnRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <div className="site-bg">
       <div className="relative z-10 flex min-h-screen flex-col">
         <header className="site-header">
           <div className="wrap flex items-center justify-between gap-2 py-3">
-            <Link to="/" className="brand flex shrink-0 items-center gap-3 no-underline">
+            <Link to="/" className="brand flex shrink-0 items-center gap-3 no-underline" aria-label="Boundless Production home">
               <BrandMark />
               <span className="block font-serif text-[19px] font-bold leading-tight text-bone">
-                Boundless Production
+                Boundless<span className="hidden sm:inline"> Production</span>
               </span>
             </Link>
 
             <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
               {NAV.map((n) => (
-                <Link
-                  key={n.to}
-                  to={n.to}
-                  activeOptions={{ exact: true }}
-                  className="nav-link"
-                  activeProps={{ className: "nav-link nav-link-active" }}
-                >
-                  {n.label}
-                </Link>
+                <NavEntry key={n.label} item={n} />
               ))}
             </nav>
 
             <div className="flex shrink-0 items-center gap-3">
+              <a
+                href={DISCORD_INVITE}
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-fill !hidden !px-4 !py-2 sm:!inline-flex"
+              >
+                Add BleachDex
+              </a>
+              <ThemeToggle />
               <button
+                ref={btnRef}
                 type="button"
                 className="inline-flex size-11 items-center justify-center rounded-lg border border-line-bright text-bone lg:hidden"
                 aria-label={open ? "Close menu" : "Open menu"}
+                aria-expanded={open}
+                aria-controls="bp-mobile-nav"
                 onClick={() => setOpen((v) => !v)}
               >
-                {open ? <X className="size-5" /> : <Menu className="size-5" />}
+                {open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
               </button>
             </div>
           </div>
 
-          {open ? (
-            <nav className="border-t border-line px-5 py-4 lg:hidden" aria-label="Mobile">
-              <div className="flex flex-col gap-2">
-                {NAV.map((n) => (
-                  <Link
-                    key={n.to}
-                    to={n.to}
-                    className="rounded-[var(--radius-blade)] px-3 py-3 text-bone-dim hover:bg-void-raised hover:text-bone"
-                    onClick={() => setOpen(false)}
-                  >
-                    {n.label}
-                  </Link>
-                ))}
-              </div>
-            </nav>
-          ) : null}
+          <nav
+            id="bp-mobile-nav"
+            hidden={!open}
+            className="border-t border-line px-5 py-4 lg:hidden"
+            aria-label="Mobile"
+          >
+            <div className="flex flex-col gap-2">
+              {NAV.map((n) => (
+                <NavEntry key={n.label} item={n} mobile onClick={() => setOpen(false)} />
+              ))}
+              <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="btn btn-fill mt-2">
+                Add BleachDex
+              </a>
+            </div>
+          </nav>
         </header>
 
-        <div className="flex-1">
+        <div id="content" tabIndex={-1} className="flex-1 outline-none">
           <main className="page-enter">{children}</main>
         </div>
 
         <footer className="border-t border-line py-11">
           <div className="wrap flex flex-wrap items-center justify-between gap-4">
-            <span className="font-mono text-xs text-bone-faint">© Boundless Production</span>
-            <div className="flex flex-wrap gap-5 text-[13px] text-bone-dim">
-              <Link to="/what-we-make" className="hover:text-azure-bright">What we make</Link>
+            <span className="font-mono text-xs text-bone-faint">
+              © {new Date().getFullYear()} Boundless Production
+            </span>
+            <div className="flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-bone-dim">
               <Link to="/projects" className="hover:text-azure-bright">Projects</Link>
+              <a href={BLEACHDEX_URL} className="hover:text-azure-bright">BleachDex</a>
+              <Link to="/about" className="hover:text-azure-bright">About</Link>
               <Link to="/contact-us" className="hover:text-azure-bright">Contact</Link>
+              <a href={SUPPORT_SERVER} className="hover:text-azure-bright" target="_blank" rel="noreferrer">
+                BleachDex support
+              </a>
               <Link to="/company-privacy" className="hover:text-azure-bright">Privacy</Link>
               <Link to="/company-terms" className="hover:text-azure-bright">Terms</Link>
               <a href={BOUNDLESS_DISCORD} className="hover:text-azure-bright" target="_blank" rel="noreferrer">
@@ -198,129 +274,14 @@ export function BpLayout({ children }: { children: ReactNode }) {
   );
 }
 
-export function PageHead({ title, children }: { title: string; children?: ReactNode }) {
+export function PageHead({ title, eyebrow, children }: { title: string; eyebrow?: string; children?: ReactNode }) {
   return (
-    <section className="py-20 md:py-24">
+    <section className="py-16 md:py-24">
       <div className="wrap">
-        <h1 className="max-w-3xl font-serif text-[44px] leading-[1.02] md:text-[64px]">{title}</h1>
-        {children ? <p className="mt-6 max-w-xl text-[16.5px] leading-7 text-bone-dim">{children}</p> : null}
+        {eyebrow ? <p className="eyebrow mb-4">{eyebrow}</p> : null}
+        <h1 className="max-w-3xl font-serif text-[clamp(36px,8vw,64px)] leading-[1.02]">{title}</h1>
+        {children ? <p className="lede mt-6">{children}</p> : null}
       </div>
     </section>
-  );
-}
-
-const cardBase =
-  "relative flex flex-col rounded-[10px] border border-line-bright bg-void-raised p-7";
-
-function Chip({ children, live }: { children: ReactNode; live?: boolean }) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-2 self-start rounded-full border px-3 py-1 font-mono text-[11.5px]",
-        live ? "border-azure-bright text-azure-bright" : "border-line-bright text-bone-dim",
-      )}
-    >
-      {live ? <span className="size-1.5 rounded-full bg-azure-bright" aria-hidden="true" /> : null}
-      {children}
-    </span>
-  );
-}
-
-function BleachDexCard() {
-  return (
-    <a
-      href={BLEACHDEX_URL}
-      className={cn(cardBase, "no-underline transition hover:-translate-y-1 hover:border-azure-bright")}
-    >
-      <img src={botAvatar} alt="" className="mb-6 size-20 rounded-[var(--radius-blade)] border border-line-bright object-cover" />
-      <Chip live>Live</Chip>
-      <p className="mt-5 font-mono text-[12px] text-bone-faint">Discord bot</p>
-      <h3 className="mt-1 font-serif text-[30px]">BleachDex</h3>
-      <p className="mt-3 text-[15px] leading-6 text-bone-dim">
-        Souls spawn in your server and you press a button to keep them.
-      </p>
-      <span className="mt-6 font-mono text-[13px] text-azure-bright">Open the website →</span>
-    </a>
-  );
-}
-
-function BoundlessBotCard() {
-  return (
-    <div className={cardBase} aria-label="Boundless — coming soon">
-      <div className="mb-6 flex size-20 items-center justify-center rounded-[var(--radius-blade)] border border-line-bright bg-void-raised-2 font-serif text-3xl text-bone">
-        B
-      </div>
-      <Chip>Coming soon</Chip>
-      <p className="mt-5 font-mono text-[12px] text-bone-faint">Discord bot</p>
-      <h3 className="mt-1 font-serif text-[30px]">Boundless</h3>
-      <p className="mt-3 text-[15px] leading-6 text-bone-dim">Our next bot. Coming soon.</p>
-    </div>
-  );
-}
-
-function ScatteredStarsCard() {
-  return (
-    <div className={cardBase} aria-label="Scattered Stars — coming soon">
-      <div className="mb-6 flex size-20 items-center justify-center rounded-[var(--radius-blade)] border border-line-bright bg-void-raised-2 text-3xl text-bone">
-        ✦
-      </div>
-      <Chip>Coming soon</Chip>
-      <p className="mt-5 font-mono text-[12px] text-bone-faint">Game</p>
-      <h3 className="mt-1 font-serif text-[30px]">Scattered Stars</h3>
-      <p className="mt-3 text-[15px] leading-6 text-bone-dim">Our upcoming game. Coming soon.</p>
-    </div>
-  );
-}
-
-/** Every project: BleachDex (live) + Boundless and Scattered Stars (coming soon). */
-export function ProjectCards() {
-  return (
-    <div className="grid gap-6 md:grid-cols-3">
-      <BleachDexCard />
-      <BoundlessBotCard />
-      <ScatteredStarsCard />
-    </div>
-  );
-}
-
-/** All of our Discord bots. */
-export function BotCards() {
-  return (
-    <div className="grid gap-6 md:grid-cols-3">
-      <BleachDexCard />
-      <BoundlessBotCard />
-    </div>
-  );
-}
-
-/** All of our games. */
-export function GameCards() {
-  return (
-    <div className="grid gap-6 md:grid-cols-3">
-      <ScatteredStarsCard />
-    </div>
-  );
-}
-
-const linkCard = cn(cardBase, "no-underline transition hover:-translate-y-1 hover:border-azure-bright");
-
-export function MakeCards() {
-  return (
-    <div className="grid gap-6 md:grid-cols-2">
-      <Link to="/games" className={linkCard}>
-        <h3 className="font-serif text-[30px]">Games</h3>
-        <p className="mt-3 text-[15px] leading-6 text-bone-dim">
-          Original games with their own worlds, rules and characters.
-        </p>
-        <span className="mt-6 font-mono text-[13px] text-azure-bright">See our games</span>
-      </Link>
-      <Link to="/bots" className={linkCard}>
-        <h3 className="font-serif text-[30px]">Discord bots</h3>
-        <p className="mt-3 text-[15px] leading-6 text-bone-dim">
-          Bots that give servers something to do together, with a website to go with them.
-        </p>
-        <span className="mt-6 font-mono text-[13px] text-azure-bright">See our bots</span>
-      </Link>
-    </div>
   );
 }

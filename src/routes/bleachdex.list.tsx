@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { SITE_URL } from "@/lib/site";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 import {
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/bleachdex/list")({
     return kind === "soul" || kind === "craft" || kind === "weapon" ? { kind } : {};
   },
   head: () => ({
+    links: [{ rel: "canonical", href: `${SITE_URL}/bleachdex/list` }],
     meta: [
       { title: "List · BleachDex" },
       {
@@ -126,6 +128,7 @@ function Thumb({ src, name }: { src: string; name: string }) {
           src={src}
           alt=""
           loading="lazy"
+          decoding="async"
           className="size-full object-cover object-top"
           onError={() => setFailed(true)}
         />

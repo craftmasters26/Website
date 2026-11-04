@@ -402,10 +402,11 @@ export const COMPANY_OG_PATHS = [
 ];
 
 export function siteForPath(site = {}, pathname = "/") {
-  const { company, ...base } = site ?? {};
+  const { company, pages, ...base } = site ?? {};
   const clean = String(pathname || "/").replace(/\/+$/, "") || "/";
-  if (company && COMPANY_OG_PATHS.includes(clean)) return { ...base, ...company };
-  return base;
+  const merged = company && COMPANY_OG_PATHS.includes(clean) ? { ...base, ...company } : base;
+  // Optional per-page title/description overrides (site.json "pages") so shared links are specific.
+  return pages?.[clean] ? { ...merged, ...pages[clean] } : merged;
 }
 
 export function stripShareMetaTags(html) {

@@ -2,21 +2,25 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Card-style catalog artwork (roster/weapon detail, homepage hero, pack
- * previews). Falls back to a plain initial-letter tile instead of the
- * browser's broken-image icon when the art fails to load — the character and
- * weapon images live on GitHub raw (`craftmasters26/bleachdex`), so a
- * transient GitHub hiccup or a renamed/moved file shouldn't leave a broken
- * icon on the page.
+ * Card-style catalog artwork. Falls back to a plain initial-letter tile instead of the
+ * browser's broken-image icon when the art fails to load. Images are lazy by default;
+ * pass `priority` for the one above-the-fold hero image. Give the parent an aspect ratio
+ * (or pass width/height) so the page does not jump while images load.
  */
 export function CatalogImage({
   src,
   name,
   className,
+  priority,
+  width,
+  height,
 }: {
   src: string;
   name: string;
   className?: string;
+  priority?: boolean;
+  width?: number;
+  height?: number;
 }) {
   const [failed, setFailed] = useState(false);
 
@@ -35,5 +39,17 @@ export function CatalogImage({
     );
   }
 
-  return <img src={src} alt={name} className={className} onError={() => setFailed(true)} />;
+  return (
+    <img
+      src={src}
+      alt={name}
+      width={width ?? 300}
+      height={height ?? 400}
+      loading={priority ? "eager" : "lazy"}
+      decoding="async"
+      fetchPriority={priority ? "high" : undefined}
+      className={className}
+      onError={() => setFailed(true)}
+    />
+  );
 }

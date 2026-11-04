@@ -187,3 +187,27 @@ specifically — this archive doesn't contain either.
 - Company pages: `/`, `/about`, `/what-we-make`, `/projects`, `/contact-us` (`src/routes/`). Shared header/footer/cards: `src/components/bp-layout.tsx`.
 - The whole site (company pages and BleachDex) now uses one blue + white palette. The colours are the `--color-ember*` / `--color-gold` tokens at the top of `src/styles.css`; rarity colours are shades of blue/white (`.tier-*`).
 - The old BleachDex home moved to `/bleachdex`. Boundless and Scattered Stars show "Coming soon".
+
+## Website improvement pass (from the website review document)
+
+**Homepage and navigation**
+- New homepage: outcome-led hero, real stat strip (character/weapon counts from the catalog, weekly catches from the bot when reachable), featured BleachDex showcase, 4-step "How it works", What we make, projects, community and final CTAs. (`src/components/home-sections.tsx`)
+- Header: Projects, BleachDex, About, Community, Contact + an "Add BleachDex" button; short "Boundless" wordmark on phones; new SVG logo mark and favicon; skip-to-content link; `aria-expanded`/`aria-controls` and Esc-to-close on both mobile menus.
+- Social buttons without a live account are no longer rendered (fill `SOCIAL_LINKS` in `bp-layout.tsx` when they exist).
+- `/what-we-make`, `/games`, `/bots` now 301 to `/projects`; `/projects` has filters (All, Live, In development, Games, Discord bots) and `?filter=` links. `/about` is a real page again. "Coming soon" became "In development".
+- Contact page: support / community / partnership routes plus a working form (`/api/contact` posts to a Discord webhook; set `CONTACT_WEBHOOK_URL`). Optional `VITE_CONTACT_EMAIL`.
+
+**Visual system**
+- Navy headings, slate body text, new warm gold accent for the main CTA on dark sections; muted text now passes WCAG AA. Buttons are sentence case, 44px minimum height. Background animation removed (static).
+
+**SEO / sharing / performance**
+- Share cards are 1200x630 (`/og.jpg`) with `summary_large_image` for BleachDex too; per-page title/description overrides in `src/lib/og/site.json` ("pages"); canonical links; Organization/WebSite and SoftwareApplication JSON-LD; `/robots.txt` and `/sitemap.xml` (includes every character and weapon page).
+- AdSense script now loads only where an ad slot renders (not on company pages, admin, checkout, premium, owned, legal or contact); the `google-adsense-account` meta tag stays site-wide for verification. Ad slot reserves its height.
+- Fewer font weights, lazy/async images with dimensions, nginx security headers, long cache for `/assets/`, and rate limiting on the contact form.
+
+## Second pass: remaining items
+- Dark mode: header toggle (Moon/Sun), remembers the choice, first visit follows the OS; set before first paint (no flash). Tokens in `styles.css` under `:root[data-theme="dark"]`.
+- Image art served through nginx `/gh-img/` with a 30-day disk cache instead of hitting GitHub raw on every view (`cdnImage()` in `catalog.ts`, production only).
+- Browser error alerts to a Discord webhook (`/api/client-error`, `ERROR_WEBHOOK_URL`), de-duplicated and rate-limited.
+- Optional Umami analytics, loaded only when `VITE_UMAMI_SRC` and `VITE_UMAMI_ID` are set.
+- Screenshots section (`src/lib/screenshots.ts`, files in `public/screens/`): hidden until there are entries.

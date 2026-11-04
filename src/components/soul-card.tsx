@@ -42,6 +42,7 @@ export function SoulCard({ soul }: { soul: Soul }) {
           src={soul.imagePath}
           alt={soul.name}
           loading="lazy"
+          decoding="async"
           className="size-full object-cover object-top"
           onError={(e) => {
             e.currentTarget.style.display = "none";
@@ -91,6 +92,7 @@ export function WeaponCard({ weapon }: { weapon: Zanpakuto }) {
           src={weapon.imagePath}
           alt={weapon.name}
           loading="lazy"
+          decoding="async"
           className="size-full object-cover object-center"
           onError={(e) => {
             e.currentTarget.style.display = "none";

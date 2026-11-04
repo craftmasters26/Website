@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site";
 import { COMMAND_GROUPS } from "@/lib/commands";
 
 export const Route = createFileRoute("/bleachdex/commands")({
   head: () => ({
+    links: [{ rel: "canonical", href: `${SITE_URL}/bleachdex/commands` }],
     meta: [{ title: "Commands · BleachDex" }],
   }),
   component: CommandsPage,

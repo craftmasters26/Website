@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { signInWithDiscord, signOut } from "@/lib/auth/client";
 import { useCurrentUser } from "@/lib/auth/use-current-user";
 import { useAdminAccess } from "@/lib/admin-access";
@@ -218,11 +219,14 @@ export function SiteHeader() {
           <a href={SITE_URL} className="hidden font-mono text-[11.5px] text-bone-faint underline-offset-4 hover:text-bone hover:underline xl:inline">
             ← Boundless Production
           </a>
+          <ThemeToggle />
           <HeaderAuth />
           <button
             type="button"
             className="inline-flex size-11 items-center justify-center rounded-lg border border-line-bright text-bone lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="bd-mobile-nav"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -231,7 +235,7 @@ export function SiteHeader() {
       </div>
 
       {open ? (
-        <nav className="border-t border-line px-5 py-4 lg:hidden" aria-label="Mobile">
+        <nav id="bd-mobile-nav" className="border-t border-line px-5 py-4 lg:hidden" aria-label="Mobile">
           <div className="flex flex-col gap-2">
             {links.map((link) => (
               <Link

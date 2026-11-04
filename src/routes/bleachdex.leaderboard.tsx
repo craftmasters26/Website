@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { SITE_URL } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/bleachdex/leaderboard")({
   head: () => ({
+    links: [{ rel: "canonical", href: `${SITE_URL}/bleachdex/leaderboard` }],
     meta: [
       { title: "Leaderboard · BleachDex" },
       {

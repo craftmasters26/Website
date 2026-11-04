@@ -1,4 +1,9 @@
 import { useMemo } from "react";
+import { Screenshots } from "@/components/screenshots";
+import { HowItWorks, SpawnPreview } from "@/components/home-sections";
+import { jsonLd, seo } from "@/lib/seo";
+import { SITE_URL, BLEACHDEX_URL } from "@/lib/site";
+import { SUPPORT_SERVER } from "@/lib/catalog";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CatalogImage } from "@/components/catalog-image";
 import { brandIcon } from "@/assets";
@@ -6,7 +11,25 @@ import { CRAFT_SOULS, DISCORD_INVITE, SOULS, TIER_LABEL, WEAPONS, getSoul } from
 import { useCatalogVersion } from "@/lib/catalog-version";
 
 export const Route = createFileRoute("/bleachdex/")({
-  head: () => ({ meta: [{ title: "BleachDex" }] }),
+  head: () => ({
+    ...seo({
+      title: "BleachDex — Collect souls in Discord",
+      description:
+        "Souls spawn in your Discord server. Catch them, build a three-character team, fight bosses, craft rare characters and climb the leaderboard.",
+      path: "/bleachdex",
+    }),
+    scripts: [
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: "BleachDex",
+        applicationCategory: "GameApplication",
+        operatingSystem: "Discord",
+        url: `${SITE_URL}${BLEACHDEX_URL.replace(SITE_URL, "")}`,
+        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      }),
+    ],
+  }),
   component: Home,
 });
 
@@ -71,6 +94,7 @@ function Home() {
               <CatalogImage
                 src={featured.imagePath}
                 name={featured.name}
+                priority
                 className="aspect-[3/4] w-full object-cover object-top"
               />
             </div>
@@ -132,6 +156,34 @@ function Home() {
               Add to Discord
             </a>
           </div>
+        </div>
+      </section>
+
+      <Screenshots />
+
+      <HowItWorks />
+
+      <section className="pb-24" aria-labelledby="install-title">
+        <div className="wrap grid items-center gap-10 md:grid-cols-[1.1fr_.9fr]">
+          <div>
+            <h2 id="install-title" className="font-serif text-[32px] leading-tight">
+              Adding BleachDex to your server
+            </h2>
+            <p className="lede mt-4">
+              Discord shows you exactly which permissions BleachDex asks for before you approve, and
+              you can change its role or remove it at any time from Server Settings. Questions first?
+              The support server is open.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="btn btn-fill">
+                Add to Discord
+              </a>
+              <a href={SUPPORT_SERVER} target="_blank" rel="noreferrer" className="btn btn-outline">
+                Join the support server
+              </a>
+            </div>
+          </div>
+          <SpawnPreview />
         </div>
       </section>
     </main>

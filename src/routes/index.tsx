@@ -1,32 +1,66 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { LayoutGrid } from "lucide-react";
-import { ABOUT_TEXT, BpLayout, Socials } from "@/components/bp-layout";
+import { createFileRoute } from "@tanstack/react-router";
+import { BpLayout } from "@/components/bp-layout";
+import {
+  CommunityCta,
+  FeaturedBleachDex,
+  FinalCta,
+  Hero,
+  HowItWorks,
+  TrustStrip,
+  WhatWeMake,
+} from "@/components/home-sections";
+import { Screenshots } from "@/components/screenshots";
+import { ProjectsSummary } from "@/components/projects";
+import { jsonLd, seo } from "@/lib/seo";
+import { SITE_URL } from "@/lib/site";
+import { BOUNDLESS_DISCORD } from "@/components/bp-layout";
 
 export const Route = createFileRoute("/")({
-  head: () => ({ meta: [{ title: "Boundless Production — Games & Discord Bots" }] }),
+  head: () => ({
+    ...seo({
+      title: "Boundless Production — Games & Discord experiences",
+      description:
+        "Boundless Production is an independent studio making collectible games and Discord bots. Home of BleachDex, a live character-collection game for Discord.",
+      path: "/",
+    }),
+    scripts: [
+      jsonLd({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            name: "Boundless Production",
+            url: SITE_URL,
+            sameAs: [BOUNDLESS_DISCORD],
+          },
+          { "@type": "WebSite", name: "Boundless Production", url: SITE_URL },
+        ],
+      }),
+    ],
+  }),
   component: CompanyHome,
 });
 
 function CompanyHome() {
   return (
     <BpLayout>
-      <section className="py-20 md:py-28">
-        <div className="wrap hero-seq">
-          <h1 className="font-serif text-[52px] leading-[0.98] tracking-[-0.01em] md:text-[76px]">
-            Boundless
-            <br />
-            <span className="accent-text">Production</span>
-          </h1>
-          <p className="mt-8 max-w-2xl text-[17px] leading-8 text-bone-dim">{ABOUT_TEXT}</p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Link to="/projects" className="btn btn-fill">
-              <LayoutGrid className="size-[18px]" aria-hidden="true" />
-              Our projects
-            </Link>
-            <Socials />
-          </div>
+      <Hero />
+      <TrustStrip />
+      <FeaturedBleachDex />
+      <Screenshots />
+      <HowItWorks />
+      <WhatWeMake />
+      <section className="pb-20 md:pb-28" aria-labelledby="projects-title">
+        <div className="wrap">
+          <p className="eyebrow">Projects</p>
+          <h2 id="projects-title" className="section-title mt-3 mb-10 font-serif">
+            One game live, more on the way.
+          </h2>
+          <ProjectsSummary />
         </div>
       </section>
+      <CommunityCta />
+      <FinalCta />
     </BpLayout>
   );
 }

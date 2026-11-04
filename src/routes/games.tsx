@@ -1,20 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { BpLayout, GameCards, PageHead } from "@/components/bp-layout";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
+// Folded into the Projects page (one fuller page instead of several thin ones).
 export const Route = createFileRoute("/games")({
-  head: () => ({ meta: [{ title: "Games — Boundless Production" }] }),
-  component: Games,
+  beforeLoad: () => {
+    throw redirect({ to: "/projects", search: { filter: "games" }, statusCode: 301 });
+  },
 });
-
-function Games() {
-  return (
-    <BpLayout>
-      <PageHead title="Our games.">All of our games are listed here.</PageHead>
-      <section className="pb-24">
-        <div className="wrap">
-          <GameCards />
-        </div>
-      </section>
-    </BpLayout>
-  );
-}

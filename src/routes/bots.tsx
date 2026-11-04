@@ -1,20 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { BotCards, BpLayout, PageHead } from "@/components/bp-layout";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
+// Folded into the Projects page (one fuller page instead of several thin ones).
 export const Route = createFileRoute("/bots")({
-  head: () => ({ meta: [{ title: "Discord bots — Boundless Production" }] }),
-  component: Bots,
+  beforeLoad: () => {
+    throw redirect({ to: "/projects", search: { filter: "bots" }, statusCode: 301 });
+  },
 });
-
-function Bots() {
-  return (
-    <BpLayout>
-      <PageHead title="Our Discord bots.">Click BleachDex to open its website.</PageHead>
-      <section className="pb-24">
-        <div className="wrap">
-          <BotCards />
-        </div>
-      </section>
-    </BpLayout>
-  );
-}

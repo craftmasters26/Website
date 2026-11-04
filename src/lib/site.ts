@@ -16,3 +16,6 @@ export const SITE_HOST = new URL(SITE_URL).host;
 const rawBleachdex = (import.meta.env.VITE_BLEACHDEX_URL as string | undefined)?.trim();
 export const BLEACHDEX_URL = (rawBleachdex || "https://boundlessproductions.org/bleachdex").replace(/\/+$/, "");
 export const BLEACHDEX_HOST = new URL(BLEACHDEX_URL).host;
+
+/** Public studio contact address. Optional: set VITE_CONTACT_EMAIL and it appears on the Contact page. */
+export const CONTACT_EMAIL = ((import.meta.env.VITE_CONTACT_EMAIL as string | undefined) ?? "").trim();
