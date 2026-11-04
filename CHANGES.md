@@ -211,3 +211,8 @@ specifically — this archive doesn't contain either.
 - Browser error alerts to a Discord webhook (`/api/client-error`, `ERROR_WEBHOOK_URL`), de-duplicated and rate-limited.
 - Optional Umami analytics, loaded only when `VITE_UMAMI_SRC` and `VITE_UMAMI_ID` are set.
 - Screenshots section (`src/lib/screenshots.ts`, files in `public/screens/`): hidden until there are entries.
+
+## Third pass
+- Real Discord screenshots (spawn, boss, leaderboard with other players' names blurred, catch) in `public/screens/`, listed in `src/lib/screenshots.ts`; shown on the homepage and the BleachDex page.
+- Boundless and Scattered Stars cards use the real copy (redacted text is announced as "[redacted]" to screen readers); placeholder glyph tile replaced by an icon header.
+- Login: `BETTER_AUTH_URL` falls back to `VITE_SITE_URL`, and `/api/login/discord` logs the exact `redirect_uri` it sends to Discord (`pm2 logs Bleachdex-Web`).

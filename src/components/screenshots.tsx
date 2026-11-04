@@ -12,7 +12,7 @@ export function Screenshots() {
         </h2>
         <div className="shot-grid">
           {SCREENSHOTS.map((s) => (
-            <figure className="shot" key={s.src}>
+            <figure className="shot" key={s.src} style={s.width / s.height > 3 ? { gridColumn: "1 / -1" } : undefined}>
               <img src={s.src} alt={s.alt} width={s.width ?? 800} height={s.height ?? 500} loading="lazy" decoding="async" />
               <figcaption>{s.caption}</figcaption>
             </figure>

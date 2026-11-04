@@ -109,6 +109,9 @@ const SITE_URL_FALLBACK = "https://bleachdex.vercel.app";
 const vercelProdHost = env("VERCEL_PROJECT_PRODUCTION_URL");
 const explicitBaseURL =
   env("BETTER_AUTH_URL") ??
+  // Self-hosted: if only the public site URL is set, use it so the Discord redirect_uri is never
+  // guessed from the request host (which produced "Invalid OAuth2 redirect_uri").
+  env("VITE_SITE_URL")?.replace(/\/+$/, "") ??
   (vercelProdHost ? `https://${vercelProdHost}` : undefined) ??
   (process.env.VERCEL ? SITE_URL_FALLBACK : undefined);
 // Explicit `string[]` (not a readonly tuple) — Better Auth's DynamicBaseURLConfig

@@ -62,6 +62,13 @@ export default defineEventHandler(async (event) => {
       );
     }
 
+    // Shows in `pm2 logs Bleachdex-Web`: this exact value must be listed under Redirects in the Discord developer portal.
+    try {
+      console.log("[login/discord] redirect_uri =", new URL(body.url).searchParams.get("redirect_uri"));
+    } catch {
+      /* logging only */
+    }
+
     // Forward Better Auth's OAuth state cookie so the callback can verify it.
     const headers = new Headers({ location: body.url, "cache-control": "no-store" });
     for (const cookie of res.headers.getSetCookie()) headers.append("set-cookie", cookie);
