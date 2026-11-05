@@ -33,6 +33,9 @@ export type AdminCharacter = {
   card_image_path: string;
   has_template: boolean;
   craftable_only: boolean;
+  /** Effective faction key (admin override or the built-in one) and the built-in one. */
+  faction: string;
+  default_faction: string;
 };
 export type AdminWeapon = {
   id: number;
@@ -205,7 +208,7 @@ export const adminSpawn = createServerFn({ method: "POST" })
  * Discord id against ADMIN_USER_IDS on every call — see `adminCall` above.
  */
 const ADMIN_PATH =
-  /^\/internal\/admin\/(?:meta|weapons|characters|spawn|give|bossbattle|broadcast(?:\/(?:targets|status|resolve))?|premium\/(?:status|setup|schedule|giveaway|grant|revoke|link|event|test)|blacklist(?:\/remove)?|emoji|craftable|achievement-icon|template|character|weapon|seed\/[a-z]+|(?:character|weapon)\/\d+(?:\/enabled)?)$/;
+  /^\/internal\/admin\/(?:meta|weapons|characters|spawn|give|bossbattle|broadcast(?:\/(?:targets|status|resolve))?|premium\/(?:status|setup|schedule|giveaway|grant|revoke|link|event|test)|blacklist(?:\/remove)?|emoji|craftable|achievement-icon|template|character|weapon|seed\/[a-z]+|(?:character|weapon)\/\d+(?:\/enabled)?|character\/\d+\/delete|features|roster\/(?:preview|purge)|crafts\/(?:preview|reverse))$/;
 
 export const adminApi = createServerFn({ method: "POST" })
   .middleware([authMiddleware])

@@ -1,5 +1,5 @@
 import { useMemo, useState, type Dispatch, type SetStateAction } from "react";
-import { EyeOff, Pencil, Plus, Rocket, Undo2 } from "lucide-react";
+import { EyeOff, Pencil, Plus, Rocket, Trash2, Undo2 } from "lucide-react";
 import { CatalogImage } from "@/components/catalog-image";
 import {
   adminRequest,
@@ -29,6 +29,16 @@ import {
 type Kind = "character" | "weapon";
 type Item = AdminCharacter | AdminWeapon;
 const PAGE = 40;
+const FACTIONS = [
+  { key: "soul_reaper", label: "Soul Reaper" },
+  { key: "vizard", label: "Vizard" },
+  { key: "quincy", label: "Quincy" },
+  { key: "hollow", label: "Hollow" },
+  { key: "fullbringer", label: "Full Bringer" },
+  { key: "human", label: "Human" },
+  { key: "bount", label: "Bount" },
+  { key: "zanpakuto_spirit", label: "Zanpakuto Spirit" },
+];
 
 const isChar = (kind: Kind, _i: Item): _i is AdminCharacter => kind === "character";
 
@@ -74,6 +84,25 @@ export function CatalogTab({
     if (r.status === "ok") {
       setRows((all) => (all ?? []).map((x) => (x.id === item.id ? { ...x, enabled } : x)));
       setNotice(`${item.name} ${enabled ? "restored" : "removed"}.`);
+    } else {
+      setNotice(failureText(r));
+    }
+  }
+
+  async function deleteForever(item: Item) {
+    if (
+      !window.confirm(
+        `DELETE ${item.name}?\n\nThis removes it from the bot AND takes every copy out of every player's inventory (copies are parked on a hidden account, so they can be given back). It cannot appear again.`,
+      )
+    )
+      return;
+    const r = await adminRequest<{ name: string; copies_moved: number }>(
+      `/internal/admin/character/${item.id}/delete`,
+      {},
+    );
+    if (r.status === "ok") {
+      setRows((all) => (all ?? []).map((x) => (x.id === item.id ? { ...x, enabled: false } : x)));
+      setNotice(`${item.name} deleted. ${r.data.copies_moved} copies taken from players.`);
     } else {
       setNotice(failureText(r));
     }
@@ -175,6 +204,15 @@ export function CatalogTab({
                       )}
                     </button>
                   ) : null}
+                  {full && kind === "character" ? (
+                    <button
+                      type="button"
+                      className="btn btn-outline inline-flex items-center gap-1.5 px-3.5 py-2 text-[12.5px] text-ember-bright"
+                      onClick={() => void deleteForever(c)}
+                    >
+                      <Trash2 className="size-3.5" aria-hidden="true" /> Delete
+                    </button>
+                  ) : null}
                 </div>
               </div>
               {isOpen && open?.mode === "edit" ? (
@@ -225,6 +263,7 @@ function EditPanel({ kind, item, onSaved }: { kind: Kind; item: Item; onSaved: (
   const [art, setArt] = useState<ImageValue>(emptyImage);
   const [cardArt, setCardArt] = useState<ImageValue>(emptyImage);
   const [template, setTemplate] = useState<File | null>(null);
+  const [faction, setFaction] = useState(c?.faction ?? "");
   const { busy, msg, setMsg, run } = useAction();
 
   function save() {
@@ -238,6 +277,7 @@ function EditPanel({ kind, item, onSaved }: { kind: Kind; item: Item; onSaved: (
       if (c) {
         if (hp !== String(c.hp)) body.hp = hp;
         if (attack !== String(c.attack)) body.attack = attack;
+        if (faction !== c.faction) body.faction = faction === c.default_faction ? "" : faction;
       }
       if (w) {
         if (boostType !== w.boost_type) body.boost_type = boostType;
@@ -270,7 +310,7 @@ function EditPanel({ kind, item, onSaved }: { kind: Kind; item: Item; onSaved: (
     name.trim() !== item.name ||
     abName !== item.ability_name ||
     abDesc !== item.ability_description ||
-    (c ? hp !== String(c.hp) || attack !== String(c.attack) : false) ||
+    (c ? hp !== String(c.hp) || attack !== String(c.attack) || faction !== c.faction : false) ||
     (w ? boostType !== w.boost_type || boostPercent !== String(w.boost_percent) : false) ||
     hasImage(art) ||
     hasImage(cardArt) ||
@@ -303,6 +343,18 @@ function EditPanel({ kind, item, onSaved }: { kind: Kind; item: Item; onSaved: (
           </Field>
         </div>
       )}
+      {c ? (
+        <Field label="Faction" hint={`Changes its card colour, shop page and collection tab. Default: ${FACTIONS.find((f) => f.key === c.default_faction)?.label ?? "none"}.`}>
+          <select className={inputCls} value={faction} onChange={(e) => setFaction(e.target.value)}>
+            {faction === "" ? <option value="">(none)</option> : null}
+            {FACTIONS.map((f) => (
+              <option key={f.key} value={f.key}>
+                {f.label}
+              </option>
+            ))}
+          </select>
+        </Field>
+      ) : null}
       <Field label="Ability name">
         <input className={inputCls} value={abName} maxLength={64} onChange={(e) => setAbName(e.target.value)} />
       </Field>

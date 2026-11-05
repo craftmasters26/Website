@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Ban, Crown, Gift, Megaphone, Rocket, Server, Sword, Users, Wrench } from "lucide-react";
+import { Ban, Crown, Gift, Hammer, Megaphone, Rocket, Server, Sword, Users, Wrench } from "lucide-react";
 import { NotFound } from "@/components/not-found";
 import { useAdminAccess } from "@/lib/admin-access";
 import type { AdminCharacter, AdminLevel, AdminWeapon } from "@/lib/admin";
@@ -14,6 +14,7 @@ import { PremiumTab } from "@/components/admin/premium";
 import { ServersTab } from "@/components/admin/servers";
 import { SpawnsTab } from "@/components/admin/spawns";
 import { ToolsTab } from "@/components/admin/tools";
+import { MaintenanceTab } from "@/components/admin/maintenance";
 
 export const Route = createFileRoute("/bleachdex/admin")({
   head: () => ({
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/bleachdex/admin")({
   component: AdminPage,
 });
 
-type Tab = "servers" | "characters" | "weapons" | "spawns" | "give" | "premium" | "blacklist" | "message" | "tools";
+type Tab = "servers" | "characters" | "weapons" | "spawns" | "give" | "premium" | "blacklist" | "message" | "tools" | "maintenance";
 
 const TABS: { id: Tab; label: string; icon: typeof Server; full?: boolean }[] = [
   { id: "servers", label: "Servers", icon: Server },
@@ -34,6 +35,7 @@ const TABS: { id: Tab; label: string; icon: typeof Server; full?: boolean }[] = 
   { id: "blacklist", label: "Blacklist", icon: Ban, full: true },
   { id: "message", label: "Message", icon: Megaphone, full: true },
   { id: "tools", label: "Tools", icon: Wrench, full: true },
+  { id: "maintenance", label: "Maintenance", icon: Hammer, full: true },
 ];
 
 function AdminPage() {
@@ -128,6 +130,7 @@ function AdminPage() {
         {tab === "blacklist" ? <BlacklistTab /> : null}
         {tab === "premium" ? <PremiumTab guilds={guilds} /> : null}
         {tab === "message" ? <BroadcastTab guilds={guilds} /> : null}
+        {tab === "maintenance" ? <MaintenanceTab /> : null}
         {tab === "tools" ? (
           <ToolsTab
             characters={(data.characters ?? []) as AdminCharacter[]}
