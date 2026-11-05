@@ -847,38 +847,99 @@
   color: var(--color-azure-bright);
 }
 
-/* ---- Hero collage: real Discord screenshots, layered ---- */
-.hero-shots {
+/* ---- Hero: three real characters, fanned ---- */
+.card-fan {
   position: relative;
-  width: min(100%, 560px);
-  aspect-ratio: 560 / 500;
+  height: 380px;
+  width: min(100%, 440px);
   margin-inline: auto;
 }
-.hero-shots-chip {
+.card-fan > .fan-card {
   position: absolute;
-  z-index: 10;
-  top: -12px;
-  left: 0;
-}
-.hero-shot {
-  position: absolute;
-  display: block;
-  height: auto;
+  top: 0;
+  width: 200px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: #000;
-  box-shadow: 0 34px 60px -26px rgba(2, 8, 24, 0.75), 0 0 0 1px rgba(11, 31, 69, 0.18);
+  border: 1px solid var(--color-line-bright);
+  background: var(--color-void-raised);
+  box-shadow: 0 28px 54px -26px rgba(2, 8, 24, 0.7);
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.hero-shot-boss { left: 0; top: 4%; width: 62%; transform: rotate(-5deg); z-index: 1; }
-.hero-shot-leaderboard { left: 60%; top: 2%; width: 40%; transform: rotate(5deg); z-index: 2; }
-.hero-shot-spawn { left: 26.8%; top: 30%; width: 46.1%; z-index: 3; }
-.hero-shot-catch { left: 12%; bottom: 0; width: 76%; z-index: 4; }
-.hero-shots:hover .hero-shot-boss { transform: rotate(-6.5deg) translate(-6px, -4px); }
-.hero-shots:hover .hero-shot-leaderboard { transform: rotate(6.5deg) translate(6px, -4px); }
-.hero-shots:hover .hero-shot-spawn { transform: translateY(-6px); }
+.card-fan > .fan-card:nth-child(1) { left: 0; top: 44px; transform: rotate(-8deg); }
+.card-fan > .fan-card:nth-child(2) { left: 50%; margin-left: -100px; top: 0; z-index: 2; }
+.card-fan > .fan-card:nth-child(3) { right: 0; top: 60px; transform: rotate(8deg); }
+.card-fan:hover > .fan-card:nth-child(1) { transform: rotate(-10deg) translate(-6px, -4px); }
+.card-fan:hover > .fan-card:nth-child(3) { transform: rotate(10deg) translate(6px, -4px); }
+.card-fan:hover > .fan-card:nth-child(2) { transform: translateY(-6px); }
+@media (max-width: 460px) {
+  .card-fan { height: 310px; }
+  .card-fan > .fan-card { width: 156px; }
+  .card-fan > .fan-card:nth-child(2) { margin-left: -78px; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .hero-shot { transition: none; }
+  .card-fan > .fan-card { transition: none; }
+}
+
+/* ---- Featured section: collection grid ---- */
+.mosaic {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.mosaic-tile {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #0b1226;
+  box-shadow: 0 20px 40px -24px rgba(0, 0, 0, 0.7);
+}
+.mosaic-tile figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 26px 10px 9px;
+  background: linear-gradient(to top, rgba(2, 8, 24, 0.92), transparent);
+  color: #fff;
+}
+.mosaic-tile figcaption b {
+  font-size: 12.5px;
+  line-height: 1.25;
+}
+.mosaic-tile figcaption span {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--color-sun);
+}
+
+/* ---- How it works: real screenshot in each step ---- */
+.step-shot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  padding: 14px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: radial-gradient(70% 80% at 50% 40%, #0b1226, #05070d);
+}
+.step-shot img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 18px 36px -20px rgba(0, 0, 0, 0.85);
+}
+@media (max-width: 520px) {
+  .step-shot { height: 240px; }
 }
 
 .framed-shot {

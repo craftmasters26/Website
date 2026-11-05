@@ -161,7 +161,7 @@ function Home() {
 
       <Screenshots />
 
-      <HowItWorks />
+      <HowItWorks shots={false} />
 
       <section className="pb-24" aria-labelledby="install-title">
         <div className="wrap grid items-center gap-10 md:grid-cols-[1.1fr_.9fr]">

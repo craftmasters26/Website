@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Crown, Hammer, Swords, Sparkles, Users, Repeat, MessagesSquare } from "lucide-react";
-import { FramedShot, shot } from "@/components/screenshots";
+import { Crown, Hammer, Swords, Sparkles, Trophy, Repeat, MessagesSquare } from "lucide-react";
+import { CatalogImage } from "@/components/catalog-image";
+import { shot } from "@/lib/screenshots";
 import { BOUNDLESS_DISCORD } from "@/components/bp-layout";
-import { DISCORD_INVITE, SOULS, CRAFT_SOULS, WEAPONS } from "@/lib/catalog";
+import { DISCORD_INVITE, SOULS, CRAFT_SOULS, WEAPONS, TIER_LABEL } from "@/lib/catalog";
 import { useCatalogVersion } from "@/lib/catalog-version";
 import { BLEACHDEX_URL } from "@/lib/site";
 
@@ -27,23 +28,62 @@ function useWeeklyStats() {
   return stats;
 }
 
-/** Layered collage of real Discord screenshots (see src/lib/screenshots.ts). */
-function HeroShots() {
-  const items = (["boss", "leaderboard", "spawn", "catch"] as const).map(shot);
+const FAN_NAMES = ["Coyote Starrk", "Ichigo Kurosaki", "Yhwach"];
+
+/** The three hero characters (falls back to the first three if the catalog changes). */
+function useFanSouls() {
+  const v = useCatalogVersion();
+  return useMemo(() => {
+    const picked = FAN_NAMES.map((n) => SOULS.find((s) => s.name === n)).filter((s) => s !== undefined);
+    return picked.length === 3 ? picked : SOULS.slice(0, 3);
+  }, [v]);
+}
+
+/** Three real characters from the collection, fanned out. */
+function HeroCards() {
+  const fan = useFanSouls();
   return (
-    <div className="hero-shots">
-      <span className="status-chip status-chip-live hero-shots-chip">BleachDex · live now</span>
-      {items.map((it) => (
-        <img
-          key={it.key}
-          className={`hero-shot hero-shot-${it.key}`}
-          src={it.src}
-          alt={it.alt}
-          width={it.width}
-          height={it.height}
-          loading="eager"
-          decoding="async"
-        />
+    <div className="relative">
+      <span className="status-chip status-chip-live absolute -top-3 left-1/2 z-10 -translate-x-1/2">
+        BleachDex · live now
+      </span>
+      <div className="card-fan mt-4">
+        {fan.map((s, i) => (
+          <div className="fan-card" key={s.id}>
+            <CatalogImage
+              src={s.imagePath}
+              name={s.name}
+              priority={i === 1}
+              className="size-full object-cover object-top"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Six more strong characters, shown as a collection grid. */
+function CollectionMosaic() {
+  const v = useCatalogVersion();
+  const picks = useMemo(
+    () =>
+      [...SOULS]
+        .filter((s) => !FAN_NAMES.includes(s.name))
+        .sort((a, b) => b.pressure - a.pressure)
+        .slice(0, 6),
+    [v],
+  );
+  return (
+    <div className="mosaic" aria-label="A few of the characters you can collect">
+      {picks.map((s) => (
+        <figure className="mosaic-tile" key={s.id}>
+          <CatalogImage src={s.imagePath} name={s.name} className="size-full object-cover object-top" />
+          <figcaption>
+            <b>{s.name}</b>
+            <span>{TIER_LABEL[s.tier]}</span>
+          </figcaption>
+        </figure>
       ))}
     </div>
   );
@@ -74,7 +114,7 @@ export function Hero() {
             </a>
           </div>
         </div>
-        <HeroShots />
+        <HeroCards />
       </div>
     </section>
   );
@@ -154,7 +194,7 @@ export function FeaturedBleachDex() {
               </a>
             </div>
           </div>
-          <FramedShot item={shot("boss")} className="mx-auto w-full max-w-[560px]" />
+          <CollectionMosaic />
         </div>
       </div>
     </section>
@@ -162,13 +202,34 @@ export function FeaturedBleachDex() {
 }
 
 const STEPS = [
-  { icon: Sparkles, t: "Characters spawn", d: "A soul appears in your Discord server while people chat." },
-  { icon: Crown, t: "Players catch them", d: "Be the first to press Catch Soul! and it joins your collection." },
-  { icon: Users, t: "Teams are created", d: "Pick three characters and equip weapons to build your team." },
-  { icon: Swords, t: "Bosses are fought", d: "Take on hourly bosses, then spend the drops crafting new characters." },
-];
+  {
+    icon: Sparkles,
+    key: "spawn",
+    t: "Characters spawn",
+    d: "A soul appears in your Discord server while people chat.",
+  },
+  {
+    icon: Crown,
+    key: "catch",
+    t: "Players catch them",
+    d: "Be the first to press Catch Soul! and it joins your collection.",
+  },
+  {
+    icon: Swords,
+    key: "boss",
+    t: "Teams fight bosses",
+    d: "Pick three characters, equip weapons and take on hourly bosses.",
+  },
+  {
+    icon: Trophy,
+    key: "leaderboard",
+    t: "Climb the leaderboard",
+    d: "Spend boss drops crafting new characters and rank against every player.",
+  },
+] as const;
 
-export function HowItWorks() {
+/** With `shots`, each step shows the real Discord screenshot; otherwise a simple icon. */
+export function HowItWorks({ shots = true }: { shots?: boolean }) {
   return (
     <section className="pb-20 md:pb-28" aria-labelledby="how-title">
       <div className="wrap">
@@ -176,17 +237,35 @@ export function HowItWorks() {
         <h2 id="how-title" className="section-title mt-3 max-w-2xl font-serif">
           A simple loop that keeps a server coming back.
         </h2>
-        <ol className="mt-10 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map((s, i) => (
-            <li key={s.t} className="step-card">
-              <span className="step-num">Step {i + 1}</span>
-              <div className="step-art" aria-hidden="true">
-                <s.icon className="size-10" strokeWidth={1.6} />
-              </div>
-              <h3 className="font-serif text-[21px]">{s.t}</h3>
-              <p className="text-[14.5px] leading-6 text-bone-dim">{s.d}</p>
-            </li>
-          ))}
+        <ol
+          className={`mt-10 grid list-none gap-5 p-0 sm:grid-cols-2 ${shots ? "" : "lg:grid-cols-4"}`}
+        >
+          {STEPS.map((s, i) => {
+            const img = shot(s.key);
+            return (
+              <li key={s.t} className="step-card">
+                <span className="step-num">Step {i + 1}</span>
+                {shots ? (
+                  <div className="step-shot">
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      width={img.width}
+                      height={img.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ) : (
+                  <div className="step-art" aria-hidden="true">
+                    <s.icon className="size-10" strokeWidth={1.6} />
+                  </div>
+                )}
+                <h3 className="font-serif text-[21px]">{s.t}</h3>
+                <p className="text-[14.5px] leading-6 text-bone-dim">{s.d}</p>
+              </li>
+            );
+          })}
         </ol>
       </div>
     </section>
