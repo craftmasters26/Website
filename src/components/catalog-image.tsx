@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
+const GH_RAW = "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/";
+
 /**
  * Card-style catalog artwork. Falls back to a plain initial-letter tile instead of the
  * browser's broken-image icon when the art fails to load. Images are lazy by default;
@@ -23,6 +25,9 @@ export function CatalogImage({
   height?: number;
 }) {
   const [failed, setFailed] = useState(false);
+  const [direct, setDirect] = useState(false);
+  // Second chance: if our /gh-img/ route fails, try GitHub directly before giving up.
+  const shown = direct && src.startsWith("/gh-img/") ? GH_RAW + src.slice(8) : src;
 
   if (failed) {
     return (
@@ -41,7 +46,7 @@ export function CatalogImage({
 
   return (
     <img
-      src={src}
+      src={shown}
       alt={name}
       width={width ?? 300}
       height={height ?? 400}
@@ -49,7 +54,7 @@ export function CatalogImage({
       decoding="async"
       fetchPriority={priority ? "high" : undefined}
       className={className}
-      onError={() => setFailed(true)}
+      onError={() => (src.startsWith("/gh-img/") && !direct ? setDirect(true) : setFailed(true))}
     />
   );
 }

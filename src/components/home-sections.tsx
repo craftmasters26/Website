@@ -1,21 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Crown, Hammer, Swords, Sparkles, Users, Repeat, MessagesSquare } from "lucide-react";
-import { CatalogImage } from "@/components/catalog-image";
+import { FramedShot, shot } from "@/components/screenshots";
 import { BOUNDLESS_DISCORD } from "@/components/bp-layout";
-import { DISCORD_INVITE, SOULS, CRAFT_SOULS, WEAPONS, TIER_LABEL } from "@/lib/catalog";
+import { DISCORD_INVITE, SOULS, CRAFT_SOULS, WEAPONS } from "@/lib/catalog";
 import { useCatalogVersion } from "@/lib/catalog-version";
 import { BLEACHDEX_URL } from "@/lib/site";
-
-const FAN_NAMES = ["Coyote Starrk", "Ichigo Kurosaki", "Yhwach"];
-
-function useFanSouls() {
-  const v = useCatalogVersion();
-  return useMemo(() => {
-    const picked = FAN_NAMES.map((n) => SOULS.find((s) => s.name === n)).filter((s) => s !== undefined);
-    return picked.length === 3 ? picked : SOULS.slice(0, 3);
-  }, [v]);
-}
 
 /** Real numbers from the bot's public leaderboard feed. Hidden when the bot is unreachable. */
 function useWeeklyStats() {
@@ -37,11 +27,32 @@ function useWeeklyStats() {
   return stats;
 }
 
+/** Layered collage of real Discord screenshots (see src/lib/screenshots.ts). */
+function HeroShots() {
+  const items = (["boss", "leaderboard", "spawn", "catch"] as const).map(shot);
+  return (
+    <div className="hero-shots">
+      <span className="status-chip status-chip-live hero-shots-chip">BleachDex · live now</span>
+      {items.map((it) => (
+        <img
+          key={it.key}
+          className={`hero-shot hero-shot-${it.key}`}
+          src={it.src}
+          alt={it.alt}
+          width={it.width}
+          height={it.height}
+          loading="eager"
+          decoding="async"
+        />
+      ))}
+    </div>
+  );
+}
+
 export function Hero() {
-  const fan = useFanSouls();
   return (
     <section className="py-14 md:py-24">
-      <div className="wrap grid items-center gap-12 md:grid-cols-[1.1fr_.9fr]">
+      <div className="wrap grid items-center gap-14 md:grid-cols-[1.05fr_.95fr]">
         <div className="hero-seq">
           <p className="eyebrow">Independent game studio</p>
           <h1 className="hero-title mt-4 font-serif">
@@ -63,24 +74,7 @@ export function Hero() {
             </a>
           </div>
         </div>
-
-        <div className="relative">
-          <span className="status-chip status-chip-live absolute -top-3 left-1/2 z-10 -translate-x-1/2">
-            BleachDex · live now
-          </span>
-          <div className="card-fan mt-4">
-            {fan.map((s, i) => (
-              <div className="fan-card" key={s.id}>
-                <CatalogImage
-                  src={s.imagePath}
-                  name={s.name}
-                  priority={i === 1}
-                  className="size-full object-cover object-top"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+        <HeroShots />
       </div>
     </section>
   );
@@ -113,31 +107,6 @@ export function TrustStrip() {
         </div>
       </div>
     </section>
-  );
-}
-
-/** A Discord-style spawn message built from real catalog art. It is a preview, not a screenshot. */
-export function SpawnPreview() {
-  const fan = useFanSouls();
-  const soul = fan[0];
-  return (
-    <figure className="discord-msg mx-auto w-full max-w-[320px]" aria-label="Preview of a BleachDex spawn message in Discord">
-      <div className="dm-head">
-        <span className="size-9 rounded-full bg-[#5865f2]" aria-hidden="true" />
-        <span className="dm-name">BleachDex</span>
-        <span className="dm-bot">APP</span>
-      </div>
-      <div className="dm-art">
-        <CatalogImage src={soul.imagePath} name="A soul has spawned" className="size-full object-cover object-top" />
-      </div>
-      <div className="dm-btns">
-        <span className="dm-btn dm-btn-primary">Catch Soul!</span>
-        <span className="dm-btn dm-btn-danger">What is this?</span>
-      </div>
-      <figcaption className="mt-3 text-[12px] text-[#949ba4]">
-        Preview built from in-game art · {soul.name}, {TIER_LABEL[soul.tier]}
-      </figcaption>
-    </figure>
   );
 }
 
@@ -185,7 +154,7 @@ export function FeaturedBleachDex() {
               </a>
             </div>
           </div>
-          <SpawnPreview />
+          <FramedShot item={shot("boss")} className="mx-auto w-full max-w-[560px]" />
         </div>
       </div>
     </section>

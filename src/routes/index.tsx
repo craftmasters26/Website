@@ -9,7 +9,6 @@ import {
   TrustStrip,
   WhatWeMake,
 } from "@/components/home-sections";
-import { Screenshots } from "@/components/screenshots";
 import { ProjectsSummary } from "@/components/projects";
 import { jsonLd, seo } from "@/lib/seo";
 import { SITE_URL } from "@/lib/site";
@@ -47,7 +46,6 @@ function CompanyHome() {
       <Hero />
       <TrustStrip />
       <FeaturedBleachDex />
-      <Screenshots />
       <HowItWorks />
       <WhatWeMake />
       <section className="pb-20 md:pb-28" aria-labelledby="projects-title">

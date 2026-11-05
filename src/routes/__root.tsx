@@ -9,6 +9,7 @@ import { COMPANY_PATHS, SkipLink } from "@/components/bp-layout";
 import AdBanner from "@/components/AdBanner";
 import { useCatalogAutoSync } from "@/lib/catalog-live";
 import { installErrorReporter } from "@/lib/error-reporter";
+import { installImageFallback } from "@/lib/img-fallback";
 import appCss from "../styles.css?url";
 import { SITE_URL } from "@/lib/site";
 
@@ -16,7 +17,7 @@ const OG_DESCRIPTION =
   "Boundless Production is an independent studio making games and Discord bots. Home of BleachDex, with Boundless and Scattered Stars in development.";
 
 // Runs before first paint so there is no flash of the wrong theme.
-const THEME_INIT = `try{var t=localStorage.getItem("bp-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}`;
+const THEME_INIT = `try{var t=localStorage.getItem("bp-theme");if(t!=="light"&&t!=="dark"){t="dark"}document.documentElement.dataset.theme=t}catch(e){}`;
 
 // Optional privacy-friendly analytics (Umami). Nothing loads unless both build-time vars are set.
 const UMAMI_SRC = (import.meta.env.VITE_UMAMI_SRC as string | undefined)?.trim();
@@ -31,7 +32,7 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Boundless Production — Games & Discord Bots" },
-      { name: "theme-color", content: "#d9eeff" },
+      { name: "theme-color", content: "#0a1226" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Boundless Production" },
       { property: "og:title", content: "Boundless Production" },
@@ -76,7 +77,10 @@ export const Route = createRootRoute({
 
 function RootDocument() {
   useCatalogAutoSync();
-  useEffect(() => installErrorReporter(), []);
+  useEffect(() => {
+    installImageFallback();
+    installErrorReporter();
+  }, []);
   // The company pages (/, /about, /projects, /contact-us) have its own header/footer and no ad slot;
   // every other route keeps the BleachDex chrome.
   const isCompanyHome = useRouterState({
@@ -84,7 +88,7 @@ function RootDocument() {
   });
   const showAd = useRouterState({ select: (s) => !NO_AD.test(s.location.pathname) });
   return (
-    <html lang="en" className="antialiased" suppressHydrationWarning>
+    <html lang="en" data-theme="dark" className="antialiased" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>

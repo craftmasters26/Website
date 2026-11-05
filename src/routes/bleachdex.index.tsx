@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { Screenshots } from "@/components/screenshots";
-import { HowItWorks, SpawnPreview } from "@/components/home-sections";
+import { FramedShot, Screenshots, shot } from "@/components/screenshots";
+import { HowItWorks } from "@/components/home-sections";
 import { jsonLd, seo } from "@/lib/seo";
 import { SITE_URL, BLEACHDEX_URL } from "@/lib/site";
 import { SUPPORT_SERVER } from "@/lib/catalog";
@@ -183,7 +183,7 @@ function Home() {
               </a>
             </div>
           </div>
-          <SpawnPreview />
+          <FramedShot item={shot("leaderboard")} className="mx-auto w-full max-w-[360px]" />
         </div>
       </section>
     </main>

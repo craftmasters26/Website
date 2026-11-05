@@ -216,3 +216,8 @@ specifically — this archive doesn't contain either.
 - Real Discord screenshots (spawn, boss, leaderboard with other players' names blurred, catch) in `public/screens/`, listed in `src/lib/screenshots.ts`; shown on the homepage and the BleachDex page.
 - Boundless and Scattered Stars cards use the real copy (redacted text is announced as "[redacted]" to screen readers); placeholder glyph tile replaced by an icon header.
 - Login: `BETTER_AUTH_URL` falls back to `VITE_SITE_URL`, and `/api/login/discord` logs the exact `redirect_uri` it sends to Discord (`pm2 logs Bleachdex-Web`).
+
+## Fourth pass
+- Homepage hero now shows a layered collage of the real Discord screenshots (cropped to their content, rounded, soft shadows) instead of the character-card fan. The BleachDex page has a tabbed viewer ("See BleachDex in action"). The mock spawn preview was replaced by real screenshots.
+- Character and weapon art: new `/gh-img/` route in the Node app fetches from GitHub once and caches to disk, so images work without any nginx change. A global fallback retries GitHub directly if that ever fails. The nginx `/gh-img/` block is now optional.
+- Dark theme is the default (a visitor's saved choice still wins).
