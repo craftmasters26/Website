@@ -12,6 +12,8 @@ import {
 } from "@/lib/catalog";
 import { reiatsuAttack, reiatsuHp } from "@/lib/reiatsu";
 import { cn } from "@/lib/utils";
+import { jsonLd } from "@/lib/seo";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/bleachdex/roster/$id")({
   loader: ({ params }) => {
@@ -19,9 +21,34 @@ export const Route = createFileRoute("/bleachdex/roster/$id")({
     if (!soul) throw notFound();
     return soul;
   },
-  head: ({ loaderData }) => ({
-    meta: [{ title: loaderData ? `${loaderData.name} · BleachDex` : "Soul · BleachDex" }],
-  }),
+  head: ({ loaderData, params }) => {
+    if (!loaderData) return { meta: [{ title: "Soul · BleachDex" }] };
+    const soul = loaderData;
+    const url = `${SITE_URL}/bleachdex/roster/${params.id}`;
+    const faction = soul.faction === "unaffiliated" ? "" : `${FACTION_LABEL[soul.faction]} `;
+    const description = `${soul.name} is a ${TIER_LABEL[soul.tier]} ${faction}character in BleachDex with ${soul.hp} HP and ${soul.attack} attack. See stats, crafting recipe and similar souls.`;
+    return {
+      meta: [
+        { title: `${soul.name}: ${TIER_LABEL[soul.tier]} character stats · BleachDex` },
+        { name: "description", content: description },
+        { property: "og:title", content: `${soul.name} · BleachDex` },
+        { property: "og:description", content: description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLd({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "BleachDex", item: `${SITE_URL}/bleachdex` },
+            { "@type": "ListItem", position: 2, name: "Roster", item: `${SITE_URL}/bleachdex/roster` },
+            { "@type": "ListItem", position: 3, name: soul.name, item: url },
+          ],
+        }),
+      ],
+    };
+  },
   component: SoulDetail,
 });
 

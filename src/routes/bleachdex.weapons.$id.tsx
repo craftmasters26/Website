@@ -1,8 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { CatchButton } from "@/components/catch-button";
 import { CatalogImage } from "@/components/catalog-image";
-import { FACTION_LABEL, TIER_LABEL, getWeapon } from "@/lib/catalog";
+import { FACTION_LABEL, TIER_LABEL, getWeapon, weaponBoostLabel } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
+import { jsonLd } from "@/lib/seo";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/bleachdex/weapons/$id")({
   loader: ({ params }) => {
@@ -10,13 +12,33 @@ export const Route = createFileRoute("/bleachdex/weapons/$id")({
     if (!weapon) throw notFound();
     return weapon;
   },
-  head: ({ loaderData }) => ({
-    meta: [
-      {
-        title: loaderData ? `${loaderData.name} · BleachDex` : "Weapon · BleachDex",
-      },
-    ],
-  }),
+  head: ({ loaderData, params }) => {
+    if (!loaderData) return { meta: [{ title: "Weapon · BleachDex" }] };
+    const weapon = loaderData;
+    const url = `${SITE_URL}/bleachdex/weapons/${params.id}`;
+    const description = `${weapon.name} is a ${TIER_LABEL[weapon.tier]} weapon in BleachDex (${weaponBoostLabel(weapon)}). See which characters it suits and how to get it.`;
+    return {
+      meta: [
+        { title: `${weapon.name}: ${TIER_LABEL[weapon.tier]} weapon stats · BleachDex` },
+        { name: "description", content: description },
+        { property: "og:title", content: `${weapon.name} · BleachDex` },
+        { property: "og:description", content: description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLd({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "BleachDex", item: `${SITE_URL}/bleachdex` },
+            { "@type": "ListItem", position: 2, name: "Weapons", item: `${SITE_URL}/bleachdex/weapons` },
+            { "@type": "ListItem", position: 3, name: weapon.name, item: url },
+          ],
+        }),
+      ],
+    };
+  },
   component: WeaponDetail,
 });
 

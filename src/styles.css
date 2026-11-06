@@ -18,7 +18,7 @@
   --color-azure-bright: #0959d4;
   --color-azure-dim: #d9ebff;
   --color-ember: #2b8cff;
-  --color-ember-bright: #0a6cf0;
+  --color-ember-bright: #0962e0; /* AA on all light surfaces (>= 4.9:1) */
   --color-ember-dim: #d9ebff;
   --color-gold: #0848b8;
   --color-sun: #f2a516;
@@ -188,7 +188,7 @@
 }
 
 .btn-fill {
-  background: linear-gradient(135deg, #1f7ff5, #0a58d0);
+  background: linear-gradient(135deg, #1a6fe0, #0a58d0);
   color: #fff;
 }
 
@@ -211,7 +211,7 @@
 }
 
 .btn-azure {
-  background: var(--grad-azure);
+  background: linear-gradient(135deg, #1a6fe0, #0a58d0); /* white text needs >= 4.5:1 */
   color: #fff;
 }
 

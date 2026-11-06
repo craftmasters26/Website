@@ -1,3 +1,33 @@
+# Changes - review-driven improvement pass (Nov 2026)
+
+Merged from the two external reviews (Figma Make and Grok). Details of what to run are in `docs/OPERATIONS.md`.
+
+**Security and dependencies**
+* `better-auth` 1.6 -> 1.7.17 (clears the critical advisory); remaining runtime advisories fixed with `npm audit fix`. Only dev-tool (ESLint chain) advisories remain.
+* Adjusted the Discord broker sign-in to the 1.7 API (`signIn.social`).
+* Migrated deprecated `.inputValidator()` server-function calls to `.validator()`.
+* User-facing error messages no longer reveal environment variable names or internal URLs.
+
+**Reliability**
+* `/api/health` (public liveness) and `/api/ready` (secret-protected database + bot diagnostics).
+* Startup configuration report (missing settings per feature, never values).
+* Atomic deploy script with smoke test, symlink switch, automatic rollback, manual `rollback`, 5 releases kept.
+* GitHub Actions CI; flat ESLint config (lint script previously had no config); Playwright smoke suite; HTTP smoke checks; bundle report.
+
+**Catalog and collection**
+* Catalog filters (type, tier, sort, search, owned/missing) live in the URL; forgiving name search ("ichgo" finds Ichigo); remembered sort; owned badge; "Clear filters" on empty results.
+* My Collection: onboarding checklist, progress bar with link to missing cards, loading skeleton, safe error states with next steps, `noindex`.
+
+**Conversion and trust**
+* Premium: "What happens after you pay", FAQ (timing, cancellation, refunds, missing perks) with FAQPage structured data, richer meta.
+* Home: live player/cards-caught numbers (only shown when real), sticky mobile "Add to Discord" bar.
+* Commands: search, category jump links, real headings.
+
+**SEO and accessibility**
+* Unique titles/descriptions, canonical + breadcrumb structured data on roster and weapon pages.
+* Contrast: accent text and button gradients raised to WCAG AA; live-region result counts; labelled search fields.
+* Catalog API sends explicit cache headers; `/api/stats` cached 5 minutes.
+
 # What changed
 
 ## 1. Real Discord OAuth (no bot server, no ngrok, in the login path)

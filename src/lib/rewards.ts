@@ -63,7 +63,7 @@ export type ClaimAdResult =
 
 export const claimAd = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
-  .inputValidator((data: { token: string }) => data)
+  .validator((data: { token: string }) => data)
   .handler(async ({ context, data }): Promise<ClaimAdResult> => {
     const { getDiscordAccountId } = await import("./auth/verify.server");
     const { botCall, readAdToken } = await import("./bot-api.server");

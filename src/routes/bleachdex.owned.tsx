@@ -16,11 +16,15 @@ import { useOwnedMe, signOutOwned } from "@/lib/owned";
 import { cn } from "@/lib/utils";
 import { discordMark } from "@/assets";
 import { WatchAdCard } from "@/components/watch-ad-card";
+import { OnboardingChecklist } from "@/components/onboarding-checklist";
+import { matchesName } from "@/lib/fuzzy";
+import { ALL_SOULS, WEAPONS } from "@/lib/catalog";
 
 export const Route = createFileRoute("/bleachdex/owned")({
   head: () => ({
     meta: [
-      { title: "Owned · BleachDex" },
+      { title: "My Collection · BleachDex" },
+      { name: "robots", content: "noindex" },
       {
         name: "description",
         content: "Your real BleachDex collection — every soul and weapon you actually own.",
@@ -142,7 +146,8 @@ function Row({ entry }: { entry: Entry }) {
 function SignedOutView() {
   const [pending, setPending] = useState(false);
   return (
-    <div className="flex flex-col items-center gap-5 rounded-md border border-line bg-void-raised px-6 py-20 text-center">
+    <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+    <div className="flex flex-col items-center justify-center gap-5 rounded-md border border-line bg-void-raised px-6 py-16 text-center">
       <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">
         Log in with Discord to see the souls and weapons your account actually owns.
       </p>
@@ -164,12 +169,15 @@ function SignedOutView() {
         {pending ? "Redirecting…" : "Login with Discord"}
       </button>
     </div>
+    <OnboardingChecklist current={0} />
+    </div>
   );
 }
 
 function NoRecordView() {
   return (
-    <div className="flex flex-col items-center gap-4 rounded-md border border-line bg-void-raised px-6 py-20 text-center">
+    <div className="grid gap-6 md:grid-cols-2">
+    <div className="flex flex-col items-center justify-center gap-4 rounded-md border border-line bg-void-raised px-6 py-16 text-center">
       <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">
         You're logged in, but the bot hasn't seen this Discord account yet. Catch a soul or claim
         a blade in Discord, then come back.
@@ -178,31 +186,77 @@ function NoRecordView() {
         Browse the full list
       </Link>
     </div>
+    <OnboardingChecklist current={1} />
+    </div>
   );
 }
 
-const ERROR_HINT: Record<string, string> = {
-  unreachable: "The site can't reach the bot's URL. Check BOT_API_URL on Vercel and that the tunnel is running.",
-  "secret-mismatch": "The bot rejected the site's secret. BOT_API_SECRET on Vercel and on the bot must be identical.",
-  "bot-secret-missing": "The bot has no BOT_API_SECRET set. Add it to the bot's environment and restart it.",
-  "bad-response": "The bot URL answered with a non-JSON page. Check BOT_API_URL points at the bot itself.",
-  "bot-error": "The bot answered with an error. Check the bot's console.",
-  "not-configured": "BOT_API_URL / BOT_API_SECRET aren't set on Vercel.",
-  "not-linked": "This login isn't linked to a Discord account. Log out and log in with Discord.",
-  timeout: "The request timed out. The bot or its tunnel is too slow or down.",
+/**
+ * What a visitor should DO about each failure. Deliberately free of server details
+ * (env var names, URLs): those belong in the server logs, not on a public page.
+ */
+const ERROR_HELP: Record<string, { title: string; body: string }> = {
+  "not-linked": {
+    title: "This login isn't a Discord login",
+    body: "Log out, then log in again with Discord so we can find your collection.",
+  },
+  "not-configured": {
+    title: "Collections are temporarily unavailable",
+    body: "The site isn't connected to the bot at the moment. Nothing is lost. Try again in a few minutes, or tell us in the Discord server if it lasts.",
+  },
+  timeout: {
+    title: "The bot is taking too long to answer",
+    body: "It may be restarting. Wait a minute and try again. Your collection is safe.",
+  },
+};
+const ERROR_DEFAULT = {
+  title: "Couldn't load your collection",
+  body: "The bot isn't answering right now. Your souls and weapons are safe. Try again in a minute, and check the Discord server for status updates if it keeps happening.",
 };
 
 function ErrorView({ onRetry, reason }: { onRetry: () => void; reason?: string }) {
-  const hint = reason ? ERROR_HINT[reason] : undefined;
+  const help = (reason && ERROR_HELP[reason]) || ERROR_DEFAULT;
   return (
-    <div className="flex flex-col items-center gap-5 rounded-md border border-line bg-void-raised px-6 py-20 text-center">
-      <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">
-        Couldn't reach the bot to load your collection. It may be offline right now.
+    <div role="alert" className="flex flex-col items-center gap-4 rounded-md border border-line bg-void-raised px-6 py-16 text-center">
+      <h2 className="font-serif text-[22px] text-bone">{help.title}</h2>
+      <p className="max-w-md text-[14.5px] leading-6 text-bone-dim">{help.body}</p>
+      <div className="flex flex-wrap justify-center gap-3">
+        <button type="button" className="btn btn-fill px-6 py-3 text-sm" onClick={onRetry}>
+          Try again
+        </button>
+        <Link to="/bleachdex/contact" className="btn btn-outline px-6 py-3 text-sm">
+          Contact support
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function CollectionProgress({ owned, total }: { owned: number; total: number }) {
+  const pct = total > 0 ? Math.min(100, Math.round((owned / total) * 100)) : 0;
+  return (
+    <div className="mb-6 rounded-md border border-line bg-void-raised p-4">
+      <div className="mb-2 flex items-baseline justify-between font-mono text-[12px] text-bone-dim">
+        <span>Collection progress</span>
+        <span>
+          {owned} of {total} · {pct}%
+        </span>
+      </div>
+      <div
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={total}
+        aria-valuenow={owned}
+        aria-label="Collection progress"
+        className="h-2 overflow-hidden rounded-full bg-line"
+      >
+        <div className="h-full rounded-full bg-ember-bright transition-[width] duration-500" style={{ width: `${pct}%` }} />
+      </div>
+      <p className="mt-2 text-[12.5px] text-bone-faint">
+        <Link to="/bleachdex/list" search={{ own: "missing" }} className="underline underline-offset-4 hover:text-bone">
+          See what you're still missing
+        </Link>
       </p>
-      {hint ? <p className="max-w-md font-mono text-[11.5px] leading-5 text-bone-faint">{hint}</p> : null}
-      <button type="button" className="btn btn-outline px-6 py-3 text-sm" onClick={onRetry}>
-        Try again
-      </button>
     </div>
   );
 }
@@ -278,13 +332,12 @@ function OwnedPage() {
   );
 
   const rows = useMemo(() => {
-    const q = search.trim().toLowerCase();
     return entries
       .filter(
         (e) =>
           (kind === "all" || e.kind === kind) &&
           (tier === "all" || e.tier === tier) &&
-          (!q || e.name.toLowerCase().includes(q)),
+          matchesName(e.name, search),
       )
       .sort(COMPARE[sort]);
   }, [entries, kind, tier, sort, search]);
@@ -323,12 +376,23 @@ function OwnedPage() {
           ) : null}
         </div>
 
+        {me ? <CollectionProgress owned={entries.length} total={ALL_SOULS.length + WEAPONS.length} /> : null}
+
         {state.status === "signed-in" || state.status === "no-record" ? <WatchAdCard /> : null}
 
         {state.status === "loading" ? (
-          <p className="py-16 text-center font-mono text-[13px] text-bone-faint">
-            Loading your collection…
-          </p>
+          <div role="status" aria-live="polite" aria-busy="true" className="overflow-hidden rounded-md border border-line">
+            <span className="sr-only">Loading your collection…</span>
+            {Array.from({ length: 6 }, (_, i) => (
+              <div key={i} className="flex items-center gap-3 border-t border-line bg-void-raised px-3 py-2 first:border-t-0">
+                <div className="size-11 animate-pulse rounded-[5px] bg-line" />
+                <div className="flex-1 space-y-2">
+                  <div className="h-3 w-1/3 animate-pulse rounded bg-line" />
+                  <div className="h-2.5 w-1/5 animate-pulse rounded bg-line" />
+                </div>
+              </div>
+            ))}
+          </div>
         ) : state.status === "signed-out" ? (
           <SignedOutView />
         ) : state.status === "no-record" ? (
@@ -336,13 +400,16 @@ function OwnedPage() {
         ) : state.status === "error" ? (
           <ErrorView onRetry={reload} reason={state.reason} />
         ) : entries.length === 0 ? (
-          <div className="flex flex-col items-center gap-4 rounded-md border border-line bg-void-raised px-6 py-20 text-center">
-            <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">
-              You don't own anything yet. Catch a soul or claim a blade in Discord, then come back.
-            </p>
-            <Link to="/bleachdex/list" className="btn btn-outline px-6 py-3 text-sm">
-              Browse the full list
-            </Link>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="flex flex-col items-center justify-center gap-4 rounded-md border border-line bg-void-raised px-6 py-16 text-center">
+              <p className="max-w-sm text-[14.5px] leading-6 text-bone-dim">
+                You don't own anything yet. Catch a soul or claim a blade in Discord, then come back.
+              </p>
+              <Link to="/bleachdex/list" className="btn btn-outline px-6 py-3 text-sm">
+                Browse the full list
+              </Link>
+            </div>
+            <OnboardingChecklist current={2} />
           </div>
         ) : (
           <>
@@ -361,6 +428,7 @@ function OwnedPage() {
               <label className="search-box ml-auto">
                 <Search className="size-4 text-bone-faint" />
                 <input
+                  type="search"
                   value={search}
                   onChange={(e) => change(setSearch)(e.target.value)}
                   placeholder="Search what you own…"
@@ -415,9 +483,21 @@ function OwnedPage() {
             </div>
 
             {rows.length === 0 ? (
-              <p className="py-16 text-center font-mono text-[13px] text-bone-faint">
-                Nothing you own matches that search.
-              </p>
+              <div className="py-16 text-center">
+                <p className="font-mono text-[13px] text-bone-faint">Nothing you own matches these filters.</p>
+                <button
+                  type="button"
+                  className="btn btn-outline mt-5 px-5 py-3 text-sm"
+                  onClick={() => {
+                    setKind("all");
+                    setTier("all");
+                    setSearch("");
+                    setLimit(PAGE_SIZE);
+                  }}
+                >
+                  Clear filters
+                </button>
+              </div>
             ) : (
               <div className="overflow-hidden rounded-md border border-line">
                 {rows.slice(0, limit).map((entry) => (
@@ -427,7 +507,7 @@ function OwnedPage() {
             )}
 
             <div className="mt-6 flex flex-wrap items-center justify-between gap-4 font-mono text-[12.5px] text-bone-faint">
-              <span>
+              <span role="status" aria-live="polite">
                 {Math.min(limit, rows.length)} of {rows.length} shown
               </span>
               {limit < rows.length ? (

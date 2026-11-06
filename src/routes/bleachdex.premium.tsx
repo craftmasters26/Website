@@ -1,11 +1,57 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { SITE_URL } from "@/lib/site";
 import { TIER_META, WHOP_LABEL, type Tier } from "@/lib/premium-tiers";
+import { jsonLd } from "@/lib/seo";
+
+const FAQ = [
+  {
+    q: "When do I get my perks?",
+    a: "Right after your payment clears. Sign in to the website with the Discord account you play with, then use the redeem command in the BleachDex server to attach your plan. Most people are set within a minute.",
+  },
+  {
+    q: "I paid but my role or perks are missing. What now?",
+    a: "Wait two minutes and run the redeem command again. If nothing changes, send us your Whop receipt email and your Discord username through the contact page and we will fix it by hand.",
+  },
+  {
+    q: "Can I cancel?",
+    a: "Yes, any time from your Whop account. You keep the perks until the end of the period you already paid for.",
+  },
+  {
+    q: "Do you offer refunds?",
+    a: "Digital perks start immediately, so refunds are handled case by case. If something went wrong with your purchase, contact us within 7 days and we will make it right.",
+  },
+  {
+    q: "Is the payment secure?",
+    a: "Payments are processed by Whop. BleachDex never sees or stores your card details.",
+  },
+  {
+    q: "What is the difference between the two plans?",
+    a: "Both give you a custom role, extra giveaway entries and cards of your choice. The Urahara Foundation Shareholder plan adds higher card counts, bigger giveaway weight and the exclusive weekly boss and spawn parties.",
+  },
+];
 
 export const Route = createFileRoute("/bleachdex/premium")({
   head: () => ({
     links: [{ rel: "canonical", href: `${SITE_URL}/bleachdex/premium` }],
-    meta: [{ title: "Premium · BleachDex" }],
+    meta: [
+      { title: "BleachDex Premium: perks, price and how it works" },
+      {
+        name: "description",
+        content:
+          "Support BleachDex and get a custom Discord role, bonus giveaway entries, cards of your choice and exclusive boss and spawn parties. Plans from $3 a month, cancel anytime.",
+      },
+    ],
+    scripts: [
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: FAQ.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }),
+    ],
   }),
   component: PremiumPage,
 });
@@ -29,8 +75,49 @@ function PremiumPage() {
         <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[11.5px] text-bone-faint">
           <span>Secure payment via Whop</span>
           <span>Cancel anytime</span>
-          <span>Role granted instantly</span>
+          <span>Perks attach after checkout</span>
         </div>
+
+        <section aria-labelledby="after-pay" className="mt-16">
+          <h2 id="after-pay" className="mb-6 font-serif text-[26px] leading-tight">
+            What happens after you pay
+          </h2>
+          <ol className="grid gap-4 md:grid-cols-3">
+            {[
+              ["1. Checkout", "Pay securely on Whop. You get a receipt by email straight away."],
+              ["2. Redeem", "Sign in with Discord here, then run the redeem command in the BleachDex server."],
+              ["3. Enjoy", "Your role, giveaway weight and card picks are applied. Not showing? Contact us with your receipt."],
+            ].map(([title, body]) => (
+              <li key={title} className="rounded-md border border-line bg-void-raised p-5">
+                <div className="mb-1.5 text-[14px] font-bold text-bone">{title}</div>
+                <p className="text-[13px] leading-5 text-bone-dim">{body}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section aria-labelledby="premium-faq" className="mt-16 max-w-3xl">
+          <h2 id="premium-faq" className="mb-6 font-serif text-[26px] leading-tight">
+            Questions before you buy
+          </h2>
+          <div className="divide-y divide-line rounded-md border border-line bg-void-raised">
+            {FAQ.map((f) => (
+              <details key={f.q} className="group p-5">
+                <summary className="cursor-pointer list-none text-[14.5px] font-bold text-bone marker:hidden">
+                  {f.q}
+                </summary>
+                <p className="mt-2 text-[13.5px] leading-6 text-bone-dim">{f.a}</p>
+              </details>
+            ))}
+          </div>
+          <p className="mt-5 text-[13px] text-bone-dim">
+            Still unsure?{" "}
+            <Link to="/bleachdex/contact" className="underline underline-offset-4 hover:text-bone">
+              Ask us
+            </Link>{" "}
+            before you buy.
+          </p>
+        </section>
       </div>
     </main>
   );

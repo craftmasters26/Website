@@ -14,7 +14,7 @@
  * warm serverless instance getting hit repeatedly within the hour) doesn't
  * open a new Mongo connection or re-query every time.
  */
-import { defineEventHandler, setResponseStatus } from "h3";
+import { defineEventHandler, setResponseHeader, setResponseStatus } from "h3";
 import { MongoClient, type Db } from "mongodb";
 
 const CACHE_MS = 60 * 60 * 1000; // 1 hour
@@ -131,17 +131,22 @@ async function loadCatalog(): Promise<CatalogPayload> {
   };
 }
 
+const OK_CACHE = "public, max-age=300, stale-while-revalidate=3600";
+
 export default defineEventHandler(async (event) => {
   if (cache && Date.now() - cache.at < CACHE_MS) {
+    setResponseHeader(event, "cache-control", OK_CACHE);
     return cache.payload;
   }
   try {
     const payload = await loadCatalog();
     cache = { at: Date.now(), payload };
+    setResponseHeader(event, "cache-control", OK_CACHE);
     return payload;
   } catch (err) {
     // Serve a stale cache rather than nothing if Mongo hiccups mid-hour.
     if (cache) return cache.payload;
+    setResponseHeader(event, "cache-control", "no-store");
     setResponseStatus(event, 503);
     return { error: err instanceof Error ? err.message : "catalog fetch failed" };
   }

@@ -122,7 +122,7 @@ export const adminListGuilds = createServerFn({ method: "GET" })
 
 export const adminGuildInvite = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
-  .inputValidator((data: { guildId: string }) => data)
+  .validator((data: { guildId: string }) => data)
   .handler(async ({ context, data }) =>
     adminCall<{ url: string }>(
       context.bearerToken,
@@ -133,7 +133,7 @@ export const adminGuildInvite = createServerFn({ method: "POST" })
 
 export const adminListChannels = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
-  .inputValidator((data: { guildId: string }) => data)
+  .validator((data: { guildId: string }) => data)
   .handler(async ({ context, data }) =>
     adminCall<{ channels: AdminChannel[] }>(
       context.bearerToken,
@@ -146,7 +146,7 @@ export type AdminRole = { id: string; name: string; color: string };
 
 export const adminListRoles = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
-  .inputValidator((data: { guildId: string }) => data)
+  .validator((data: { guildId: string }) => data)
   .handler(async ({ context, data }) =>
     adminCall<{ roles: AdminRole[] }>(
       context.bearerToken,
@@ -167,7 +167,7 @@ export const adminListCharacters = createServerFn({ method: "GET" })
 
 export const adminEditCharacter = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
-  .inputValidator(
+  .validator(
     (data: { id: number; name?: string; imageUrl?: string; imageBase64?: string }) => data,
   )
   .handler(async ({ context, data }) =>
@@ -185,7 +185,7 @@ export const adminEditCharacter = createServerFn({ method: "POST" })
 
 export const adminSpawn = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
-  .inputValidator(
+  .validator(
     (data: { guildId: string; channelId: string; characterId: number; amount: number }) => data,
   )
   .handler(async ({ context, data }) =>
@@ -212,12 +212,12 @@ const ADMIN_PATH =
 
 export const adminApi = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
-  .inputValidator((data: { path: string; body?: Record<string, unknown> }) => {
+  .validator((data: { path: string; body?: Record<string, unknown> }) => {
     if (!ADMIN_PATH.test(data.path)) throw new Error("Bad admin path");
     return data;
   })
   .handler(async ({ context, data }) =>
-    adminCall<unknown>(context.bearerToken, "limited", data.path, data.body),
+    adminCall<any>(context.bearerToken, "limited", data.path, data.body),
   );
 
 export type AdminResult<T> = { status: "ok"; data: T } | Fail;

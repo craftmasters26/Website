@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SITE_URL } from "@/lib/site";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 import {
   ALL_SOULS,
@@ -15,24 +15,40 @@ import {
 } from "@/lib/catalog";
 import { useCatalogVersion } from "@/lib/catalog-version";
 import { cn } from "@/lib/utils";
+import { matchesName } from "@/lib/fuzzy";
+import { useOwnedMe } from "@/lib/owned";
 
 type Kind = "soul" | "craft" | "weapon";
 type KindFilter = Kind | "all";
 type Sort = "rarity" | "strongest" | "name";
+type OwnFilter = "owned" | "missing";
+/** Every filter lives in the URL, so a filtered view can be shared or bookmarked. */
+type ListSearch = { kind?: Kind; tier?: Tier; sort?: Sort; q?: string; own?: OwnFilter };
+const SORT_KEY = "bp-list-sort";
 
 export const Route = createFileRoute("/bleachdex/list")({
-  validateSearch: (search: Record<string, unknown>): { kind?: Kind } => {
+  validateSearch: (search: Record<string, unknown>): ListSearch => {
+    const out: ListSearch = {};
     const kind = search.kind;
-    return kind === "soul" || kind === "craft" || kind === "weapon" ? { kind } : {};
+    if (kind === "soul" || kind === "craft" || kind === "weapon") out.kind = kind;
+    if (typeof search.tier === "string" && (TIERS as readonly string[]).includes(search.tier)) {
+      out.tier = search.tier as Tier;
+    }
+    if (search.sort === "strongest" || search.sort === "name" || search.sort === "rarity") {
+      out.sort = search.sort;
+    }
+    if (typeof search.q === "string" && search.q.trim()) out.q = search.q.slice(0, 60);
+    if (search.own === "owned" || search.own === "missing") out.own = search.own;
+    return out;
   },
   head: () => ({
     links: [{ rel: "canonical", href: `${SITE_URL}/bleachdex/list` }],
     meta: [
-      { title: "List · BleachDex" },
+      { title: "BleachDex Character & Weapon List — tiers, stats, crafting recipes" },
       {
         name: "description",
         content:
-          "Every BleachDex soul, craft-only character and weapon in one list, with tier, HP, attack and crafting recipes.",
+          "Browse every BleachDex soul, craft-only character and weapon. Search by name, filter by tier, and see HP, attack and crafting recipes for the Bleach Discord collection bot.",
       },
     ],
   }),
@@ -137,13 +153,20 @@ function Thumb({ src, name }: { src: string; name: string }) {
   );
 }
 
-function Row({ entry }: { entry: Entry }) {
+function Row({ entry, owned }: { entry: Entry; owned?: boolean }) {
   const inner = (
     <>
       <span className={cn("self-stretch", `tier-${entry.tier}`)} />
       <Thumb src={entry.imagePath} name={entry.name} />
       <span className="min-w-0">
-        <span className="block truncate text-[14px] font-bold text-bone">{entry.name}</span>
+        <span className="block truncate text-[14px] font-bold text-bone">
+          {entry.name}
+          {owned ? (
+            <span className="ml-2 rounded-sm border border-line-bright px-1.5 py-0.5 align-middle font-mono text-[10px] font-medium text-bone-dim">
+              Owned
+            </span>
+          ) : null}
+        </span>
         <span className="block truncate font-mono text-[11px] text-bone-faint">
           {entry.note}
           {entry.note ? " · " : ""}
@@ -177,13 +200,62 @@ function Row({ entry }: { entry: Entry }) {
 }
 
 function ListPage() {
-  const { kind: initialKind } = Route.useSearch();
-  const [kind, setKind] = useState<KindFilter>(initialKind ?? "all");
-  const [tier, setTier] = useState<Tier | "all">("all");
-  const [sort, setSort] = useState<Sort>("rarity");
-  const [search, setSearch] = useState("");
+  const search = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const kind: KindFilter = search.kind ?? "all";
+  const tier: Tier | "all" = search.tier ?? "all";
+  const query = search.q ?? "";
+  const own = search.own;
+  const [savedSort, setSavedSort] = useState<Sort>("rarity");
+  const sort: Sort = search.sort ?? savedSort;
   const [limit, setLimit] = useState(PAGE_SIZE);
   const catalogVersion = useCatalogVersion();
+  const [owned] = useOwnedMe();
+
+  // Remember the visitor's preferred sort when the URL does not say otherwise.
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem(SORT_KEY);
+      if (v === "rarity" || v === "strongest" || v === "name") setSavedSort(v);
+    } catch {
+      /* storage unavailable */
+    }
+  }, []);
+
+  const ownedKeys = useMemo(() => {
+    if (owned.status !== "signed-in") return null;
+    const keys = new Set<string>();
+    for (const id of owned.me.ownedCharacterIds) keys.add(`s${id}`);
+    for (const id of owned.me.ownedWeaponIds) keys.add(`w${id}`);
+    return keys;
+  }, [owned]);
+
+  const update = (patch: Partial<ListSearch>) => {
+    setLimit(PAGE_SIZE);
+    void navigate({
+      search: (prev: ListSearch) => {
+        const next = { ...prev, ...patch };
+        // Drop defaults so URLs stay short and clean.
+        if (next.kind === undefined || (next.kind as string) === "all") delete next.kind;
+        if (!next.tier || (next.tier as string) === "all") delete next.tier;
+        if (!next.q) delete next.q;
+        if (!next.own) delete next.own;
+        if (next.sort === "rarity") delete next.sort;
+        return next;
+      },
+      replace: true,
+    });
+  };
+
+  const setSort = (value: Sort) => {
+    try {
+      localStorage.setItem(SORT_KEY, value);
+    } catch {
+      /* ignore */
+    }
+    setSavedSort(value);
+    update({ sort: value });
+  };
 
   // Recomputed whenever the hourly bot sync bumps the catalog version, not
   // just once at module load — otherwise a page left open all day would
@@ -200,23 +272,22 @@ function ListPage() {
   );
 
   const rows = useMemo(() => {
-    const q = search.trim().toLowerCase();
     return entries
       .filter(
         (e) =>
           (kind === "all" || e.kind === kind) &&
           (tier === "all" || e.tier === tier) &&
-          (!q || e.name.toLowerCase().includes(q)),
+          (!own || !ownedKeys || (own === "owned") === ownedKeys.has(e.key)) &&
+          matchesName(e.name, query),
       )
       .sort(COMPARE[sort]);
-  }, [entries, kind, tier, sort, search]);
+  }, [entries, kind, tier, sort, query, own, ownedKeys]);
 
-  const change =
-    <T,>(setter: (value: T) => void) =>
-    (value: T) => {
-      setter(value);
-      setLimit(PAGE_SIZE);
-    };
+  const filtersActive = kind !== "all" || tier !== "all" || Boolean(query) || Boolean(own);
+  const clearFilters = () => {
+    setLimit(PAGE_SIZE);
+    void navigate({ search: {}, replace: true });
+  };
 
   return (
     <main className="page-enter py-16 md:py-20">
@@ -234,7 +305,7 @@ function ListPage() {
               type="button"
               aria-pressed={kind === chip.value}
               className={cn("chip", kind === chip.value && "chip-active")}
-              onClick={() => change(setKind)(chip.value)}
+              onClick={() => update({ kind: chip.value === "all" ? undefined : chip.value })}
             >
               {chip.label} {counts[chip.value]}
             </button>
@@ -242,8 +313,9 @@ function ListPage() {
           <label className="search-box ml-auto">
             <Search className="size-4 text-bone-faint" />
             <input
-              value={search}
-              onChange={(e) => change(setSearch)(e.target.value)}
+              type="search"
+              value={query}
+              onChange={(e) => update({ q: e.target.value })}
               placeholder="Search a name…"
               aria-label="Search the list"
             />
@@ -262,7 +334,7 @@ function ListPage() {
                   ? "border-ember-bright text-bone"
                   : "border-transparent text-bone-faint hover:text-bone",
               )}
-              onClick={() => change(setTier)(value)}
+              onClick={() => update({ tier: value === "all" ? undefined : value })}
             >
               {value === "all" ? "Any tier" : TIER_LABEL[value]}
             </button>
@@ -278,13 +350,29 @@ function ListPage() {
                   "px-2 py-2 underline-offset-4",
                   sort === option.value ? "text-bone underline" : "hover:text-bone",
                 )}
-                onClick={() => change(setSort)(option.value)}
+                onClick={() => setSort(option.value)}
               >
                 {option.label}
               </button>
             ))}
           </div>
         </div>
+
+        {ownedKeys ? (
+          <div className="mb-6 flex flex-wrap items-center gap-2" role="group" aria-label="Collection filter">
+            {([undefined, "owned", "missing"] as const).map((value) => (
+              <button
+                key={value ?? "any"}
+                type="button"
+                aria-pressed={own === value}
+                className={cn("chip", own === value && "chip-active")}
+                onClick={() => update({ own: value })}
+              >
+                {value === undefined ? "Everything" : value === "owned" ? "I own" : "Still missing"}
+              </button>
+            ))}
+          </div>
+        ) : null}
 
         <div className="hidden grid-cols-[3px_44px_minmax(0,1fr)_110px_100px_150px] gap-3 px-3 pb-2 font-mono text-[10.5px] uppercase tracking-[0.08em] text-bone-faint md:grid">
           <span />
@@ -296,19 +384,24 @@ function ListPage() {
         </div>
 
         {rows.length === 0 ? (
-          <p className="py-16 text-center font-mono text-[13px] text-bone-faint">
-            Nothing matches that search.
-          </p>
+          <div className="py-16 text-center">
+            <p className="font-mono text-[13px] text-bone-faint">Nothing matches these filters.</p>
+            {filtersActive ? (
+              <button type="button" className="btn btn-outline mt-5 px-5 py-3 text-sm" onClick={clearFilters}>
+                Clear filters
+              </button>
+            ) : null}
+          </div>
         ) : (
           <div className="overflow-hidden rounded-md border border-line">
             {rows.slice(0, limit).map((entry) => (
-              <Row key={entry.key} entry={entry} />
+              <Row key={entry.key} entry={entry} owned={ownedKeys?.has(entry.key)} />
             ))}
           </div>
         )}
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 font-mono text-[12.5px] text-bone-faint">
-          <span>
+          <span role="status" aria-live="polite">
             {Math.min(limit, rows.length)} of {rows.length} shown
           </span>
           {limit < rows.length ? (

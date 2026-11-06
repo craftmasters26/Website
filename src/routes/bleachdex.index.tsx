@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FramedShot, Screenshots, shot } from "@/components/screenshots";
 import { HowItWorks } from "@/components/home-sections";
 import { jsonLd, seo } from "@/lib/seo";
@@ -9,6 +9,7 @@ import { CatalogImage } from "@/components/catalog-image";
 import { brandIcon } from "@/assets";
 import { CRAFT_SOULS, DISCORD_INVITE, SOULS, TIER_LABEL, WEAPONS, getSoul } from "@/lib/catalog";
 import { useCatalogVersion } from "@/lib/catalog-version";
+import { useLiveStats } from "@/lib/use-live-stats";
 
 export const Route = createFileRoute("/bleachdex/")({
   head: () => ({
@@ -35,8 +36,38 @@ export const Route = createFileRoute("/bleachdex/")({
 
 const PACK_ART_NAMES = ["Coyote Starrk", "Ichigo Kurosaki", "Yhwach"];
 
+/** Mobile-only bar that appears once the hero CTA has scrolled away, so "Add to Discord" is always one tap away. */
+function StickyInvite({ targetRef }: { targetRef: React.RefObject<HTMLElement | null> }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const el = targetRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(([entry]) => setShow(!entry.isIntersecting && entry.boundingClientRect.top < 0), {
+      threshold: 0,
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [targetRef]);
+  return (
+    <div
+      aria-hidden={!show}
+      className={
+        "fixed inset-x-0 bottom-0 z-40 border-t border-line bg-void/95 px-4 pt-3 backdrop-blur transition-transform duration-300 md:hidden " +
+        (show ? "translate-y-0" : "translate-y-full")
+      }
+      style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
+    >
+      <a href={DISCORD_INVITE} tabIndex={show ? 0 : -1} className="btn btn-fill w-full justify-center">
+        Add to Discord
+      </a>
+    </div>
+  );
+}
+
 function Home() {
+  const heroCta = useRef<HTMLDivElement>(null);
   const catalogVersion = useCatalogVersion();
+  const live = useLiveStats();
   const featured = useMemo(() => getSoul(1) ?? SOULS[0], [catalogVersion]);
   const packArt = useMemo(
     () =>
@@ -61,7 +92,7 @@ function Home() {
               Souls spawn in your server and you press a button to keep them. Build a
               three-character team, fight the hourly boss, and spend its drops on /craft.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div ref={heroCta} className="mt-8 flex flex-wrap gap-4">
               <a href={DISCORD_INVITE} className="btn btn-fill">
                 Add to Discord
               </a>
@@ -86,6 +117,12 @@ function Home() {
               <span>
                 <b className="text-bone">300</b> KAN a day
               </span>
+              {live && live.players > 0 ? (
+                <span>
+                  <b className="text-bone">{live.players.toLocaleString()}</b> players ·{" "}
+                  <b className="text-bone">{live.cardsCaught.toLocaleString()}</b> cards caught
+                </span>
+              ) : null}
             </div>
           </div>
 
@@ -186,6 +223,7 @@ function Home() {
           <FramedShot item={shot("leaderboard")} className="mx-auto w-full max-w-[360px]" />
         </div>
       </section>
+      <StickyInvite targetRef={heroCta} />
     </main>
   );
 }

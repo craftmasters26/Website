@@ -70,6 +70,7 @@ export function useCurrentUserState(): CurrentUserState {
   // slow request, but a loop of requests each abandoned by the next.
   // Memoizing on the primitive fields keeps the object reference stable
   // when the underlying session hasn't actually changed.
+  // eslint-disable-next-line react-hooks/rules-of-hooks -- authEnabled is constant for the app's lifetime
   const user = useMemo<AppUser | null>(() => {
     if (!sessionUser) return null;
     return {

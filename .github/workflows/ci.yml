@@ -1,0 +1,32 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-fund
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npx vite build   # via scripts/with-app-env.mjs in real builds; plain build is enough to catch breakage
+        env:
+          VITE_SITE_URL: https://boundlessproductions.org
+      - name: Dependency audit (runtime deps, high+ fails the build)
+        run: npm audit --omit=dev --audit-level=high
+      - name: Dependency audit report (all deps, informational)
+        run: npm audit || true
+        continue-on-error: true
+      - name: E2E smoke tests against the production build
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:e2e

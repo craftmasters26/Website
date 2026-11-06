@@ -1,14 +1,19 @@
 // PM2 definition for the website (Nitro node-server build).
+// One-time migration to atomic releases: run `bash deploy/deploy-web.sh` once; it creates the symlink.
 // Secrets/config are loaded from /root/web_data/.env via Node's --env-file.
 module.exports = {
   apps: [
     {
       name: "Bleachdex-Web",
       script: ".output/server/index.mjs",
-      cwd: "/var/www/Bleachdex-Web",
+      // Runs from the atomic-release symlink maintained by deploy/deploy-web.sh
+      cwd: "/var/www/bleachdex-web-current",
       interpreter: "node",
       node_args: "--env-file=/root/web_data/.env",
       autorestart: true,
+      // Give in-flight requests a moment to finish before pm2 force-kills on restart.
+      kill_timeout: 8000,
+      time: true,
       max_restarts: 20,
       restart_delay: 3000,
       max_memory_restart: "600M",
