@@ -18,6 +18,8 @@ export type RawCharacter = {
   tier: string;
   ability_name: string;
   ability_description: string;
+  /** Card art. The site shows this (repo folder "Character cards"); image_path is the bot's spawn art. */
+  card_image_path?: string;
   enabled?: number;
   faction?: string;
   craft?: RawCraft;
@@ -34,6 +36,7 @@ export type RawWeapon = {
   tier: string;
   ability_name: string;
   ability_description: string;
+  card_image_path?: string;
   enabled?: number;
   faction?: string;
 };
@@ -89,13 +92,26 @@ export function cdnImage(url: string): string {
   return !import.meta.env.DEV && url.startsWith(GH_RAW) ? `/gh-img/${url.slice(GH_RAW.length)}` : url;
 }
 
+/**
+ * The art the website shows for a row. Order: the row's own card art, then the art this site was built
+ * with for the same id, then the plain image_path. The middle step is what stops the live catalog from
+ * swapping every picture a second after load when the bot database still holds spawn art.
+ */
+const BUNDLED_ART = new Map<string, string>();
+for (const r of rawCharacters as RawCharacter[]) BUNDLED_ART.set(`c${r.id}`, r.card_image_path || r.image_path);
+for (const r of rawWeapons as RawWeapon[]) BUNDLED_ART.set(`w${r.id}`, r.card_image_path || r.image_path);
+
+function pickArt(kind: "c" | "w", row: { id: number; image_path: string; card_image_path?: string }): string {
+  return row.card_image_path || BUNDLED_ART.get(`${kind}${row.id}`) || row.image_path;
+}
+
 function buildSouls(raw: RawCharacter[]): Soul[] {
   return raw
     .filter((row) => row.enabled !== 0)
     .map((row) => ({
       id: row.id,
       name: row.name,
-      imagePath: cdnImage(row.image_path),
+      imagePath: cdnImage(pickArt("c", row)),
       hp: row.hp,
       attack: row.attack,
       pressure: row.hp + row.attack,
@@ -119,7 +135,7 @@ function buildWeapons(raw: RawWeapon[]): Zanpakuto[] {
     .map((row) => ({
       id: row.id,
       name: row.name,
-      imagePath: cdnImage(row.image_path),
+      imagePath: cdnImage(pickArt("w", row)),
       attackBonus: row.attack_bonus,
       boostType: row.boost_type === "hp" ? "hp" : "damage",
       boostPercent: row.boost_percent ?? 0,

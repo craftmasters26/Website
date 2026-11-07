@@ -28,6 +28,9 @@ function useWeeklyStats() {
   return stats;
 }
 
+/** Fixed locale so the server and every visitor's browser print identical digits (avoids hydration mismatches). */
+const fmt = (n: number) => n.toLocaleString("en-US");
+
 const FAN_NAMES = ["Coyote Starrk", "Ichigo Kurosaki", "Yhwach"];
 
 /** The three hero characters (falls back to the first three if the catalog changes). */
@@ -125,11 +128,11 @@ export function TrustStrip() {
   const weekly = useWeeklyStats();
   const items = useMemo(
     () => [
-      { n: SOULS.length.toLocaleString(), l: "pullable characters" },
-      { n: CRAFT_SOULS.length.toLocaleString(), l: "craft-only characters" },
-      { n: WEAPONS.length.toLocaleString(), l: "weapons" },
+      { n: fmt(SOULS.length), l: "pullable characters" },
+      { n: fmt(CRAFT_SOULS.length), l: "craft-only characters" },
+      { n: fmt(WEAPONS.length), l: "weapons" },
       weekly
-        ? { n: weekly.catches.toLocaleString(), l: "souls caught this week" }
+        ? { n: fmt(weekly.catches), l: "souls caught this week" }
         : { n: "3", l: "free pulls every day" },
     ],
     [v, weekly],
@@ -177,7 +180,7 @@ export function FeaturedBleachDex() {
             <div className="mt-7 flex flex-wrap gap-8">
               {stats.map((s) => (
                 <div className="showcase-stat" key={s.l}>
-                  <b>{s.n.toLocaleString()}</b>
+                  <b>{fmt(s.n)}</b>
                   <span>{s.l}</span>
                 </div>
               ))}

@@ -9,6 +9,18 @@ const hits = new Map<string, number[]>();
 const recent = new Map<string, number>(); // message -> last sent time (global de-dupe)
 const clip = (v: unknown, n: number) => String(v ?? "").slice(0, n);
 
+/** Plain-English meaning of the minified React errors that show up most, so the Discord post is readable. */
+const REACT_ERRORS: Record<string, string> = {
+  "418": "Hydration mismatch: the text React built in the browser differed from the server's HTML.",
+  "423": "Hydration mismatch: React had to throw away the server HTML and re-render in the browser.",
+  "425": "Hydration mismatch: a text node differed between server and browser.",
+  "310": "A React hook ran a different number of times between renders.",
+};
+const reactHint = (message: string) => {
+  const m = /Minified React error #(\d+)/.exec(message);
+  return m ? (REACT_ERRORS[m[1]] ?? null) : null;
+};
+
 export default defineEventHandler(async (event) => {
   setResponseStatus(event, 204);
   const webhook = process.env.ERROR_WEBHOOK_URL || process.env.CONTACT_WEBHOOK_URL;
@@ -36,7 +48,7 @@ export default defineEventHandler(async (event) => {
       embeds: [
         {
           title: "Browser error",
-          description: "```\n" + message.replace(/```/g, "'''") + "\n" + clip(body.stack, 900).replace(/```/g, "'''") + "\n```",
+          description: (reactHint(message) ? "**" + reactHint(message) + "**\n" : "") + "```\n" + message.replace(/```/g, "'''") + "\n" + clip(body.stack, 900).replace(/```/g, "'''") + "\n```",
           color: 0xb42318,
           fields: [
             { name: "Page", value: clip(body.url, 200) || "?", inline: true },

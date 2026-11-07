@@ -33,16 +33,43 @@ export async function refreshCatalogFromApi(): Promise<void> {
   }
 }
 
+/** Resolves once the page has finished loading and the browser is idle, i.e. React has hydrated. */
+function afterHydration(run: () => void): () => void {
+  let cancelled = false;
+  let timer: number | undefined;
+  const go = () => {
+    if (cancelled) return;
+    const idle = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number })
+      .requestIdleCallback;
+    if (idle) idle(() => !cancelled && run(), { timeout: 4000 });
+    else timer = window.setTimeout(() => !cancelled && run(), 2000);
+  };
+  if (document.readyState === "complete") go();
+  else window.addEventListener("load", go, { once: true });
+  return () => {
+    cancelled = true;
+    window.removeEventListener("load", go);
+    if (timer) window.clearTimeout(timer);
+  };
+}
+
 /**
- * Mount once, near the root. Refreshes on load (so a long-open tab
+ * Mount once, near the root. Refreshes shortly after the page has hydrated (so a long-open tab
  * eventually catches up) and every hour after that.
+ *
+ * The first refresh MUST wait for hydration: applyCatalog() changes the data the components read, and
+ * if that happens while React is still hydrating, the browser's first render no longer matches the
+ * server's HTML -> React error #418 ("Hydration failed ... text didn't match").
  */
 export function useCatalogAutoSync(): void {
   useEffect(() => {
-    void refreshCatalogFromApi();
+    const stop = afterHydration(() => void refreshCatalogFromApi());
     const id = window.setInterval(() => {
       void refreshCatalogFromApi();
     }, REFRESH_INTERVAL_MS);
-    return () => window.clearInterval(id);
+    return () => {
+      stop();
+      window.clearInterval(id);
+    };
   }, []);
 }

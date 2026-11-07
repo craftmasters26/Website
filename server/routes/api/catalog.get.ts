@@ -31,6 +31,7 @@ type CharacterDoc = {
   abilityName?: string;
   abilityDescription?: string;
   imagePath: string;
+  cardImagePath?: string;
   enabled: boolean;
   craftableOnly?: boolean;
   craftCategory?: string;
@@ -48,6 +49,7 @@ type WeaponDoc = {
   abilityName?: string;
   abilityDescription?: string;
   imagePath: string;
+  cardImagePath?: string;
   enabled: boolean;
 };
 
@@ -56,6 +58,7 @@ type CatalogPayload = {
     id: number;
     name: string;
     image_path: string;
+    card_image_path: string;
     hp: number;
     attack: number;
     tier: string;
@@ -69,6 +72,7 @@ type CatalogPayload = {
     id: number;
     name: string;
     image_path: string;
+    card_image_path: string;
     attack_bonus: number;
     boost_type: string;
     boost_percent: number;
@@ -104,6 +108,7 @@ async function loadCatalog(): Promise<CatalogPayload> {
       id: c.sourceId,
       name: c.name,
       image_path: c.imagePath,
+      card_image_path: c.cardImagePath ?? "",
       hp: c.hp,
       attack: c.attack,
       tier: c.tier,
@@ -119,6 +124,7 @@ async function loadCatalog(): Promise<CatalogPayload> {
       id: w.sourceId,
       name: w.name,
       image_path: w.imagePath,
+      card_image_path: w.cardImagePath ?? "",
       attack_bonus: w.attackBonus,
       boost_type: w.boostType ?? "damage",
       boost_percent: w.boostPercent ?? 0,

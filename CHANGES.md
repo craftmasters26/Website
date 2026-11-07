@@ -1,3 +1,17 @@
+# Fix: React error #418 and images changing after page load (7 Nov 2026)
+
+**Cause.** The site renders from the bundled `characters.json` / `weapons.json`, then fetches `/api/catalog` (live data from the bot's database) and swaps it in. Two problems:
+1. The live data was applied while React was still hydrating, so the browser's first render no longer matched the server HTML -> `Minified React error #418` (reported to the Discord error webhook).
+2. The live catalog sent the bot's **spawn art** (`Character Images` / `Weapons images`) while the bundled data uses **card art** (`Character cards` / `Weapon cards`), so every picture changed about a second after load.
+
+**Fix.**
+* `src/lib/catalog-live.ts` - the first live refresh now waits for page load + browser idle (after hydration).
+* `server/routes/api/catalog.get.ts` + `src/lib/catalog.ts` - the API now sends `card_image_path`; the site shows card art first, then the art it was built with for that id, then `image_path`. No more art swap.
+* `src/components/home-sections.tsx` - numbers formatted with a fixed `en-US` locale so server and browser always print the same text.
+* `server/routes/api/client-error.post.ts` - Discord error posts now explain common React errors in plain English.
+
+Bot side (separate repo): `sync/mongo_sync.py` now fills `cardImagePath` from `card.py` when the database row is empty.
+
 # Changes - review-driven improvement pass (Nov 2026)
 
 Merged from the two external reviews (Figma Make and Grok). Details of what to run are in `docs/OPERATIONS.md`.
