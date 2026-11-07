@@ -35,3 +35,11 @@ The script builds first, copies `.output` into `/var/www/bleachdex-web-releases/
 * `npm run test:e2e` - Playwright browser journeys against the built server (`npx playwright install chromium` once).
 * `npm run analyze` - bundle size report with budgets.
 * GitHub Actions (`.github/workflows/ci.yml`) runs all of the above plus a dependency audit on every push and pull request.
+
+## Image optimisation (/gh-img)
+
+Card art is fetched from GitHub once, cached under `GH_IMG_CACHE_DIR` (default: the OS temp dir), and, when the
+browser accepts WebP, resized (`?w=240|360|480|720|960`) and converted by `sharp`. If `sharp` is unavailable the
+original file is served, so nothing breaks. nginx must proxy `/gh-img/` to the Node app (see
+`deploy/nginx-boundless.conf`); the first visit to each image costs one conversion, later visits are cached.
+Public APIs `/api/catalog|leaderboard|stats` are limited to 120 requests/minute per IP (`server/middleware/rate-limit.ts`).

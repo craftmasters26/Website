@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { imgSrcSet, imgVariant, SIZES } from "@/lib/img";
 
 const GH_RAW = "https://raw.githubusercontent.com/craftmasters26/bleachdex/main/";
 
@@ -16,6 +17,7 @@ export function CatalogImage({
   priority,
   width,
   height,
+  sizes,
 }: {
   src: string;
   name: string;
@@ -23,6 +25,8 @@ export function CatalogImage({
   priority?: boolean;
   width?: number;
   height?: number;
+  /** `sizes` hint for the responsive srcset (defaults to a grid-card size). */
+  sizes?: string;
 }) {
   const [failed, setFailed] = useState(false);
   const [direct, setDirect] = useState(false);
@@ -46,7 +50,9 @@ export function CatalogImage({
 
   return (
     <img
-      src={shown}
+      src={direct ? shown : imgVariant(shown, 480)}
+      srcSet={direct ? undefined : imgSrcSet(src)}
+      sizes={direct ? undefined : sizes ?? SIZES.card}
       alt={name}
       width={width ?? 300}
       height={height ?? 400}

@@ -255,3 +255,20 @@ specifically — this archive doesn't contain either.
 ## Fifth pass
 - Real Discord screenshots now live in the four "How it works" step cards (spawn, catch, boss fight, leaderboard) instead of the hero. The step copy matches the pictures: spawn, catch, fight bosses, climb the leaderboard.
 - Hero is back to three real characters (art loads through `/gh-img/`); the featured BleachDex section shows a grid of six more real characters with their rarity. The /bleachdex page keeps the tabbed screenshot gallery and uses the icon version of the steps.
+
+## 2026-11-07 — second review pass (Grok notes)
+
+Applied: WebP/resized card art (`/gh-img/…?w=`, uses `sharp`), `srcset` on card/hero/catalog images, tier-coloured
+card frames, mouse-only tilt, grain + hero glow, new homepage headline, "Your first five minutes" section, live
+server / active-player counts (needs the updated bot), Free vs Premium table, exact `/redeem rewards` wording
+(and removed the "attach automatically" claim that contradicted it), Guide page, Updates page
+(`src/data/changelog.ts`), List structured data, per-IP rate limit on /api/catalog|leaderboard|stats, Umami click
+events for Add to Discord / checkout / premium, and a refreshed bundled catalog snapshot (image paths now point at
+the current GitHub folders; 12 characters have no art in the repo yet).
+
+Not applied, on purpose: testimonials / "popular in communities" (no real data), video/GIF slots (no real
+footage), fake urgency timers, one-time supporter packs (needs Whop + bot work), a Premium upsell on My Collection
+(the site cannot tell who already paid), self-hosted fonts.
+
+**Deploy notes:** run `npm ci` (adds `sharp`); apply `deploy/nginx-boundless.conf` (routes `/gh-img/` through the
+optimizer; `sudo nginx -t && sudo systemctl reload nginx`); restart the bot to expose servers / 24h-active stats.

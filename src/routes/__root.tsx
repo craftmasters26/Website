@@ -10,6 +10,7 @@ import AdBanner from "@/components/AdBanner";
 import { useCatalogAutoSync } from "@/lib/catalog-live";
 import { installErrorReporter } from "@/lib/error-reporter";
 import { installImageFallback } from "@/lib/img-fallback";
+import { installClickTracking } from "@/lib/track";
 import appCss from "../styles.css?url";
 import { SITE_URL } from "@/lib/site";
 
@@ -80,6 +81,7 @@ function RootDocument() {
   useEffect(() => {
     installImageFallback();
     installErrorReporter();
+    installClickTracking();
   }, []);
   // The company pages (/, /about, /projects, /contact-us) have its own header/footer and no ad slot;
   // every other route keeps the BleachDex chrome.

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FramedShot, Screenshots, shot } from "@/components/screenshots";
 import { HowItWorks } from "@/components/home-sections";
+import { FirstMinutes } from "@/components/first-minutes";
+import { SIZES } from "@/lib/img";
 import { jsonLd, seo } from "@/lib/seo";
 import { SITE_URL, BLEACHDEX_URL } from "@/lib/site";
 import { SUPPORT_SERVER } from "@/lib/catalog";
@@ -52,14 +54,27 @@ function StickyInvite({ targetRef }: { targetRef: React.RefObject<HTMLElement | 
     <div
       aria-hidden={!show}
       className={
-        "fixed inset-x-0 bottom-0 z-40 border-t border-line bg-void/95 px-4 pt-3 backdrop-blur transition-transform duration-300 md:hidden " +
+        "fixed inset-x-0 bottom-0 z-40 border-t border-line-bright bg-void/90 px-4 pt-3 shadow-[0_-12px_32px_-12px_rgba(0,0,0,0.5)] backdrop-blur-md transition-transform duration-300 md:hidden " +
         (show ? "translate-y-0" : "translate-y-full")
       }
       style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
     >
-      <a href={DISCORD_INVITE} tabIndex={show ? 0 : -1} className="btn btn-fill w-full justify-center">
-        Add to Discord
-      </a>
+      <div className="mx-auto flex max-w-md items-center gap-3">
+        <img src={brandIcon} alt="" width={36} height={36} className="size-9 rounded-md" />
+        <div className="min-w-0 flex-1 leading-tight">
+          <div className="truncate text-sm font-bold text-bone">BleachDex</div>
+          <div className="truncate text-[12px] text-bone-faint">Free Discord bot</div>
+        </div>
+        <a
+          href={DISCORD_INVITE}
+          tabIndex={show ? 0 : -1}
+          data-umami-event="add-to-discord"
+          data-umami-event-where="sticky-bar"
+          className="btn btn-fill shrink-0 px-5"
+        >
+          Add to Discord
+        </a>
+      </div>
     </div>
   );
 }
@@ -82,18 +97,25 @@ function Home() {
       <section className="py-20 md:py-24">
         <div className="wrap grid items-center gap-14 md:grid-cols-[1.15fr_.85fr]">
           <div className="hero-seq">
-            <img src={brandIcon} alt="BleachDex" className="h-9 w-auto rounded-md" />
-            <h1 className="mt-5 font-serif text-[52px] leading-[0.98] tracking-[-0.01em] md:text-[76px]">
-              Bleach
-              <br />
-              <span className="accent-text">Dex</span>
+            <div className="flex items-center gap-3">
+              <img src={brandIcon} alt="" width={36} height={36} className="size-9 rounded-md" />
+              <span className="font-mono text-[13px] uppercase tracking-[0.14em] text-bone-dim">BleachDex</span>
+            </div>
+            <h1 className="mt-5 font-serif text-[42px] leading-[1.02] tracking-[-0.01em] md:text-[62px]">
+              Souls appear while your server chats.{" "}
+              <span className="accent-text">Be the one who catches them.</span>
             </h1>
             <p className="mt-7 max-w-md text-[16.5px] leading-7 text-bone-dim">
               Souls spawn in your server and you press a button to keep them. Build a
               three-character team, fight the hourly boss, and spend its drops on /craft.
             </p>
             <div ref={heroCta} className="mt-8 flex flex-wrap gap-4">
-              <a href={DISCORD_INVITE} className="btn btn-fill">
+              <a
+                href={DISCORD_INVITE}
+                data-umami-event="add-to-discord"
+                data-umami-event-where="hero"
+                className="btn btn-fill"
+              >
                 Add to Discord
               </a>
               <Link to="/bleachdex/list" className="btn btn-outline">
@@ -121,17 +143,33 @@ function Home() {
                 <span>
                   <b className="text-bone">{live.players.toLocaleString()}</b> players ·{" "}
                   <b className="text-bone">{live.cardsCaught.toLocaleString()}</b> cards caught
+                  {live.servers ? (
+                    <>
+                      {" "}
+                      · <b className="text-bone">{live.servers.toLocaleString()}</b> servers
+                    </>
+                  ) : null}
+                  {live.activePlayers24h ? (
+                    <>
+                      {" "}
+                      · <b className="text-bone">{live.activePlayers24h.toLocaleString()}</b> caught something today
+                    </>
+                  ) : null}
                 </span>
               ) : null}
             </div>
           </div>
 
-          <figure className="mx-auto w-full max-w-[340px] md:ml-auto">
-            <div className="hero-float rotate-[2deg] overflow-hidden rounded-[10px] border border-line-bright bg-void-raised">
+          <figure className="hero-aura relative mx-auto w-full max-w-[340px] md:ml-auto">
+            <div
+              data-tier={featured.tier}
+              className="hero-float soul-card-frame rotate-[2deg] overflow-hidden rounded-[10px] border bg-void-raised"
+            >
               <CatalogImage
                 src={featured.imagePath}
                 name={featured.name}
                 priority
+                sizes={SIZES.hero}
                 className="aspect-[3/4] w-full object-cover object-top"
               />
             </div>
@@ -199,6 +237,8 @@ function Home() {
       <Screenshots />
 
       <HowItWorks shots={false} />
+
+      <FirstMinutes where="first-minutes" />
 
       <section className="pb-24" aria-labelledby="install-title">
         <div className="wrap grid items-center gap-10 md:grid-cols-[1.1fr_.9fr]">

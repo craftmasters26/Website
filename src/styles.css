@@ -110,6 +110,18 @@
     radial-gradient(40% 34% at 70% 80%, rgba(93, 185, 255, 0.16), transparent 70%);
 }
 
+/* Fine film grain over the BleachDex pages (inline SVG, ~300 bytes, no request) */
+.site-bg::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 .wrap {
   width: min(1180px, calc(100% - 40px));
   margin-inline: auto;
@@ -339,21 +351,45 @@
   border-color: var(--color-ember-bright);
 }
 
+/* ---------- Tier palette: each rarity reads at a glance ---------- */
+[data-tier="common"] { --tier: #8b97b5; --tier-glow: 139, 151, 181; }
+[data-tier="uncommon"] { --tier: #2fc48d; --tier-glow: 47, 196, 141; }
+[data-tier="rare"] { --tier: #3b9bff; --tier-glow: 59, 155, 255; }
+[data-tier="epic"] { --tier: #a56bff; --tier-glow: 165, 107, 255; }
+[data-tier="legendary"] { --tier: #ffb020; --tier-glow: 255, 176, 32; }
+[data-tier="mythic"] { --tier: #ff4560; --tier-glow: 255, 69, 96; }
+
+.tier-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--tier, var(--color-bone-faint));
+  box-shadow: 0 0 8px rgba(var(--tier-glow, 139, 151, 181), 0.8);
+  vertical-align: 0.05em;
+}
+
 .soul-card {
+  position: relative;
   background: linear-gradient(180deg, var(--color-void-raised-2), var(--color-void-raised));
-  border: 1px solid var(--color-line);
-  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--tier, var(--color-line)) 38%, var(--color-line));
+  border-radius: 10px;
   overflow: hidden;
   transform-style: preserve-3d;
+  box-shadow: 0 10px 24px -18px rgba(var(--tier-glow, 10, 108, 240), 0.55);
   transition:
     transform 0.12s ease-out,
     border-color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
-.soul-card:hover {
-  border-color: var(--color-line-bright);
-  box-shadow: var(--shadow-border-hover);
+.soul-card:hover,
+.soul-card:focus-visible {
+  border-color: var(--tier, var(--color-line-bright));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--tier, transparent) 60%, transparent),
+    0 18px 36px -16px rgba(var(--tier-glow, 10, 108, 240), 0.75);
 }
 
 .soul-card img {
@@ -362,12 +398,40 @@
   transition: transform 0.5s ease;
 }
 
-.soul-card:hover img {
-  transform: scale(1.08);
+@media (hover: hover) {
+  .soul-card:hover img {
+    transform: scale(1.06);
+  }
 }
 
-.soul-card-mythic {
-  box-shadow: 0 0 0 1px rgba(10, 108, 240, 0.55), 0 12px 30px -14px rgba(43, 140, 255, 0.6);
+/* Higher rarities carry a permanent glow; the light sweep only plays on hover (cheap on phones). */
+.soul-card-epic { box-shadow: 0 0 0 1px rgba(165, 107, 255, 0.35), 0 12px 28px -16px rgba(165, 107, 255, 0.65); }
+.soul-card-legendary { box-shadow: 0 0 0 1px rgba(255, 176, 32, 0.5), 0 12px 30px -14px rgba(255, 176, 32, 0.6); }
+.soul-card-mythic { box-shadow: 0 0 0 1px rgba(255, 69, 96, 0.6), 0 14px 34px -12px rgba(255, 69, 96, 0.7); }
+
+.card-shine {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 11;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.42) 50%, transparent 62%);
+  background-size: 250% 100%;
+  background-position: 120% 0;
+}
+.soul-card-legendary .card-shine,
+.soul-card-mythic .card-shine {
+  display: block;
+}
+@media (hover: hover) {
+  .soul-card-legendary:hover .card-shine,
+  .soul-card-mythic:hover .card-shine {
+    animation: bd-card-shine 0.9s ease-out 1;
+  }
+}
+@keyframes bd-card-shine {
+  from { background-position: 120% 0; }
+  to { background-position: -40% 0; }
 }
 
 .chip {
@@ -451,23 +515,13 @@
 }
 
 
-.tier-common {
-  background: var(--color-bone-faint);
-}
-.tier-uncommon {
-  background: var(--color-azure-bright);
-}
-.tier-rare {
-  background: linear-gradient(90deg, #2b8cff, #5db9ff);
-}
-.tier-epic {
-  background: linear-gradient(90deg, #5db9ff, #a8dcff);
-}
-.tier-legendary {
-  background: var(--color-gold);
-}
+.tier-common { background: #8b97b5; }
+.tier-uncommon { background: #2fc48d; }
+.tier-rare { background: linear-gradient(90deg, #2b8cff, #7fc3ff); }
+.tier-epic { background: linear-gradient(90deg, #8a4dff, #c4a2ff); }
+.tier-legendary { background: linear-gradient(90deg, #ff9d00, #ffd36b); }
 .tier-mythic {
-  background: linear-gradient(90deg, #0a6cf0, #7fd0ff, #0a6cf0);
+  background: linear-gradient(90deg, #ff2d55, #ff9bb0, #ff2d55);
   background-size: 200% 100%;
   animation: bp-sweep 4s linear infinite;
 }
@@ -1056,3 +1110,20 @@
   box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.8);
 }
 .shot-canvas img[hidden] { display: none; }
+
+/* ---------- BleachDex hero: moonlit aura + tier-coloured frame on the featured card ---------- */
+.hero-aura::before {
+  content: "";
+  position: absolute;
+  inset: -14% max(-22%, -12px);
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(48% 42% at 50% 46%, rgba(var(--tier-glow, 59, 155, 255), 0.32), transparent 70%),
+    radial-gradient(30% 26% at 78% 18%, rgba(255, 255, 255, 0.18), transparent 70%);
+  filter: blur(8px);
+}
+.soul-card-frame {
+  border-color: color-mix(in srgb, var(--tier, var(--color-line-bright)) 70%, var(--color-line));
+  box-shadow: 0 22px 48px -22px rgba(var(--tier-glow, 10, 108, 240), 0.8);
+}

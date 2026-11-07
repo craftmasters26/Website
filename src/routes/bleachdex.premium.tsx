@@ -3,14 +3,57 @@ import { SITE_URL } from "@/lib/site";
 import { TIER_META, WHOP_LABEL, type Tier } from "@/lib/premium-tiers";
 import { jsonLd } from "@/lib/seo";
 
+const COMPARE_ROWS: { perk: string; free: string; enjoyer: string; shareholder: string }[] = [
+  { perk: "Catch, packs, bosses, crafting, leaderboard", free: "Included", enjoyer: "Included", shareholder: "Included" },
+  { perk: "Giveaway entries", free: "Standard", enjoyer: "Average ÷ 10 extra", shareholder: "Average ÷ 6.5 extra" },
+  { perk: "Custom role (name, colour, icon)", free: "—", enjoyer: "Yes", shareholder: "Yes" },
+  { perk: "Cards of your choice", free: "—", enjoyer: "1 Mythical · 2 Legendary · 3 Rare · 4 Uncommon · 5 Common", shareholder: "2 Mythical · 4 Legendary · 5 Rare · 6 Uncommon · 7 Common" },
+  { perk: "Exclusive weekly boss day (a boss every 15 min)", free: "—", enjoyer: "—", shareholder: "Yes" },
+  { perk: "Exclusive weekly spawn party channel", free: "—", enjoyer: "—", shareholder: "Yes" },
+  { perk: "Price", free: "$0", enjoyer: "$3", shareholder: "$5" },
+];
+
+function CompareTable() {
+  return (
+    <section aria-labelledby="compare-title" className="mt-16">
+      <h2 id="compare-title" className="mb-6 font-serif text-[26px] leading-tight">
+        Free vs Premium, side by side
+      </h2>
+      <div className="overflow-x-auto rounded-md border border-line bg-void-raised">
+        <table className="w-full min-w-[640px] border-collapse text-left text-[13.5px]">
+          <caption className="sr-only">Comparison of the free experience, Bleach Enjoyer and Urahara Foundation Shareholder</caption>
+          <thead>
+            <tr className="border-b border-line font-mono text-[11.5px] uppercase tracking-[0.06em] text-bone-faint">
+              <th scope="col" className="p-4 font-normal">Perk</th>
+              <th scope="col" className="p-4 font-normal">Free</th>
+              <th scope="col" className="p-4 font-normal">Bleach Enjoyer</th>
+              <th scope="col" className="p-4 font-normal text-bone">Shareholder</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-line">
+            {COMPARE_ROWS.map((r) => (
+              <tr key={r.perk}>
+                <th scope="row" className="p-4 font-medium text-bone">{r.perk}</th>
+                <td className="p-4 text-bone-faint">{r.free}</td>
+                <td className="p-4 text-bone-dim">{r.enjoyer}</td>
+                <td className="p-4 text-bone">{r.shareholder}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
 const FAQ = [
   {
     q: "When do I get my perks?",
-    a: "Right after your payment clears. Sign in to the website with the Discord account you play with, then use the redeem command in the BleachDex server to attach your plan. Most people are set within a minute.",
+    a: "Right after your payment clears. Sign in to the website with the Discord account you play with, then run /redeem rewards in the BleachDex server to attach your plan. Most people are set within a minute.",
   },
   {
     q: "I paid but my role or perks are missing. What now?",
-    a: "Wait two minutes and run the redeem command again. If nothing changes, send us your Whop receipt email and your Discord username through the contact page and we will fix it by hand.",
+    a: "Wait two minutes and run /redeem rewards again. If nothing changes, send us your Whop receipt email and your Discord username through the contact page and we will fix it by hand.",
   },
   {
     q: "Can I cancel?",
@@ -64,8 +107,8 @@ function PremiumPage() {
           Support the bot.
         </h1>
         <p className="mb-11 max-w-[520px] text-[14.5px] leading-[1.65] text-bone-dim">
-          Keep BleachDex running and get rewarded for it. Your Discord role and
-          perks attach automatically the moment your payment goes through.
+          Keep BleachDex running and get rewarded for it. Pay once on Whop, then run
+          /redeem rewards in the BleachDex server to claim your role and perks.
         </p>
         <div className="grid gap-6 md:grid-cols-2">
           {(["bleach-enjoyer", "urahara-foundation-shareholder"] as Tier[]).map((kind) => (
@@ -75,8 +118,10 @@ function PremiumPage() {
         <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[11.5px] text-bone-faint">
           <span>Secure payment via Whop</span>
           <span>Cancel anytime</span>
-          <span>Perks attach after checkout</span>
+          <span>Claim perks with /redeem rewards</span>
         </div>
+
+        <CompareTable />
 
         <section aria-labelledby="after-pay" className="mt-16">
           <h2 id="after-pay" className="mb-6 font-serif text-[26px] leading-tight">
@@ -85,7 +130,7 @@ function PremiumPage() {
           <ol className="grid gap-4 md:grid-cols-3">
             {[
               ["1. Checkout", "Pay securely on Whop. You get a receipt by email straight away."],
-              ["2. Redeem", "Sign in with Discord here, then run the redeem command in the BleachDex server."],
+              ["2. Redeem", "Sign in with Discord here, then run /redeem rewards in the BleachDex server."],
               ["3. Enjoy", "Your role, giveaway weight and card picks are applied. Not showing? Contact us with your receipt."],
             ].map(([title, body]) => (
               <li key={title} className="rounded-md border border-line bg-void-raised p-5">

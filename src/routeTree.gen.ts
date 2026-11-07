@@ -23,6 +23,7 @@ import { Route as BleachdexAdminRouteImport } from './routes/bleachdex.admin'
 import { Route as BleachdexCheckoutRouteImport } from './routes/bleachdex.checkout'
 import { Route as BleachdexCommandsRouteImport } from './routes/bleachdex.commands'
 import { Route as BleachdexContactRouteImport } from './routes/bleachdex.contact'
+import { Route as BleachdexGuideRouteImport } from './routes/bleachdex.guide'
 import { Route as BleachdexLeaderboardRouteImport } from './routes/bleachdex.leaderboard'
 import { Route as BleachdexListRouteImport } from './routes/bleachdex.list'
 import { Route as BleachdexOwnedRouteImport } from './routes/bleachdex.owned'
@@ -31,6 +32,7 @@ import { Route as BleachdexPrivacyRouteImport } from './routes/bleachdex.privacy
 import { Route as BleachdexRanksRouteImport } from './routes/bleachdex.ranks'
 import { Route as BleachdexRosterRouteImport } from './routes/bleachdex.roster'
 import { Route as BleachdexTermsRouteImport } from './routes/bleachdex.terms'
+import { Route as BleachdexUpdatesRouteImport } from './routes/bleachdex.updates'
 import { Route as BleachdexWeaponsRouteImport } from './routes/bleachdex.weapons'
 import { Route as BleachdexRosterIndexRouteImport } from './routes/bleachdex.roster.index'
 import { Route as BleachdexRosterIdRouteImport } from './routes/bleachdex.roster.$id'
@@ -107,6 +109,11 @@ const BleachdexContactRoute = BleachdexContactRouteImport.update({
   path: '/bleachdex/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BleachdexGuideRoute = BleachdexGuideRouteImport.update({
+  id: '/bleachdex/guide',
+  path: '/bleachdex/guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BleachdexLeaderboardRoute = BleachdexLeaderboardRouteImport.update({
   id: '/bleachdex/leaderboard',
   path: '/bleachdex/leaderboard',
@@ -145,6 +152,11 @@ const BleachdexRosterRoute = BleachdexRosterRouteImport.update({
 const BleachdexTermsRoute = BleachdexTermsRouteImport.update({
   id: '/bleachdex/terms',
   path: '/bleachdex/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BleachdexUpdatesRoute = BleachdexUpdatesRouteImport.update({
+  id: '/bleachdex/updates',
+  path: '/bleachdex/updates',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BleachdexWeaponsRoute = BleachdexWeaponsRouteImport.update({
@@ -187,6 +199,7 @@ export interface FileRoutesByFullPath {
   '/bleachdex/checkout': typeof BleachdexCheckoutRoute
   '/bleachdex/commands': typeof BleachdexCommandsRoute
   '/bleachdex/contact': typeof BleachdexContactRoute
+  '/bleachdex/guide': typeof BleachdexGuideRoute
   '/bleachdex/leaderboard': typeof BleachdexLeaderboardRoute
   '/bleachdex/list': typeof BleachdexListRoute
   '/bleachdex/owned': typeof BleachdexOwnedRoute
@@ -195,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/bleachdex/ranks': typeof BleachdexRanksRoute
   '/bleachdex/roster': typeof BleachdexRosterRouteWithChildren
   '/bleachdex/terms': typeof BleachdexTermsRoute
+  '/bleachdex/updates': typeof BleachdexUpdatesRoute
   '/bleachdex/weapons': typeof BleachdexWeaponsRouteWithChildren
   '/bleachdex/': typeof BleachdexIndexRoute
   '/bleachdex/roster/$id': typeof BleachdexRosterIdRoute
@@ -216,6 +230,7 @@ export interface FileRoutesByTo {
   '/bleachdex/checkout': typeof BleachdexCheckoutRoute
   '/bleachdex/commands': typeof BleachdexCommandsRoute
   '/bleachdex/contact': typeof BleachdexContactRoute
+  '/bleachdex/guide': typeof BleachdexGuideRoute
   '/bleachdex/leaderboard': typeof BleachdexLeaderboardRoute
   '/bleachdex/list': typeof BleachdexListRoute
   '/bleachdex/owned': typeof BleachdexOwnedRoute
@@ -223,6 +238,7 @@ export interface FileRoutesByTo {
   '/bleachdex/privacy': typeof BleachdexPrivacyRoute
   '/bleachdex/ranks': typeof BleachdexRanksRoute
   '/bleachdex/terms': typeof BleachdexTermsRoute
+  '/bleachdex/updates': typeof BleachdexUpdatesRoute
   '/bleachdex': typeof BleachdexIndexRoute
   '/bleachdex/roster/$id': typeof BleachdexRosterIdRoute
   '/bleachdex/weapons/$id': typeof BleachdexWeaponsIdRoute
@@ -244,6 +260,7 @@ export interface FileRoutesById {
   '/bleachdex/checkout': typeof BleachdexCheckoutRoute
   '/bleachdex/commands': typeof BleachdexCommandsRoute
   '/bleachdex/contact': typeof BleachdexContactRoute
+  '/bleachdex/guide': typeof BleachdexGuideRoute
   '/bleachdex/leaderboard': typeof BleachdexLeaderboardRoute
   '/bleachdex/list': typeof BleachdexListRoute
   '/bleachdex/owned': typeof BleachdexOwnedRoute
@@ -252,6 +269,7 @@ export interface FileRoutesById {
   '/bleachdex/ranks': typeof BleachdexRanksRoute
   '/bleachdex/roster': typeof BleachdexRosterRouteWithChildren
   '/bleachdex/terms': typeof BleachdexTermsRoute
+  '/bleachdex/updates': typeof BleachdexUpdatesRoute
   '/bleachdex/weapons': typeof BleachdexWeaponsRouteWithChildren
   '/bleachdex/': typeof BleachdexIndexRoute
   '/bleachdex/roster/$id': typeof BleachdexRosterIdRoute
@@ -275,6 +293,7 @@ export interface FileRouteTypes {
     | '/bleachdex/checkout'
     | '/bleachdex/commands'
     | '/bleachdex/contact'
+    | '/bleachdex/guide'
     | '/bleachdex/leaderboard'
     | '/bleachdex/list'
     | '/bleachdex/owned'
@@ -283,6 +302,7 @@ export interface FileRouteTypes {
     | '/bleachdex/ranks'
     | '/bleachdex/roster'
     | '/bleachdex/terms'
+    | '/bleachdex/updates'
     | '/bleachdex/weapons'
     | '/bleachdex/'
     | '/bleachdex/roster/$id'
@@ -304,6 +324,7 @@ export interface FileRouteTypes {
     | '/bleachdex/checkout'
     | '/bleachdex/commands'
     | '/bleachdex/contact'
+    | '/bleachdex/guide'
     | '/bleachdex/leaderboard'
     | '/bleachdex/list'
     | '/bleachdex/owned'
@@ -311,6 +332,7 @@ export interface FileRouteTypes {
     | '/bleachdex/privacy'
     | '/bleachdex/ranks'
     | '/bleachdex/terms'
+    | '/bleachdex/updates'
     | '/bleachdex'
     | '/bleachdex/roster/$id'
     | '/bleachdex/weapons/$id'
@@ -331,6 +353,7 @@ export interface FileRouteTypes {
     | '/bleachdex/checkout'
     | '/bleachdex/commands'
     | '/bleachdex/contact'
+    | '/bleachdex/guide'
     | '/bleachdex/leaderboard'
     | '/bleachdex/list'
     | '/bleachdex/owned'
@@ -339,6 +362,7 @@ export interface FileRouteTypes {
     | '/bleachdex/ranks'
     | '/bleachdex/roster'
     | '/bleachdex/terms'
+    | '/bleachdex/updates'
     | '/bleachdex/weapons'
     | '/bleachdex/'
     | '/bleachdex/roster/$id'
@@ -361,6 +385,7 @@ export interface RootRouteChildren {
   BleachdexCheckoutRoute: typeof BleachdexCheckoutRoute
   BleachdexCommandsRoute: typeof BleachdexCommandsRoute
   BleachdexContactRoute: typeof BleachdexContactRoute
+  BleachdexGuideRoute: typeof BleachdexGuideRoute
   BleachdexLeaderboardRoute: typeof BleachdexLeaderboardRoute
   BleachdexListRoute: typeof BleachdexListRoute
   BleachdexOwnedRoute: typeof BleachdexOwnedRoute
@@ -369,6 +394,7 @@ export interface RootRouteChildren {
   BleachdexRanksRoute: typeof BleachdexRanksRoute
   BleachdexRosterRoute: typeof BleachdexRosterRouteWithChildren
   BleachdexTermsRoute: typeof BleachdexTermsRoute
+  BleachdexUpdatesRoute: typeof BleachdexUpdatesRoute
   BleachdexWeaponsRoute: typeof BleachdexWeaponsRouteWithChildren
   BleachdexIndexRoute: typeof BleachdexIndexRoute
 }
@@ -473,6 +499,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BleachdexContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bleachdex/guide': {
+      id: '/bleachdex/guide'
+      path: '/bleachdex/guide'
+      fullPath: '/bleachdex/guide'
+      preLoaderRoute: typeof BleachdexGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bleachdex/leaderboard': {
       id: '/bleachdex/leaderboard'
       path: '/bleachdex/leaderboard'
@@ -527,6 +560,13 @@ declare module '@tanstack/react-router' {
       path: '/bleachdex/terms'
       fullPath: '/bleachdex/terms'
       preLoaderRoute: typeof BleachdexTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bleachdex/updates': {
+      id: '/bleachdex/updates'
+      path: '/bleachdex/updates'
+      fullPath: '/bleachdex/updates'
+      preLoaderRoute: typeof BleachdexUpdatesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bleachdex/weapons': {
@@ -608,6 +648,7 @@ const rootRouteChildren: RootRouteChildren = {
   BleachdexCheckoutRoute: BleachdexCheckoutRoute,
   BleachdexCommandsRoute: BleachdexCommandsRoute,
   BleachdexContactRoute: BleachdexContactRoute,
+  BleachdexGuideRoute: BleachdexGuideRoute,
   BleachdexLeaderboardRoute: BleachdexLeaderboardRoute,
   BleachdexListRoute: BleachdexListRoute,
   BleachdexOwnedRoute: BleachdexOwnedRoute,
@@ -616,6 +657,7 @@ const rootRouteChildren: RootRouteChildren = {
   BleachdexRanksRoute: BleachdexRanksRoute,
   BleachdexRosterRoute: BleachdexRosterRouteWithChildren,
   BleachdexTermsRoute: BleachdexTermsRoute,
+  BleachdexUpdatesRoute: BleachdexUpdatesRoute,
   BleachdexWeaponsRoute: BleachdexWeaponsRouteWithChildren,
   BleachdexIndexRoute: BleachdexIndexRoute,
 }

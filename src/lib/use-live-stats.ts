@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export type LiveStats = { players: number; cardsCaught: number };
+export type LiveStats = { players: number; cardsCaught: number; servers?: number; activePlayers24h?: number };
 
 /** Real totals from the bot, or null while loading / unavailable (callers render nothing, never a fake number). */
 export function useLiveStats(): LiveStats | null {
@@ -12,7 +12,12 @@ export function useLiveStats(): LiveStats | null {
       .then((j: Partial<LiveStats> | null) => {
         if (cancelled || !j) return;
         if (typeof j.players === "number" && typeof j.cardsCaught === "number") {
-          setStats({ players: j.players, cardsCaught: j.cardsCaught });
+          setStats({
+            players: j.players,
+            cardsCaught: j.cardsCaught,
+            servers: typeof j.servers === "number" ? j.servers : undefined,
+            activePlayers24h: typeof j.activePlayers24h === "number" ? j.activePlayers24h : undefined,
+          });
         }
       })
       .catch(() => {});

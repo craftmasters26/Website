@@ -15,6 +15,8 @@ const PAGES = [
   "/bleachdex/weapons",
   "/bleachdex/leaderboard",
   "/bleachdex/commands",
+  "/bleachdex/guide",
+  "/bleachdex/updates",
   "/bleachdex/ranks",
   "/bleachdex/premium",
   "/bleachdex/contact",

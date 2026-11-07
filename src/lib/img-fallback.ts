@@ -16,6 +16,8 @@ export function installImageFallback() {
       const at = img.src.indexOf("/gh-img/");
       if (at === -1) return;
       img.dataset.ghRetry = "1";
+      img.removeAttribute("srcset"); // otherwise the browser keeps preferring the failed candidates
+      img.removeAttribute("sizes");
       img.src = GH_RAW + img.src.slice(at + 8);
       e.stopImmediatePropagation(); // skip the component's failure handler for this first miss
     },

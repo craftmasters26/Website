@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { SITE_URL } from "@/lib/site";
+import { jsonLd } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 import {
@@ -50,6 +51,24 @@ export const Route = createFileRoute("/bleachdex/list")({
         content:
           "Browse every BleachDex soul, craft-only character and weapon. Search by name, filter by tier, and see HP, attack and crafting recipes for the Bleach Discord collection bot.",
       },
+    ],
+    scripts: [
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "BleachDex character and weapon list",
+        url: `${SITE_URL}/bleachdex/list`,
+        mainEntity: {
+          "@type": "ItemList",
+          numberOfItems: ALL_SOULS.length + WEAPONS.length,
+          itemListElement: ALL_SOULS.slice(0, 100).map((s, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name: s.name,
+            url: `${SITE_URL}/bleachdex/roster/${s.id}`,
+          })),
+        },
+      }),
     ],
   }),
   component: ListPage,

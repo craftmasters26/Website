@@ -16,6 +16,7 @@ type NavLink = {
     | "/bleachdex/list"
     | "/bleachdex/owned"
     | "/bleachdex/leaderboard"
+    | "/bleachdex/guide"
     | "/bleachdex/commands"
     | "/bleachdex/premium"
     | "/bleachdex/admin";
@@ -36,6 +37,7 @@ function useNavLinks(): NavLink[] {
   if (signedIn) links.push({ to: "/bleachdex/owned", label: "Inventory" });
   links.push(
     { to: "/bleachdex/leaderboard", label: "Leaderboard", live: true },
+    { to: "/bleachdex/guide", label: "Guide" },
     { to: "/bleachdex/commands", label: "Commands" },
     { to: "/bleachdex/premium", label: "Premium" },
   );
@@ -281,6 +283,12 @@ export function SiteFooter() {
           </Link>
           <Link to="/bleachdex/commands" className="hover:text-azure-bright">
             Commands
+          </Link>
+          <Link to="/bleachdex/guide" className="hover:text-azure-bright">
+            Guide
+          </Link>
+          <Link to="/bleachdex/updates" className="hover:text-azure-bright">
+            Updates
           </Link>
           <Link to="/bleachdex/premium" className="hover:text-azure-bright">
             Premium
