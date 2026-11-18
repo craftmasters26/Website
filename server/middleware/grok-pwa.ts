@@ -97,6 +97,8 @@ export default async function grokPwaMiddleware(
     });
   }
 
+  // /ngs is a standalone school page with its own head; do not inject BleachDex PWA/OG tags.
+  if (path === "/ngs" || path.startsWith("/ngs/")) return next();
   if (!isDocumentPath(path)) return next();
 
   const result = await next();

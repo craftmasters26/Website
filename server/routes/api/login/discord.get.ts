@@ -38,6 +38,28 @@ main{max-width:560px}h1{font-size:22px;margin:0 0 12px}code{background:#16233d;p
 export default defineEventHandler(async (event) => {
   const next = safeNext(getQuery(event).next);
 
+  // Discord always returns to BETTER_AUTH_URL. If the login was started on another host (www.,
+  // the server IP, an old domain) the OAuth state cookie is on the wrong host and the callback
+  // silently fails. Restart the login on the canonical host first.
+  const canonical = (process.env.BETTER_AUTH_URL || process.env.VITE_SITE_URL || "").trim().replace(/\/+$/, "");
+  const reqHost = (event.req.headers.get("x-forwarded-host") || event.req.headers.get("host") || "")
+    .split(",")[0]
+    .trim()
+    .toLowerCase();
+  if (canonical && reqHost) {
+    try {
+      const want = new URL(canonical);
+      if (want.host.toLowerCase() !== reqHost && !/^(localhost|127\.0\.0\.1)(:\d+)?$/.test(reqHost)) {
+        return new Response(null, {
+          status: 302,
+          headers: { location: `${want.origin}/api/login/discord?next=${encodeURIComponent(next)}`, "cache-control": "no-store" },
+        });
+      }
+    } catch {
+      /* bad BETTER_AUTH_URL — carry on */
+    }
+  }
+
   if (!discordConfigured) {
     return page(
       500,
