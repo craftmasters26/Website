@@ -23,4 +23,15 @@ export function installImageFallback() {
     },
     true,
   );
+  // Images that failed while the page was still hydrating fired their `error` event before this
+  // listener existed, so they stayed broken. Retry those now.
+  for (const img of Array.from(document.images)) {
+    if (!img.complete || img.naturalWidth > 0 || img.dataset.ghRetry) continue;
+    const at = img.src.indexOf("/gh-img/");
+    if (at === -1) continue;
+    img.dataset.ghRetry = "1";
+    img.removeAttribute("srcset");
+    img.removeAttribute("sizes");
+    img.src = GH_RAW + img.src.slice(at + 8);
+  }
 }

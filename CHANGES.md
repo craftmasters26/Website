@@ -1,3 +1,14 @@
+# NGS school quiz at /ngs (Nov 2026)
+
+* New page **https://boundlessproductions.org/ngs** - MCQ practice for the National Garrison Secondary School inter-campus quiz (Chemistry, Class 9, built from the Punjab textbook: exercise MCQs, glossary and every line/box of Units 1-13, plus calculation practice).
+* `server/ngs-quiz.html` - the whole quiz in one self-contained file (edit this file to change it).
+* `server/ngs-handler.ts` + `server/routes/ngs.get.ts` + `server/routes/ngs/[...path].get.ts` - serve it at `/ngs`, `/ngs/` and below; bundled with `?raw`, no new dependencies, no nginx change (nginx already sends everything to Node).
+* `server/middleware/grok-pwa.ts` - skips BleachDex PWA/OG head injection for `/ngs`.
+* `server/routes/robots.txt.get.ts` - `/ngs` is Disallow and the page sends `noindex` (school-only).
+* Features: custom chapter picker, 10/25/Endless rounds, source (unit, name, book page) shown under every question, review of mistakes.
+
+---
+
 # Fix: React error #418 and images changing after page load (7 Nov 2026)
 
 **Cause.** The site renders from the bundled `characters.json` / `weapons.json`, then fetches `/api/catalog` (live data from the bot's database) and swaps it in. Two problems:
@@ -286,3 +297,7 @@ footage), fake urgency timers, one-time supporter packs (needs Whop + bot work),
 
 **Deploy notes:** run `npm ci` (adds `sharp`); apply `deploy/nginx-boundless.conf` (routes `/gh-img/` through the
 optimizer; `sudo nginx -t && sudo systemctl reload nginx`); restart the bot to expose servers / 24h-active stats.
+
+# Login + image fixes (17 Nov 2026)
+* Login: Discord accounts without a verified e-mail no longer fail (synthetic id-based e-mail); `tanstackStartCookies` can no longer abort the callback; login started on a non-canonical host is restarted on BETTER_AUTH_URL; `?error=` from a failed login is shown in a banner; `/api/login/status` self-check; loud log if BETTER_AUTH_SECRET is unset.
+* Images: /gh-img tries other extensions/art folders, 10s timeout + retry, optional local mirror (ART_DIR); images that failed before hydration are retried; `scripts/check-images.mjs` lists missing art.

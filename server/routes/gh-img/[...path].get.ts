@@ -47,6 +47,42 @@ function loadSharp(): Promise<Sharp | null> {
   return sharpPromise;
 }
 
+/** Optional local mirror of the art (see scripts/download-art.mjs). Checked before GitHub. */
+const ART_DIR = process.env.ART_DIR || "";
+const EXTS = ["png", "jpg", "jpeg", "webp"];
+const SIBLINGS = [
+  ["Character cards", "Character Images", "new soul images/New Character Images"],
+  ["Weapon cards", "Weapons images"],
+];
+
+/** Same file, other extensions / sibling art folders — the repo and the data often disagree. */
+function candidates(decoded: string): string[] {
+  const out = [decoded];
+  const m = decoded.match(/^(.*)\.([^./]+)$/);
+  const stem = m ? m[1] : decoded;
+  const ext = m ? m[2].toLowerCase() : "";
+  const dirs = [stem.slice(0, Math.max(0, stem.lastIndexOf("/")))];
+  const file = stem.slice(stem.lastIndexOf("/") + 1);
+  for (const group of SIBLINGS) if (group.includes(dirs[0])) dirs.push(...group.filter((g) => g !== dirs[0]));
+  for (const d of dirs) for (const e of [ext, ...EXTS]) {
+    const c = `${d}/${file}.${e}`;
+    if (e && !out.includes(c)) out.push(c);
+  }
+  return out;
+}
+
+async function fetchUpstream(rel: string): Promise<Response | null> {
+  for (let i = 0; i < 2; i++) {
+    const res = await fetch(UPSTREAM + rel, {
+      headers: { "user-agent": "boundless-site" },
+      signal: AbortSignal.timeout(10_000),
+    }).catch(() => null);
+    if (res?.ok) return res;
+    if (res && res.status === 404) return null;
+  }
+  return null;
+}
+
 const sha = (s: string) => createHash("sha1").update(s).digest("hex");
 
 async function readIfExists(file: string): Promise<Buffer | null> {
@@ -116,20 +152,40 @@ export default defineEventHandler(async (event) => {
   // 1) Original bytes: from disk, else from GitHub (then cached).
   const originalFile = join(CACHE_DIR, sha(decoded));
   let original = await readIfExists(originalFile);
+  let actualType = type;
   if (!original) {
-    const res = await fetch(UPSTREAM + rel, { headers: { "user-agent": "boundless-site" } }).catch(() => null);
-    if (!res || !res.ok) {
+    for (const cand of candidates(decoded)) {
+      if (ART_DIR) {
+        const local = await readIfExists(join(ART_DIR, cand));
+        if (local) {
+          original = local;
+          actualType = TYPES[cand.split(".").pop()!.toLowerCase()] ?? type;
+          break;
+        }
+      }
+      const res = await fetchUpstream(cand.split("/").map(encodeURIComponent).join("/"));
+      if (res) {
+        original = Buffer.from(await res.arrayBuffer());
+        actualType = TYPES[cand.split(".").pop()!.toLowerCase()] ?? type;
+        break;
+      }
+    }
+    if (!original) {
       return new Response("Not found", { status: 404, headers: { "cache-control": "public, max-age=60" } });
     }
-    original = Buffer.from(await res.arrayBuffer());
     await writeAtomic(originalFile, original);
+    await writeAtomic(`${originalFile}.type`, Buffer.from(actualType));
+  } else {
+    const t = await readIfExists(`${originalFile}.type`);
+    if (t) actualType = t.toString();
   }
+  const sourceIsConvertible = actualType === "image/png" || actualType === "image/jpeg";
 
   // 2) Optimised variant when the browser can take it.
-  if (wantsWebp) {
+  if (wantsWebp && sourceIsConvertible) {
     const webp = await makeWebp(original, width, join(CACHE_DIR, `${sha(`${decoded}|${width}`)}.webp`));
     if (webp) return new Response(new Uint8Array(webp), { headers: HEADERS("image/webp") });
   }
 
-  return new Response(new Uint8Array(original), { headers: HEADERS(type) });
+  return new Response(new Uint8Array(original), { headers: HEADERS(actualType) });
 });

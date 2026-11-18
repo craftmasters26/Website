@@ -219,6 +219,40 @@ const grokOAuthPlugin = authConfigured
     })
   : null;
 
+/**
+ * `tanstackStartCookies()` copies Set-Cookie into TanStack's response store. This app serves
+ * `/api/auth/*` from a Nitro route (outside TanStack's request context), where that copy can
+ * throw — which turns a finished Discord callback into a 500 with NO session cookie (the
+ * "came back from Discord but I'm not logged in" symptom). The real Set-Cookie headers already
+ * travel on the Response, so a failure here must never abort the request.
+ */
+function safeTanstackStartCookies() {
+  const base = tanstackStartCookies();
+  return {
+    ...base,
+    hooks: {
+      after: base.hooks.after.map((hook) => ({
+        ...hook,
+        handler: async (ctx: never) => {
+          try {
+            return await (hook.handler as (c: never) => Promise<unknown>)(ctx);
+          } catch (err) {
+            console.warn("[auth] tanstackStartCookies skipped:", err instanceof Error ? err.message : err);
+            return undefined;
+          }
+        },
+      })),
+    },
+  } as unknown as typeof base;
+}
+
+if (process.env.NODE_ENV === "production" && !env("BETTER_AUTH_SECRET")) {
+  console.error(
+    "[auth] BETTER_AUTH_SECRET is not set: a random secret is used per process, so every login " +
+      "is lost on each restart/deploy. Set it in /root/web_data/.env (openssl rand -base64 32).",
+  );
+}
+
 export const auth = betterAuth({
   baseURL,
   // Deployed apps inject BETTER_AUTH_SECRET. Preview: process-stable secret on
@@ -234,6 +268,18 @@ export const auth = betterAuth({
         discord: {
           clientId: discordClientId as string,
           clientSecret: discordClientSecret as string,
+          scope: ["identify", "email"],
+          // Discord accounts made with a phone number (or with an unverified e-mail) come back
+          // with no usable e-mail, and Better Auth then aborts the login with
+          // `email_not_found` / `account_not_linked` and bounces the visitor back signed out.
+          // Key those accounts by their Discord id instead; the e-mail is never used by the site.
+          mapProfileToUser: (profile: { id: string; email?: string | null; verified?: boolean }) => ({
+            email:
+              profile.email && profile.verified
+                ? profile.email.toLowerCase()
+                : `${profile.id}@discord.bleachdex.invalid`,
+            emailVerified: Boolean(profile.email && profile.verified),
+          }),
         },
       }
     : undefined,
@@ -307,7 +353,7 @@ export const auth = betterAuth({
 
     // Bridges Better Auth's Set-Cookie into TanStack Start responses. MUST be
     // last so it runs after every other plugin's hooks.
-    tanstackStartCookies(),
+    safeTanstackStartCookies(),
   ],
 });
 

@@ -9,6 +9,7 @@ export default defineEventHandler((event) => {
     "User-agent: *",
     "Allow: /",
     "Disallow: /api/",
+    "Disallow: /ngs",
     "Disallow: /bleachdex/admin",
     "Disallow: /bleachdex/checkout",
     "Disallow: /bleachdex/owned",

@@ -9,6 +9,7 @@ import { COMPANY_PATHS, SkipLink } from "@/components/bp-layout";
 import AdBanner from "@/components/AdBanner";
 import { useCatalogAutoSync } from "@/lib/catalog-live";
 import { installErrorReporter } from "@/lib/error-reporter";
+import { AuthErrorBanner } from "@/components/auth-error-banner";
 import { installImageFallback } from "@/lib/img-fallback";
 import { installClickTracking } from "@/lib/track";
 import appCss from "../styles.css?url";
@@ -105,6 +106,7 @@ function RootDocument() {
             <div className="site-bg">
               <div className="relative z-10 flex min-h-screen flex-col">
                 <SiteHeader />
+                <AuthErrorBanner />
                 <div id="content" tabIndex={-1} className="flex-1 outline-none">
                   <Outlet />
                 </div>
