@@ -22,7 +22,6 @@ import {
   isDocumentPath,
   isInstallQuery,
   renderInstallPageHtml,
-  renderWebManifest,
   siteForPath,
 } from "../../scripts/grok-pwa-shared.mjs";
 
@@ -72,12 +71,7 @@ export default async function grokPwaMiddleware(
   const urlWithQuery = path + event.url.search;
 
   if (path === "/__grok/manifest.webmanifest" || path === "/__grok/manifest.json") {
-    return new Response(renderWebManifest(requestHost(event)), {
-      headers: {
-        "content-type": "application/manifest+json; charset=utf-8",
-        "cache-control": "no-cache",
-      },
-    });
+    return new Response("Not found", { status: 404 });
   }
 
   if (

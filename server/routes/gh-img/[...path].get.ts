@@ -21,6 +21,7 @@ const TYPES: Record<string, string> = {
   jpg: "image/jpeg",
   jpeg: "image/jpeg",
   webp: "image/webp",
+  avif: "image/avif",
   gif: "image/gif",
 };
 const CONVERTIBLE = new Set(["png", "jpg", "jpeg"]);
@@ -49,10 +50,11 @@ function loadSharp(): Promise<Sharp | null> {
 
 /** Optional local mirror of the art (see scripts/download-art.mjs). Checked before GitHub. */
 const ART_DIR = process.env.ART_DIR || "";
-const EXTS = ["png", "jpg", "jpeg", "webp"];
+const EXTS = ["png", "jpg", "jpeg", "webp", "avif"];
 const SIBLINGS = [
   ["Character cards", "Character Images", "new soul images/New Character Images"],
   ["Weapon cards", "Weapons images"],
+  ["Craftable Cards", "Craftable Images"],
 ];
 
 /** Same file, other extensions / sibling art folders — the repo and the data often disagree. */

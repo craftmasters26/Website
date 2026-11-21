@@ -301,3 +301,8 @@ optimizer; `sudo nginx -t && sudo systemctl reload nginx`); restart the bot to e
 # Login + image fixes (17 Nov 2026)
 * Login: Discord accounts without a verified e-mail no longer fail (synthetic id-based e-mail); `tanstackStartCookies` can no longer abort the callback; login started on a non-canonical host is restarted on BETTER_AUTH_URL; `?error=` from a failed login is shown in a banner; `/api/login/status` self-check; loud log if BETTER_AUTH_SECRET is unset.
 * Images: /gh-img tries other extensions/art folders, 10s timeout + retry, optional local mirror (ART_DIR); images that failed before hydration are retried; `scripts/check-images.mjs` lists missing art.
+
+## Latest update
+- Quiz: replaced the hard MCQ bank for chapters 1, 2, 6, 7, 8, 9, 11 with the new 200-question sets (chapters 3 and 4 unchanged).
+- Removed the "Grok App" install prompt (PWA manifest, apple-touch-icon, Grok banner script and the manifest route).
+- Fixed 130 broken character image links in `src/data/characters.json` (wrong folder/extension); `/gh-img` route now serves `.avif` and checks Craftable folders.
