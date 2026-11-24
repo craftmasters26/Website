@@ -61,44 +61,48 @@ function rnd(n){return Math.floor(Math.random()*n)}
 function pick(a){return a[rnd(a.length)]}
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1),t=a[i];a[i]=a[j];a[j]=t}return a}
 var S={len:10,seen:{},unit:[],sub:"c",cu:null};
-function nextQ(){
- var D=SUB[S.sub],u=S.unit,P=D.d.filter(function(x){return u.indexOf(x[0])>=0}),F=P.filter(function(x){return !S.seen[x[1]]});
- if(!F.length){P.forEach(function(x){delete S.seen[x[1]]});F=P}
- var b=pick(F);S.seen[b[1]]=1;
+function build(b){
+ var D=SUB[S.sub];
  var fix=b[2].some(function(t){return /of the above|above (are|is)|a and b|b and c|both|all of|none of/i.test(t)});
  var o=b[2].map(function(t,i){return{t:t,c:i===b[3]}});if(!fix)o=shuffle(o);
  return{q:b[1],o:o,a:b[2][b[3]],s:"Source: "+D.title+" · Unit "+b[0]+" · "+D.names[b[0]]+" · hard MCQ practice"}}
+function makeRound(){
+ var D=SUB[S.sub],u=S.unit,P=D.d.filter(function(x){return u.indexOf(x[0])>=0}),qs=[];
+ while(qs.length<S.len){var sh=shuffle(P);for(var i=0;i<sh.length&&qs.length<S.len;i++)qs.push(sh[i])}
+ return qs.map(build)}
 function home(){window.scrollTo(0,0);
  app.innerHTML='<section class="card hero"><span class="tag">Quiz Practice</span><h1>Quiz Practice</h1><p class="maker">Made by <b>Furqan</b></p><p>Practice hard MCQs for Class 9 Chemistry and Physics. Questions come in a different order every round.</p><div class="row"><button onclick="subjects()">Start practising</button></div></section>'}
 function subjects(){window.scrollTo(0,0);
  app.innerHTML='<section class="card"><button class="ghost" onclick="home()">← Home</button><h2 style="margin-top:12px">Choose a subject</h2><div class="grid">'+
- '<button class="pick" onclick="units(\'c\')"><b>Chemistry</b><span>Class 9 · '+SUB.c.d.length+' questions</span></button>'+
- '<button class="pick" onclick="units(\'p\')"><b>Physics</b><span>Class 9 · '+SUB.p.d.length+' questions</span></button></div></section>'}
+ '<button class="pick" onclick="units(\'c\')"><b>Chemistry</b><span>Class 9</span></button>'+
+ '<button class="pick" onclick="units(\'p\')"><b>Physics</b><span>Class 9</span></button></div></section>'}
 function setLen(n){S.len=n;units()}
 function units(s){if(s){S.sub=s;S.cu=null}window.scrollTo(0,0);var D=SUB[S.sub];
  var h='<section class="card"><button class="ghost" onclick="subjects()">← Subjects</button><h2 style="margin-top:12px">'+D.title+' · Class 9</h2><p class="mute">Questions per round:</p><div class="row">';
  [10,25,50,100].forEach(function(n){h+='<button class="'+(S.len===n?'':'ghost')+'" onclick="setLen('+n+')">'+n+'</button>'});
  h+='</div></section><section class="card"><h2>Custom chapters</h2><p class="mute">Tick the chapters you want in your own quiz.</p><div class="grid">';
- D.chaps.forEach(function(k){var n=D.d.filter(function(x){return x[0]===k}).length;h+='<label class="chk"><input type="checkbox" class="cu" value="'+k+'"'+(S.cu&&S.cu.indexOf(k)>=0?' checked':'')+'><span><b>Unit '+k+'</b> · '+esc(D.names[k])+' <span class="mute">('+n+')</span></span></label>'});
+ D.chaps.forEach(function(k){h+='<label class="chk"><input type="checkbox" class="cu" value="'+k+'"'+(S.cu&&S.cu.indexOf(k)>=0?' checked':'')+'><span><b>Unit '+k+'</b> · '+esc(D.names[k])+'</span></label>'});
  h+='</div><div class="err" id="cerr"></div><div class="row"><button class="ghost" onclick="selAll(1)">Select all</button><button class="ghost" onclick="selAll(0)">Clear</button><button onclick="startCustom()">Start custom quiz</button></div></section>';
  app.innerHTML=h}
 function selAll(v){Array.prototype.forEach.call(document.querySelectorAll('.cu'),function(c){c.checked=!!v})}
 function startCustom(){var a=[];Array.prototype.forEach.call(document.querySelectorAll('.cu'),function(c){if(c.checked)a.push(+c.value)});if(!a.length){document.getElementById('cerr').textContent='Select at least one chapter.';return}S.cu=a;start(a)}
-function start(u){S.unit=u;S.seen={};S.i=0;S.score=0;S.wrong=[];S.title=SUB[S.sub].title+": Unit"+(u.length>1?"s ":" ")+u.join(", ");show()}
-function show(){var q=S.q=nextQ(),pct=Math.round(S.i/S.len*100);
+function start(u){S.unit=u;S.qs=makeRound();S.ans=[];S.i=0;S.title=SUB[S.sub].title+": Unit"+(u.length>1?"s ":" ")+u.join(", ");show()}
+function show(keep){var q=S.qs[S.i],a=S.ans[S.i],done=a!=null,last=S.i>=S.len-1,pct=Math.round((S.i+1)/S.len*100);
  var h='<section class="card"><div style="display:flex;justify-content:space-between;gap:8px"><span class="tag">'+esc(S.title)+'</span><span class="mute">Q '+(S.i+1)+' of '+S.len+'</span></div><div class="bar"><i style="width:'+pct+'%"></i></div><p class="q">'+esc(q.q)+'</p>';
- q.o.forEach(function(o,i){h+='<button class="opt" id="o'+i+'" onclick="ans('+i+')">'+String.fromCharCode(65+i)+'. '+esc(o.t)+'</button>'});
- app.innerHTML=h+'<p class="src">'+esc(q.s||"")+'</p><div id="nx"></div></section>';window.scrollTo(0,0)}
-function ans(i){var q=S.q;if(q.done)return;q.done=true;
- q.o.forEach(function(o,j){var b=document.getElementById("o"+j);b.disabled=true;if(o.c)b.classList.add("ok");else if(j===i)b.classList.add("no")});
- if(q.o[i].c)S.score++;else S.wrong.push({q:q.q,a:q.a,y:q.o[i].t});
- S.i++;var last=S.i>=S.len;
- document.getElementById("nx").innerHTML='<p><b>'+(q.o[i].c?"Correct!":"Not quite — the right answer is highlighted.")+'</b></p><div class="row"><button onclick="'+(last?'finish()':'show()')+'">'+(last?"See my result":"Next question")+'</button></div>';
- document.getElementById("nx").scrollIntoView({block:"nearest"})}
-function finish(){var n=S.i||1,p=Math.round(S.score/n*100);
+ q.o.forEach(function(o,i){var c=done?(o.c?' ok':(i===a?' no':'')):'';h+='<button class="opt'+c+'" id="o'+i+'"'+(done?' disabled':'')+' onclick="ans('+i+')">'+String.fromCharCode(65+i)+'. '+esc(o.t)+'</button>'});
+ h+='<p class="src">'+esc(q.s||"")+'</p>';
+ if(done)h+='<p><b>'+(q.o[a].c?"Correct!":"Not quite — the right answer is highlighted.")+'</b></p>';
+ h+='<div class="row"><button class="ghost" onclick="go(-1)"'+(S.i===0?' disabled':'')+'>← Previous</button><button onclick="'+(last?'finish()':'go(1)')+'">'+(last?'See my result':'Next →')+'</button></div>';
+ if(!last)h+='<div class="row"><button class="ghost" onclick="finish()">Finish now</button></div>';
+ app.innerHTML=h+'</section>';if(!keep)window.scrollTo(0,0)}
+function go(d){var n=S.i+d;if(n<0||n>=S.len)return;S.i=n;show()}
+function ans(i){if(S.ans[S.i]!=null)return;S.ans[S.i]=i;show(true)}
+function finish(){var sc=0,ak=0,wrong=[];
+ S.qs.forEach(function(q,k){var a=S.ans[k];if(a==null){wrong.push({q:q.q,a:q.a,y:"Not answered"});return}ak++;if(q.o[a].c)sc++;else wrong.push({q:q.q,a:q.a,y:q.o[a].t})});
+ var n=S.len,p=Math.round(sc/n*100),sk=n-ak;
  var msg=p>=90?"Excellent — you are quiz-ready.":p>=70?"Good work. Review the mistakes and try again.":p>=50?"Keep practising this topic.":"Read the unit again, then retry.";
- var h='<section class="card"><span class="tag">'+esc(S.title)+'</span><p class="score">'+S.score+' / '+S.i+'</p><p><b>'+p+'%</b> — '+msg+'</p><div class="row"><button onclick="start(S.unit)">New round (fresh questions)</button><button class="ghost" onclick="units()">Choose other chapters</button><button class="ghost" onclick="home()">Home</button></div></section>';
- if(S.wrong.length){h+='<section class="card"><h2>Review your mistakes</h2>';S.wrong.forEach(function(w){h+='<div class="rev"><p><b>'+esc(w.q)+'</b></p><p style="color:var(--bad)">Your answer: '+esc(w.y)+'</p><p style="color:var(--ok)">Correct answer: '+esc(w.a)+'</p></div>'});h+='</section>'}
+ var h='<section class="card"><span class="tag">'+esc(S.title)+'</span><p class="score">'+sc+' / '+n+'</p><p><b>'+p+'%</b> — '+msg+(sk?' ('+sk+' not answered)':'')+'</p><div class="row"><button onclick="start(S.unit)">New round (fresh questions)</button><button class="ghost" onclick="units()">Choose other chapters</button><button class="ghost" onclick="home()">Home</button></div></section>';
+ if(wrong.length){h+='<section class="card"><h2>Review your mistakes</h2>';wrong.forEach(function(w){h+='<div class="rev"><p><b>'+esc(w.q)+'</b></p><p style="color:var(--bad)">Your answer: '+esc(w.y)+'</p><p style="color:var(--ok)">Correct answer: '+esc(w.a)+'</p></div>'});h+='</section>'}
  app.innerHTML=h;window.scrollTo(0,0)}
 home();
 </script>
