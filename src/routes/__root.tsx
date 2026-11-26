@@ -40,14 +40,14 @@ export const Route = createRootRoute({
       { property: "og:title", content: "Boundless Production" },
       { property: "og:description", content: OG_DESCRIPTION },
       { property: "og:url", content: SITE_URL },
-      { property: "og:image", content: `${SITE_URL}/og.jpg` },
+      { property: "og:image", content: `${SITE_URL}/og.jpg?v=2` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { name: "google-adsense-account", content: "ca-pub-4630325130876570" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Boundless Production" },
       { name: "twitter:description", content: OG_DESCRIPTION },
-      { name: "twitter:image", content: `${SITE_URL}/og.jpg` },
+      { name: "twitter:image", content: `${SITE_URL}/og.jpg?v=2` },
       {
         name: "description",
         content:
