@@ -275,7 +275,7 @@ specifically — this archive doesn't contain either.
 ## Fourth pass
 - Homepage hero now shows a layered collage of the real Discord screenshots (cropped to their content, rounded, soft shadows) instead of the character-card fan. The BleachDex page has a tabbed viewer ("See BleachDex in action"). The mock spawn preview was replaced by real screenshots.
 - Character and weapon art: new `/gh-img/` route in the Node app fetches from GitHub once and caches to disk, so images work without any nginx change. A global fallback retries GitHub directly if that ever fails. The nginx `/gh-img/` block is now optional.
-- Dark theme is the default (a visitor's saved choice still wins).
+- Light (white) theme is the default; dark theme is pure black (a visitor's saved choice still wins).
 
 ## Fifth pass
 - Real Discord screenshots now live in the four "How it works" step cards (spawn, catch, boss fight, leaderboard) instead of the hero. The step copy matches the pictures: spawn, catch, fight bosses, climb the leaderboard.
