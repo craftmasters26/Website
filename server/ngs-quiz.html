@@ -7,15 +7,15 @@
 <title>Quiz Practice</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧪</text></svg>">
 <style>
-:root{--bg:#f3f5f1;--card:#fff;--ink:#17251f;--mute:#5b6b63;--line:#d5ddd6;--pri:#1f4d3a;--pri-ink:#fff;--acc:#b8892b;--ok:#1d7a46;--okbg:#dff3e6;--bad:#b3261e;--badbg:#fbe3e1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101914;--card:#18231d;--ink:#e8efe9;--mute:#9db0a5;--line:#2b3a32;--pri:#5cb88a;--pri-ink:#0c1812;--acc:#e0b350;--ok:#6fd49b;--okbg:#17382a;--bad:#ff8f86;--badbg:#3d1d1b}}
-:root[data-theme="dark"]{--bg:#101914;--card:#18231d;--ink:#e8efe9;--mute:#9db0a5;--line:#2b3a32;--pri:#5cb88a;--pri-ink:#0c1812;--acc:#e0b350;--ok:#6fd49b;--okbg:#17382a;--bad:#ff8f86;--badbg:#3d1d1b}
+:root{--bg:#f2f6fd;--card:#fff;--ink:#0f1f3d;--mute:#56668a;--line:#d3ddf0;--pri:#1646a8;--pri-ink:#fff;--acc:#4a86e8;--ok:#1d7a46;--okbg:#dff3e6;--bad:#b3261e;--badbg:#fbe3e1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1426;--card:#132039;--ink:#e6edf9;--mute:#9fb1d3;--line:#26375c;--pri:#6ea2f5;--pri-ink:#08122a;--acc:#9bbcf7;--ok:#6fd49b;--okbg:#17382a;--bad:#ff8f86;--badbg:#3d1d1b}}
+:root[data-theme="dark"]{--bg:#0b1426;--card:#132039;--ink:#e6edf9;--mute:#9fb1d3;--line:#26375c;--pri:#6ea2f5;--pri-ink:#08122a;--acc:#9bbcf7;--ok:#6fd49b;--okbg:#17382a;--bad:#ff8f86;--badbg:#3d1d1b}
 html{color-scheme:light dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif}
 h1,h2,h3,button,.tag,label{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif}
 main{max-width:760px;margin:0 auto;padding:16px}
-header.top{background:var(--pri);color:var(--pri-ink);padding:14px 16px;border-bottom:4px solid var(--acc)}
+header.top{background:var(--pri);color:var(--pri-ink);padding:14px 16px;border-bottom:4px solid #fff}
 header.top div{max-width:760px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
 header.top b{font:700 15px/1.25 "Trebuchet MS",system-ui,sans-serif}
 header.top small{display:block;font-weight:400;opacity:.85}
@@ -46,7 +46,7 @@ label{font-size:14px;font-weight:700}
 .rev{border-top:1px solid var(--line);padding:10px 0}
 .err{color:var(--bad);font-size:14px;min-height:20px}
 .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.hero p{max-width:60ch}.src{font-size:13px;color:var(--mute);margin:12px 0 4px;border-top:1px dashed var(--line);padding-top:8px}.src{font-size:13px;color:var(--mute);margin:12px 0 4px;border-top:1px dashed var(--line);padding-top:8px}.src{font-size:13px;color:var(--mute);margin:12px 0 4px;border-top:1px dashed var(--line);padding-top:8px}.maker{font-size:18px;color:var(--pri);margin:2px 0 10px}label.chk{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);min-height:44px;cursor:pointer}input[type=checkbox]{width:22px;height:22px;margin:0;flex:none}.src{font-size:13px;color:var(--mute);margin:12px 0 4px;border-top:1px dashed var(--line);padding-top:8px}footer{text-align:center;color:var(--mute);font-size:13px;padding:20px 16px 30px}
+.hero p{max-width:60ch}.src{font-size:13px;color:var(--mute);margin:12px 0 4px;border-top:1px dashed var(--line);padding-top:8px}.src{font-size:13px;color:var(--mute);margin:12px 0 4px;border-top:1px dashed var(--line);padding-top:8px}.src{font-size:13px;color:var(--mute);margin:12px 0 4px;border-top:1px dashed var(--line);padding-top:8px}.maker{font-size:18px;color:var(--pri);margin:2px 0 10px}label.chk{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);min-height:44px;cursor:pointer}input[type=checkbox]{width:22px;height:22px;margin:0;flex:none}.src{font-size:13px;color:var(--mute);margin:12px 0 4px;border-top:1px dashed var(--line);padding-top:8px}body:not(.home) header.top small,body:not(.home) footer{display:none}footer{text-align:center;color:var(--mute);font-size:13px;padding:20px 16px 30px}
 </style>
 <body>
 <header class="top"><div><b>Quiz Practice<small>Made by Furqan</small></b></div></header>
@@ -70,14 +70,14 @@ function makeRound(){
  var D=SUB[S.sub],u=S.unit,P=D.d.filter(function(x){return u.indexOf(x[0])>=0}),qs=[];
  while(qs.length<S.len){var sh=shuffle(P);for(var i=0;i<sh.length&&qs.length<S.len;i++)qs.push(sh[i])}
  return qs.map(build)}
-function home(){window.scrollTo(0,0);
+function home(){document.body.className="home";window.scrollTo(0,0);
  app.innerHTML='<section class="card hero"><span class="tag">Quiz Practice</span><h1>Quiz Practice</h1><p class="maker">Made by <b>Furqan</b></p><p>Practice hard MCQs for Class 9 Chemistry and Physics. Questions come in a different order every round.</p><div class="row"><button onclick="subjects()">Start practising</button></div></section>'}
-function subjects(){window.scrollTo(0,0);
+function subjects(){document.body.className="";window.scrollTo(0,0);
  app.innerHTML='<section class="card"><button class="ghost" onclick="home()">← Home</button><h2 style="margin-top:12px">Choose a subject</h2><div class="grid">'+
  '<button class="pick" onclick="units(\'c\')"><b>Chemistry</b><span>Class 9</span></button>'+
  '<button class="pick" onclick="units(\'p\')"><b>Physics</b><span>Class 9</span></button></div></section>'}
 function setLen(n){S.len=n;units()}
-function units(s){if(s){S.sub=s;S.cu=null}window.scrollTo(0,0);var D=SUB[S.sub];
+function units(s){document.body.className="";if(s){S.sub=s;S.cu=null}window.scrollTo(0,0);var D=SUB[S.sub];
  var h='<section class="card"><button class="ghost" onclick="subjects()">← Subjects</button><h2 style="margin-top:12px">'+D.title+' · Class 9</h2><p class="mute">Questions per round:</p><div class="row">';
  [10,25,50,100].forEach(function(n){h+='<button class="'+(S.len===n?'':'ghost')+'" onclick="setLen('+n+')">'+n+'</button>'});
  h+='</div></section><section class="card"><h2>Custom chapters</h2><p class="mute">Tick the chapters you want in your own quiz.</p><div class="grid">';
@@ -87,7 +87,7 @@ function units(s){if(s){S.sub=s;S.cu=null}window.scrollTo(0,0);var D=SUB[S.sub];
 function selAll(v){Array.prototype.forEach.call(document.querySelectorAll('.cu'),function(c){c.checked=!!v})}
 function startCustom(){var a=[];Array.prototype.forEach.call(document.querySelectorAll('.cu'),function(c){if(c.checked)a.push(+c.value)});if(!a.length){document.getElementById('cerr').textContent='Select at least one chapter.';return}S.cu=a;start(a)}
 function start(u){S.unit=u;S.qs=makeRound();S.ans=[];S.i=0;S.title=SUB[S.sub].title+": Unit"+(u.length>1?"s ":" ")+u.join(", ");show()}
-function show(keep){var q=S.qs[S.i],a=S.ans[S.i],done=a!=null,last=S.i>=S.len-1,pct=Math.round((S.i+1)/S.len*100);
+function show(keep){document.body.className="";var q=S.qs[S.i],a=S.ans[S.i],done=a!=null,last=S.i>=S.len-1,pct=Math.round((S.i+1)/S.len*100);
  var h='<section class="card"><div style="display:flex;justify-content:space-between;gap:8px"><span class="tag">'+esc(S.title)+'</span><span class="mute">Q '+(S.i+1)+' of '+S.len+'</span></div><div class="bar"><i style="width:'+pct+'%"></i></div><p class="q">'+esc(q.q)+'</p>';
  q.o.forEach(function(o,i){var c=done?(o.c?' ok':(i===a?' no':'')):'';h+='<button class="opt'+c+'" id="o'+i+'"'+(done?' disabled':'')+' onclick="ans('+i+')">'+String.fromCharCode(65+i)+'. '+esc(o.t)+'</button>'});
  h+='<p class="src">'+esc(q.s||"")+'</p>';
@@ -97,7 +97,7 @@ function show(keep){var q=S.qs[S.i],a=S.ans[S.i],done=a!=null,last=S.i>=S.len-1,
  app.innerHTML=h+'</section>';if(!keep)window.scrollTo(0,0)}
 function go(d){var n=S.i+d;if(n<0||n>=S.len)return;S.i=n;show()}
 function ans(i){if(S.ans[S.i]!=null)return;S.ans[S.i]=i;show(true)}
-function finish(){var sc=0,ak=0,wrong=[];
+function finish(){document.body.className="";var sc=0,ak=0,wrong=[];
  S.qs.forEach(function(q,k){var a=S.ans[k];if(a==null){wrong.push({q:q.q,a:q.a,y:"Not answered"});return}ak++;if(q.o[a].c)sc++;else wrong.push({q:q.q,a:q.a,y:q.o[a].t})});
  var n=S.len,p=Math.round(sc/n*100),sk=n-ak;
  var msg=p>=90?"Excellent — you are quiz-ready.":p>=70?"Good work. Review the mistakes and try again.":p>=50?"Keep practising this topic.":"Read the unit again, then retry.";
